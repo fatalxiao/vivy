@@ -2,12 +2,9 @@
  * @file ApiMiddleware.js
  */
 
-import CALL_API from '../actionTypes/CallApi';
+import {CALL_API} from '../actionTypes/CallApi';
 
-// Vendors
-import RequestManagement from 'vendors/api/RequestManagement';
-
-export default function createApiMiddleware({}) {
+export default function createApiMiddleware() {
 
     return ({dispatch, getState}) => next => action => {
 
@@ -26,7 +23,6 @@ export default function createApiMiddleware({}) {
 
                 successCallback: actionSuccessCallback,
                 failureCallback: actionFailureCallback,
-                cancelCallback: actionCancelCallback,
 
                 ...restOptions
 
@@ -70,11 +66,6 @@ export default function createApiMiddleware({}) {
 
             },
             failureCallback(xhr, response, responseData) {
-
-                if (xhr[RequestManagement.CANCEL_FLAG] === true) {
-                    actionCancelCallback?.(xhr);
-                    return;
-                }
 
                 if (!resMsgDisabled && !failureResMsgDisabled) {
                     if (xhr.status === 500) {

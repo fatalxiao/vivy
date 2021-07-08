@@ -2,4 +2,4 @@
  * @file CallApi.js
  */
 
-export default '@@VIVY/CALL_API';
+export const CALL_API = '@@VIVY/CALL_API';

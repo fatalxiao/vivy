@@ -3,7 +3,7 @@
  */
 
 // Action Types
-import CALL_API from '../actionTypes/CallApi';
+import {CALL_API} from '../actionTypes/CallApi';
 
 /**
  * ModelApiActionMiddleware creater
