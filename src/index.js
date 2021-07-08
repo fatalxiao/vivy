@@ -9,6 +9,8 @@ import createVivy from './vivy';
 import createAsyncReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
+export AsyncComponent from './AsyncComponent';
+
 /**
  * 注册 model
  * @param store
@@ -53,14 +55,16 @@ export function registerModels(store, models) {
     models.forEach(model => registerModel(store, model));
 }
 
-export default history => {
+export default (history) => {
 
-    const vivy = createVivy(history);
+    this.history = history;
+    this.store = null;
 
-    vivy.createStore = () => {
+    return {
 
+        createStore: () => {
+            this.store = createVivy(this.history);
+        }
     };
-
-    return vivy;
 
 };
