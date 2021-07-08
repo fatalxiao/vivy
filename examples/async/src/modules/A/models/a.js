@@ -1,4 +1,8 @@
+/**
+ * @file a.js
+ */
+
 export default {
     nameSpace: 'a',
-    state: ''
+    state: 'model a'
 };

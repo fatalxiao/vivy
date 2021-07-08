@@ -1,5 +1,28 @@
-function A() {
-    return null;
-}
+/**
+ * @file A.js
+ */
 
-export default A;
+import React from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+
+// Vendors
+import {renderRoutes} from 'react-router-config';
+
+const A = ({
+    route, modelAState
+}) => (
+    <>
+        {modelAState}
+        {renderRoutes(route.routes)}
+    </>
+);
+
+A.propTypes = {
+    route: PropTypes.object,
+    modelAState: PropTypes.string
+};
+
+export default connect(state => ({
+    modelAState: state.a
+}))(A);
