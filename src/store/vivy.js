@@ -53,7 +53,7 @@ export default function createVivyStore(history) {
         registerActions: ModelActionMiddleware.register,
 
         // 暴露给 store 的注册异步 apis 的方法
-        registerApis: ModelApiActionMiddleware.register
+        registerApiActions: ModelApiActionMiddleware.register
 
     };
 

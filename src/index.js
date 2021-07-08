@@ -9,10 +9,11 @@ import createVivyStore from './store/vivy';
 import createAsyncReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
+// Components
 export AsyncComponent from './AsyncComponent';
 
 /**
- * 注册 model
+ * Register model
  * @param store
  * @param model
  */
@@ -28,26 +29,26 @@ export function registerModel(store, model) {
         console.error(`nameSpace: ${nameSpace} has been registered.`);
     }
 
-    // 注册 reducers
+    // register reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
         store, nameSpace, state, globalReducers || {}, reducers || {}
     );
     store.replaceReducer(createRootReducer(store.history, store.asyncReducers));
 
-    // 注册 actions
+    // register actions
     if (actions) {
         store.registerActions(nameSpace, actions || {});
     }
 
-    // 注册 apis
+    // register api actions
     if (apis) {
-        store.registerApis(nameSpace, apis || {});
+        store.registerApiActions(nameSpace, apis || {});
     }
 
 }
 
 /**
- * 注册 models
+ * Register models
  * @param store
  * @param models
  */
@@ -55,7 +56,12 @@ export function registerModels(store, models) {
     models.forEach(model => registerModel(store, model));
 }
 
-export default (history) => {
+/**
+ * Create Vivy instance
+ * @param history
+ * @returns {{}}
+ */
+export default function Vivy(history) {
 
     this.history = history;
     this.store = null;
@@ -88,4 +94,4 @@ export default (history) => {
 
     };
 
-};
+}
