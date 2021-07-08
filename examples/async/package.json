@@ -2,7 +2,7 @@
     "name": "vivy-example-async",
     "author": "liangxiaojun",
     "version": "0.0.3",
-    "description": "vivy",
+    "description": "Vivy Example: Async",
     "main": "./src/index.js",
     "scripts": {
         "start": "webpack-dev-server --open --hot --config ./webpack.config.js"
