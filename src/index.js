@@ -59,13 +59,15 @@ export function registerModels(store, models) {
 /**
  * Create Vivy instance
  * @param history
+ * @param options
  * @returns {{}}
  */
-export default function Vivy(history) {
+export default function Vivy(history, options) {
     return {
         history,
+        options,
         createStore: () => {
-            return createVivyStore(history);
+            return createVivyStore(history, options);
         }
     };
 }

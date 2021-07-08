@@ -16,7 +16,7 @@ export default (
 ) => class AsyncModuleComponent extends Component {
 
     // 使用 babel-plugin-transform-import-sync 加快开发环境编译速度
-    static IS_SYNC = process.env.NODE_ENV.includes('development');
+    // static IS_SYNC = process.env.NODE_ENV.includes('development');
 
     constructor(props) {
 
@@ -84,12 +84,12 @@ export default (
             return;
         }
 
-        // 开发环境同步加载
-        if (AsyncModuleComponent.IS_SYNC) {
-            const model = getModel();
-            registerModel(store, model);
-            return;
-        }
+        // // 开发环境同步加载
+        // if (AsyncModuleComponent.IS_SYNC) {
+        //     const model = getModel();
+        //     registerModel(store, model);
+        //     return;
+        // }
 
         // 其他环境异步加载
         const model = await getModel();
@@ -122,13 +122,13 @@ export default (
             return;
         }
 
-        // 开发环境同步加载
-        if (AsyncModuleComponent.IS_SYNC) {
-            this.setState({
-                Component: getComponent()
-            });
-            return;
-        }
+        // // 开发环境同步加载
+        // if (AsyncModuleComponent.IS_SYNC) {
+        //     this.setState({
+        //         Component: getComponent()
+        //     });
+        //     return;
+        // }
 
         // 其他环境异步加载
         const component = await getComponent();

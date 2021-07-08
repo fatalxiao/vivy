@@ -18,9 +18,10 @@ import createRootReducer from '../reducers/RootReducer';
 /**
  *
  * @param history
+ * @param options
  * @returns {{}}
  */
-export default function createVivyStore(history) {
+export default function createVivyStore(history, options) {
 
     // 用于加载和调用异步 actions 的 ModelActionMiddleware
     const ModelActionMiddleware = createModelActionMiddleware();
