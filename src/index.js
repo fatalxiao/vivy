@@ -62,36 +62,10 @@ export function registerModels(store, models) {
  * @returns {{}}
  */
 export default function Vivy(history) {
-
-    this.history = history;
-    this.store = null;
-
     return {
-
+        history,
         createStore: () => {
-            return this.store = createVivyStore(this.history);
-        },
-
-        registerModel: model => {
-
-            if (!this.store) {
-                return;
-            }
-
-            registerModel(this.store, model);
-
-        },
-
-        registerModels: models => {
-
-            if (!this.store) {
-                return;
-            }
-
-            registerModels(this.store, models);
-
+            return createVivyStore(history);
         }
-
     };
-
 }
