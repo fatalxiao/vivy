@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
 import {configureRoutes} from './routes';
 
-import Vivy from 'src/index';
+import Vivy from 'vivy';
 
 const history = createBrowserHistory();
 const vivy = Vivy(history);
