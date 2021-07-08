@@ -7,20 +7,20 @@ import {createStore, applyMiddleware} from 'redux';
 // Middlewares
 import thunk from 'redux-thunk';
 import {routerMiddleware} from 'connected-react-router';
-import AsyncComponentLoadingMiddleware from './middlewares/AsyncComponentLoadingMiddleware';
-import createApiMiddleware from './middlewares/ApiMiddleware';
-import createModelActionMiddleware from './middlewares/ModelActionMiddleware';
-import createModelApiActionMiddleware from './middlewares/ModelApiActionMiddleware';
+import AsyncComponentLoadingMiddleware from '../middlewares/AsyncComponentLoadingMiddleware';
+import createApiMiddleware from '../middlewares/ApiMiddleware';
+import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
+import createModelApiActionMiddleware from '../middlewares/ModelApiActionMiddleware';
 
 // Reducers
-import createRootReducer from './reducers/RootReducer';
+import createRootReducer from '../reducers/RootReducer';
 
 /**
  *
  * @param history
  * @returns {{}}
  */
-export default function createVivy(history) {
+export default function createVivyStore(history) {
 
     // 用于加载和调用异步 actions 的 ModelActionMiddleware
     const ModelActionMiddleware = createModelActionMiddleware();

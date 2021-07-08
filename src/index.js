@@ -3,7 +3,7 @@
  */
 
 // Vivy
-import createVivy from './vivy';
+import createVivyStore from './store/vivy';
 
 // Reducers
 import createAsyncReducer from './reducers/ModelReducer';
@@ -63,7 +63,27 @@ export default (history) => {
     return {
 
         createStore: () => {
-            return this.store = createVivy(this.history);
+            return this.store = createVivyStore(this.history);
+        },
+
+        registerModel: model => {
+
+            if (!this.store) {
+                return;
+            }
+
+            registerModel(this.store, model);
+
+        },
+
+        registerModels: models => {
+
+            if (!this.store) {
+                return;
+            }
+
+            registerModels(this.store, models);
+
         }
 
     };
