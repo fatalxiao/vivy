@@ -35,7 +35,6 @@ module.exports = {
         '@babel/plugin-proposal-throw-expressions',
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-syntax-import-meta',
-        '@babel/plugin-transform-runtime',
-        'transform-import-sync'
+        '@babel/plugin-transform-runtime'
     ]
 };
