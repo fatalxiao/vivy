@@ -10,7 +10,7 @@ import createAsyncReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
 // Components
-export * as AsyncComponent from './AsyncComponent';
+export AsyncComponent from './AsyncComponent';
 
 /**
  * Register model
