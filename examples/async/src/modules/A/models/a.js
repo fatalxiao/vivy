@@ -1,3 +1,4 @@
 export default {
-    nameSpace: 'a'
+    nameSpace: 'a',
+    state: ''
 };

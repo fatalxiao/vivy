@@ -2,7 +2,7 @@
  * @file routes.js
  */
 
-import {AsyncComponent} from 'src';
+import {AsyncComponent} from 'vivy';
 
 export function configureRoutes(store) {
     return [{

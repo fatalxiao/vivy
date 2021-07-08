@@ -34,7 +34,7 @@ module.exports = merge(baseConfig, {
     // 配置相应的插件
     plugins: [
         new HtmlWebpackPlugin({
-            template: './index.html'
+            template: './src/index.html'
         }),
         new CleanWebpackPlugin()
     ]
