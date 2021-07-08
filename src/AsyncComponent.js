@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 
 // Vendors
 import isFunction from 'lodash/isFunction';
-import {registerModel} from 'src/index';
+import {registerModel} from './index';
 
 export default (
     getComponent,
