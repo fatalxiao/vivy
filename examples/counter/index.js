@@ -16,8 +16,6 @@ const history = createBrowserHistory();
 const vivy = Vivy(history);
 const store = vivy.createStore();
 
-store.registerModels([]);
-
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>

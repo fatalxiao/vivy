@@ -63,8 +63,9 @@ export default (history) => {
     return {
 
         createStore: () => {
-            this.store = createVivy(this.history);
+            return this.store = createVivy(this.history);
         }
+
     };
 
 };
