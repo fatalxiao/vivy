@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import {createBrowserHistory} from 'history';
+import {createHashHistory} from 'history';
 import {renderRoutes} from 'react-router-config';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
@@ -12,7 +12,7 @@ import {configureRoutes} from './routes';
 
 import Vivy from 'vivy';
 
-const history = createBrowserHistory();
+const history = createHashHistory();
 const vivy = Vivy(history);
 const store = vivy.createStore();
 

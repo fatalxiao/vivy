@@ -13,7 +13,7 @@ const A = ({
     route, modelAState
 }) => (
     <>
-        <div>Component A</div>
+        <div>Module A</div>
         <div>{modelAState}</div>
         <div>{renderRoutes(route.routes)}</div>
     </>

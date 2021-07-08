@@ -5,7 +5,7 @@
 import {AsyncComponent} from 'vivy';
 
 export function configureRoutes(store) {
-    return {
+    return [{
         path: '/',
         component: AsyncComponent(() => import('./modules/Root/containers/Root'), store, [
             () => import('./modules/Root/models/root')
@@ -28,5 +28,5 @@ export function configureRoutes(store) {
                 }]
             }]
         }]
-    };
+    }];
 }

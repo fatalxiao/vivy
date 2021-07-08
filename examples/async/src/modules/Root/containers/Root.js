@@ -13,7 +13,7 @@ const Root = ({
     route, modelRootState
 }) => (
     <>
-        <div>Component Root</div>
+        <div>Module Root</div>
         <div>{modelRootState}</div>
         <div>{renderRoutes(route.routes)}</div>
     </>
