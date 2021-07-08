@@ -1,5 +1,5 @@
 /**
- * @file ModelActionMiddleware.js
+ * @file ModelApiActionMiddleware.js
  */
 
 // Action Types
