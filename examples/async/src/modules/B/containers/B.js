@@ -1,5 +1,5 @@
 /**
- * @file A.js
+ * @file B.js
  */
 
 import React from 'react';
@@ -9,21 +9,21 @@ import {connect} from 'react-redux';
 // Vendors
 import {renderRoutes} from 'react-router-config';
 
-const A = ({
-    route, modelAState
+const B = ({
+    route, modelBState
 }) => (
     <>
-        <div>Component A</div>
-        <div>{modelAState}</div>
+        <div>Component B</div>
+        <div>{modelBState}</div>
         <div>{renderRoutes(route.routes)}</div>
     </>
 );
 
-A.propTypes = {
+B.propTypes = {
     route: PropTypes.object,
-    modelAState: PropTypes.string
+    modelBState: PropTypes.string
 };
 
 export default connect(state => ({
-    modelAState: state.a
-}))(A);
+    modelBState: state.b
+}))(B);

@@ -1,5 +1,5 @@
 /**
- * @file A.js
+ * @file C.js
  */
 
 import React from 'react';
@@ -9,21 +9,21 @@ import {connect} from 'react-redux';
 // Vendors
 import {renderRoutes} from 'react-router-config';
 
-const A = ({
-    route, modelAState
+const C = ({
+    route, modelCState
 }) => (
     <>
-        <div>Component A</div>
-        <div>{modelAState}</div>
+        <div>Component C</div>
+        <div>{modelCState}</div>
         <div>{renderRoutes(route.routes)}</div>
     </>
 );
 
-A.propTypes = {
+C.propTypes = {
     route: PropTypes.object,
-    modelAState: PropTypes.string
+    modelCState: PropTypes.string
 };
 
 export default connect(state => ({
-    modelAState: state.a
-}))(A);
+    modelCState: state.c
+}))(C);
