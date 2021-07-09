@@ -25,11 +25,7 @@ export function registerModel(store, model) {
 
     const {nameSpace, state, actions, apis, globalReducers, reducers} = model;
 
-    if (store.asyncReducers.hasOwnProperty(nameSpace)) {
-        console.error(`nameSpace: ${nameSpace} has been registered.`);
-    }
-
-    // register reducers
+    // register or overwrite reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
         store, nameSpace, state, globalReducers || {}, reducers || {}
     );
