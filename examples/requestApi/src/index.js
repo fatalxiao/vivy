@@ -11,20 +11,20 @@ import {ConnectedRouter} from 'connected-react-router';
 // import Vivy
 import Vivy, {registerModel} from '../../../src';
 
-import RequestApi from './modules/RequestApi/containers/RequestApi';
-import requestApiModel from './modules/RequestApi/models/requestApi';
+import UserList from './modules/UserList/containers/UserList';
+import userListModel from './modules/UserList/models/userList';
 
 // prepare vivy store
 const history = createBrowserHistory();
 const vivy = Vivy(history);
 const store = vivy.createStore();
 
-registerModel(store, requestApiModel);
+registerModel(store, userListModel);
 
 render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
-            <RequestApi/>
+            <UserList/>
         </ConnectedRouter>
     </Provider>,
     document.getElementById('app-container')

@@ -1,5 +1,5 @@
 /**
- * @file RequestApi.js
+ * @file UserList.js
  */
 
 import React, {useState, useCallback} from 'react';
@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 // Styles
-import './RequestApi.scss';
+import './UserList.scss';
 
-const RequestApi = ({
+const UserList = ({
     data, getDataActionType,
     dispatch
 }) => {
@@ -23,7 +23,7 @@ const RequestApi = ({
 
 };
 
-RequestApi.propTypes = {
+UserList.propTypes = {
 
     data: PropTypes.array,
     getDataActionType: PropTypes.string,
@@ -35,4 +35,4 @@ RequestApi.propTypes = {
 export default connect(state => ({
     data: state.requestApi.data,
     getDataActionType: state.requestApi.getDataActionType
-}))(RequestApi);
+}))(UserList);
