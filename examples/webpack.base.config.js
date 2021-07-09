@@ -2,8 +2,6 @@
  * @file webpack.base.config.js
  */
 
-const path = require('path');
-
 /**
  * css loader config
  * @type {[]}
@@ -27,10 +25,7 @@ const cssLoaderConfig = ['style-loader', {
 module.exports = {
 
     resolve: {
-        extensions: ['.js', '.scss'],
-        alias: {
-            'vivy': path.join(__dirname, '../src')
-        }
+        extensions: ['.js', '.scss']
     },
 
     module: {
