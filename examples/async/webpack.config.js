@@ -17,7 +17,7 @@ module.exports = merge(baseConfig, {
     devtool: 'inline-source-map',
 
     // 入口文件
-    entry: './src/index.js',
+    entry: path.join(__dirname, './src/index.js'),
 
     output: {
         filename: 'index.[hash].js',
@@ -34,7 +34,7 @@ module.exports = merge(baseConfig, {
     // 配置相应的插件
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: path.join(__dirname, './src/index.html')
         }),
         new CleanWebpackPlugin()
     ]

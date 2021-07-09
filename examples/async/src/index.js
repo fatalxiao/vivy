@@ -11,7 +11,7 @@ import {ConnectedRouter} from 'connected-react-router';
 import {configureRoutes} from './routes';
 
 // import Vivy
-import Vivy from 'vivy';
+import Vivy from '../../../src';
 
 // prepare vivy store
 const history = createHashHistory();

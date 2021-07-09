@@ -8,11 +8,7 @@ const presets = [
             {
                 modules: false,
                 useBuiltIns: 'usage',
-                corejs: 3,
-                targets: {
-                    'safari': '7',
-                    'ie': '9'
-                }
+                corejs: 3
             }
         ],
         '@babel/preset-react'
@@ -32,31 +28,20 @@ const presets = [
         '@babel/plugin-proposal-optional-chaining',
         ['@babel/plugin-proposal-pipeline-operator', {proposal: 'minimal'}],
         '@babel/plugin-proposal-throw-expressions',
+        '@babel/plugin-syntax-export-default-from',
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-syntax-import-meta',
         '@babel/plugin-transform-runtime'
     ],
-    packagePlugins = [
-        ['transform-react-remove-prop-types', {removeImport: true}]
-    ],
     packageConfig = {
         presets,
-        plugins: [
-            ...commonPlugins,
-            ...packagePlugins
-        ]
+        plugins: commonPlugins
     };
 
 module.exports = {
     'env': {
 
-        'development': {
-            presets,
-            plugins: [
-                ...commonPlugins,
-                'transform-import-sync'
-            ]
-        },
+        'development': packageConfig,
 
         'test': {
             'presets': [
