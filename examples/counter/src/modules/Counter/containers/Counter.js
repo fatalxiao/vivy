@@ -1,5 +1,5 @@
 /**
- * @file Root.js
+ * @file Counter.js
  */
 
 import React, {useState, useCallback} from 'react';
