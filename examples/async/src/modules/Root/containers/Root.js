@@ -6,24 +6,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+// Component
+import {NavLink} from 'react-router-dom';
+
 // Vendors
 import {renderRoutes} from 'react-router-config';
 
+// Styles
+import './Root.scss';
+
 const Root = ({
-    route, modelRootState
+    route, menu
 }) => (
-    <>
-        <div>Module Root</div>
-        <div>{modelRootState}</div>
-        <div>{renderRoutes(route.routes)}</div>
-    </>
+    <div className="root">
+
+        <div className="menu">
+            <h2>Module Root</h2>
+            <ul>
+                {
+                    menu.map((item, index) =>
+                        <NavLink key={index}
+                                 to={item.route}>
+                            <li>
+                                {item.name}
+                            </li>
+                        </NavLink>
+                    )
+                }
+            </ul>
+        </div>
+
+        <div className="content">
+            {renderRoutes(route.routes)}
+        </div>
+
+    </div>
 );
 
 Root.propTypes = {
     route: PropTypes.object,
-    modelRootState: PropTypes.string
+    menu: PropTypes.array
 };
 
 export default connect(state => ({
-    modelRootState: state.root
+    menu: state.root
 }))(Root);

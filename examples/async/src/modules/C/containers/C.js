@@ -13,7 +13,7 @@ const C = ({
     route, modelCState
 }) => (
     <>
-        <div>Module C</div>
+        <h2>Module C</h2>
         <div>{modelCState}</div>
         <div>{renderRoutes(route.routes)}</div>
     </>

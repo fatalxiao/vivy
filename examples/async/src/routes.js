@@ -4,6 +4,11 @@
 
 import {AsyncComponent} from 'vivy';
 
+/**
+ * get route config
+ * @param store
+ * @returns {[]}
+ */
 export function configureRoutes(store) {
     return [{
         path: '/',
@@ -14,19 +19,17 @@ export function configureRoutes(store) {
             path: '/a',
             component: AsyncComponent(() => import('./modules/A/containers/A'), store, [
                 () => import('./modules/A/models/a')
-            ]),
-            routes: [{
-                path: '/a/b',
-                component: AsyncComponent(() => import('./modules/B/containers/B'), store, [
-                    () => import('./modules/B/models/b')
-                ]),
-                routes: [{
-                    path: '/a/b/c',
-                    component: AsyncComponent(() => import('./modules/C/containers/C'), store, [
-                        () => import('./modules/C/models/c')
-                    ])
-                }]
-            }]
+            ])
+        }, {
+            path: '/b',
+            component: AsyncComponent(() => import('./modules/B/containers/B'), store, [
+                () => import('./modules/B/models/b')
+            ])
+        }, {
+            path: '/c',
+            component: AsyncComponent(() => import('./modules/C/containers/C'), store, [
+                () => import('./modules/C/models/c')
+            ])
         }]
     }];
 }

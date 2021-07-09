@@ -1,0 +1,15 @@
+/**
+ * @file Root.scss
+ */
+
+.root {
+    display: flex;
+
+    .menu {
+        flex-basis: 200px;
+    }
+
+    .content {
+        flex: 1;
+    }
+}

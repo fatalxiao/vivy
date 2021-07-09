@@ -62,6 +62,7 @@
         "babel-plugin-transform-import-sync": "^2.0.0",
         "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
         "babel-plugin-webpack-aliases": "^1.1.3",
+        "clean-webpack-plugin": "^3.0.0",
         "compression": "^1.7.4",
         "compression-webpack-plugin": "^8.0.1",
         "connect-history-api-fallback": "^1.6.0",
@@ -104,6 +105,7 @@
         "style-loader": "^3.0.0",
         "url-loader": "^4.1.1",
         "webpack": "^5.41.1",
+        "webpack-cli": "^4.7.2",
         "webpack-dev-middleware": "^5.0.0",
         "webpack-hot-middleware": "^2.25.0",
         "webpack-merge": "^5.8.0"

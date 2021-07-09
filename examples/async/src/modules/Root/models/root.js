@@ -4,5 +4,14 @@
 
 export default {
     nameSpace: 'root',
-    state: 'model root'
+    state: [{
+        name: 'Module A',
+        route: '/a'
+    }, {
+        name: 'Module B',
+        route: '/b'
+    }, {
+        name: 'Module C',
+        route: '/c'
+    }]
 };
