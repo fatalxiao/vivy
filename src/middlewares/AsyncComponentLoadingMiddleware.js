@@ -2,11 +2,21 @@
  * @file AsyncComponentLoadingMiddleware.js
  */
 
+// Action Types
 import {
     ASYNC_COMPONENT_LOADING_START, ASYNC_COMPONENT_LOADING_COMPLETE
 } from '../actionTypes/AsyncComponentLoading';
 
+/**
+ * timeout duration
+ * @type {number}
+ */
 const DURATION = 1000;
+
+/**
+ * component loading complete timeout id
+ * @type {null}
+ */
 let timeoutId = null;
 
 export default ({dispatch, getState}) => next => action => {
@@ -15,38 +25,33 @@ export default ({dispatch, getState}) => next => action => {
         return next(action);
     }
 
-    const state = getState();
+    // whether async component is loading
+    const loading = getState()?.['@@VIVY/ASYNC_COMPONENT_LOADING'];
 
-    if (!state?.asyncComponentLoading) {
-        return next(action);
-    }
-
-    // loading start
+    // start loading
     if (action.type === ASYNC_COMPONENT_LOADING_START) {
 
-        // 如果有 complete 的 timeout，清除 timeout
+        // clear timeout
         timeoutId && clearTimeout(timeoutId);
 
-        // 只有非 loading 时 dispatch start 的 action
-        if (!state.moduleComponentLoading) {
-            next(action);
-        }
+        // dispatch start loading component action
+        !loading && next(action);
 
     }
 
     // loading complete
     else if (action.type === ASYNC_COMPONENT_LOADING_COMPLETE) {
 
-        // 清除之前 complete 的 timeout
+        // clear time out
         timeoutId && clearTimeout(timeoutId);
 
-        // 重新设定新的 timeout
+        // set timeout
         timeoutId = setTimeout(() => {
 
-            // 成功执行 complete 的 action 之前，先清除 timeout
+            // clear time out
             timeoutId && clearTimeout(timeoutId);
 
-            // 执行 complete 的 action
+            // dispatch loading component complete action
             next(action);
 
         }, DURATION);

@@ -16,7 +16,7 @@ import createModelApiActionMiddleware from '../middlewares/ModelApiActionMiddlew
 import createRootReducer from '../reducers/RootReducer';
 
 /**
- *
+ * create Vivy store
  * @param history
  * @param options
  * @returns {{}}

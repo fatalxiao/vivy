@@ -2,12 +2,15 @@
  * @file index.js
  */
 
-// Vivy
+// Vivy Store
 import createVivyStore from './store/vivy';
 
 // Reducers
 import createAsyncReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
+
+// Models
+import asyncComponentLoading from './models/asyncComponentLoading';
 
 // Components
 export AsyncComponent from './AsyncComponent';
@@ -63,7 +66,15 @@ export default function Vivy(history, options) {
         history,
         options,
         createStore: () => {
-            return createVivyStore(history, options);
+
+            const store = createVivyStore(history, options);
+
+            registerModels(store, [
+                asyncComponentLoading
+            ]);
+
+            return store;
+
         }
     };
 }
