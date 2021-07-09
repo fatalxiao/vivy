@@ -1,6 +1,5 @@
 /**
  * @file webpack.dev.config.js
- * @author sunday(sunday.wei@derbysoft.com)
  */
 
 const path = require('path');
@@ -11,12 +10,10 @@ const baseConfig = require('../webpack.base.config.js');
 
 module.exports = merge(baseConfig, {
 
-    // 设置为开发模式
     mode: 'development',
 
     devtool: 'inline-source-map',
 
-    // 入口文件
     entry: path.join(__dirname, './src/index.js'),
 
     output: {
@@ -24,14 +21,12 @@ module.exports = merge(baseConfig, {
         path: path.join(__dirname, './dist')
     },
 
-    // 配置服务端目录和端口
     devServer: {
         static: path.join(__dirname, './dist'),
         hot: true,
         port: 3000
     },
 
-    // 配置相应的插件
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html')
