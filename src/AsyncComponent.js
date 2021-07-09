@@ -1,6 +1,5 @@
 /**
  * @file AsyncModuleComponent.js
- * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
 import React, {useState, useCallback, useEffect} from 'react';
