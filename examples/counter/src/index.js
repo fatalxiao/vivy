@@ -4,7 +4,7 @@
 
 import React from 'react';
 import {render} from 'react-dom';
-import {createHashHistory} from 'history';
+import {createBrowserHistory} from 'history';
 import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
 
@@ -15,7 +15,7 @@ import Counter from './modules/Counter/containers/Counter';
 import counterModel from './modules/Counter/models/counter';
 
 // prepare vivy store
-const history = createHashHistory();
+const history = createBrowserHistory();
 const vivy = Vivy(history);
 const store = vivy.createStore();
 
