@@ -3,81 +3,48 @@
  * @author liangxiaojun(liangxiaojun@derbysoft.com)
  */
 
-import React, {Component} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
+
+import {
+    ASYNC_COMPONENT_LOADING_START, ASYNC_COMPONENT_LOADING_COMPLETE
+} from './actionTypes/AsyncComponentLoading';
 
 // Vendors
 import isFunction from 'lodash/isFunction';
 import {registerModel} from './index';
 
-export default (
-    getComponent,
-    store,
-    getModels
-) => class AsyncModuleComponent extends Component {
-
-    constructor(props) {
-
-        super(props);
-
-        this.state = {
-
-            /**
-             * 存储调用 getComponent() 后获取到的 component
-             */
-            Component: null
-
-        };
-
-    }
-
-    async componentDidMount() {
-        await this.init();
-    }
+export default (getComponent, store, getModels) => props => {
 
     /**
-     * 如果 Component 为空，开始加载
-     * @returns {Promise<void>}
+     * component from getComponent
      */
-    init = async () => {
-
-        console.log('this.state.Component::', this.state.Component);
-
-        if (this.state.Component) {
-            return;
-        }
-
-        this.loadStartCallback();
-
-        await this.loadModels();
-        await this.loadComponent();
-
-        this.loadCompleteCallback();
-
-    };
+    const [Cpn, setCpn] = useState(null);
 
     /**
-     * 开始加载 component 的回调
+     * dispatch starting load component action
+     * @type {(function(): void)|*}
      */
-    loadStartCallback = () => {
+    const loadStartCallback = useCallback(() => {
         store?.dispatch({
-            type: 'moduleComponentLoading/start'
+            type: ASYNC_COMPONENT_LOADING_START
         });
-    };
+    }, []);
 
     /**
-     * 加载 component 完成的回调
+     * dispatch loading component complete action
+     * @type {(function(): void)|*}
      */
-    loadCompleteCallback = () => {
+    const loadCompleteCallback = useCallback(() => {
         store?.dispatch({
-            type: 'moduleComponentLoading/complete'
+            type: ASYNC_COMPONENT_LOADING_COMPLETE
         });
-    };
+    }, []);
 
     /**
-     * 加载 model
-     * @returns {Promise<void>}
+     * load model from getModel
+     * @type {(function(*=): Promise<void>)|*}
      */
-    loadModel = async getModel => {
+    const loadModel = useCallback(async getModel => {
 
         if (!getModel || !isFunction(getModel)) {
             return;
@@ -86,50 +53,80 @@ export default (
         const model = await getModel();
         registerModel(store, model.default || model);
 
-    };
+    }, []);
 
     /**
-     * 加载 models
-     * @returns {Promise<void>}
+     * load models from getModels
+     * @type {(function(): Promise<void>)|*}
      */
-    loadModels = async () => {
+    const loadModels = useCallback(async () => {
 
         if (!getModels || getModels?.length < 1) {
             return;
         }
 
-        await Promise.all(getModels.map(getModel => this.loadModel(getModel)));
+        await Promise.all(getModels.map(getModel => loadModel(getModel)));
 
-    };
+    }, [
+        loadModel
+    ]);
 
     /**
-     * 加载 component
-     * 根据不同环境使用不同的调用方式
-     * @returns {Promise<void>}
+     * load component from getComponent
+     * @type {(function(): Promise<void>)|*}
      */
-    loadComponent = async () => {
+    const loadComponent = useCallback(async () => {
 
         if (!getComponent || !isFunction(getComponent)) {
             return;
         }
 
         const component = await getComponent();
-        this.setState({
-            Component: component.default || component
-        });
+        setCpn(component.default || component);
 
-    };
+    }, []);
 
-    render() {
+    /**
+     * init getting models and component
+     * @type {(function(): Promise<void>)|*}
+     */
+    const init = useCallback(async () => {
 
-        const {Component} = this.state;
-
-        if (Component) {
-            return <Component {...this.props}/>;
+        if (Cpn) {
+            return;
         }
 
-        return null;
+        loadStartCallback();
 
-    }
+        await loadModels();
+        await loadComponent();
+
+        loadCompleteCallback();
+
+    }, [
+        Cpn,
+        loadCompleteCallback, loadComponent, loadModels, loadStartCallback
+    ]);
+
+    useEffect(() => {
+
+        /**
+         * call init
+         * @returns {Promise<void>}
+         */
+        async function callInit() {
+            await init();
+        }
+
+        callInit();
+
+    }, [
+        init
+    ]);
+
+    return Cpn ?
+        <Cpn {...props}/>
+        :
+        null;
 
 };
