@@ -11,6 +11,7 @@
     ],
     "scripts": {
         "example:async": "webpack-dev-server --open --hot --config examples/async/webpack.config.js",
+        "example:counter": "webpack-dev-server --open --hot --config examples/counter/webpack.config.js",
         "build": "gulp",
         "do-publish": "npm run build && npm publish"
     },
