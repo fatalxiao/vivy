@@ -22,15 +22,15 @@ const Root = ({
 
         <div className="menu">
             <h2>Module Root</h2>
+            <h3>Menu:</h3>
             <ul>
                 {
                     menu.map((item, index) =>
-                        <NavLink key={index}
-                                 to={item.route}>
-                            <li>
+                        <li key={index}>
+                            <NavLink to={item.route}>
                                 {item.name}
-                            </li>
-                        </NavLink>
+                            </NavLink>
+                        </li>
                     )
                 }
             </ul>

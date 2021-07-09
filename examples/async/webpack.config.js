@@ -2,17 +2,15 @@
  * @file webpack.dev.config.js
  */
 
+// Vendors
 const path = require('path');
 const {merge} = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+
+// base config
 const baseConfig = require('../webpack.base.config.js');
 
 module.exports = merge(baseConfig, {
-
-    mode: 'development',
-
-    devtool: 'inline-source-map',
 
     entry: path.join(__dirname, './src/index.js'),
 
@@ -30,8 +28,7 @@ module.exports = merge(baseConfig, {
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html')
-        }),
-        new CleanWebpackPlugin()
+        })
     ]
 
 });
