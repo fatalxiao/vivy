@@ -2,7 +2,7 @@
  * @file UserList.js
  */
 
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -14,9 +14,22 @@ const UserList = ({
     dispatch
 }) => {
 
+    const getUserList = useCallback(() => {
+        dispatch?.({
+            type: 'userList/getUserList'
+        });
+    }, [
+        dispatch
+    ]);
+
+    useEffect(() => {
+        getUserList();
+    }, [
+        getUserList
+    ]);
+
     return (
         <div>
-
 
         </div>
     );

@@ -1,11 +1,11 @@
 /**
- * @file requestApi.js
+ * @file userList.js
  */
 
 import {getUserList} from '../apis/UserListApi';
 
 export default {
-    nameSpace: 'requestApi',
+    nameSpace: 'userList',
     state: {
         data: [],
         getUserListActionType: ''

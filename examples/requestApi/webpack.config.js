@@ -25,9 +25,16 @@ module.exports = merge(baseConfig, {
         port: 3001,
         historyApiFallback: true,
         before: function (app, server, compiler) {
-            app.get('/some/path', function (req, res) {
+            app.get('/getUserList', function (req, res) {
                 res.json({
-                    custom: 'response'
+                    userList: [
+                        'User-1',
+                        'User-2',
+                        'User-3',
+                        'User-4',
+                        'User-5',
+                        'User-6'
+                    ]
                 });
             });
         }
