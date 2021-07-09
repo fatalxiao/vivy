@@ -2,17 +2,21 @@
  * @file requestApi.js
  */
 
+import {getUserList} from '../apis/UserListApi';
+
 export default {
     nameSpace: 'requestApi',
     state: {
         data: [],
-        getDataActionType: ''
+        getUserListActionType: ''
     },
     apis: {
 
-        get: ({}) => (dispatchApi) => dispatchApi({
-            api: EpPlacementPointApi.getEpPlacementPoints,
-            successResMsgDisabled: true
+        getUserList: ({searchText}) => dispatchApi => dispatchApi({
+            api: getUserList,
+            params: {
+                searchText
+            }
         })
 
     },

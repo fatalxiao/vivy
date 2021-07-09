@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 import './UserList.scss';
 
 const UserList = ({
-    data, getDataActionType,
+    data, getUserListActionType,
     dispatch
 }) => {
 
@@ -26,13 +26,13 @@ const UserList = ({
 UserList.propTypes = {
 
     data: PropTypes.array,
-    getDataActionType: PropTypes.string,
+    getUserListActionType: PropTypes.string,
 
     dispatch: PropTypes.func
 
 };
 
 export default connect(state => ({
-    data: state.requestApi.data,
-    getDataActionType: state.requestApi.getDataActionType
+    data: state.userList.data,
+    getUserListActionType: state.userList.getUserListActionType
 }))(UserList);
