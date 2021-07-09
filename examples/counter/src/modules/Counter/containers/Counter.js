@@ -14,30 +14,49 @@ const Counter = ({
     dispatch
 }) => {
 
-    const [inputValue, setInputValue] = useState(100);
-
+    /**
+     * plus 1
+     * @type {(function(): void)|*}
+     */
     const handlePlus = useCallback(() => {
-        dispatch({
+        dispatch?.({
             type: 'counter/plus'
         });
     }, [
         dispatch
     ]);
 
+    /**
+     * minus 1
+     * @type {(function(): void)|*}
+     */
     const handleMinus = useCallback(() => {
-        dispatch({
+        dispatch?.({
             type: 'counter/minus'
         });
     }, [
         dispatch
     ]);
 
+    /**
+     * input value state
+     */
+    const [inputValue, setInputValue] = useState(100);
+
+    /**
+     * handle input value change
+     * @type {(function(*): void)|*}
+     */
     const handleChange = useCallback(e => {
         setInputValue(+e.target.value);
     }, []);
 
+    /**
+     * update input value to model
+     * @type {(function(): void)|*}
+     */
     const handleUpdate = useCallback(() => {
-        dispatch({
+        dispatch?.({
             type: 'counter/update',
             nextValue: inputValue
         });
