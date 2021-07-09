@@ -2,7 +2,7 @@
  * @file Root.js
  */
 
-import React, {useCallback} from 'react';
+import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
@@ -13,6 +13,8 @@ const Counter = ({
     value,
     dispatch
 }) => {
+
+    const [inputValue, setInputValue] = useState(100);
 
     const handlePlus = useCallback(() => {
         dispatch({
@@ -30,13 +32,43 @@ const Counter = ({
         dispatch
     ]);
 
+    const handleChange = useCallback(e => {
+        setInputValue(+e.target.value);
+    }, []);
+
+    const handleUpdate = useCallback(() => {
+        dispatch({
+            type: 'counter/update',
+            nextValue: inputValue
+        });
+    }, [
+        inputValue,
+        dispatch
+    ]);
+
     return (
-        <div className="counter">
+        <div>
 
-            Current value: {value}
+            <div className="counter">
 
-            <button onClick={handlePlus}>Plus</button>
-            <button onClick={handleMinus}>Minus</button>
+                Current value: {value}
+
+                <button onClick={handlePlus}>+1</button>
+                <button onClick={handleMinus}>-1</button>
+
+            </div>
+
+            <div className="counter-updater">
+
+                <input value={inputValue}
+                       onChange={handleChange}/>
+
+                <button className="update-button"
+                        onClick={handleUpdate}>
+                    Update value
+                </button>
+
+            </div>
 
         </div>
     );

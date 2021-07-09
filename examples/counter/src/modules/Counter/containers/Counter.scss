@@ -6,20 +6,28 @@ body {
     margin: 0;
 }
 
-.root {
+.counter,
+.counter-updater {
     display: flex;
+    align-items: center;
     box-sizing: border-box;
-    height: 100vh;
-    padding: 24px;
+    margin: 24px;
 
-    .menu {
-        padding: 24px;
-        background: #f0f0f0;
-        border-radius: 24px;
+    input {
+        box-sizing: border-box;
+        width: 135px;
+        height: 40px;
+        padding: 8px;
     }
 
-    .content {
-        flex: 1;
-        padding: 24px;
+    button {
+        box-sizing: border-box;
+        width: 80px;
+        height: 40px;
+        margin-left: 16px;
+
+        &.update-button {
+            width: 176px;
+        }
     }
 }

@@ -13,6 +13,10 @@ export default {
 
         minus: state => {
             return state - 1;
+        },
+
+        update: (state, {nextValue}) => {
+            return nextValue;
         }
 
     }
