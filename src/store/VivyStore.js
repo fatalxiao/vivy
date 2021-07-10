@@ -1,5 +1,5 @@
 /**
- * @file vivy.js
+ * @file VivyStore.js
  */
 
 import {createStore, applyMiddleware} from 'redux';
@@ -11,6 +11,7 @@ import AsyncComponentLoadingMiddleware from '../middlewares/AsyncComponentLoadin
 import createApiMiddleware from '../middlewares/ApiMiddleware';
 import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 import createModelApiActionMiddleware from '../middlewares/ModelApiActionMiddleware';
+import createRequestMiddleware from '../middlewares/RequestMiddleware';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
@@ -39,7 +40,8 @@ export default function createVivyStore(history, options) {
                 AsyncComponentLoadingMiddleware,
                 ModelActionMiddleware,
                 ModelApiActionMiddleware,
-                createApiMiddleware(),
+                // createApiMiddleware(),
+                createRequestMiddleware(options),
                 routerMiddleware(history)
             )
         ),

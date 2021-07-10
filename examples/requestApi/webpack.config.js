@@ -24,8 +24,8 @@ module.exports = merge(baseConfig, {
         hot: true,
         port: 3001,
         historyApiFallback: true,
-        before: function (app, server, compiler) {
-            app.get('/getUserList', function (req, res) {
+        onBeforeSetupMiddleware: function (server) {
+            server.app.get('/getUserList', function (req, res) {
                 res.json({
                     userList: [
                         'User-1',

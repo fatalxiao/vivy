@@ -3,7 +3,7 @@
  */
 
 // Vivy Store
-import createVivyStore from './store/vivy';
+import createVivyStore from './store/VivyStore';
 
 // Reducers
 import createAsyncReducer from './reducers/ModelReducer';

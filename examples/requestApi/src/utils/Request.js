@@ -11,6 +11,6 @@
 export function get(url, params) {
     return fetch(url, {
         method: 'GET',
-        body: JSON.stringify(params)
+        params: JSON.stringify(params)
     });
 }
