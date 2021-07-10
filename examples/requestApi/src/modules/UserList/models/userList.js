@@ -20,5 +20,27 @@ export default {
         })
 
     },
-    reducers: {}
+    reducers: {
+
+        getUserListRequest: state => {
+            return {
+                ...state,
+                getUserListActionType: 'userList/getUserListRequest'
+            };
+        },
+        getUserListSuccess: (state, {responseData}) => {
+            return {
+                ...state,
+                getUserListActionType: 'userList/getUserListSuccess',
+                data: responseData?.data || []
+            };
+        },
+        getUserListFailure: state => {
+            return {
+                ...state,
+                getUserListActionType: 'userList/getUserListFailure'
+            };
+        }
+
+    }
 };

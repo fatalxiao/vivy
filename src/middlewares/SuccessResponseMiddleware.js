@@ -4,9 +4,8 @@
 
 import {CALL_API_SUCCESS} from '../actionTypes/CallApi';
 
-export default function createSuccessResponseMiddleware() {
-
-    return () => next => async action => {
+export default function createSuccessResponseMiddleware(successResponseHandler) {
+    return ({dispatch, getState}) => next => async action => {
 
         const options = action[CALL_API_SUCCESS];
 
@@ -15,8 +14,11 @@ export default function createSuccessResponseMiddleware() {
             return next(action);
         }
 
+        if (successResponseHandler && typeof successResponseHandler === 'function') {
+            return successResponseHandler({dispatch, getState})(next)(options);
+        }
 
+        next(options);
 
     };
-
 }

@@ -9,8 +9,7 @@ function defaultCheckResponseStatus(response) {
 }
 
 export default function createRequestMiddleware(checkResponseStatus) {
-
-    return ({dispatch}) => next => async action => {
+    return () => next => async action => {
 
         const options = action[CALL_API];
 
@@ -23,7 +22,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
             [requestType, successType, failureType] = types;
 
         // next request action
-        dispatch({
+        next({
             ...restOptions,
             type: requestType
         });
@@ -38,7 +37,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
                 :
                 defaultCheckResponseStatus(response)
         ) {
-            dispatch({
+            next({
                 [CALL_API_SUCCESS]: {
                     ...restOptions,
                     type: successType,
@@ -47,7 +46,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
                 }
             });
         } else {
-            dispatch({
+            next({
                 [CALL_API_FAILURE]: {
                     ...restOptions,
                     type: failureType,
@@ -58,5 +57,4 @@ export default function createRequestMiddleware(checkResponseStatus) {
         }
 
     };
-
 }
