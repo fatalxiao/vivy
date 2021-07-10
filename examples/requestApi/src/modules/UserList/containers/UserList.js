@@ -28,11 +28,18 @@ const UserList = ({
         getUserList
     ]);
 
-    return (
-        <div>
-
-        </div>
-    );
+    return getUserListActionType === 'userList/getUserListRequest' ?
+        'loading'
+        :
+        <ul>
+            {
+                data?.map((item, index) =>
+                    <li key={index}>
+                        {item}
+                    </li>
+                )
+            }
+        </ul>;
 
 };
 

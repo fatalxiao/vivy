@@ -10,6 +10,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // base config
 const baseConfig = require('../webpack.base.config.js');
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 module.exports = merge(baseConfig, {
 
     entry: path.join(__dirname, './src/index.js'),
@@ -25,7 +29,8 @@ module.exports = merge(baseConfig, {
         port: 3001,
         historyApiFallback: true,
         onBeforeSetupMiddleware: function (server) {
-            server.app.get('/getUserList', function (req, res) {
+            server.app.get('/getUserList', async function (req, res) {
+                await sleep(4000);
                 res.json({
                     code: 2000,
                     data: [
