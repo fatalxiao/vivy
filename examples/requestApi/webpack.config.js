@@ -31,8 +31,6 @@ module.exports = merge(baseConfig, {
 
             server.app.post('/getUserList', function (req, res) {
 
-                console.log('req::', req);
-                console.log('req.params::', req.params);
                 console.log('req.body::', req.body);
 
                 const data = [
@@ -44,7 +42,7 @@ module.exports = merge(baseConfig, {
                     'User-6'
                 ];
 
-                setTimeout(() => res.json(data.filter(item => item.includes('1'))), 3000);
+                setTimeout(() => res.json(data), 2000);
 
             });
         }
