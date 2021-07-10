@@ -32,7 +32,7 @@ export default {
             return {
                 ...state,
                 getUserListActionType: 'userList/getUserListSuccess',
-                data: responseData?.data || []
+                data: responseData || []
             };
         },
         getUserListFailure: state => {
