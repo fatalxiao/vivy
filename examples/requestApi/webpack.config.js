@@ -27,7 +27,8 @@ module.exports = merge(baseConfig, {
         onBeforeSetupMiddleware: function (server) {
             server.app.get('/getUserList', function (req, res) {
                 res.json({
-                    userList: [
+                    code: 2000,
+                    data: [
                         'User-1',
                         'User-2',
                         'User-3',
