@@ -6,7 +6,6 @@
 const path = require('path');
 const {merge} = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const bodyParser = require('body-parser');
 
 // base config
 const baseConfig = require('../webpack.base.config.js');
@@ -25,13 +24,10 @@ module.exports = merge(baseConfig, {
         hot: true,
         port: 3001,
         historyApiFallback: true,
-        onBeforeSetupMiddleware: function (server) {
+        onBeforeSetupMiddleware: server => {
 
-            server.app.use(bodyParser.json());
-
-            server.app.post('/getUserList', function (req, res) {
-
-                console.log('req.body::', req.body);
+            // reponse user list
+            server.app.get('/getUserList', (req, res) => {
 
                 const data = [
                     'User-1',
@@ -42,9 +38,16 @@ module.exports = merge(baseConfig, {
                     'User-6'
                 ];
 
-                setTimeout(() => res.json(data), 2000);
+                // delay 1s
+                setTimeout(() => res.json(
+                    req.query.searchText ?
+                        data.filter(item => item.toUpperCase().includes(req.query.searchText.toUpperCase()))
+                        :
+                        data
+                ), 1000);
 
             });
+
         }
     },
 

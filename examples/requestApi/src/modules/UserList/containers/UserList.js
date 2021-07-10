@@ -14,17 +14,29 @@ const UserList = ({
     dispatch
 }) => {
 
+    /**
+     * search text
+     */
     const [searchText, setSearchText] = useState('');
 
+    /**
+     * query user list by search text
+     * @type {(function(): void)|*}
+     */
     const getUserList = useCallback(() => {
         dispatch?.({
             type: 'userList/getUserList',
             searchText
         });
     }, [
+        searchText,
         dispatch
     ]);
 
+    /**
+     * handle search text change
+     * @type {(function(*): void)|*}
+     */
     const handleChange = useCallback(e => {
         setSearchText(e.target.value);
         getUserList();
@@ -32,6 +44,9 @@ const UserList = ({
         getUserList
     ]);
 
+    /**
+     * query user list when init
+     */
     useEffect(() => {
         getUserList();
     }, [

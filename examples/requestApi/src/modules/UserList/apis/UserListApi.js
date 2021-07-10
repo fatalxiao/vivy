@@ -2,7 +2,7 @@
  * @file UserListApi.js
  */
 
-import {post} from '../../../utils/Request';
+import {get} from '../../../utils/Request';
 
 /**
  * get user list
@@ -10,5 +10,5 @@ import {post} from '../../../utils/Request';
  * @returns {Promise<Response>}
  */
 export function getUserList(params) {
-    return post('/getUserList', params);
+    return get('/getUserList', `searchText=${params?.searchText}`);
 }
