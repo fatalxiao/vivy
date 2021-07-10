@@ -13,9 +13,13 @@ import {configureRoutes} from './routes';
 // import Vivy
 import Vivy from '../../../src';
 
-// prepare vivy store
+// Prepare vivy store
 const history = createBrowserHistory();
+
+// Create vivy
 const vivy = Vivy(history);
+
+// Create store after configuration
 const store = vivy.createStore();
 
 render(

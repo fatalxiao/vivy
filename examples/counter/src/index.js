@@ -13,11 +13,16 @@ import Vivy, {registerModel} from '../../../src';
 import Counter from './modules/Counter/containers/Counter';
 import counterModel from './modules/Counter/models/counter';
 
-// prepare vivy store
+// Prepare vivy store
 const history = createBrowserHistory();
+
+// Create vivy
 const vivy = Vivy(history);
+
+// Create store after configuration
 const store = vivy.createStore();
 
+// Register model to store
 registerModel(store, counterModel);
 
 render(

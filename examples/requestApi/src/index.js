@@ -20,10 +20,6 @@ const history = createBrowserHistory();
 // Create vivy
 const vivy = Vivy(history);
 
-// Add customized check response status callback
-// to define which one is successful response
-// vivy.setCheckResponseStatus((response, responseData) => responseData?.code === 2000);
-
 // Create store after configuration
 const store = vivy.createStore();
 
