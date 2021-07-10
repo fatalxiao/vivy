@@ -41,7 +41,7 @@ export default function createVivyStore(history, options) {
                 ModelActionMiddleware,
                 ModelApiActionMiddleware,
                 // createApiMiddleware(),
-                createRequestMiddleware(options),
+                createRequestMiddleware(options?.checkStatus),
                 routerMiddleware(history)
             )
         ),

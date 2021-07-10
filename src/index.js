@@ -58,13 +58,21 @@ export function registerModels(store, models) {
 /**
  * Create Vivy instance
  * @param history
- * @param options
  * @returns {{}}
  */
-export default function Vivy(history, options) {
+export default function Vivy(history) {
+
+    let options = {};
+
     return {
+
         history,
         options,
+
+        setCheckResponseStatus: checkStatus => {
+            options.checkStatus = checkStatus;
+        },
+
         createStore: () => {
 
             const store = createVivyStore(history, options);
@@ -76,5 +84,7 @@ export default function Vivy(history, options) {
             return store;
 
         }
+
     };
+
 }

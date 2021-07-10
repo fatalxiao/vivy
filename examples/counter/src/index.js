@@ -6,7 +6,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import {createBrowserHistory} from 'history';
 import {Provider} from 'react-redux';
-import {ConnectedRouter} from 'connected-react-router';
 
 // import Vivy
 import Vivy, {registerModel} from '../../../src';
@@ -23,9 +22,7 @@ registerModel(store, counterModel);
 
 render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <Counter/>
-        </ConnectedRouter>
+        <Counter/>
     </Provider>,
     document.getElementById('app-container')
 );

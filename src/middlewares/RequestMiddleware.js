@@ -4,9 +4,13 @@
 
 import {CALL_API, CALL_API_SUCCESS, CALL_API_FAILURE} from '../actionTypes/CallApi';
 
-export default function createRequestMiddleware() {
+function defaultCheckStatus(response) {
+    return response.status >= 200 && response.status < 300;
+}
 
-    return ({dispatch, getState}) => next => async action => {
+export default function createRequestMiddleware(checkStatus) {
+
+    return () => next => async action => {
 
         const options = action[CALL_API];
 
@@ -32,12 +36,16 @@ export default function createRequestMiddleware() {
         // next request action
         next(actionWith({type: requestType}));
 
-        // call api
+        // call api and get response
         const response = await api(restOptions);
+        const responseData = await response.json();
 
-        console.log(response);
-
-        if (response.status >= 200 && response.status < 300) {
+        if (
+            checkStatus && typeof checkStatus === 'function' ?
+                checkStatus(response, responseData)
+                :
+                defaultCheckStatus(response)
+        ) {
 
             next(actionWith({
                 originAction: {
@@ -62,59 +70,6 @@ export default function createRequestMiddleware() {
             }));
 
         }
-
-        // api({
-        //     header,
-        //     params,
-        //     contentType,
-        //     successCallback(xhr, response, responseData) {
-        //
-        //         !resMsgDisabled && !successResMsgDisabled && dispatch({
-        //             type: 'responseMessage/addSuccessResMsg'
-        //         });
-        //
-        //         next(actionWith({
-        //             ...restOptions,
-        //             type: successType,
-        //             responseData,
-        //             response,
-        //             xhr
-        //         }));
-        //
-        //         actionSuccessCallback?.(responseData, response, xhr);
-        //
-        //     },
-        //     failureCallback(xhr, response, responseData) {
-        //
-        //         if (!resMsgDisabled && !failureResMsgDisabled) {
-        //             if (xhr.status === 500) {
-        //                 dispatch({
-        //                     type: 'responseMessage/addFailureResMsg'
-        //                 });
-        //             } else {
-        //                 dispatch({
-        //                     type: 'responseMessage/addFailureResMsg',
-        //                     message: responseData
-        //                 });
-        //             }
-        //         }
-        //
-        //         next(actionWith({
-        //             ...restOptions,
-        //             type: failureType,
-        //             responseData,
-        //             response,
-        //             xhr,
-        //             error: response ?
-        //                 (responseData || response.message)
-        //                 :
-        //                 'Server or Network failure. Please try again later or contact your account manager.'
-        //         }));
-        //
-        //         actionFailureCallback?.(responseData, response, xhr);
-        //
-        //     }
-        // });
 
     };
 
