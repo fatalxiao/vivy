@@ -2,7 +2,9 @@
  * @file UserListApi.js
  */
 
-import {get} from '../../../utils/Request';
+import axios from 'axios';
+
+let source;
 
 /**
  * get user list
@@ -10,5 +12,18 @@ import {get} from '../../../utils/Request';
  * @returns {Promise<Response>}
  */
 export function getUserList(params) {
-    return get('/getUserList', `searchText=${params?.searchText}`);
+
+    if (source) {
+        source.cancel();
+    }
+
+    source = axios.CancelToken.source();
+
+    return axios.get('/getUserList', {
+        cancelToken: source.token,
+        params
+    });
+
+    // return get('/getUserList', `searchText=${params?.searchText}`);
+
 }

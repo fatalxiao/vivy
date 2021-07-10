@@ -29,11 +29,10 @@ export default function createRequestMiddleware(checkResponseStatus) {
 
         // call api and get response
         const response = await api(params);
-        const responseData = await response.json();
 
         if (
             checkResponseStatus && typeof checkResponseStatus === 'function' ?
-                checkResponseStatus(response, responseData)
+                checkResponseStatus(response, response.data)
                 :
                 defaultCheckResponseStatus(response)
         ) {
@@ -42,7 +41,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
                     ...restOptions,
                     type: successType,
                     response,
-                    responseData
+                    responseData: response.data
                 }
             });
         } else {
@@ -51,7 +50,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
                     ...restOptions,
                     type: failureType,
                     response,
-                    responseData
+                    responseData: response.data
                 }
             });
         }
