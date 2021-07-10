@@ -69,8 +69,16 @@ export default function Vivy(history) {
         history,
         options,
 
-        setCheckResponseStatus: checkStatus => {
-            options.checkStatus = checkStatus;
+        setCheckResponseStatus: checkResponseStatus => {
+            options.checkResponseStatus = checkResponseStatus;
+        },
+
+        setSuccessResponseHandler: successResponseHandler => {
+            options.successResponseHandler = successResponseHandler;
+        },
+
+        setFailureResponseHandler: failureResponseHandler => {
+            options.failureResponseHandler = failureResponseHandler;
         },
 
         createStore: () => {

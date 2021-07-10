@@ -4,13 +4,13 @@
 
 import {CALL_API, CALL_API_SUCCESS, CALL_API_FAILURE} from '../actionTypes/CallApi';
 
-function defaultCheckStatus(response) {
+function defaultCheckResponseStatus(response) {
     return response.status >= 200 && response.status < 300;
 }
 
-export default function createRequestMiddleware(checkStatus) {
+export default function createRequestMiddleware(checkResponseStatus) {
 
-    return () => next => async action => {
+    return ({dispatch}) => next => async action => {
 
         const options = action[CALL_API];
 
@@ -22,53 +22,39 @@ export default function createRequestMiddleware(checkStatus) {
         const {types, api, ...restOptions} = options,
             [requestType, successType, failureType] = types;
 
-        /**
-         * calculate action data
-         * @param data
-         * @returns {*}
-         */
-        function actionWith(data) {
-            const finalAction = Object.assign({}, action, data);
-            delete finalAction[CALL_API];
-            return finalAction;
-        }
-
         // next request action
-        next(actionWith({type: requestType}));
+        dispatch({
+            ...restOptions,
+            type: requestType
+        });
 
         // call api and get response
         const response = await api(restOptions);
         const responseData = await response.json();
 
         if (
-            checkStatus && typeof checkStatus === 'function' ?
-                checkStatus(response, responseData)
+            checkResponseStatus && typeof checkResponseStatus === 'function' ?
+                checkResponseStatus(response, responseData)
                 :
-                defaultCheckStatus(response)
+                defaultCheckResponseStatus(response)
         ) {
-
-            next(actionWith({
-                originAction: {
+            dispatch({
+                [CALL_API_SUCCESS]: {
                     ...restOptions,
-                    api
-                },
-                type: CALL_API_SUCCESS,
-                successType,
-                response
-            }));
-
+                    type: successType,
+                    response,
+                    responseData
+                }
+            });
         } else {
-
-            next(actionWith({
-                originAction: {
+            dispatch({
+                [CALL_API_FAILURE]: {
                     ...restOptions,
-                    api
-                },
-                type: CALL_API_FAILURE,
-                failureType,
-                response
-            }));
-
+                    type: failureType,
+                    response,
+                    responseData
+                }
+            });
         }
 
     };

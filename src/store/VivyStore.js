@@ -8,10 +8,11 @@ import {createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import {routerMiddleware} from 'connected-react-router';
 import AsyncComponentLoadingMiddleware from '../middlewares/AsyncComponentLoadingMiddleware';
-import createApiMiddleware from '../middlewares/ApiMiddleware';
 import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 import createModelApiActionMiddleware from '../middlewares/ModelApiActionMiddleware';
 import createRequestMiddleware from '../middlewares/RequestMiddleware';
+import createSuccessResponseMiddleware from '../middlewares/SuccessResponseMiddleware';
+import createFailureResponseMiddleware from '../middlewares/FailureResponseMiddleware';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
@@ -40,8 +41,9 @@ export default function createVivyStore(history, options) {
                 AsyncComponentLoadingMiddleware,
                 ModelActionMiddleware,
                 ModelApiActionMiddleware,
-                // createApiMiddleware(),
-                createRequestMiddleware(options?.checkStatus),
+                createRequestMiddleware(options?.checkResponseStatus),
+                createSuccessResponseMiddleware(options?.successResponseHandler),
+                createFailureResponseMiddleware(options?.failureResponseHandler),
                 routerMiddleware(history)
             )
         ),
