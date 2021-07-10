@@ -18,7 +18,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
             return next(action);
         }
 
-        const {types, api, ...restOptions} = options,
+        const {types, api, params, ...restOptions} = options,
             [requestType, successType, failureType] = types;
 
         // next request action
@@ -28,7 +28,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
         });
 
         // call api and get response
-        const response = await api(restOptions);
+        const response = await api(params);
         const responseData = await response.json();
 
         if (

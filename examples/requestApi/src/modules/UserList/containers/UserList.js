@@ -14,12 +14,22 @@ const UserList = ({
     dispatch
 }) => {
 
+    const [searchText, setSearchText] = useState('');
+
     const getUserList = useCallback(() => {
         dispatch?.({
-            type: 'userList/getUserList'
+            type: 'userList/getUserList',
+            searchText
         });
     }, [
         dispatch
+    ]);
+
+    const handleChange = useCallback(e => {
+        setSearchText(e.target.value);
+        getUserList();
+    }, [
+        getUserList
     ]);
 
     useEffect(() => {
@@ -28,18 +38,32 @@ const UserList = ({
         getUserList
     ]);
 
-    return getUserListActionType === 'userList/getUserListRequest' ?
-        'loading'
-        :
-        <ul>
+    return (
+        <div className="user-list">
+
+            <div className="search">
+                Search:
+                <input value={searchText}
+                       onChange={handleChange}/>
+            </div>
+
             {
-                data?.map((item, index) =>
-                    <li key={index}>
-                        {item}
-                    </li>
-                )
+                getUserListActionType === 'userList/getUserListRequest' ?
+                    'loading'
+                    :
+                    <ul>
+                        {
+                            data?.map((item, index) =>
+                                <li key={index}>
+                                    {item}
+                                </li>
+                            )
+                        }
+                    </ul>
             }
-        </ul>;
+
+        </div>
+    );
 
 };
 

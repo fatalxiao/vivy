@@ -3,14 +3,14 @@
  */
 
 /**
- * get
+ * post
  * @param url
  * @param params
  * @returns {Promise<Response>}
  */
-export function get(url, params) {
+export function post(url, params) {
     return fetch(url, {
-        method: 'GET',
-        params: JSON.stringify(params)
+        method: 'POST',
+        body: JSON.stringify(params)
     });
 }
