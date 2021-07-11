@@ -32,7 +32,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
 
         if (
             checkResponseStatus && typeof checkResponseStatus === 'function' ?
-                checkResponseStatus(response, response.data)
+                checkResponseStatus(response)
                 :
                 defaultCheckResponseStatus(response)
         ) {
@@ -40,8 +40,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
                 [CALL_API_SUCCESS]: {
                     ...restOptions,
                     type: successType,
-                    response,
-                    responseData: response.data
+                    response
                 }
             });
         } else {
@@ -49,8 +48,7 @@ export default function createRequestMiddleware(checkResponseStatus) {
                 [CALL_API_FAILURE]: {
                     ...restOptions,
                     type: failureType,
-                    response,
-                    responseData: response.data
+                    response
                 }
             });
         }

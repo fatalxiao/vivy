@@ -43,11 +43,11 @@ export default {
                 getUserListActionType: 'userList/getUserListRequest'
             };
         },
-        getUserListSuccess: (state, {responseData}) => {
+        getUserListSuccess: (state, {response}) => {
             return {
                 ...state,
                 getUserListActionType: 'userList/getUserListSuccess',
-                data: responseData || []
+                data: response?.data || []
             };
         },
         getUserListFailure: state => {

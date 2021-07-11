@@ -24,6 +24,4 @@ export function getUserList(params) {
         params
     });
 
-    // return get('/getUserList', `searchText=${params?.searchText}`);
-
 }
