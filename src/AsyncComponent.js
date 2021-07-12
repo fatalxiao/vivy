@@ -9,7 +9,6 @@ import {
 } from './actionTypes/AsyncComponentLoading';
 
 // Vendors
-import isFunction from 'lodash/isFunction';
 import {registerModel} from './index';
 
 export default (getComponent, store, getModels) => props => {
@@ -45,7 +44,7 @@ export default (getComponent, store, getModels) => props => {
      */
     const loadModel = useCallback(async getModel => {
 
-        if (!getModel || !isFunction(getModel)) {
+        if (!getModel || typeof getModel !== 'function') {
             return;
         }
 
@@ -76,7 +75,7 @@ export default (getComponent, store, getModels) => props => {
      */
     const loadComponent = useCallback(async () => {
 
-        if (!getComponent || !isFunction(getComponent)) {
+        if (!getComponent || typeof getComponent !== 'function') {
             return;
         }
 
