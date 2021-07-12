@@ -6,6 +6,11 @@ import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+// Components
+import A from '../../A/containers/A';
+import B from '../../B/containers/B';
+import C from '../../C/containers/C';
+
 // Styles
 import './Root.scss';
 
@@ -44,13 +49,22 @@ const Root = ({
     return (
         <div className="root">
 
-            <input value={value}
-                   onChange={handleChange}/>
+            <div>
 
-            <button className="sync-button"
-                    onClick={handleSync}>
-                Sync
-            </button>
+                <input value={value}
+                       onChange={handleChange}/>
+
+                <button onClick={handleSync}>
+                    Sync value
+                </button>
+
+            </div>
+
+            <div className="modules">
+                <A/>
+                <B/>
+                <C/>
+            </div>
 
         </div>
     );

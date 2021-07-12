@@ -7,15 +7,31 @@ body {
 }
 
 .root {
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
+    padding: 24px;
+    border: 1px solid #aaa;
     margin: 24px;
 
-    .sync-button {
+    input {
+        box-sizing: border-box;
+        height: 40px;
+        padding: 8px;
+        margin: 16px 16px 0 24px;
+    }
+
+    button {
         box-sizing: border-box;
         width: 160px;
         height: 40px;
-        margin-left: 16px;
+    }
+
+    .modules {
+        display: flex;
+
+        & > * {
+            flex: 1;
+            padding: 24px;
+            border: 1px solid #aaa;
+            margin: 24px;
+        }
     }
 }

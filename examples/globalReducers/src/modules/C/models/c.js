@@ -1,19 +1,19 @@
 /**
- * @file root.js
+ * @file c.js
  */
 
 export default {
-    nameSpace: 'root',
-    state: 'Init text.',
-    reducers: {
+    nameSpace: 'c',
+    state: 'Module C init text.',
+    globalReducers: {
 
         /**
-         * update state value
+         * sync state value
          * @param state
          * @param value
          * @returns {*}
          */
-        update: (state, {value}) => {
+        sync: (state, {value}) => {
             return value;
         }
 
