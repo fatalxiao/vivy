@@ -20,10 +20,11 @@ import createRootReducer from '../reducers/RootReducer';
 /**
  * create Vivy store
  * @param history
+ * @param plugins
  * @param options
  * @returns {{}}
  */
-export default function createVivyStore(history, options) {
+export default function createVivyStore(history, plugins, options) {
 
     // 用于加载和调用异步 actions 的 ModelActionMiddleware
     const ModelActionMiddleware = createModelActionMiddleware();
@@ -31,22 +32,26 @@ export default function createVivyStore(history, options) {
     // 用于加载和调用异步 api 的 ModelApiActionMiddleware
     const ModelApiActionMiddleware = createModelApiActionMiddleware();
 
+    const originStore = createStore(
+        createRootReducer(history),
+        applyMiddleware(
+            thunk,
+            AsyncComponentLoadingMiddleware,
+            ModelActionMiddleware,
+            ModelApiActionMiddleware,
+            createRequestMiddleware(options?.checkResponseStatus),
+            createSuccessResponseMiddleware(options?.successResponseHandler),
+            createFailureResponseMiddleware(options?.failureResponseHandler),
+            routerMiddleware(history)
+        )
+    );
+
     return {
 
         // 创建的默认 store
-        ...createStore(
-            createRootReducer(history),
-            applyMiddleware(
-                thunk,
-                AsyncComponentLoadingMiddleware,
-                ModelActionMiddleware,
-                ModelApiActionMiddleware,
-                createRequestMiddleware(options?.checkResponseStatus),
-                createSuccessResponseMiddleware(options?.successResponseHandler),
-                createFailureResponseMiddleware(options?.failureResponseHandler),
-                routerMiddleware(history)
-            )
-        ),
+        ...originStore,
+
+        originStore,
 
         // history 实例
         history,
@@ -58,7 +63,9 @@ export default function createVivyStore(history, options) {
         registerActions: ModelActionMiddleware.register,
 
         // 暴露给 store 的注册异步 apis 的方法
-        registerApiActions: ModelApiActionMiddleware.register
+        registerApiActions: ModelApiActionMiddleware.register,
+
+        plugins
 
     };
 

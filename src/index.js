@@ -66,7 +66,28 @@ export function registerModels(store, models) {
  */
 export default function Vivy(history) {
 
-    let options = {};
+    const options = {};
+    const plugins = [];
+
+    function use(plugin, options) {
+        plugins.push({
+            plugin,
+            options
+        });
+    }
+
+    function createStore() {
+
+        const store = createVivyStore(history, plugins, options);
+
+        registerModels(store, [
+            asyncComponentLoading,
+            apiStatus
+        ]);
+
+        return store;
+
+    }
 
     return {
 
@@ -85,18 +106,9 @@ export default function Vivy(history) {
             options.failureResponseHandler = failureResponseHandler;
         },
 
-        createStore: () => {
+        applyPlugIn,
 
-            const store = createVivyStore(history, options);
-
-            registerModels(store, [
-                asyncComponentLoading,
-                apiStatus
-            ]);
-
-            return store;
-
-        }
+        createStore
 
     };
 
