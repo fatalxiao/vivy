@@ -13,7 +13,7 @@ import {ApiStatus} from '../../../../../../plugins/vivy-api';
 import './UserList.scss';
 
 const UserList = ({
-    data, getUserListStatus,
+    data, message, getUserListStatus,
     dispatch
 }) => {
 
@@ -63,6 +63,7 @@ const UserList = ({
                 Search:
                 <input value={searchText}
                        onChange={handleChange}/>
+                {message}
             </div>
 
             {
@@ -88,6 +89,7 @@ const UserList = ({
 UserList.propTypes = {
 
     data: PropTypes.array,
+    message: PropTypes.string,
     getUserListStatus: PropTypes.string,
 
     dispatch: PropTypes.func
@@ -96,5 +98,6 @@ UserList.propTypes = {
 
 export default connect(state => ({
     data: state.userList.data,
+    message: state.userList.message,
     getUserListStatus: state.apiStatus.userList?.getUserList
 }))(UserList);
