@@ -69,11 +69,8 @@ export default function Vivy(history) {
     const options = {};
     const plugins = [];
 
-    function use(plugin, options) {
-        plugins.push({
-            plugin,
-            options
-        });
+    function use(plugin) {
+        plugins.push(plugin);
     }
 
     function createStore() {
@@ -106,7 +103,7 @@ export default function Vivy(history) {
             options.failureResponseHandler = failureResponseHandler;
         },
 
-        applyPlugIn,
+        use,
 
         createStore
 

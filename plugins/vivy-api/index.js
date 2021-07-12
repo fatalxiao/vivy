@@ -39,7 +39,8 @@ export default function createVivyApiPlugin(options) {
             createRequestMiddleware(options?.checkResponseStatus),
             createSuccessResponseMiddleware(options?.successResponseHandler),
             createFailureResponseMiddleware(options?.failureResponseHandler)
-        ]
+        ],
+
     };
 
 };
