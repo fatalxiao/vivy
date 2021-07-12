@@ -7,7 +7,6 @@ import {createStore, applyMiddleware} from 'redux';
 // Middlewares
 import thunk from 'redux-thunk';
 import {routerMiddleware} from 'connected-react-router';
-import AsyncComponentLoadingMiddleware from '../middlewares/AsyncComponentLoadingMiddleware';
 import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 
 // Reducers
@@ -29,7 +28,6 @@ export default function createVivyStore(history, plugins, options) {
         createRootReducer(history),
         applyMiddleware(
             thunk,
-            AsyncComponentLoadingMiddleware,
             ModelActionMiddleware,
             ...plugins?.reduce((extraMiddlewares, plugin) => [...extraMiddlewares, ...plugin.extraMiddlewares], []),
             routerMiddleware(history)
