@@ -11,13 +11,13 @@ import createRootReducer from './reducers/RootReducer';
 
 // Models
 import asyncComponentLoading from './models/asyncComponentLoading';
-import apiStatus from './models/apiStatus';
+// import apiStatus from './models/apiStatus';
 
 // Components
 export AsyncComponent from './AsyncComponent';
 
 // Statics
-export ApiStatus from './statics/ApiStatus';
+// export ApiStatus from './statics/ApiStatus';
 
 /**
  * Register model
@@ -30,7 +30,7 @@ export function registerModel(store, model) {
         return;
     }
 
-    const {nameSpace, state, actions, /* apis, */ globalReducers, reducers, plugins} = model;
+    const {nameSpace, state, actions, /* apis, */ globalReducers, reducers} = model;
 
     // register or overwrite reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
@@ -43,7 +43,7 @@ export function registerModel(store, model) {
         store.registerActions(nameSpace, actions || {});
     }
 
-    plugins.forEach(plugin => plugin.onRegisterModel(model, store));
+    store.plugins?.forEach(plugin => plugin?.onRegisterModel(model, store));
 
     // register api actions
     // if (apis) {
@@ -84,7 +84,7 @@ export default function Vivy(history) {
             // apiStatus
         ]);
 
-        plugins.forEach(plugin => plugin.onCreateStore(store));
+        plugins?.forEach(plugin => plugin?.onCreateStore(store));
 
         return store;
 

@@ -9,7 +9,7 @@ import createRequestMiddleware from './middlewares/RequestMiddleware';
 import createSuccessResponseMiddleware from './middlewares/SuccessResponseMiddleware';
 import createFailureResponseMiddleware from './middlewares/FailureResponseMiddleware';
 
-import {registerModels} from '../../src';
+import {registerModel} from '../../src';
 
 // Statics
 export ApiStatus from './statics/ApiStatus';
@@ -32,11 +32,11 @@ export default function createVivyApiPlugin(options) {
             createFailureResponseMiddleware(options?.failureResponseHandler)
         ],
         onCreateStore: store => {
-            registerModels(store, [
-                apiStatus
-            ]);
+            registerModel(store, apiStatus);
         },
         onRegisterModel: model => {
+
+            console.log(model);
 
             const {nameSpace, apis} = model;
 

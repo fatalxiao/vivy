@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 // Statics
-import {ApiStatus} from '../../../../../../src';
+import {ApiStatus} from '../../../../../../plugins/vivy-api';
 
 // Styles
 import './UserList.scss';

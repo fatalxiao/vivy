@@ -25,8 +25,6 @@ export default function createRequestMiddleware(checkResponseStatus) {
             {nameSpace, apiActionName, types} = callApiParams,
             [requestType, successType, failureType] = types;
 
-        console.log('callApiParams::', callApiParams);
-
         // next request action
         next({
             ...restOptions,

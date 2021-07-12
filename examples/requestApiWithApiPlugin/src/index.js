@@ -9,6 +9,7 @@ import {Provider} from 'react-redux';
 
 // Import Vivy
 import Vivy, {registerModel} from '../../../src';
+import VivyApi from '../../../plugins/vivy-api';
 
 // Sync component and model
 import UserList from './modules/UserList/containers/UserList';
@@ -19,6 +20,9 @@ const history = createBrowserHistory();
 
 // Create vivy
 const vivy = Vivy(history);
+
+// Apply hooks
+vivy.use(VivyApi());
 
 // Create store after configuration
 const store = vivy.createStore();

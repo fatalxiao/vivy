@@ -38,7 +38,7 @@ export default function createVivyStore(history, plugins, options) {
             thunk,
             AsyncComponentLoadingMiddleware,
             ModelActionMiddleware,
-            ...plugins.reduce((extraMiddlewares, plugin) => [...extraMiddlewares, ...plugin.extraMiddlewares], []),
+            ...plugins?.reduce((extraMiddlewares, plugin) => [...extraMiddlewares, ...plugin.extraMiddlewares], []),
             // ModelApiActionMiddleware,
             // createRequestMiddleware(options?.checkResponseStatus),
             // createSuccessResponseMiddleware(options?.successResponseHandler),
