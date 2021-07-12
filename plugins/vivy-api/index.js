@@ -36,8 +36,6 @@ export default function createVivyApiPlugin(options) {
         },
         onRegisterModel: model => {
 
-            console.log(model);
-
             const {nameSpace, apis} = model;
 
             // register api actions

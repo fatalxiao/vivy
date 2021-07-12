@@ -5,7 +5,7 @@
 import {CALL_API_FAILURE} from '../actionTypes/CallApi';
 
 export default function createFailureResponseMiddleware(failureResponseHandler) {
-    return ({dispatch, getState}) => next => async action => {
+    return ({dispatch, getState}) => next => action => {
 
         const options = action[CALL_API_FAILURE];
 

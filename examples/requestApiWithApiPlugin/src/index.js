@@ -22,7 +22,25 @@ const history = createBrowserHistory();
 const vivy = Vivy(history);
 
 // Apply hooks
-vivy.use(VivyApi());
+vivy.use(VivyApi({
+    checkResponseStatus: response => response?.data?.code === 2000,
+    successResponseHandler: ({dispatch, getState}) => next => action => {
+
+        const {response, successCallback} = action;
+
+        successCallback?.(response);
+
+        next({
+            ...action,
+            responseData: response.data.data
+        });
+
+    },
+    failureResponseHandler: ({dispatch, getState}) => next => action => {
+        const {response, failureCallback} = action;
+        failureCallback?.(response);
+    }
+}));
 
 // Create store after configuration
 const store = vivy.createStore();

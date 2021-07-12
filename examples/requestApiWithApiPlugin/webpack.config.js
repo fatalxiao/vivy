@@ -39,12 +39,13 @@ module.exports = merge(baseConfig, {
                 ];
 
                 // Delay 1s
-                setTimeout(() => res.json(
-                    req.query.searchText ?
+                setTimeout(() => res.json({
+                    code: 2000,
+                    data: req.query.searchText ?
                         data.filter(item => item.toUpperCase().includes(req.query.searchText.toUpperCase()))
                         :
                         data
-                ), 1000);
+                }), 1000);
 
             });
 

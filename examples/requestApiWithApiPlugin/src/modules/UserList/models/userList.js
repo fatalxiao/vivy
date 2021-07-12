@@ -26,16 +26,22 @@ export default {
             api: getUserList,
             params: {
                 searchText
+            },
+            successCallback: response => {
+                console.log('Get user list successfully.');
+            },
+            failureCallback: response => {
+                console.log('Get user list failure.');
             }
         })
 
     },
     reducers: {
 
-        getUserListSuccess: (state, {response}) => {
+        getUserListSuccess: (state, {responseData}) => {
             return {
                 ...state,
-                data: response?.data || []
+                data: responseData || []
             };
         }
 
