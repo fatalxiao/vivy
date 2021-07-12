@@ -9,12 +9,6 @@ import createVivyStore from './store/VivyStore';
 import createAsyncReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
-// Models
-// import asyncComponentLoading from './models/asyncComponentLoading';
-
-// // Components
-// export AsyncComponent from './AsyncComponent';
-
 /**
  * Register model
  * @param store
@@ -26,7 +20,7 @@ export function registerModel(store, model) {
         return;
     }
 
-    const {nameSpace, state, actions, /* apis, */ globalReducers, reducers} = model;
+    const {nameSpace, state, actions, globalReducers, reducers} = model;
 
     // register or overwrite reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
@@ -39,6 +33,7 @@ export function registerModel(store, model) {
         store.registerActions(nameSpace, actions || {});
     }
 
+    // call onRegisterModel in plugins
     store.plugins?.forEach(plugin => plugin?.onRegisterModel?.(model, store));
 
 }
@@ -62,24 +57,34 @@ export default function Vivy(history) {
     const options = {};
     const plugins = [];
 
+    /**
+     * use vivy plugin
+     * @param plugin
+     */
     function use(plugin) {
         plugins.push(plugin);
     }
 
+    /**
+     * create store
+     * @returns {{}|*}
+     */
     function createStore() {
 
+        // create a vivy store
         const store = createVivyStore(history, plugins, options);
 
-        // registerModel(store, asyncComponentLoading);
-
+        // register extra models in plugins
         registerModels(
             store,
             plugins?.reduce((extraModels, plugin) => [...extraModels, ...plugin.extraModels], [])
         );
 
+        // add methods
         store.registerModel = registerModel.bind(null, store);
         store.registerModels = registerModels.bind(null, store);
 
+        // call onCreateStore in plugins
         plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
 
         return store;
