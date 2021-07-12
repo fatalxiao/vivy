@@ -11,13 +11,9 @@ import createRootReducer from './reducers/RootReducer';
 
 // Models
 import asyncComponentLoading from './models/asyncComponentLoading';
-// import apiStatus from './models/apiStatus';
 
 // Components
 export AsyncComponent from './AsyncComponent';
-
-// Statics
-// export ApiStatus from './statics/ApiStatus';
 
 /**
  * Register model
@@ -44,11 +40,6 @@ export function registerModel(store, model) {
     }
 
     store.plugins?.forEach(plugin => plugin?.onRegisterModel(model, store));
-
-    // register api actions
-    // if (apis) {
-    //     store.registerApiActions(nameSpace, apis || {});
-    // }
 
 }
 
@@ -79,10 +70,7 @@ export default function Vivy(history) {
 
         const store = createVivyStore(history, plugins, options);
 
-        registerModels(store, [
-            asyncComponentLoading
-            // apiStatus
-        ]);
+        registerModel(store, asyncComponentLoading);
 
         plugins?.forEach(plugin => plugin?.onCreateStore(store));
 
@@ -94,18 +82,6 @@ export default function Vivy(history) {
 
         history,
         options,
-
-        // setCheckResponseStatus: checkResponseStatus => {
-        //     options.checkResponseStatus = checkResponseStatus;
-        // },
-        //
-        // setSuccessResponseHandler: successResponseHandler => {
-        //     options.successResponseHandler = successResponseHandler;
-        // },
-        //
-        // setFailureResponseHandler: failureResponseHandler => {
-        //     options.failureResponseHandler = failureResponseHandler;
-        // },
 
         use,
 
