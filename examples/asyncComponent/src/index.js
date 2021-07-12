@@ -12,12 +12,15 @@ import {configureRoutes} from './routes';
 
 // Import Vivy
 import Vivy from '../../../src';
+import VivyAsyncComponent from '../../../plugins/vivy-async-component';
 
 // Prepare vivy store
 const history = createBrowserHistory();
 
 // Create vivy
 const vivy = Vivy(history);
+
+vivy.use(VivyAsyncComponent());
 
 // Create store after configuration
 const store = vivy.createStore();

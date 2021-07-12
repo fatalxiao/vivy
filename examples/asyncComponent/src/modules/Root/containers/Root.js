@@ -25,10 +25,10 @@ const Root = ({
             <h3>Menu:</h3>
             <ul>
                 {
-                    menu.map((item, index) =>
+                    menu?.map((item, index) =>
                         <li key={index}>
-                            <NavLink to={item.route}>
-                                {item.name}
+                            <NavLink to={item?.route}>
+                                {item?.name}
                             </NavLink>
                         </li>
                     )

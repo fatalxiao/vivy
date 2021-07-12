@@ -4,11 +4,14 @@
 
 // Models
 import apiStatus from './models/apiStatus';
+
+// Middlewares
 import createModelApiActionMiddleware from './middlewares/ModelApiActionMiddleware';
 import createRequestMiddleware from './middlewares/RequestMiddleware';
 import createSuccessResponseMiddleware from './middlewares/SuccessResponseMiddleware';
 import createFailureResponseMiddleware from './middlewares/FailureResponseMiddleware';
 
+// Vendors
 import {registerModel} from '../../src';
 
 // Statics
@@ -31,9 +34,9 @@ export default function createVivyApiPlugin(options) {
             createSuccessResponseMiddleware(options?.successResponseHandler),
             createFailureResponseMiddleware(options?.failureResponseHandler)
         ],
-        onCreateStore: store => {
-            registerModel(store, apiStatus);
-        },
+        extraModels: [
+            apiStatus
+        ],
         onRegisterModel: model => {
 
             const {nameSpace, apis} = model;

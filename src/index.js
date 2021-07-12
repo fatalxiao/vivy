@@ -10,10 +10,10 @@ import createAsyncReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
 // Models
-import asyncComponentLoading from './models/asyncComponentLoading';
+// import asyncComponentLoading from './models/asyncComponentLoading';
 
-// Components
-export AsyncComponent from './AsyncComponent';
+// // Components
+// export AsyncComponent from './AsyncComponent';
 
 /**
  * Register model
@@ -39,7 +39,7 @@ export function registerModel(store, model) {
         store.registerActions(nameSpace, actions || {});
     }
 
-    store.plugins?.forEach(plugin => plugin?.onRegisterModel(model, store));
+    store.plugins?.forEach(plugin => plugin?.onRegisterModel?.(model, store));
 
 }
 
@@ -70,9 +70,17 @@ export default function Vivy(history) {
 
         const store = createVivyStore(history, plugins, options);
 
-        registerModel(store, asyncComponentLoading);
+        // registerModel(store, asyncComponentLoading);
 
-        plugins?.forEach(plugin => plugin?.onCreateStore(store));
+        registerModels(
+            store,
+            plugins?.reduce((extraModels, plugin) => [...extraModels, ...plugin.extraModels], [])
+        );
+
+        store.registerModel = registerModel.bind(null, store);
+        store.registerModels = registerModels.bind(null, store);
+
+        plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
 
         return store;
 
