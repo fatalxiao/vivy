@@ -7,7 +7,7 @@ const path = require('path');
 const {merge} = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// Base config
+// base config
 const baseConfig = require('../webpack.base.config.js');
 
 module.exports = merge(baseConfig, {
@@ -26,7 +26,7 @@ module.exports = merge(baseConfig, {
         historyApiFallback: true,
         onBeforeSetupMiddleware: server => {
 
-            // Reponse user list
+            // reponse user list
             server.app.get('/getUserList', (req, res) => {
 
                 const data = [
@@ -38,7 +38,7 @@ module.exports = merge(baseConfig, {
                     'User-6'
                 ];
 
-                // Delay 1s
+                // delay 1s
                 setTimeout(() => res.json(
                     req.query.searchText ?
                         data.filter(item => item.toUpperCase().includes(req.query.searchText.toUpperCase()))

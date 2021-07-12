@@ -7,7 +7,7 @@ import axios from 'axios';
 let source;
 
 /**
- * Get user list
+ * get user list
  * @param params
  * @returns {Promise<Response>}
  */

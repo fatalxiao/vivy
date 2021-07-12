@@ -1,0 +1,17 @@
+/**
+ * @file UserList.scss
+ */
+
+body {
+    margin: 0;
+}
+
+.user-list {
+    padding: 24px;
+
+    .search {
+        input {
+            margin-left: 8px;
+        }
+    }
+}
