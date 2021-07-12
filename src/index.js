@@ -22,18 +22,18 @@ export function registerModel(store, model) {
 
     const {nameSpace, state, actions, globalReducers, reducers} = model;
 
-    // register or overwrite reducers
+    // Register or overwrite reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
         store, nameSpace, state, globalReducers || {}, reducers || {}
     );
     store.replaceReducer(createRootReducer(store.history, store.asyncReducers));
 
-    // register actions
+    // Register actions
     if (actions) {
         store.registerActions(nameSpace, actions || {});
     }
 
-    // call onRegisterModel in plugins
+    // Call onRegisterModel in plugins
     store.plugins?.forEach(plugin => plugin?.onRegisterModel?.(model, store));
 
 }
@@ -58,7 +58,7 @@ export default function Vivy(history) {
     const plugins = [];
 
     /**
-     * use vivy plugin
+     * Use vivy plugin
      * @param plugin
      */
     function use(plugin) {
@@ -66,25 +66,25 @@ export default function Vivy(history) {
     }
 
     /**
-     * create store
+     * Create store
      * @returns {{}|*}
      */
     function createStore() {
 
-        // create a vivy store
+        // Create a vivy store
         const store = createVivyStore(history, plugins, options);
 
-        // register extra models in plugins
+        // Register extra models in plugins
         registerModels(
             store,
             plugins?.reduce((extraModels, plugin) => [...extraModels, ...plugin.extraModels], [])
         );
 
-        // add methods
+        // Add methods
         store.registerModel = registerModel.bind(null, store);
         store.registerModels = registerModels.bind(null, store);
 
-        // call onCreateStore in plugins
+        // Call onCreateStore in plugins
         plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
 
         return store;

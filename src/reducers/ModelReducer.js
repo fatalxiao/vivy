@@ -3,7 +3,7 @@
  */
 
 /**
- * 默认的 reducer
+ * Default reducer
  * @param value
  * @returns {*}
  */
@@ -12,7 +12,7 @@ function identify(value) {
 }
 
 /**
- * 生成 Reducer
+ * Generate reducer
  * @param actionType
  * @param reducer
  * @returns {(function(*=, *=): (*))|*}
@@ -32,7 +32,7 @@ function handleReducer(actionType, reducer = identify) {
 }
 
 /**
- * reduce reducers
+ * Reduce reducers
  * @param reducers
  * @returns {function(*=, *=): *}
  */
@@ -41,7 +41,7 @@ function reduceReducers(...reducers) {
 }
 
 /**
- * 生成 actions
+ * Create an async reducer
  * @param store
  * @param nameSpace
  * @param initialState
@@ -51,6 +51,7 @@ function reduceReducers(...reducers) {
  */
 export default function createAsyncReducer(store, nameSpace, initialState, globalReducers, reducers) {
 
+    // Handle global reducers
     const globalReducerHandlers = globalReducers ?
         Object.keys(globalReducers).map(type =>
             handleReducer(type, globalReducers[type])
@@ -58,6 +59,7 @@ export default function createAsyncReducer(store, nameSpace, initialState, globa
         :
         [];
 
+    // Handle reducers
     const reducerHandlers = reducers ?
         Object.keys(reducers).map(type =>
             handleReducer(`${nameSpace}/${type}`, reducers[type])
@@ -65,8 +67,10 @@ export default function createAsyncReducer(store, nameSpace, initialState, globa
         :
         [];
 
+    // Reduce reducers
     const reducer = reduceReducers(...globalReducerHandlers, ...reducerHandlers);
 
+    // Return reducer
     return (state = initialState, action) => reducer(state, action);
 
 }

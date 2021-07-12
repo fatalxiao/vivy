@@ -13,7 +13,7 @@ import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 import createRootReducer from '../reducers/RootReducer';
 
 /**
- * create Vivy store
+ * Create Vivy store
  * @param history
  * @param plugins
  * @param options
@@ -21,7 +21,7 @@ import createRootReducer from '../reducers/RootReducer';
  */
 export default function createVivyStore(history, plugins, options) {
 
-    // 用于加载和调用异步 actions 的 ModelActionMiddleware
+    // Handle actions in models
     const ModelActionMiddleware = createModelActionMiddleware();
 
     const originStore = createStore(
@@ -36,20 +36,22 @@ export default function createVivyStore(history, plugins, options) {
 
     return {
 
-        // 创建的默认 store
+        // Store
         ...originStore,
 
+        // Origin store
         originStore,
 
-        // history 实例
+        // History
         history,
 
-        // 异步的 reducers
+        // Async reducers
         asyncReducers: {},
 
-        // 暴露给 store 的注册异步 actions 的方法
+        // Register actions
         registerActions: ModelActionMiddleware.register,
 
+        // All registered plugins
         plugins
 
     };
