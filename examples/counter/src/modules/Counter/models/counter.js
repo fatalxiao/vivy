@@ -8,7 +8,7 @@ export default {
     reducers: {
 
         /**
-         * plus 1
+         * Plus 1
          * @param state
          * @returns {*}
          */
@@ -17,7 +17,7 @@ export default {
         },
 
         /**
-         * minus 1
+         * Minus 1
          * @param state
          * @returns {number}
          */
@@ -26,7 +26,7 @@ export default {
         },
 
         /**
-         * update new value
+         * Update new value
          * @param state
          * @param nextValue
          * @returns {*}

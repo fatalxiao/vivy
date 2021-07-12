@@ -15,7 +15,7 @@ const Counter = ({
 }) => {
 
     /**
-     * plus 1
+     * Plus 1
      * @type {(function(): void)|*}
      */
     const handlePlus = useCallback(() => {
@@ -27,7 +27,7 @@ const Counter = ({
     ]);
 
     /**
-     * minus 1
+     * Minus 1
      * @type {(function(): void)|*}
      */
     const handleMinus = useCallback(() => {
@@ -39,12 +39,12 @@ const Counter = ({
     ]);
 
     /**
-     * input value state
+     * Input value state
      */
     const [inputValue, setInputValue] = useState(100);
 
     /**
-     * handle input value change
+     * Handle input value change
      * @type {(function(*): void)|*}
      */
     const handleChange = useCallback(e => {
@@ -52,7 +52,7 @@ const Counter = ({
     }, []);
 
     /**
-     * update input value to model
+     * Update input value to model
      * @type {(function(): void)|*}
      */
     const handleUpdate = useCallback(() => {

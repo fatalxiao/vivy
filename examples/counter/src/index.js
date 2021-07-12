@@ -7,9 +7,10 @@ import {render} from 'react-dom';
 import {createBrowserHistory} from 'history';
 import {Provider} from 'react-redux';
 
-// import Vivy
+// Import Vivy
 import Vivy, {registerModel} from '../../../src';
 
+// Sync component and model
 import Counter from './modules/Counter/containers/Counter';
 import counterModel from './modules/Counter/models/counter';
 
