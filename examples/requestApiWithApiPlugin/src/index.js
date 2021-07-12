@@ -21,7 +21,7 @@ const history = createBrowserHistory();
 // Create vivy
 const vivy = Vivy(history);
 
-// Apply hooks
+// Apply api plugin
 vivy.use(VivyApi({
     checkResponseStatus: response => response?.data?.code === 2000,
     successResponseHandler: ({dispatch, getState}) => next => action => {

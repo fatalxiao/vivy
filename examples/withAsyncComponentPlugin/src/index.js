@@ -20,6 +20,7 @@ const history = createBrowserHistory();
 // Create vivy
 const vivy = Vivy(history);
 
+// Apply async component plugin
 vivy.use(VivyAsyncComponent());
 
 // Create store after configuration
