@@ -5,6 +5,9 @@
 export default {
     nameSpace: 'root',
     state: [{
+        name: 'Root',
+        route: '/'
+    }, {
         name: 'Module A',
         route: '/a'
     }, {
