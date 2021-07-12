@@ -1,0 +1,21 @@
+/**
+ * @file Counter.scss
+ */
+
+body {
+    margin: 0;
+}
+
+.root {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 24px;
+
+    .sync-button {
+        box-sizing: border-box;
+        width: 160px;
+        height: 40px;
+        margin-left: 16px;
+    }
+}
