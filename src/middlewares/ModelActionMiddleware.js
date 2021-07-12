@@ -8,7 +8,7 @@
  */
 export default function createModelActionMiddleware() {
 
-    // async actions
+    // Async actions
     const asyncActions = {};
 
     /**
@@ -32,7 +32,7 @@ export default function createModelActionMiddleware() {
     }
 
     /**
-     * register async actions
+     * Register async actions
      * @param nameSpace
      * @param actions
      */
