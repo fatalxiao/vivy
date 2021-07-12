@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import {ConnectedRouter} from 'connected-react-router';
 import {configureRoutes} from './routes';
 
-// import Vivy
+// Import Vivy
 import Vivy from '../../../src';
 
 // Prepare vivy store

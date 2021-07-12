@@ -7,7 +7,7 @@ const path = require('path');
 const {merge} = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-// base config
+// Base config
 const baseConfig = require('../webpack.base.config.js');
 
 module.exports = merge(baseConfig, {

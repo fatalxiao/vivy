@@ -5,7 +5,7 @@
 import {AsyncComponent} from '../../../src';
 
 /**
- * get route config
+ * Get route config
  * @param store
  * @returns {[]}
  */
