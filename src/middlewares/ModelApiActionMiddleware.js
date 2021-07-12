@@ -3,7 +3,7 @@
  */
 
 // Action Types
-import {CALL_API} from '../actionTypes/CallApi';
+import {CALL_API, CALL_API_PARAMS} from '../actionTypes/CallApi';
 
 /**
  * ModelApiActionMiddleware creater
@@ -28,16 +28,26 @@ export default function createModelApiActionMiddleware() {
          * @param type
          * @returns {function(*): *}
          */
-        const dispatchApi = type => apiAction => dispatch({
-            [CALL_API]: {
-                ...apiAction,
-                types: [
-                    `${type}Request`,
-                    `${type}Success`,
-                    `${type}Failure`
-                ]
-            }
-        });
+        const dispatchApi = type => apiAction => {
+
+            const [nameSpace, apiActionName] = type.split('/');
+
+            dispatch({
+                [CALL_API]: {
+                    ...apiAction,
+                    [CALL_API_PARAMS]: {
+                        nameSpace,
+                        apiActionName,
+                        types: [
+                            `${type}Request`,
+                            `${type}Success`,
+                            `${type}Failure`
+                        ]
+                    }
+                }
+            });
+
+        };
 
         return next => action => {
 

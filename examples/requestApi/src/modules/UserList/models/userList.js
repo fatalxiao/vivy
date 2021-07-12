@@ -12,12 +12,7 @@ export default {
         /**
          * user list data
          */
-        data: [],
-
-        /**
-         * action type for getting user list
-         */
-        getUserListActionType: ''
+        data: []
 
     },
     apis: {
@@ -37,23 +32,10 @@ export default {
     },
     reducers: {
 
-        getUserListRequest: state => {
-            return {
-                ...state,
-                getUserListActionType: 'userList/getUserListRequest'
-            };
-        },
         getUserListSuccess: (state, {response}) => {
             return {
                 ...state,
-                getUserListActionType: 'userList/getUserListSuccess',
                 data: response?.data || []
-            };
-        },
-        getUserListFailure: state => {
-            return {
-                ...state,
-                getUserListActionType: 'userList/getUserListFailure'
             };
         }
 

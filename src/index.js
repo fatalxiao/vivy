@@ -11,9 +11,13 @@ import createRootReducer from './reducers/RootReducer';
 
 // Models
 import asyncComponentLoading from './models/asyncComponentLoading';
+import apiStatus from './models/apiStatus';
 
 // Components
 export AsyncComponent from './AsyncComponent';
+
+// Statics
+export ApiStatus from './statics/ApiStatus';
 
 /**
  * Register model
@@ -86,7 +90,8 @@ export default function Vivy(history) {
             const store = createVivyStore(history, options);
 
             registerModels(store, [
-                asyncComponentLoading
+                asyncComponentLoading,
+                apiStatus
             ]);
 
             return store;

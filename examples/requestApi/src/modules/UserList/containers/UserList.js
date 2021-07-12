@@ -6,11 +6,14 @@ import React, {useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+// Statics
+import {ApiStatus} from '../../../../../../src';
+
 // Styles
 import './UserList.scss';
 
 const UserList = ({
-    data, getUserListActionType,
+    data, getUserListStatus,
     dispatch
 }) => {
 
@@ -63,7 +66,7 @@ const UserList = ({
             </div>
 
             {
-                getUserListActionType === 'userList/getUserListRequest' ?
+                getUserListStatus === ApiStatus.REQUEST ?
                     'loading'
                     :
                     <ul>
@@ -85,7 +88,7 @@ const UserList = ({
 UserList.propTypes = {
 
     data: PropTypes.array,
-    getUserListActionType: PropTypes.string,
+    getUserListStatus: PropTypes.string,
 
     dispatch: PropTypes.func
 
@@ -93,5 +96,5 @@ UserList.propTypes = {
 
 export default connect(state => ({
     data: state.userList.data,
-    getUserListActionType: state.userList.getUserListActionType
+    getUserListStatus: state.apiStatus.userList?.getUserList
 }))(UserList);

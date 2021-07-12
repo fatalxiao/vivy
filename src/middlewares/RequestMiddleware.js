@@ -2,14 +2,17 @@
  * @file RequestMiddleware.js
  */
 
-import {CALL_API, CALL_API_SUCCESS, CALL_API_FAILURE} from '../actionTypes/CallApi';
+import {
+    CALL_API, CALL_API_PARAMS, CALL_API_SUCCESS, CALL_API_FAILURE,
+    API_STATUS_REQUEST, API_STATUS_SUCCESS, API_STATUS_FAILURE
+} from '../actionTypes/CallApi';
 
 function defaultCheckResponseStatus(response) {
     return response.status >= 200 && response.status < 300;
 }
 
 export default function createRequestMiddleware(checkResponseStatus) {
-    return () => next => async action => {
+    return ({dispatch}) => next => async action => {
 
         const options = action[CALL_API];
 
@@ -18,13 +21,21 @@ export default function createRequestMiddleware(checkResponseStatus) {
             return next(action);
         }
 
-        const {types, api, params, ...restOptions} = options,
+        const {[CALL_API_PARAMS]: callApiParams, api, params, ...restOptions} = options,
+            {nameSpace, apiActionName, types} = callApiParams,
             [requestType, successType, failureType] = types;
+
+        console.log('callApiParams::', callApiParams);
 
         // next request action
         next({
             ...restOptions,
             type: requestType
+        });
+        dispatch({
+            type: API_STATUS_REQUEST,
+            nameSpace,
+            apiActionName
         });
 
         // call api and get response
@@ -43,6 +54,11 @@ export default function createRequestMiddleware(checkResponseStatus) {
                     response
                 }
             });
+            dispatch({
+                type: API_STATUS_SUCCESS,
+                nameSpace,
+                apiActionName
+            });
         } else {
             next({
                 [CALL_API_FAILURE]: {
@@ -50,6 +66,11 @@ export default function createRequestMiddleware(checkResponseStatus) {
                     type: failureType,
                     response
                 }
+            });
+            dispatch({
+                type: API_STATUS_FAILURE,
+                nameSpace,
+                apiActionName
             });
         }
 

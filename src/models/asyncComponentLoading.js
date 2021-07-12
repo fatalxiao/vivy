@@ -3,7 +3,7 @@
  */
 
 export default {
-    nameSpace: '@@VIVY/ASYNC_COMPONENT_LOADING',
+    nameSpace: 'asyncComponentLoading',
     state: false,
     reducers: {
 
