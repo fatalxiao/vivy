@@ -23,7 +23,7 @@ export default {
     apis: {
 
         /**
-         * call api to get user list
+         * Call api to get user list
          * @param searchText
          * @returns {function(*, *): *}
          */
@@ -72,7 +72,7 @@ export default {
         },
 
         /**
-         * handle getting user list successfully
+         * Handle getting user list successfully
          * @param state
          * @param responseData
          * @returns {*&{data: *[]}}

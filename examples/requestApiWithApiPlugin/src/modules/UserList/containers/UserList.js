@@ -18,12 +18,12 @@ const UserList = ({
 }) => {
 
     /**
-     * search text
+     * Search text
      */
     const [searchText, setSearchText] = useState('');
 
     /**
-     * query user list by search text
+     * Query user list by search text
      * @type {(function(): void)|*}
      */
     const getUserList = useCallback(() => {
@@ -37,7 +37,7 @@ const UserList = ({
     ]);
 
     /**
-     * handle search text change
+     * Handle search text change
      * @type {(function(*): void)|*}
      */
     const handleChange = useCallback(e => {
@@ -48,7 +48,7 @@ const UserList = ({
     ]);
 
     /**
-     * query user list when init
+     * Query user list when init
      */
     useEffect(() => {
         getUserList();
