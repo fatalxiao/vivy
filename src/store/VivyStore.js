@@ -9,10 +9,10 @@ import thunk from 'redux-thunk';
 import {routerMiddleware} from 'connected-react-router';
 import AsyncComponentLoadingMiddleware from '../middlewares/AsyncComponentLoadingMiddleware';
 import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
-import createModelApiActionMiddleware from '../middlewares/ModelApiActionMiddleware';
-import createRequestMiddleware from '../middlewares/RequestMiddleware';
-import createSuccessResponseMiddleware from '../middlewares/SuccessResponseMiddleware';
-import createFailureResponseMiddleware from '../middlewares/FailureResponseMiddleware';
+// import createModelApiActionMiddleware from '../middlewares/ModelApiActionMiddleware';
+// import createRequestMiddleware from '../middlewares/RequestMiddleware';
+// import createSuccessResponseMiddleware from '../middlewares/SuccessResponseMiddleware';
+// import createFailureResponseMiddleware from '../middlewares/FailureResponseMiddleware';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
@@ -30,7 +30,7 @@ export default function createVivyStore(history, plugins, options) {
     const ModelActionMiddleware = createModelActionMiddleware();
 
     // 用于加载和调用异步 api 的 ModelApiActionMiddleware
-    const ModelApiActionMiddleware = createModelApiActionMiddleware();
+    // const ModelApiActionMiddleware = createModelApiActionMiddleware();
 
     const originStore = createStore(
         createRootReducer(history),
@@ -38,10 +38,11 @@ export default function createVivyStore(history, plugins, options) {
             thunk,
             AsyncComponentLoadingMiddleware,
             ModelActionMiddleware,
-            ModelApiActionMiddleware,
-            createRequestMiddleware(options?.checkResponseStatus),
-            createSuccessResponseMiddleware(options?.successResponseHandler),
-            createFailureResponseMiddleware(options?.failureResponseHandler),
+            ...plugins.reduce((extraMiddlewares, plugin) => [...extraMiddlewares, ...plugin.extraMiddlewares], []),
+            // ModelApiActionMiddleware,
+            // createRequestMiddleware(options?.checkResponseStatus),
+            // createSuccessResponseMiddleware(options?.successResponseHandler),
+            // createFailureResponseMiddleware(options?.failureResponseHandler),
             routerMiddleware(history)
         )
     );
@@ -63,7 +64,7 @@ export default function createVivyStore(history, plugins, options) {
         registerActions: ModelActionMiddleware.register,
 
         // 暴露给 store 的注册异步 apis 的方法
-        registerApiActions: ModelApiActionMiddleware.register,
+        // registerApiActions: ModelApiActionMiddleware.register,
 
         plugins
 

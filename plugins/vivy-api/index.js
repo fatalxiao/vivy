@@ -2,30 +2,21 @@
  * @file index.js
  */
 
-// Vivy Store
-import createVivyStore from './store/VivyStore';
-
-// Reducers
-import createAsyncReducer from './reducers/ModelReducer';
-import createRootReducer from './reducers/RootReducer';
-
 // Models
-import asyncComponentLoading from './models/asyncComponentLoading';
 import apiStatus from './models/apiStatus';
-import createModelApiActionMiddleware from '../../src/middlewares/ModelApiActionMiddleware';
-import createRequestMiddleware from '../../src/middlewares/RequestMiddleware';
-import createSuccessResponseMiddleware from '../../src/middlewares/SuccessResponseMiddleware';
-import createFailureResponseMiddleware from '../../src/middlewares/FailureResponseMiddleware';
+import createModelApiActionMiddleware from './middlewares/ModelApiActionMiddleware';
+import createRequestMiddleware from './middlewares/RequestMiddleware';
+import createSuccessResponseMiddleware from './middlewares/SuccessResponseMiddleware';
+import createFailureResponseMiddleware from './middlewares/FailureResponseMiddleware';
 
-// Components
-export AsyncComponent from './AsyncComponent';
+import {registerModels} from '../../src';
 
 // Statics
 export ApiStatus from './statics/ApiStatus';
 
 /**
- * Create Vivy instance
- * @param history
+ * Create Vivy api plugin
+ * @param options
  * @returns {{}}
  */
 export default function createVivyApiPlugin(options) {
@@ -40,7 +31,21 @@ export default function createVivyApiPlugin(options) {
             createSuccessResponseMiddleware(options?.successResponseHandler),
             createFailureResponseMiddleware(options?.failureResponseHandler)
         ],
+        onCreateStore: store => {
+            registerModels(store, [
+                apiStatus
+            ]);
+        },
+        onRegisterModel: model => {
 
+            const {nameSpace, apis} = model;
+
+            // register api actions
+            if (apis) {
+                ModelApiActionMiddleware.register(nameSpace, apis || {});
+            }
+
+        }
     };
 
 };

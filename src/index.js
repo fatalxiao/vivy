@@ -30,7 +30,7 @@ export function registerModel(store, model) {
         return;
     }
 
-    const {nameSpace, state, actions, apis, globalReducers, reducers} = model;
+    const {nameSpace, state, actions, /* apis, */ globalReducers, reducers, plugins} = model;
 
     // register or overwrite reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
@@ -43,10 +43,12 @@ export function registerModel(store, model) {
         store.registerActions(nameSpace, actions || {});
     }
 
+    plugins.forEach(plugin => plugin.onRegisterModel(model, store));
+
     // register api actions
-    if (apis) {
-        store.registerApiActions(nameSpace, apis || {});
-    }
+    // if (apis) {
+    //     store.registerApiActions(nameSpace, apis || {});
+    // }
 
 }
 
@@ -78,9 +80,11 @@ export default function Vivy(history) {
         const store = createVivyStore(history, plugins, options);
 
         registerModels(store, [
-            asyncComponentLoading,
-            apiStatus
+            asyncComponentLoading
+            // apiStatus
         ]);
+
+        plugins.forEach(plugin => plugin.onCreateStore(store));
 
         return store;
 
@@ -91,17 +95,17 @@ export default function Vivy(history) {
         history,
         options,
 
-        setCheckResponseStatus: checkResponseStatus => {
-            options.checkResponseStatus = checkResponseStatus;
-        },
-
-        setSuccessResponseHandler: successResponseHandler => {
-            options.successResponseHandler = successResponseHandler;
-        },
-
-        setFailureResponseHandler: failureResponseHandler => {
-            options.failureResponseHandler = failureResponseHandler;
-        },
+        // setCheckResponseStatus: checkResponseStatus => {
+        //     options.checkResponseStatus = checkResponseStatus;
+        // },
+        //
+        // setSuccessResponseHandler: successResponseHandler => {
+        //     options.successResponseHandler = successResponseHandler;
+        // },
+        //
+        // setFailureResponseHandler: failureResponseHandler => {
+        //     options.failureResponseHandler = failureResponseHandler;
+        // },
 
         use,
 
