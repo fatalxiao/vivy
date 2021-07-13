@@ -14,7 +14,7 @@ import Vivy, {registerModel} from '../../../src';
 import Counter from './modules/Counter/containers/Counter';
 import counterModel from './modules/Counter/models/counter';
 
-// Prepare vivy store
+// Create browser history
 const history = createBrowserHistory();
 
 // Create vivy

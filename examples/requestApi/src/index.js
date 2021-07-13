@@ -14,7 +14,7 @@ import Vivy, {registerModel} from '../../../src';
 import UserList from './modules/UserList/containers/UserList';
 import userListModel from './modules/UserList/models/userList';
 
-// Prepare vivy store
+// Create browser history
 const history = createBrowserHistory();
 
 // Create vivy

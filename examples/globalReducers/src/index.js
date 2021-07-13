@@ -17,7 +17,7 @@ import aModel from './modules/A/models/a';
 import bModel from './modules/B/models/b';
 import cModel from './modules/C/models/c';
 
-// Prepare vivy store
+// Create browser history
 const history = createBrowserHistory();
 
 // Create vivy
