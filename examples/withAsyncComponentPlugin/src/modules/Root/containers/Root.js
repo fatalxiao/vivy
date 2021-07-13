@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 
 // Component
 import {NavLink} from 'react-router-dom';
+import PageLoading from 'alcedo-ui/PageLoading';
 
 // Vendors
 import {renderRoutes} from 'react-router-config';
@@ -16,9 +17,12 @@ import {renderRoutes} from 'react-router-config';
 import './Root.scss';
 
 const Root = ({
-    route, menu
+    route, menu, customizedAsyncComponentLoading
 }) => (
     <div className="root">
+
+        <PageLoading visible={customizedAsyncComponentLoading}
+                     showStripes={false}/>
 
         <div className="menu">
             <h2>Module Root</h2>
@@ -45,9 +49,16 @@ const Root = ({
 
 Root.propTypes = {
     route: PropTypes.object,
-    menu: PropTypes.array
+    menu: PropTypes.array,
+    customizedAsyncComponentLoading: PropTypes.bool
 };
 
 export default connect(state => ({
-    menu: state.root
+
+    // get menu config from root model
+    menu: state.root,
+
+    // get async component loading from customized name space model
+    customizedAsyncComponentLoading: state.customizedAsyncComponentLoading
+
 }))(Root);

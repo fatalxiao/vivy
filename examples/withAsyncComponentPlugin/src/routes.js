@@ -2,7 +2,7 @@
  * @file routes.js
  */
 
-import {AsyncComponent} from 'vivy-async-component';
+import {AsyncComponent} from '../../../src';
 
 /**
  * Get route config

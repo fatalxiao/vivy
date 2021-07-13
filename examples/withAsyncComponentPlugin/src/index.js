@@ -11,8 +11,8 @@ import {ConnectedRouter} from 'connected-react-router';
 import {configureRoutes} from './routes';
 
 // Import Vivy
-import Vivy from '../../../src';
-import VivyAsyncComponent from 'vivy-async-component';
+import Vivy from 'vivy';
+import VivyAsyncComponent from '../../../src';
 
 // Create browser history
 const history = createBrowserHistory();
@@ -21,7 +21,10 @@ const history = createBrowserHistory();
 const vivy = Vivy(history);
 
 // Apply async component plugin
-vivy.use(VivyAsyncComponent());
+vivy.use(VivyAsyncComponent({
+    // customized AsyncComponentLoading model nameSpace
+    modelNameSpace: 'customizedAsyncComponentLoading'
+}));
 
 // Create store after configuration
 const store = vivy.createStore();
