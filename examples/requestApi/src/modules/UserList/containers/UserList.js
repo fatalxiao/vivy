@@ -62,20 +62,25 @@ const UserList = ({
                        onChange={handleChange}/>
             </div>
 
-            {
-                getUserListActionType === 'userList/getUserListRequest' ?
-                    'loading'
-                    :
-                    <ul>
-                        {
-                            data?.map((item, index) =>
-                                <li key={index}>
-                                    {item}
-                                </li>
-                            )
-                        }
-                    </ul>
-            }
+            <div className="result">
+                {
+                    getUserListActionType === 'userList/getUserListRequest' ?
+                        'loading'
+                        :
+                        data?.length > 0 ?
+                            <ul>
+                                {
+                                    data?.map((item, index) =>
+                                        <li key={index}>
+                                            {item}
+                                        </li>
+                                    )
+                                }
+                            </ul>
+                            :
+                            'No matched data'
+                }
+            </div>
 
         </div>
     );
