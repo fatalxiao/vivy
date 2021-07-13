@@ -22,7 +22,7 @@ const vivy = Vivy(history);
 
 // Apply async component plugin
 vivy.use(VivyAsyncComponent({
-    // Customized AsyncComponentLoading model nameSpace
+    // Customized AsyncComponentLoading model nameSpace ( default is "asyncComponentLoading" )
     modelNameSpace: 'customizedAsyncComponentLoading'
 }));
 

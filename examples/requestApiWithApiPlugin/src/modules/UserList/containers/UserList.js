@@ -102,7 +102,12 @@ UserList.propTypes = {
 };
 
 export default connect(state => ({
+
+    // get data from userList model
     data: state.userList.data,
     message: state.userList.message,
+
+    // get "getUserList" api status from vivy-api model ( default model name space is "apiStatus" )
     getUserListStatus: state.customizedApiStatus.userList?.getUserList
+
 }))(UserList);

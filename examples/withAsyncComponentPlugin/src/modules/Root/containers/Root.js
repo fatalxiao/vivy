@@ -59,6 +59,7 @@ export default connect(state => ({
     menu: state.root,
 
     // get async component loading from customized name space model
+    // ( default vivy-async-component model name space is "asyncComponentLoading" )
     customizedAsyncComponentLoading: state.customizedAsyncComponentLoading
 
 }))(Root);

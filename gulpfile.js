@@ -6,8 +6,7 @@
 
 const gulp = require('gulp'),
     clean = require('gulp-clean'),
-    babel = require('gulp-babel'),
-    uglify = require('gulp-uglify');
+    babel = require('gulp-babel');
 
 gulp.task('clean', () =>
     gulp.src('./dist')
@@ -20,7 +19,6 @@ gulp.task('build', () =>
             presets: [['@babel/env', {modules: 'commonjs'}]],
             plugins: ['@babel/plugin-transform-runtime']
         }))
-        .pipe(uglify())
         .pipe(gulp.dest('./dist'))
 );
 
