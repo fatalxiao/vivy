@@ -50,11 +50,12 @@ export function registerModels(store, models) {
 /**
  * Create Vivy instance
  * @param history
+ * @param options
  * @returns {{}}
  */
-export default function Vivy(history) {
+export default function Vivy(history, options) {
 
-    const options = {};
+    const op = {...options};
     const plugins = [];
 
     /**
@@ -72,7 +73,7 @@ export default function Vivy(history) {
     function createStore() {
 
         // Create a vivy store
-        const store = createVivyStore(history, plugins, options);
+        const store = createVivyStore(history, plugins, op?.extraMiddlewares);
 
         // Register extra models in plugins
         registerModels(
@@ -94,7 +95,7 @@ export default function Vivy(history) {
     return {
 
         history,
-        options,
+        options: op,
 
         use,
 

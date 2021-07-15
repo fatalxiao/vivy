@@ -16,20 +16,22 @@ import createRootReducer from '../reducers/RootReducer';
  * Create Vivy store
  * @param history
  * @param plugins
- * @param options
+ * @param extraMiddlewares
  * @returns {{}}
  */
-export default function createVivyStore(history, plugins, options) {
+export default function createVivyStore(history, plugins, extraMiddlewares) {
 
     // Handle actions in models
     const ModelActionMiddleware = createModelActionMiddleware();
 
+    // Create origin redux store
     const originStore = createStore(
         createRootReducer(history),
         applyMiddleware(
             thunk,
             ModelActionMiddleware,
             ...plugins?.reduce((extraMiddlewares, plugin) => [...extraMiddlewares, ...plugin.extraMiddlewares], []),
+            ...extraMiddlewares,
             routerMiddleware(history)
         )
     );
