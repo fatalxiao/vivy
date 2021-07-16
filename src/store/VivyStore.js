@@ -30,8 +30,11 @@ export default function createVivyStore(history, plugins, extraMiddlewares) {
         applyMiddleware(
             thunk,
             ModelActionMiddleware,
-            ...plugins?.reduce((extraMiddlewares, plugin) => [...extraMiddlewares, ...plugin.extraMiddlewares], []),
-            ...extraMiddlewares,
+            ...plugins?.reduce((pluginMiddlewares, plugin) => [
+                ...pluginMiddlewares,
+                ...(plugin.extraMiddlewares || [])
+            ], []),
+            ...(extraMiddlewares || []),
             routerMiddleware(history)
         )
     );

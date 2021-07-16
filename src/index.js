@@ -78,7 +78,7 @@ export default function Vivy(history, options) {
         // Register extra models in plugins
         registerModels(
             store,
-            plugins?.reduce((extraModels, plugin) => [...extraModels, ...plugin.extraModels], [])
+            plugins?.reduce((extraModels, plugin) => [...extraModels, ...(plugin?.extraModels || [])], [])
         );
 
         // Add methods
