@@ -1,7 +1,7 @@
 {
     "name": "vivy",
     "author": "liangxiaojun",
-    "version": "0.0.11",
+    "version": "0.0.12",
     "description": "vivy",
     "main": "./dist/index.js",
     "files": [
