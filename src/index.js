@@ -22,9 +22,14 @@ export function registerModel(store, model) {
 
     const {nameSpace, state, actions, globalReducers, reducers} = model;
 
+    if (!nameSpace) {
+        console.error('NameSpace in model is required.');
+        return;
+    }
+
     // Register or overwrite reducers
     store.asyncReducers[nameSpace] = createAsyncReducer(
-        store, nameSpace, state, globalReducers || {}, reducers || {}
+        store, nameSpace, state || null, globalReducers || {}, reducers || {}
     );
     store.replaceReducer(createRootReducer(store.history, store.asyncReducers));
 
