@@ -17,7 +17,8 @@ import {renderRoutes} from 'react-router-config';
 import './Root.scss';
 
 const Root = ({
-    route, menu, customizedAsyncComponentLoading
+    route,
+    menu, activatedMenu, customizedAsyncComponentLoading
 }) => (
     <div className="root">
 
@@ -31,7 +32,8 @@ const Root = ({
                 {
                     menu?.map((item, index) =>
                         <li key={index}>
-                            <NavLink to={item?.route}>
+                            <NavLink className={item === activatedMenu ? 'activated' : null}
+                                     to={item?.route}>
                                 {item?.name}
                             </NavLink>
                         </li>
@@ -48,17 +50,24 @@ const Root = ({
 );
 
 Root.propTypes = {
+
     route: PropTypes.object,
+
     menu: PropTypes.array,
+    activatedMenu: PropTypes.object,
     customizedAsyncComponentLoading: PropTypes.bool
+
 };
 
 export default connect(state => ({
 
-    // get menu config from root model
+    // Get menu config from root model
     menu: state.root.menu,
 
-    // get async component loading from customized name space model
+    // Get activated menu from root model
+    activatedMenu: state.root.activatedMenu,
+
+    // Get async component loading from customized name space model
     // ( default vivy-async-component model name space is "asyncComponentLoading" )
     customizedAsyncComponentLoading: state.customizedAsyncComponentLoading
 
