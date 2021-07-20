@@ -56,7 +56,7 @@ Root.propTypes = {
 export default connect(state => ({
 
     // get menu config from root model
-    menu: state.root,
+    menu: state.root.menu,
 
     // get async component loading from customized name space model
     // ( default vivy-async-component model name space is "asyncComponentLoading" )
