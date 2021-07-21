@@ -39,7 +39,7 @@ $ npm install vivy
 
 ## Examples
 
-#### Run examples in repository.
+### Run examples in repository.
 
 ```shell
 $ npm run example:[EXAMPLE_NAME]
@@ -53,7 +53,7 @@ $ npm run example:[EXAMPLE_NAME]
 * [requestApiWithApiPlugin][example-requestApiWithApiPlugin-url]
 * [withAsyncComponentPlugin][example-withAsyncComponentPlugin-url]
 
-#### A complete and real example:
+### A complete and real example:
 
 [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
 
