@@ -11,7 +11,7 @@ import {ConnectedRouter} from 'connected-react-router';
 import {configureRoutes} from './routes';
 
 // Import Vivy
-import Vivy from 'vivy';
+import Vivy from '../../../src';
 import VivyAsyncComponent from 'vivy-async-component';
 
 // Create browser history

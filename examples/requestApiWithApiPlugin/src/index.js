@@ -8,7 +8,7 @@ import {createBrowserHistory} from 'history';
 import {Provider} from 'react-redux';
 
 // Import Vivy
-import Vivy, {registerModel} from 'vivy';
+import Vivy, {registerModel} from '../../../src';
 import VivyApi from 'vivy-api';
 
 // Sync component and model
