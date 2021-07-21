@@ -9,10 +9,10 @@ let source;
 
 /**
  * Get user list
- * @param params
+ * @param options
  * @returns {Promise<Response>}
  */
-export function getUserList(params) {
+export function getUserList(options) {
 
     if (source) {
         source.cancel();
@@ -21,8 +21,8 @@ export function getUserList(params) {
     source = axios.CancelToken.source();
 
     return axios.get('/getUserList', {
-        cancelToken: source.token,
-        params
+        ...options,
+        cancelToken: source.token
     });
 
 }
