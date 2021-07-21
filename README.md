@@ -18,6 +18,8 @@
 
 [example-withAsyncComponentPlugin-url]: https://github.com/fatalxiao/vivy/tree/main/examples/withAsyncComponentPlugin
 
+[pieb-with-dpe-frontend-url]: https://github.com/fatalxiao/pieb-with-dpe-frontend
+
 # Vivy
 
 [![NPM Version][npm-image]][npm-url]
@@ -37,7 +39,7 @@ $ npm install vivy
 
 ## Examples
 
-Run examples in repository.
+#### Run examples in repository.
 
 ```shell
 $ npm run example:[EXAMPLE_NAME]
@@ -50,6 +52,10 @@ $ npm run example:[EXAMPLE_NAME]
 * [requestApi][example-requestApi-url]
 * [requestApiWithApiPlugin][example-requestApiWithApiPlugin-url]
 * [withAsyncComponentPlugin][example-withAsyncComponentPlugin-url]
+
+#### A complete and real example:
+
+[pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
 
 ## Documentation
 
