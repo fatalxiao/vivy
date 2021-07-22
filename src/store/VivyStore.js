@@ -5,7 +5,6 @@
 import {createStore, applyMiddleware} from 'redux';
 
 // Middlewares
-import thunk from 'redux-thunk';
 import {routerMiddleware} from 'connected-react-router';
 import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 
@@ -31,7 +30,6 @@ export default function createVivyStore(history, plugins, extraMiddlewares) {
     const originStore = createStore(
         createRootReducer(history),
         applyMiddleware(
-            thunk,
             ModelActionMiddleware,
             ...plugins?.reduce((pluginMiddlewares, plugin) => [
                 ...pluginMiddlewares,

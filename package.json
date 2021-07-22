@@ -31,8 +31,7 @@
         "url": "https://github.com/fatalxiao/vivy/issues"
     },
     "dependencies": {
-        "redux": "^4.1.0",
-        "redux-thunk": "^2.3.0"
+        "redux": "^4.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.14.8",
