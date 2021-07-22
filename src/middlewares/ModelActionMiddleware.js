@@ -23,7 +23,7 @@ export default function createModelActionMiddleware() {
 
             // match type in asyncActions
             if (asyncActions?.hasOwnProperty(action?.type)) {
-                asyncActions[action.type]?.(action)?.(dispatch, getState);
+                return asyncActions[action.type]?.(action)?.(dispatch, getState);
             }
 
             return next(action);
