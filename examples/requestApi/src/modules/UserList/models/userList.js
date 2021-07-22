@@ -32,19 +32,25 @@ export default {
                 type: 'userList/getUserListRequest'
             });
 
-            const response = await getUserList({
-                searchText
-            });
+            try {
 
-            if (response.status === 200) {
-                dispatch({
-                    type: 'userList/getUserListSuccess',
-                    response
+                const response = await getUserList({
+                    searchText
                 });
-            } else {
-                dispatch({
-                    type: 'userList/getUserListFailure'
-                });
+
+                if (response.status === 200) {
+                    dispatch({
+                        type: 'userList/getUserListSuccess',
+                        response
+                    });
+                } else {
+                    dispatch({
+                        type: 'userList/getUserListFailure'
+                    });
+                }
+
+            } catch (e) {
+                // ...
             }
 
         }
