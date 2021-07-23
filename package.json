@@ -24,7 +24,8 @@
         "url": "https://github.com/fatalxiao/vivy"
     },
     "keywords": [
-        "redux"
+        "redux",
+        "state-management"
     ],
     "license": "MIT",
     "bugs": {
