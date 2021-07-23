@@ -31,7 +31,7 @@ Vivy is a [Dva][dva-url] like state container based on [redux][redux-url].
 
 ## Installation
 
-Install with npm.
+Using npm:
 
 ```shell
 $ npm install vivy
@@ -61,4 +61,40 @@ $ npm run example:[EXAMPLE_NAME]
 
 ### Usage
 
+#### Import Vivy
 
+```js
+import Vivy from 'vivy';
+```
+
+#### Create Vivy instance
+
+```js
+const vivy = Vivy();
+```
+
+### Vivy Api
+
+### Methods
+
+#### registerModel
+
+```js
+import {registerModel} from 'vivy';
+
+// register model to your Vivy store
+registerModel(yourVivyStore, model);
+```
+
+#### registerModels
+
+```js
+import {registerModels} from 'vivy';
+
+// register models to your Vivy store
+registerModels(yourVivyStore, [
+    model1,
+    model2,
+    // other models...
+]);
+```
