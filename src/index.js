@@ -49,7 +49,7 @@ export function registerModel(store, model) {
         return;
     }
 
-    const {nameSpace, state, actions, globalReducers, reducers, subscriptions} = model;
+    const {nameSpace, state, actions, globalReducers, reducers} = model;
 
     if (!nameSpace) {
         console.error('NameSpace in model is required.');
@@ -69,11 +69,6 @@ export function registerModel(store, model) {
     // Register actions
     if (actions) {
         store.registerActions(nameSpace, actions || {});
-    }
-
-    // Register subscriptions
-    if (subscriptions) {
-        store.registerSubscriptions(nameSpace, subscriptions || {});
     }
 
     // Call onRegisterModel in plugins
