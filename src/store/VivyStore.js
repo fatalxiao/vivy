@@ -81,10 +81,7 @@ export default function createVivyStore(plugins, extraMiddlewares) {
         registerActions: ModelActionMiddleware.register,
 
         // Register subscriptions
-        registerSubscriptions,
-
-        // All registered plugins
-        plugins
+        registerSubscriptions
 
     };
 

@@ -154,6 +154,8 @@ export default function Vivy(options) {
 
         options: op,
 
+        plugins,
+
         use,
 
         createStore
