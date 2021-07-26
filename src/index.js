@@ -33,7 +33,9 @@ export function registerReducer(store, nameSpace, reducer) {
  * @param reducers
  */
 export function registerReducers(store, reducers) {
-    Object.keys(reducers).forEach(nameSpace => registerReducer(store, nameSpace, reducers[nameSpace]));
+    Object.keys(reducers).forEach(nameSpace =>
+        registerReducer(store, nameSpace, reducers[nameSpace])
+    );
 }
 
 /**
@@ -56,7 +58,11 @@ export function registerModel(store, model) {
 
     // Register or overwrite reducers
     store.asyncReducers[nameSpace] = createModelReducer(
-        store, nameSpace, state || null, globalReducers || {}, reducers || {}
+        store,
+        nameSpace,
+        state || null,
+        globalReducers || {},
+        reducers || {}
     );
     store.replaceReducer(createRootReducer(store.asyncReducers));
 
@@ -81,7 +87,9 @@ export function registerModel(store, model) {
  * @param models
  */
 export function registerModels(store, models) {
-    models.forEach(model => registerModel(store, model));
+    models.forEach(model =>
+        registerModel(store, model)
+    );
 }
 
 /**
@@ -111,10 +119,22 @@ export default function Vivy(options) {
         // Create a vivy store
         const store = createVivyStore(plugins, op?.extraMiddlewares);
 
+        // Register extra reducers in plugins
+        registerReducers(
+            store,
+            plugins?.reduce((extraReducers, plugin) => ({
+                ...extraReducers,
+                ...plugin?.extraReducers
+            }), {})
+        );
+
         // Register extra models in plugins
         registerModels(
             store,
-            plugins?.reduce((extraModels, plugin) => [...extraModels, ...(plugin?.extraModels || [])], [])
+            plugins?.reduce((extraModels, plugin) => [
+                ...extraModels,
+                ...(plugin?.extraModels || [])
+            ], [])
         );
 
         // Add methods
