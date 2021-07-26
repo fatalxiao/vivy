@@ -49,7 +49,7 @@ function reduceReducers(...reducers) {
  * @param reducers
  * @returns {function(*=, *=): *}
  */
-export default function createAsyncReducer(store, nameSpace, initialState, globalReducers, reducers) {
+export default function createModelReducer(store, nameSpace, initialState, globalReducers, reducers) {
 
     // Handle global reducers
     const globalReducerHandlers = globalReducers ?
