@@ -2,7 +2,7 @@
     "name": "vivy",
     "author": "liangxiaojun",
     "version": "0.2.0-alpha.0",
-    "description": "vivy",
+    "description": "A state container based on redux.",
     "main": "./dist/index.js",
     "files": [
         "src",
