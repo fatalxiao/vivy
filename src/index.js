@@ -6,8 +6,35 @@
 import createVivyStore from './store/VivyStore';
 
 // Reducers
-import createAsyncReducer from './reducers/ModelReducer';
+import createModelReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
+
+/**
+ * Register reducer
+ * @param store
+ * @param nameSpace
+ * @param reducer
+ */
+export function registerReducer(store, nameSpace, reducer) {
+
+    if (!nameSpace) {
+        console.error('NameSpace of reducer is required.');
+        return;
+    }
+
+    store.asyncReducers[nameSpace] = reducer;
+    store.replaceReducer(createRootReducer(store.asyncReducers));
+
+}
+
+/**
+ * Register reducers
+ * @param store
+ * @param reducers
+ */
+export function registerReducers(store, reducers) {
+    Object.keys(reducers).forEach(nameSpace => registerReducer(store, nameSpace, reducers[nameSpace]));
+}
 
 /**
  * Register model
@@ -28,10 +55,10 @@ export function registerModel(store, model) {
     }
 
     // Register or overwrite reducers
-    store.asyncReducers[nameSpace] = createAsyncReducer(
+    store.asyncReducers[nameSpace] = createModelReducer(
         store, nameSpace, state || null, globalReducers || {}, reducers || {}
     );
-    store.replaceReducer(createRootReducer(store.history, store.asyncReducers));
+    store.replaceReducer(createRootReducer(store.asyncReducers));
 
     // Register actions
     if (actions) {
@@ -59,11 +86,10 @@ export function registerModels(store, models) {
 
 /**
  * Create Vivy instance
- * @param history
  * @param options
  * @returns {{}}
  */
-export default function Vivy(history, options) {
+export default function Vivy(options) {
 
     const op = {...options};
     const plugins = [];
@@ -83,7 +109,7 @@ export default function Vivy(history, options) {
     function createStore() {
 
         // Create a vivy store
-        const store = createVivyStore(history, plugins, op?.extraMiddlewares);
+        const store = createVivyStore(plugins, op?.extraMiddlewares);
 
         // Register extra models in plugins
         registerModels(
@@ -92,6 +118,8 @@ export default function Vivy(history, options) {
         );
 
         // Add methods
+        store.registerReducer = registerReducer.bind(null, store);
+        store.registerReducers = registerReducers.bind(null, store);
         store.registerModel = registerModel.bind(null, store);
         store.registerModels = registerModels.bind(null, store);
 
@@ -104,7 +132,6 @@ export default function Vivy(history, options) {
 
     return {
 
-        history,
         options: op,
 
         use,
