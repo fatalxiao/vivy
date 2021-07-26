@@ -14,6 +14,7 @@
         "example:counter": "webpack-dev-server --open --hot --config examples/counter/webpack.config.js",
         "example:globalReducers": "webpack-dev-server --open --hot --config examples/globalReducers/webpack.config.js",
         "example:requestApi": "webpack-dev-server --open --hot --config examples/requestApi/webpack.config.js",
+        "example:withRouterPlugin": "webpack-dev-server --open --hot --config examples/withRouterPlugin/webpack.config.js",
         "example:withAsyncComponentPlugin": "webpack-dev-server --open --hot --config examples/withAsyncComponentPlugin/webpack.config.js",
         "example:requestApiWithApiPlugin": "webpack-dev-server --open --hot --config examples/requestApiWithApiPlugin/webpack.config.js",
         "build": "gulp",
