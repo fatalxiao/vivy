@@ -60,15 +60,15 @@ export function registerModel(store, model) {
     store.asyncReducers[nameSpace] = createModelReducer(
         store,
         nameSpace,
-        state || null,
-        globalReducers || {},
-        reducers || {}
+        state ?? null,
+        globalReducers ?? {},
+        reducers ?? {}
     );
     store.replaceReducer(createRootReducer(store.asyncReducers));
 
     // Register actions
     if (actions) {
-        store.registerActions(nameSpace, actions || {});
+        store.registerActions(nameSpace, actions ?? {});
     }
 
     // Call onRegisterModel in plugins
