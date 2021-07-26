@@ -18,7 +18,7 @@ import './Root.scss';
 
 const Root = ({
     route,
-    menu, activatedMenu, customizedAsyncComponentLoading
+    menu, customizedAsyncComponentLoading
 }) => (
     <div className="root">
 
@@ -32,8 +32,7 @@ const Root = ({
                 {
                     menu?.map((item, index) =>
                         <li key={index}>
-                            <NavLink className={item === activatedMenu ? 'activated' : null}
-                                     to={item?.route}>
+                            <NavLink to={item?.route}>
                                 {item?.name}
                             </NavLink>
                         </li>
@@ -54,7 +53,6 @@ Root.propTypes = {
     route: PropTypes.object,
 
     menu: PropTypes.array,
-    activatedMenu: PropTypes.object,
     customizedAsyncComponentLoading: PropTypes.bool
 
 };
@@ -63,9 +61,6 @@ export default connect(state => ({
 
     // Get menu config from root model
     menu: state.root.menu,
-
-    // Get activated menu from root model
-    activatedMenu: state.root.activatedMenu,
 
     // Get async component loading from customized name space model
     // ( default vivy-async-component model name space is "asyncComponentLoading" )
