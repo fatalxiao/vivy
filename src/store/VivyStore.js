@@ -51,6 +51,9 @@ export default function createVivyStore(plugins, extraMiddlewares) {
         // Register actions
         registerActions: ModelActionMiddleware.register,
 
+        // All registered plugins
+        plugins,
+
         // Extra store props in plugins
         ...plugins?.reduce((pluginStoreProps, plugin) => ({
             ...pluginStoreProps,
