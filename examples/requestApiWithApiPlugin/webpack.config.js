@@ -22,7 +22,7 @@ module.exports = merge(baseConfig, {
     devServer: {
         static: path.join(__dirname, './dist'),
         hot: true,
-        port: 3004,
+        port: 3005,
         historyApiFallback: true,
         onBeforeSetupMiddleware: server => {
 
