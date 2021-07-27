@@ -69,7 +69,7 @@ export function unregisterReducer(store, nameSpace) {
 /**
  * Unregister reducers
  * @param store {Object}
- * @param nameSpacesOrReducers {Array|Object}
+ * @param nameSpacesOrReducers {Array<string>|Object}
  */
 export function unregisterReducers(store, nameSpacesOrReducers) {
     if (Array.isArray(nameSpacesOrReducers)) { // nameSpaces
@@ -85,8 +85,8 @@ export function unregisterReducers(store, nameSpacesOrReducers) {
 
 /**
  * Register model
- * @param store
- * @param model
+ * @param store {Object}
+ * @param model {Object}
  */
 export function registerModel(store, model) {
 
@@ -129,8 +129,8 @@ export function registerModel(store, model) {
 
 /**
  * Register models
- * @param store
- * @param models
+ * @param store {Object}
+ * @param models {Array<Object>}
  */
 export function registerModels(store, models) {
     models.forEach(model =>
@@ -140,17 +140,21 @@ export function registerModels(store, models) {
 
 /**
  * Create Vivy instance
- * @param options
- * @returns {{}}
+ * @param options {Object}
+ * @returns {{plugins: *[], use: use, options, createStore: (function(): {}|*)}}
+ * @constructor
  */
 export default function Vivy(options) {
 
+    // Vivy options
     const op = {...options};
+
+    // All Vivy plugins
     const plugins = [];
 
     /**
      * Use vivy plugin
-     * @param plugin
+     * @param plugin {Object}
      */
     function use(plugin) {
         plugins.push(plugin);
@@ -158,7 +162,7 @@ export default function Vivy(options) {
 
     /**
      * Create store
-     * @returns {{}|*}
+     * @returns {Object}
      */
     function createStore() {
 
