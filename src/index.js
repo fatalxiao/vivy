@@ -30,6 +30,11 @@ export function registerReducer(store, nameSpace, reducer) {
     store.asyncReducers[nameSpace] = reducer;
     store.replaceReducer(createRootReducer(store.asyncReducers));
 
+    // Call onRegisterReducer in plugins
+    store.plugins?.forEach(plugin =>
+        plugin?.onRegisterReducer?.(reducer, nameSpace, store)
+    );
+
 }
 
 /**
@@ -61,8 +66,14 @@ export function unregisterReducer(store, nameSpace) {
     }
 
     const nextReducers = {...store.asyncReducers};
+    const unregisteredReducer = nextReducers[nameSpace];
     delete nextReducers[nameSpace];
     store.replaceReducer(createRootReducer(nextReducers));
+
+    // Call onUnregisterReducer in plugins
+    store.plugins?.forEach(plugin =>
+        plugin?.onUnregisterReducer?.(unregisteredReducer, nameSpace, store)
+    );
 
 }
 
@@ -123,7 +134,9 @@ export function registerModel(store, model) {
     }
 
     // Call onRegisterModel in plugins
-    store.plugins?.forEach(plugin => plugin?.onRegisterModel?.(model, store));
+    store.plugins?.forEach(plugin =>
+        plugin?.onRegisterModel?.(model, store)
+    );
 
 }
 
@@ -135,6 +148,54 @@ export function registerModel(store, model) {
 export function registerModels(store, models) {
     models.forEach(model =>
         registerModel(store, model)
+    );
+}
+
+/**
+ * Unregister model
+ * @param store {Object}
+ * @param nameSpaceOrModel {string|Object}
+ */
+export function unregisterModel(store, nameSpaceOrModel) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!nameSpaceOrModel) {
+        console.error('NameSpace or model is required.');
+        return;
+    }
+
+    const nextReducers = {...store.asyncReducers};
+    let unregisteredModel;
+
+    if (typeof nameSpaceOrModel === 'string') { // nameSpace
+        unregisteredModel = nextReducers[nameSpaceOrModel];
+        delete nextReducers[nameSpaceOrModel];
+    } else { // model
+        unregisteredModel = nextReducers[nameSpaceOrModel.nameSpace];
+        delete nextReducers[nameSpaceOrModel.nameSpace];
+    }
+
+    store.replaceReducer(createRootReducer(nextReducers));
+
+    // Call onUnregisterModel in plugins
+    store.plugins?.forEach(plugin =>
+        plugin?.onUnregisterModel?.(unregisteredModel, store)
+    );
+
+}
+
+/**
+ * Unregister models
+ * @param store {Object}
+ * @param nameSpacesOrModels {Array<string|Object>}
+ */
+export function unregisterModels(store, nameSpacesOrModels) {
+    nameSpacesOrModels.forEach(nameSpaceOrModel =>
+        unregisterModel(store, nameSpaceOrModel)
     );
 }
 
@@ -190,8 +251,12 @@ export default function Vivy(options) {
         // Add methods
         store.registerReducer = registerReducer.bind(null, store);
         store.registerReducers = registerReducers.bind(null, store);
+        store.unregisterReducer = unregisterReducer.bind(null, store);
+        store.unregisterReducers = unregisterReducers.bind(null, store);
         store.registerModel = registerModel.bind(null, store);
         store.registerModels = registerModels.bind(null, store);
+        store.unregisterModel = unregisterModel.bind(null, store);
+        store.unregisterModels = unregisterModels.bind(null, store);
 
         // Call onCreateStore in plugins
         plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
