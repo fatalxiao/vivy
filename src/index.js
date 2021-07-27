@@ -11,11 +11,16 @@ import createRootReducer from './reducers/RootReducer';
 
 /**
  * Register reducer
- * @param store
- * @param nameSpace
- * @param reducer
+ * @param store {Object}
+ * @param nameSpace {string}
+ * @param reducer {Function}
  */
 export function registerReducer(store, nameSpace, reducer) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
 
     if (!nameSpace) {
         console.error('NameSpace of reducer is required.');
@@ -29,13 +34,53 @@ export function registerReducer(store, nameSpace, reducer) {
 
 /**
  * Register reducers
- * @param store
- * @param reducers
+ * @param store {Object}
+ * @param reducers {Object}
  */
 export function registerReducers(store, reducers) {
     Object.keys(reducers).forEach(nameSpace =>
         registerReducer(store, nameSpace, reducers[nameSpace])
     );
+}
+
+/**
+ * Unregister reducer
+ * @param store {Object}
+ * @param nameSpace {string}
+ */
+export function unregisterReducer(store, nameSpace) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!nameSpace) {
+        console.error('NameSpace of reducer is required.');
+        return;
+    }
+
+    const nextReducers = {...store.asyncReducers};
+    delete nextReducers[nameSpace];
+    store.replaceReducer(createRootReducer(nextReducers));
+
+}
+
+/**
+ * Unregister reducers
+ * @param store {Object}
+ * @param nameSpacesOrReducers {Array|Object}
+ */
+export function unregisterReducers(store, nameSpacesOrReducers) {
+    if (Array.isArray(nameSpacesOrReducers)) { // nameSpaces
+        nameSpacesOrReducers.forEach(nameSpace =>
+            unregisterReducer(store, nameSpace)
+        );
+    } else { // reducers
+        Object.keys(nameSpacesOrReducers).forEach(nameSpace =>
+            unregisterReducer(store, nameSpace)
+        );
+    }
 }
 
 /**
@@ -45,7 +90,13 @@ export function registerReducers(store, reducers) {
  */
 export function registerModel(store, model) {
 
-    if (!store || !model?.nameSpace) {
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!model) {
+        console.error('Model is required.');
         return;
     }
 
