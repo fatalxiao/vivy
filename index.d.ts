@@ -215,7 +215,7 @@ export function unregisterModels(store?: VivyStore, nameSpacesOrModels?: string[
 
 /**
  * Create Vivy Instance
- * @param opts
+ * @param options
  * @constructor
  */
-export default function Vivy(opts?: VivyOption): VivyInstance;
+export default function Vivy(options?: VivyOption): VivyInstance;
