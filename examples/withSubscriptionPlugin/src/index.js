@@ -17,7 +17,7 @@ import b from './modules/B/models/b';
 import c from './modules/C/models/c';
 
 // Import Vivy
-import Vivy from '../../../src';
+import Vivy from 'vivy';
 import VivyRouter from 'vivy-router';
 import vivySubscription from 'vivy-subscription';
 

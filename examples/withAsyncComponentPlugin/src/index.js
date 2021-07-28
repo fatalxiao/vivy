@@ -11,7 +11,7 @@ import {ConnectedRouter} from 'connected-react-router';
 import {configureRoutes} from './routes';
 
 // Import Vivy
-import Vivy from '../../../src';
+import Vivy from 'vivy';
 import VivyRouter from 'vivy-router';
 import VivyAsyncComponent from 'vivy-async-component';
 

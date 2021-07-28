@@ -7,7 +7,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 
 // Import Vivy
-import Vivy, {registerModel} from '../../../src';
+import Vivy from 'vivy';
 import VivyApi from 'vivy-api';
 
 // Sync component and model
@@ -53,7 +53,7 @@ vivy.use(VivyApi({
 const store = vivy.createStore();
 
 // Register model to store
-registerModel(store, userListModel);
+store.registerModel(userListModel);
 
 render(
     <Provider store={store}>
