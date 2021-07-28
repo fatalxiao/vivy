@@ -208,7 +208,7 @@ export function unregisterModels(store, nameSpacesOrModels) {
 export default function Vivy(options) {
 
     // Vivy options
-    const op = {...options};
+    const opts = {...options};
 
     // All Vivy plugins
     const plugins = [];
@@ -228,7 +228,7 @@ export default function Vivy(options) {
     function createStore() {
 
         // Create a vivy store
-        const store = createVivyStore(plugins, op?.extraMiddlewares);
+        const store = createVivyStore(opts?.initialState, plugins, opts?.extraMiddlewares);
 
         // Register extra reducers in plugins
         registerReducers(
@@ -267,7 +267,7 @@ export default function Vivy(options) {
 
     return {
 
-        options: op,
+        options: opts,
 
         plugins,
 

@@ -14,11 +14,12 @@ import VivyReducer from '../reducers/VivyReducer';
 
 /**
  * Create Vivy store
+ * @param initialState {Object}
  * @param plugins {Array}
  * @param extraMiddlewares {Array}
  * @returns {Object}
  */
-export default function createVivyStore(plugins, extraMiddlewares) {
+export default function createVivyStore(initialState, plugins, extraMiddlewares) {
 
     // Handle actions in models
     const ModelActionMiddleware = createModelActionMiddleware();
@@ -28,6 +29,7 @@ export default function createVivyStore(plugins, extraMiddlewares) {
         createRootReducer({
             '@@VIVY': VivyReducer
         }),
+        initialState,
         applyMiddleware(
             ModelActionMiddleware,
             ...plugins?.reduce((pluginMiddlewares, plugin) => [
