@@ -1,5 +1,5 @@
 {
-    "name": "vivy-async-component-plugin-example",
+    "name": "vivy-subscription-plugin-example",
     "author": "liangxiaojun",
     "private": true,
     "main": "./src/index.js",
