@@ -7,7 +7,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 
 // Import Vivy
-import Vivy, {registerModel} from '../../../src';
+import Vivy, {registerModel} from 'vivy';
 
 // Component and model
 import Counter from './modules/Counter/containers/Counter';
