@@ -3,16 +3,66 @@ import {
 } from 'redux';
 
 export interface VivyStore extends Store {
+
+    /**
+     * Origin redux store
+     */
     originStore?: Store,
+
+    /**
+     * All Vivy plugins
+     */
     plugins?: Plugin[],
+
+    /**
+     * Register reducer to Vivy
+     * @param nameSpace
+     * @param reducer
+     */
     registerReducer: (nameSpace?: string, reducer?: Reducer) => void,
+
+    /**
+     * Register reducers to Vivy
+     * @param reducer
+     */
     registerReducers: (reducer?: Reducer) => void,
-    unregisterReducer: (nameSpace?: string) => void
+
+    /**
+     * Unregister reducer
+     * @param nameSpace
+     */
+    unregisterReducer: (nameSpace?: string) => void,
+
+    /**
+     * Unregister reducers
+     * @param nameSpacesOrReducers
+     */
     unregisterReducers: (nameSpacesOrReducers?: string[] | Reducer[]) => void,
+
+    /**
+     * Register model to Vivy
+     * @param model
+     */
     registerModel: (model?: VivyModel) => void,
+
+    /**
+     * Register models to Vivy
+     * @param models
+     */
     registerModels: (models?: VivyModel[]) => void,
+
+    /**
+     * Unregister model
+     * @param nameSpaceOrModel
+     */
     unregisterModel: (nameSpaceOrModel?: string | VivyModel) => void,
+
+    /**
+     * Unregister models
+     * @param nameSpacesOrModels
+     */
     unregisterModels: (nameSpacesOrModels?: string[] | VivyModel[]) => void
+
 }
 
 export interface VivyModelAction {
@@ -32,10 +82,27 @@ export interface VivyModelReducers {
 }
 
 export interface VivyModel {
+
+    /**
+     * Vivy model nameSpace
+     */
     nameSpace?: string,
+
+    /**
+     * Vivy model state
+     */
     state?: any,
+
+    /**
+     * Vivy model actions, like action in redux
+     */
     actions?: VivyModelActions,
+
+    /**
+     * Vivy model reducers, like reducers in redux
+     */
     reducers?: VivyModelReducers
+
 }
 
 export interface VivyOption {
