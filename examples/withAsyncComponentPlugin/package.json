@@ -1,5 +1,5 @@
 {
-    "name": "vivy-router-plugin-example",
+    "name": "vivy-async-component-plugin-example",
     "author": "liangxiaojun",
     "private": true,
     "main": "./src/index.js",
@@ -7,6 +7,7 @@
         "start": "webpack-dev-server --open --hot --config webpack.config.js"
     },
     "dependencies": {
+        "alcedo-ui": "^2.56.15",
         "connected-react-router": "^6.9.1",
         "history": "^4.10.1",
         "prop-types": "^15.7.2",
@@ -16,6 +17,7 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
+        "vivy-async-component": "^0.1.1",
         "vivy-router": "^0.0.2"
     },
     "devDependencies": {
