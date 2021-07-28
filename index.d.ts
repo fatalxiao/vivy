@@ -2,10 +2,6 @@ import {
     Reducer, Middleware, MiddlewareAPI, Action, Store
 } from 'redux';
 
-export interface Plugin {
-
-}
-
 export interface VivyStore extends Store {
     originStore?: Store,
     plugins?: Plugin[],
@@ -79,6 +75,18 @@ export interface VivyInstance {
      */
     createStore: () => VivyStore
 
+}
+
+export interface Plugin {
+    extraReducers: VivyModelReducers,
+    extraModels: VivyModel[],
+    extraMiddlewares: Middleware[],
+    extraStoreProps: Object,
+    onCreateStore?: (onCreateStore?: VivyStore) => void,
+    onRegisterReducer?: (reducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
+    onUnregisterReducer?: (unregisteredReducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
+    onRegisterModel?: (model?: VivyModel, store?: VivyStore) => void,
+    onUnregisterModel?: (unregisteredModel?: VivyModel, store?: VivyStore) => void,
 }
 
 /**
