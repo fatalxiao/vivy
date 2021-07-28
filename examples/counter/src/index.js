@@ -7,7 +7,7 @@ import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 
 // Import Vivy
-import Vivy, {registerModel} from 'vivy';
+import Vivy from 'vivy';
 
 // Component and model
 import Counter from './modules/Counter/containers/Counter';
@@ -20,7 +20,7 @@ const vivy = Vivy();
 const store = vivy.createStore();
 
 // Register model to store
-registerModel(store, counterModel);
+store.registerModel(counterModel);
 
 render(
     <Provider store={store}>
