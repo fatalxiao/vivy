@@ -7,7 +7,7 @@ import {combineReducers} from 'redux';
 
 /**
  * Create root reducer
- * @param reducers
+ * @param reducers {Object}
  * @returns {Reducer}
  */
 export default reducers => combineReducers({

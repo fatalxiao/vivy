@@ -2,6 +2,7 @@
  * @file VivyStore.js
  */
 
+// Vendors
 import {createStore, applyMiddleware} from 'redux';
 
 // Middlewares
@@ -13,9 +14,9 @@ import VivyReducer from '../reducers/VivyReducer';
 
 /**
  * Create Vivy store
- * @param plugins
- * @param extraMiddlewares
- * @returns {{}}
+ * @param plugins {Array}
+ * @param extraMiddlewares {Array}
+ * @returns {Object}
  */
 export default function createVivyStore(plugins, extraMiddlewares) {
 

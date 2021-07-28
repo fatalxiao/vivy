@@ -2,13 +2,14 @@
  * @file VivyReducer.js
  */
 
+// Action Types
 import {VIVY_UPDATE} from '../actionTypes/VivyActionType';
 
 /**
  * Vivy Reducer
- * @param state
- * @param action
- * @returns {null}
+ * @param state {number}
+ * @param action {Object}
+ * @returns {number}
  */
 export default function (state = 0, action) {
 

@@ -13,8 +13,8 @@ export default function createModelActionMiddleware() {
 
     /**
      * ModelActionMiddleware
-     * @param dispatch
-     * @param getState
+     * @param dispatch {Function}
+     * @param getState {Function}
      * @returns {function(*): function(*=): *}
      * @constructor
      */
@@ -33,8 +33,8 @@ export default function createModelActionMiddleware() {
 
     /**
      * Register async actions
-     * @param nameSpace
-     * @param actions
+     * @param nameSpace {string}
+     * @param actions {Object}
      */
     ModelActionMiddleware.register = (nameSpace, actions) => Object.keys(actions).forEach(type =>
         asyncActions[`${nameSpace}/${type}`] = actions[type]

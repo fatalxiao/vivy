@@ -4,7 +4,7 @@
 
 /**
  * Default reducer
- * @param value
+ * @param value {any}
  * @returns {*}
  */
 function identify(value) {
@@ -13,8 +13,8 @@ function identify(value) {
 
 /**
  * Generate reducer
- * @param actionType
- * @param reducer
+ * @param actionType {string}
+ * @param reducer {Function}
  * @returns {(function(*=, *=): (*))|*}
  */
 function handleReducer(actionType, reducer = identify) {
@@ -33,7 +33,7 @@ function handleReducer(actionType, reducer = identify) {
 
 /**
  * Reduce reducers
- * @param reducers
+ * @param reducers {Array}
  * @returns {function(*=, *=): *}
  */
 function reduceReducers(...reducers) {
@@ -42,14 +42,16 @@ function reduceReducers(...reducers) {
 
 /**
  * Create an async reducer
- * @param store
- * @param nameSpace
- * @param initialState
- * @param globalReducers
- * @param reducers
+ * @param store {Object}
+ * @param nameSpace {string}
+ * @param initialState {any}
+ * @param globalReducers {Object}
+ * @param reducers {Object}
  * @returns {function(*=, *=): *}
  */
-export default function createModelReducer(store, nameSpace, initialState, globalReducers, reducers) {
+export default function createModelReducer(
+    store, nameSpace, initialState, globalReducers, reducers
+) {
 
     // Handle global reducers
     const globalReducerHandlers = globalReducers ?
