@@ -1,7 +1,7 @@
 {
     "name": "vivy",
     "author": "liangxiaojun",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "A state container based on redux",
     "main": "./dist/index.js",
     "files": [
@@ -9,7 +9,7 @@
         "dist",
         "LICENSE",
         "README.md",
-        "*.d.ts"
+        "index.d.ts"
     ],
     "scripts": {
         "build": "gulp",
