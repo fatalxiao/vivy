@@ -11,8 +11,6 @@
         "README.md"
     ],
     "scripts": {
-        "example:globalReducers": "webpack-dev-server --open --hot --config examples/globalReducers/webpack.config.js",
-        "example:requestApi": "webpack-dev-server --open --hot --config examples/requestApi/webpack.config.js",
         "example:withApiPlugin": "webpack-dev-server --open --hot --config examples/withApiPlugin/webpack.config.js",
         "example:withRouterPlugin": "webpack-dev-server --open --hot --config examples/withRouterPlugin/webpack.config.js",
         "example:withAsyncComponentPlugin": "webpack-dev-server --open --hot --config examples/withAsyncComponentPlugin/webpack.config.js",
@@ -76,7 +74,7 @@
         "copy-webpack-plugin": "^9.0.1",
         "core-js": "^3.15.2",
         "cross-env": "^7.0.3",
-        "css-loader": "^6.2.0",
+        "css-loader": "^5.2.7",
         "eslint": "^7.31.0",
         "eslint-plugin-react": "^7.24.0",
         "eslint-plugin-react-hooks": "^4.2.0",
