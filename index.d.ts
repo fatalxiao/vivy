@@ -148,7 +148,6 @@ export interface Plugin {
     extraReducers: VivyModelReducers,
     extraModels: VivyModel[],
     extraMiddlewares: Middleware[],
-    extraStoreProps: Object,
     onCreateStore?: (onCreateStore?: VivyStore) => void,
     onRegisterReducer?: (reducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
     onUnregisterReducer?: (unregisteredReducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,

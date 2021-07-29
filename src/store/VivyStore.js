@@ -40,7 +40,7 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         )
     );
 
-    return {
+    const store = {
 
         // Store
         ...originStore,
@@ -55,14 +55,13 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         registerActions: ModelActionMiddleware.register,
 
         // All registered plugins
-        plugins,
-
-        // Extra store props in plugins
-        ...plugins?.reduce((pluginStoreProps, plugin) => ({
-            ...pluginStoreProps,
-            ...plugin.extraStoreProps
-        }), {})
+        plugins
 
     };
+
+    // Call onCreateStore in plugins
+    plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
+
+    return store;
 
 }

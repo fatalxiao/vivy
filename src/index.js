@@ -258,9 +258,6 @@ export default function Vivy(options) {
         store.unregisterModel = unregisterModel.bind(null, store);
         store.unregisterModels = unregisterModels.bind(null, store);
 
-        // Call onCreateStore in plugins
-        plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
-
         return store;
 
     }
