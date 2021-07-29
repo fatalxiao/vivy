@@ -7,7 +7,6 @@
         "start": "webpack-dev-server --open --hot --config webpack.config.js"
     },
     "dependencies": {
-        "alcedo-ui": "^2.56.15",
         "connected-react-router": "^6.9.1",
         "history": "^4.10.1",
         "prop-types": "^15.7.2",
@@ -17,9 +16,9 @@
         "react-router": "^5.2.0",
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
-        "vivy": "^0.2.1",
-        "vivy-router": "^0.0.2",
-        "vivy-subscription": "^0.0.3"
+        "vivy": "^0.3.0",
+        "vivy-router": "^0.2.3",
+        "vivy-subscription": "^0.1.0"
     },
     "devDependencies": {
         "@babel/core": "^7.14.8",
@@ -54,7 +53,7 @@
         "sass-loader": "^12.1.0",
         "style-loader": "^3.2.1",
         "url-loader": "^4.1.1",
-        "webpack": "^5.46.0",
+        "webpack": "^5.47.0",
         "webpack-cli": "^4.7.2",
         "webpack-dev-server": "^4.0.0-beta.3",
         "webpack-merge": "^5.8.0"

@@ -21,7 +21,7 @@ const vivy = Vivy();
 vivy.use(VivyApi({
 
     // Customized api status model name space ( default is "apiStatus" )
-    modelNameSpace: 'customizedApiStatus',
+    apiStatusModelNameSpace: 'customizedApiStatus',
 
     // Customized check response status callback
     // to tell whether response is successful

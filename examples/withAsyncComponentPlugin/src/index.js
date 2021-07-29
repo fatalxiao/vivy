@@ -30,7 +30,7 @@ vivy.use(VivyRouter({
 vivy.use(VivyAsyncComponent({
     // Customized AsyncComponentLoading model nameSpace
     // default is "asyncComponentLoading"
-    modelNameSpace: 'customizedAsyncComponentLoading'
+    asyncComponentLoadingModelNameSpace: 'customizedAsyncComponentLoading'
 }));
 
 // Create store after configuration
