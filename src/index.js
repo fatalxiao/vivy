@@ -227,6 +227,9 @@ export default function Vivy(options) {
      */
     function createStore() {
 
+        // Call beforeCreateStore in plugins
+        plugins?.forEach(plugin => plugin?.beforeCreateStore?.(opts, plugins));
+
         // Create a vivy store
         const store = createVivyStore(opts?.initialState, plugins, opts?.extraMiddlewares);
 

@@ -12,7 +12,7 @@ export interface VivyStore extends Store {
     /**
      * All Vivy plugins
      */
-    plugins?: Plugin[],
+    plugins?: VivyPlugin[],
 
     /**
      * Register reducer to Vivy
@@ -119,6 +119,18 @@ export interface VivyOption {
 
 }
 
+export interface VivyPlugin {
+    extraReducers: VivyModelReducers,
+    extraModels: VivyModel[],
+    extraMiddlewares: Middleware[],
+    beforeCreateStore?: (options?: VivyOption, plugins?: VivyPlugin[]) => void,
+    onCreateStore?: (store?: VivyStore) => void,
+    onRegisterReducer?: (reducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
+    onUnregisterReducer?: (unregisteredReducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
+    onRegisterModel?: (model?: VivyModel, store?: VivyStore) => void,
+    onUnregisterModel?: (unregisteredModel?: VivyModel, store?: VivyStore) => void,
+}
+
 export interface VivyInstance {
 
     /**
@@ -129,30 +141,19 @@ export interface VivyInstance {
     /**
      * Vivy plugins
      */
-    plugins?: Plugin[],
+    plugins?: VivyPlugin[],
 
     /**
      * Register Vivy plugin to Vivy
      * @param plugin
      */
-    use: (plugin: Plugin) => void,
+    use: (plugin: VivyPlugin) => void,
 
     /**
      * Generate Vivy store
      */
     createStore: () => VivyStore
 
-}
-
-export interface Plugin {
-    extraReducers: VivyModelReducers,
-    extraModels: VivyModel[],
-    extraMiddlewares: Middleware[],
-    onCreateStore?: (onCreateStore?: VivyStore) => void,
-    onRegisterReducer?: (reducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
-    onUnregisterReducer?: (unregisteredReducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
-    onRegisterModel?: (model?: VivyModel, store?: VivyStore) => void,
-    onUnregisterModel?: (unregisteredModel?: VivyModel, store?: VivyStore) => void,
 }
 
 /**
