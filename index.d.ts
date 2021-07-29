@@ -120,15 +120,65 @@ export interface VivyOption {
 }
 
 export interface VivyPlugin {
+
+    /**
+     * Register extra reducers to Vivy
+     */
     extraReducers: VivyModelReducers,
+
+    /**
+     * Register extra models to Vivy
+     */
     extraModels: VivyModel[],
+
+    /**
+     * Register extra middlewares to Vivy
+     */
     extraMiddlewares: Middleware[],
+
+    /**
+     * Callback before create Vivy store
+     * @param options
+     * @param plugins
+     */
     beforeCreateStore?: (options?: VivyOption, plugins?: VivyPlugin[]) => void,
+
+    /**
+     * Callback when create Vivy store
+     * @param options
+     * @param plugins
+     */
     onCreateStore?: (store?: VivyStore) => void,
+
+    /**
+     * Callback when register reducer
+     * @param options
+     * @param plugins
+     */
     onRegisterReducer?: (reducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
+
+    /**
+     * Callback when unregister reducer
+     * @param unregisteredReducer
+     * @param nameSpace
+     * @param store
+     */
     onUnregisterReducer?: (unregisteredReducer?: VivyModelReducer, nameSpace?: string, store?: VivyStore) => void,
+
+    /**
+     * Callback when register model
+     * @param model
+     * @param store
+     */
     onRegisterModel?: (model?: VivyModel, store?: VivyStore) => void,
-    onUnregisterModel?: (unregisteredModel?: VivyModel, store?: VivyStore) => void,
+
+    /**
+     * Callback when unregister model
+     * @param unregisteredModel
+     * @param store
+     */
+    onUnregisterModel?: (unregisteredModel?: VivyModel, store?: VivyStore) => void
+
 }
 
 export interface VivyInstance {
