@@ -31,7 +31,7 @@ export default {
 
             dispatch({
                 type: 'userList/updateMessage',
-                message: ''
+                message: 'Getting user list...'
             });
 
             dispatchApi({
@@ -39,13 +39,13 @@ export default {
                 params: {
                     searchText
                 },
-                successCallback: response => {
+                successCallback: () => {
                     dispatch({
                         type: 'userList/updateMessage',
                         message: 'Get user list successfully.'
                     });
                 },
-                failureCallback: response => {
+                failureCallback: () => {
                     dispatch({
                         type: 'userList/updateMessage',
                         message: 'Get user list failure.'

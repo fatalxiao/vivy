@@ -5,9 +5,10 @@
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
+import axios from 'axios';
 
 // Import Vivy
-import Vivy from 'vivy';
+import Vivy, {registerModel} from 'vivy';
 import VivyApi from 'vivy-api';
 
 // Sync component and model
@@ -43,8 +44,16 @@ vivy.use(VivyApi({
 
     // A middleware like callback to handle the failure response
     failureResponseHandler: ({dispatch, getState}) => next => action => {
-        const {response, failureCallback} = action;
+
+        const {response, error, failureCallback} = action;
+
+        // Ignore cancelled request
+        if (axios.isCancel(error)) {
+            return;
+        }
+
         failureCallback?.(response);
+
     }
 
 }));
@@ -53,7 +62,7 @@ vivy.use(VivyApi({
 const store = vivy.createStore();
 
 // Register model to store
-store.registerModel(userListModel);
+registerModel(store, userListModel);
 
 render(
     <Provider store={store}>

@@ -108,6 +108,6 @@ export default connect(state => ({
     message: state.userList.message,
 
     // get "getUserList" api status from vivy-api model ( default model name space is "apiStatus" )
-    getUserListStatus: state.customizedApiStatus.userList?.getUserList
+    getUserListStatus: state.customizedApiStatus?.userList?.getUserList
 
 }))(UserList);

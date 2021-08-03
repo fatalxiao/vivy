@@ -13,7 +13,7 @@
         "react-dom": "^17.0.2",
         "react-redux": "^7.2.4",
         "vivy": "^0.3.0",
-        "vivy-api": "^0.2.2"
+        "vivy-api": "^0.3.3"
     },
     "devDependencies": {
         "@babel/core": "^7.14.8",
@@ -44,11 +44,11 @@
         "postcss": "^8.3.6",
         "postcss-loader": "^6.1.1",
         "postcss-preset-env": "^6.7.0",
-        "sass": "^1.37.0",
+        "sass": "^1.37.2",
         "sass-loader": "^12.1.0",
         "style-loader": "^3.2.1",
         "url-loader": "^4.1.1",
-        "webpack": "^5.47.1",
+        "webpack": "^5.48.0",
         "webpack-cli": "^4.7.2",
         "webpack-dev-server": "^4.0.0-beta.3",
         "webpack-merge": "^5.8.0"
