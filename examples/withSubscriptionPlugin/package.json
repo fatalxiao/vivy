@@ -17,7 +17,7 @@
         "react-router-config": "^5.1.1",
         "react-router-dom": "^5.2.0",
         "vivy": "^0.4.0",
-        "vivy-router": "^0.2.4",
+        "vivy-router": "^0.3.0",
         "vivy-subscription": "^0.1.1"
     },
     "devDependencies": {
