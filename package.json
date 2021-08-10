@@ -1,7 +1,7 @@
 {
     "name": "vivy",
     "author": "liangxiaojun",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "description": "A state container based on redux",
     "main": "./dist/index.js",
     "files": [
@@ -28,7 +28,7 @@
         "url": "https://github.com/fatalxiao/vivy/issues"
     },
     "dependencies": {
-        "redux": "^4.1.1"
+        "redux": ">=4.x"
     },
     "devDependencies": {
         "@babel/core": "^7.15.0",
