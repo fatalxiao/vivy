@@ -217,9 +217,9 @@ export function registerReducer(store?: VivyStore, nameSpace?: string, reducer?:
 /**
  * Register reducers to Vivy
  * @param store
- * @param reducer
+ * @param reducers
  */
-export function registerReducers(store?: VivyStore, reducer?: Reducer): void
+export function registerReducers(store?: VivyStore, reducers?: VivyModelReducers): void
 
 /**
  * Unregister reducer
@@ -233,7 +233,7 @@ export function unregisterReducer(store?: VivyStore, nameSpace?: string): void
  * @param store
  * @param nameSpacesOrReducers
  */
-export function unregisterReducers(store?: VivyStore, nameSpacesOrReducers?: string[] | Reducer[]): void
+export function unregisterReducers(store?: VivyStore, nameSpacesOrReducers?: string[] | VivyModelReducers): void
 
 /**
  * Register model to Vivy
