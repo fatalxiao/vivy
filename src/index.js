@@ -27,7 +27,7 @@ export function registerReducer(store, nameSpace, reducer) {
         return;
     }
 
-    if (!store.options?.overWriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
+    if (!store.options?.overwriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
         // console.error('Same nameSpace reducer already exists.');
         return;
     }
@@ -123,7 +123,7 @@ export function registerModel(store, model) {
         return;
     }
 
-    if (!store.options?.overWriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
+    if (!store.options?.overwriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
         // console.error('Same nameSpace reducer already exists.');
         return;
     }
@@ -211,10 +211,15 @@ export function unregisterModels(store, nameSpacesOrModels) {
 
 /**
  * Default Vivy options
- * @type {{overWriteSameNameSpaceModel: boolean}}
+ * @type {{overwriteSameNameSpaceModel: boolean}}
  */
 const DEFAULT_OPTIONS = {
-    overWriteSameNameSpaceModel: false
+
+    /**
+     * Whether overwrite same name space model when registering ( Default false )
+     */
+    overwriteSameNameSpaceModel: false
+
 };
 
 /**
