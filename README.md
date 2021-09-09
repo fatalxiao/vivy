@@ -67,7 +67,7 @@ $ npm run example:[EXAMPLE_NAME]
 
 ### A complete and real example:
 
-[pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
+* [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
 
 ## Documentation
 
@@ -188,6 +188,20 @@ unregisterModels(YOUR_VIVY_STORE, [
     YOUR_VIVY_MODEL_2,
     // other models...
 ]);
+```
+
+## Model
+
+A model in Vivy is an Object combined state, actions and reducers.
+
+```js
+const example_model = {
+    nameSpace: 'MODEL_NAME_SPACE',
+    state: ANY_VALUE,
+    actions: {},
+    globalReducers: {},
+    reducers: {}
+}
 ```
 
 ## Plugins
