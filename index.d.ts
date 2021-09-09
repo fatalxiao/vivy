@@ -115,7 +115,12 @@ export interface VivyOption {
     /**
      * Register extra middlewares to Vivy
      */
-    extraMiddlewares?: Middleware[]
+    extraMiddlewares?: Middleware[],
+
+    /**
+     * Whether overwrite same name space model when registering ( Default false )
+     */
+    overwriteSameNameSpaceModel?: boolean
 
 }
 
