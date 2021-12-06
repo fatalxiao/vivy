@@ -210,6 +210,48 @@ export function unregisterModels(store, nameSpacesOrModels) {
 }
 
 /**
+ * Build action or reducer methods with dispatch
+ * @param modelActionCreator {string}
+ * @param dispatch {Function}
+ * @returns {Function}
+ */
+function buildModelActionCreator(modelActionCreator, dispatch) {
+    return function (...args) {
+        return dispatch({
+            ...args,
+            type: modelActionCreator
+        });
+    };
+}
+
+/**
+ * Build actions or reducers methods with dispatch, and bind them into your props
+ * Just like "bindActionCreator" in redux
+ * @param modelActionCreators {Object}
+ * @param dispatch {Function}
+ * @returns {Object}
+ */
+export function bindModelActionCreators(modelActionCreators, dispatch) {
+
+    if (typeof modelActionCreators === 'object') {
+
+        const boundModelActionCreators = {};
+
+        Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
+            if (typeof modelActionCreator === 'string') {
+                boundModelActionCreators[key] = buildModelActionCreator(modelActionCreator, dispatch);
+            }
+        });
+
+        return boundModelActionCreators;
+
+    }
+
+    return null;
+
+}
+
+/**
  * Default Vivy options
  * @type {{overwriteSameNameSpaceModel: boolean}}
  */
@@ -224,8 +266,8 @@ const DEFAULT_OPTIONS = {
 
 /**
  * Create Vivy instance
- * @param options {Object}
- * @returns {{plugins: *[], use: use, options, createStore: (function(): {}|*)}}
+ * @param options
+ * @returns {Object}
  * @constructor
  */
 export default function Vivy(options) {

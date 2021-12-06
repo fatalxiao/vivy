@@ -269,6 +269,14 @@ export function unregisterModel(store?: VivyStore, nameSpaceOrModel?: string | V
 export function unregisterModels(store?: VivyStore, nameSpacesOrModels?: string[] | VivyModel[]): void
 
 /**
+ * Build actions or reducers methods with dispatch, and bind them into your props
+ * Just like "bindActionCreator" in redux
+ * @param modelActionCreators
+ * @param dispatch
+ */
+export function bindModelActionCreators(modelActionCreators?: object, dispatch?: () => {}): object
+
+/**
  * Create Vivy Instance
  * @param options
  * @constructor
