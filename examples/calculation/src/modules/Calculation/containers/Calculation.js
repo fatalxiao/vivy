@@ -15,6 +15,10 @@ const Calculation = ({
     updateLeftValue, updateRightValue
 }) => {
 
+    /**
+     * Update left value to model
+     * @type {(function(*): void)|*}
+     */
     const handleLeftValueChange = useCallback(e => {
         updateLeftValue?.({
             value: e?.target?.value
@@ -23,6 +27,10 @@ const Calculation = ({
         updateLeftValue
     ]);
 
+    /**
+     * Update right value to model
+     * @type {(function(*): void)|*}
+     */
     const handleRightValueChange = useCallback(e => {
         updateRightValue?.({
             value: e?.target?.value
