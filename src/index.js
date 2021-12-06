@@ -216,7 +216,7 @@ export function unregisterModels(store, nameSpacesOrModels) {
  * @returns {Function}
  */
 function buildModelActionCreator(modelActionCreator, dispatch) {
-    return function (...args) {
+    return function (args) {
         return dispatch({
             ...args,
             type: modelActionCreator
