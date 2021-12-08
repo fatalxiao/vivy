@@ -6,29 +6,25 @@
 
 [redux-url]: https://github.com/reduxjs/redux
 
-[example-counter-url]: https://github.com/fatalxiao/vivy/tree/main/examples/counter
+[counter-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/counter
 
-[example-globalReducers-url]: https://github.com/fatalxiao/vivy/tree/main/examples/globalReducers
+[calculation-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/calculation
 
-[example-requestApi-url]: https://github.com/fatalxiao/vivy/tree/main/examples/requestApi
+[global-reducers-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/globalReducers
 
-[example-withApiPlugin-url]: https://github.com/fatalxiao/vivy/tree/main/examples/withApiPlugin
-
-[example-withRouterPlugin-url]: https://github.com/fatalxiao/vivy/tree/main/examples/withRouterPlugin
-
-[example-withAsyncComponentPlugin-url]: https://github.com/fatalxiao/vivy/tree/main/examples/withAsyncComponentPlugin
-
-[example-withSubscriptionPlugin-url]: https://github.com/fatalxiao/vivy/tree/main/examples/withSubscriptionPlugin
+[request-api-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/requestApi
 
 [pieb-with-dpe-frontend-url]: https://github.com/fatalxiao/pieb-with-dpe-frontend
 
-[ApiPlugin-url]: https://github.com/fatalxiao/vivy-api
+[router-plugin-url]: https://github.com/fatalxiao/vivy-router
 
-[RouterPlugin-url]: https://github.com/fatalxiao/vivy-router
+[async-component-plugin-url]: https://github.com/fatalxiao/vivy-async-component
 
-[AsyncComponentPlugin-url]: https://github.com/fatalxiao/vivy-async-component
+[api-plugin-url]: https://github.com/fatalxiao/vivy-api
 
-[SubscriptionPlugin-url]: https://github.com/fatalxiao/vivy-subscription
+[subscription-plugin-url]: https://github.com/fatalxiao/vivy-subscription
+
+[i18n-plugin-url]: https://github.com/fatalxiao/vivy-i18n
 
 # Vivy
 
@@ -57,13 +53,10 @@ $ npm run example:[EXAMPLE_NAME]
 
 **Example names**:
 
-* [counter][example-counter-url]
-* [globalReducers][example-globalReducers-url]
-* [requestApi][example-requestApi-url]
-* [withApiPlugin][example-withApiPlugin-url]
-* [withRouterPlugin][example-withRouterPlugin-url]
-* [withAsyncComponentPlugin][example-withAsyncComponentPlugin-url]
-* [withSubscriptionPlugin][example-withSubscriptionPlugin-url]
+* [counter][counter-example-url]
+* [calculation][calculation-example-url]
+* [globalReducers][global-reducers-example-url]
+* [requestApi][request-api-example-url]
 
 ### A complete and real example:
 
@@ -206,9 +199,10 @@ const example_model = {
 
 ## Plugins
 
-Name                                             | Description
-:----------------------------------------------- | :-------------------------
-[vivy-api][ApiPlugin-url]                        | Handle `apis` in Vivy model to make api calling easier.
-[vivy-router][RouterPlugin-url]                  | A router plugin based on `connected-react-router`
-[vivy-async-component][AsyncComponentPlugin-url] | Load an async component when using `react-router`
-[vivy-subscription][SubscriptionPlugin-url]      | Handle `subscriptions` in Vivy model to watch `history` or something else.
+| Name                                             | Description                                                                |
+|:-------------------------------------------------|:---------------------------------------------------------------------------|
+| [vivy-router][router-plugin-url]                  | A router plugin based on `connected-react-router`                          |
+| [vivy-async-component][async-component-plugin-url] | Load an async component when using `react-router`                          |
+| [vivy-api][api-plugin-url]                        | Handle `apis` in Vivy model to make api calling easier.                    |
+| [vivy-subscription][subscription-plugin-url]      | Handle `subscriptions` in Vivy model to watch `history` or something else. |
+| [vivy-i18n][i18n-plugin-url]                      | Handle `i18ns` in Vivy model to implement i18n.                            |
