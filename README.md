@@ -166,8 +166,16 @@ const EXAMPLE_MODEL = {
 
     },
 
+    // Vivy model reducer.
     reducers: {
 
+        // Register a reducer.
+        //
+        // Example:
+        //  dispatch({
+        //      type: 'MODEL_NAME_SPACE/GLOBAL_REDUCER_NAME',
+        //      // payloads ...
+        //  });
         REDUCER_NAME: (state, payload) => {
             return {
                 ...state,
