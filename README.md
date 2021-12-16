@@ -62,6 +62,16 @@ $ npm run example:[EXAMPLE_NAME]
 
 * [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
 
+## Plugins
+
+| Name                                               | Description                                                                |
+|:---------------------------------------------------|:---------------------------------------------------------------------------|
+| [vivy-router][router-plugin-url]                   | A router plugin based on `connected-react-router`                          |
+| [vivy-async-component][async-component-plugin-url] | Load an async component when using `react-router`                          |
+| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                    |
+| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else. |
+| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                            |
+
 ## Documentation
 
 ### Basic usage
@@ -314,13 +324,3 @@ export default connect(state => ({
     MODEL_ACTION: 'MODEL_NAMESPACE/MODEL_ACTION_KEY',
 }, dispatch))(App);
 ```
-
-## Plugins
-
-| Name                                               | Description                                                                |
-|:---------------------------------------------------|:---------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                   | A router plugin based on `connected-react-router`                          |
-| [vivy-async-component][async-component-plugin-url] | Load an async component when using `react-router`                          |
-| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                    |
-| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else. |
-| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                            |
