@@ -64,9 +64,13 @@ $ npm run example:[EXAMPLE_NAME]
 
 ## Documentation
 
-### Usage
+### Basic usage
 
 ```js
+import React from 'react';
+import {render} from 'react-dom';
+import {Provider} from 'react-redux';
+
 // Import Vivy
 import Vivy from 'vivy';
 
@@ -75,14 +79,25 @@ const vivy = Vivy();
 
 // Get Vivy Store
 const store = vivy.createStore();
+
+// Register  Vivy model
+store.registerModel(VIVY_MODEL);
+
+// Render
+render(
+    <Provider store={store}>
+        <Root/>
+    </Provider>,
+    document.getElementById('app-container')
+);
 ```
 
-### Model
+### Vivy model
 
-A model in Vivy is an Object combined state, actions, globalReducers and reducers.
+A Vivy model is an `Object` combined `state`, `actions`, `globalReducers` and `reducers`.
 
 ```js
-const example_model = {
+const EXAMPLE_MODEL = {
 
     // An unique key registered to store.
     nameSpace: 'MODEL_NAME_SPACE',
