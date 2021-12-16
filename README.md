@@ -58,7 +58,7 @@ $ npm run example:[EXAMPLE_NAME]
 * [globalReducers][global-reducers-example-url]
 * [requestApi][request-api-example-url]
 
-### A complete and real example:
+### A complete and real project example:
 
 * [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
 
@@ -77,9 +77,99 @@ const vivy = Vivy();
 const store = vivy.createStore();
 ```
 
+### Model
+
+A model in Vivy is an Object combined state, actions, globalReducers and reducers.
+
+```js
+const example_model = {
+
+    // An unique key registered to store.
+    nameSpace: 'MODEL_NAME_SPACE',
+
+    // Any type of value.
+    state: STATE_VALUE,
+
+    // Vivy model actions just like redux actions.
+    actions: {
+
+        // Register a model action.
+        ACTION_NAME: payload => (dispatch, getState) => {
+
+            // Get state value by getState.
+            const state = getState();
+            const STATE_VALUE = state.MODEL_NAME_SPACE
+
+            // Dispatch an action
+            dispatch({
+                type: 'MODEL_NAME_SPACE/OTHER_ACTION_NAME',
+                // payloads ...
+            });
+
+            // Dispatch a global reducer.
+            dispatch({
+                type: 'GLOBAL_REDUCER_NAME',
+                // payloads ...
+            });
+
+            // Dispatch a reducer
+            dispatch({
+                type: 'MODEL_NAME_SPACE/REDUCER_NAME',
+                // payloads ...
+            });
+
+        },
+
+        // Register another model action.
+        OTHER_ACTION_NAME: payload => (dispatch, getState) => {
+            // dispatch some actions or reducers.
+        }
+
+        // Other actions ...
+
+    },
+
+    // Vivy model global reducer.
+    globalReducers: {
+
+        // Register a global reducer.
+        // The reducer will be registered to global without current model namespace.
+        // 
+        // Example:
+        //  dispatch({
+        //      type: 'GLOBAL_REDUCER_NAME',
+        //      // payloads ...
+        //  });
+        GLOBAL_REDUCER_NAME: (state, payload) => {
+            return {
+                ...state,
+                // Do something by payload.
+            };
+        },
+
+        // Other global reducers ...
+
+    },
+
+    reducers: {
+
+        REDUCER_NAME: (state, payload) => {
+            return {
+                ...state,
+                // Do something by payload.
+            };
+        },
+
+        // Other reducers ...
+
+    }
+
+}
+```
+
 ### Methods
 
-### registerReducer
+#### registerReducer
 
 `registerReducer(vivyStore, nameSpace, reducer)`
 
@@ -90,7 +180,7 @@ import {registerReducer} from 'vivy';
 registerReducer(YOUR_VIVY_STORE, YOUR_REDUCER_NAME_SAPCE, YOUR_REDUX_REDUCER);
 ```
 
-### registerReducers
+#### registerReducers
 
 `registerReducers(vivyStore, reducers)`
 
@@ -105,7 +195,7 @@ registerReducers(YOUR_VIVY_STORE, {
 });
 ```
 
-### registerModel
+#### registerModel
 
 `registerModel(vivyStore, model)`
 
@@ -116,7 +206,7 @@ import {registerModel} from 'vivy';
 registerModel(YOUR_VIVY_STORE, YOUR_VIVY_MODEL);
 ```
 
-### registerModels
+#### registerModels
 
 `registerModels(vivyStore, models)`
 
@@ -131,7 +221,7 @@ registerModels(YOUR_VIVY_STORE, [
 ]);
 ```
 
-### unregisterReducer
+#### unregisterReducer
 
 `unregisterReducer(vivyStore, nameSpace)`
 
@@ -142,7 +232,7 @@ import {unregisterReducer} from 'vivy';
 unregisterReducer(YOUR_VIVY_STORE, YOUR_REDUCER_NAME_SAPCE);
 ```
 
-### unregisterReducers
+#### unregisterReducers
 
 `unregisterReducers(vivyStore, nameSpaces)`
 
@@ -157,7 +247,7 @@ unregisterReducers(YOUR_VIVY_STORE, [
 ]);
 ```
 
-### unregisterModel
+#### unregisterModel
 
 `unregisterModel(vivyStore, model)`
 
@@ -168,7 +258,7 @@ import {unregisterModel} from 'vivy';
 unregisterModel(YOUR_VIVY_STORE, YOUR_VIVY_MODEL);
 ```
 
-### unregisterModels
+#### unregisterModels
 
 `unregisterModels(vivyStore, models)`
 
@@ -183,26 +273,31 @@ unregisterModels(YOUR_VIVY_STORE, [
 ]);
 ```
 
-## Model
+#### bindModelActionCreators
 
-A model in Vivy is an Object combined state, actions and reducers.
+`bindModelActionCreators(modelActionCreators, dispatch)`
 
 ```js
-const example_model = {
-    nameSpace: 'MODEL_NAME_SPACE',
-    state: ANY_VALUE,
-    actions: {},
-    globalReducers: {},
-    reducers: {}
-}
+import {connect} from 'react-redux';
+import {bindModelActionCreators} from 'vivy';
+
+const App = ({
+    MODEL_STATE, MODEL_ACTION
+}) => <div>App</div>
+
+export default connect(state => ({
+    MODEL_STATE: state.MODEL_NAMESPACE,
+}), dispatch => bindModelActionCreators({
+    MODEL_ACTION: 'MODEL_NAMESPACE/MODEL_ACTION_KEY',
+}, dispatch))(App);
 ```
 
 ## Plugins
 
-| Name                                             | Description                                                                |
-|:-------------------------------------------------|:---------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                  | A router plugin based on `connected-react-router`                          |
+| Name                                               | Description                                                                |
+|:---------------------------------------------------|:---------------------------------------------------------------------------|
+| [vivy-router][router-plugin-url]                   | A router plugin based on `connected-react-router`                          |
 | [vivy-async-component][async-component-plugin-url] | Load an async component when using `react-router`                          |
-| [vivy-api][api-plugin-url]                        | Handle `apis` in Vivy model to make api calling easier.                    |
-| [vivy-subscription][subscription-plugin-url]      | Handle `subscriptions` in Vivy model to watch `history` or something else. |
-| [vivy-i18n][i18n-plugin-url]                      | Handle `i18ns` in Vivy model to implement i18n.                            |
+| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                    |
+| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else. |
+| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                            |
