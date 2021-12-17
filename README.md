@@ -107,7 +107,7 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Import Vivy model
-import yourVivyModel from './path_to_your_vivy_model';
+import yourVivyModel from 'path_to_your_vivy_model';
 
 // Create Vivy instance
 const vivy = Vivy();
