@@ -67,7 +67,8 @@ $ npm install vivy
 ### Examples in repository
 
 ```shell
-$ npm run example:[EXAMPLE_NAME]
+$ cd ./examples/[EXAMPLE_NAME]
+$ npm run start
 ```
 
 **Example names**:
