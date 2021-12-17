@@ -16,6 +16,8 @@
 
 [pieb-with-dpe-frontend-url]: https://github.com/fatalxiao/pieb-with-dpe-frontend
 
+[connected-react-router-url]: https://github.com/supasate/connected-react-router
+
 [router-plugin-url]: https://github.com/fatalxiao/vivy-router
 
 [async-component-plugin-url]: https://github.com/fatalxiao/vivy-async-component
@@ -86,7 +88,7 @@ $ npm run start
 
 | Name                                               | Description                                                                                                            |
 |:---------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                   | A router plugin based on `connected-react-router`.                                                                     |
+| [vivy-router][router-plugin-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].                                         |
 | [vivy-async-component][async-component-plugin-url] | A plugin which loading async component and async Vivy model to easily split chunks according to `react-router` config. |
 | [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                                                                |
 | [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                                             |
