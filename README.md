@@ -84,6 +84,9 @@ import {Provider} from 'react-redux';
 // Import Vivy
 import Vivy from 'vivy';
 
+// Import Vivy model
+import yourVivyModel from './path_to_your_vivy_model';
+
 // Create Vivy instance
 const vivy = Vivy();
 
@@ -91,7 +94,7 @@ const vivy = Vivy();
 const store = vivy.createStore();
 
 // Register  Vivy model
-store.registerModel(VIVY_MODEL);
+store.registerModel(yourVivyModel);
 
 // Render
 render(
