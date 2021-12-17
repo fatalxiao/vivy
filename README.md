@@ -31,8 +31,6 @@
 [![NPM Version][npm-image]][npm-url]
 [![License][license-image]][npm-url]
 
-## What is Vivy?
-
 Vivy is a state container for JavaScript apps based on [redux][redux-url]. You can get started easily as syntax is
 designed closing to Redux.
 
@@ -44,6 +42,14 @@ Vivy is designed with high expansibility. You can easily route by using [vivy-ro
 components and models by [vivy-async-component][async-component-plugin-url]. [vivy-api][api-plugin-url] can help to
 request apis. [vivy-subscription][subscription-plugin-url] can easily watch history or something else to update state by
 dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement i18n.
+
+* [Installation](#installation)
+* [Examples](#examples)
+* [Plugins](#plugins)
+* [Documentation](#documentation)
+    * [Basic usage](#basic-usage)
+    * [Vivy model](#vivy-model)
+    * [Methods](#methods)
 
 ## Installation
 
