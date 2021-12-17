@@ -86,13 +86,13 @@ $ npm run start
 
 ## Plugins
 
-| Name                                               | Description                                                                                                            |
-|:---------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].                                         |
-| [vivy-async-component][async-component-plugin-url] | A plugin which loading async component and async Vivy model to easily split chunks according to `react-router` config. |
-| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                                                                |
-| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                                             |
-| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                                                        |
+| Name                                               | Description                                                                                  |
+|:---------------------------------------------------|:---------------------------------------------------------------------------------------------|
+| [vivy-router][router-plugin-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].               |
+| [vivy-async-component][async-component-plugin-url] | A plugin which loading async component and async Vivy model to easily split chunks by route. |
+| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                                      |
+| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                   |
+| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                              |
 
 ## Documentation
 
