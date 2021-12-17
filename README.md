@@ -33,8 +33,16 @@
 
 ## What is Vivy?
 
-Vivy is a state container based on [redux][redux-url]. In Vivy, actions and reducers are combined in one file
-called `model`. You can easily route and lazy load components and models by using Vivy.
+Vivy is a state container for JavaScript apps based on [redux][redux-url].
+
+In Vivy, state, actions and reducers are combined in one file called `model`. Actions and reducers in model all can be
+called by `dispatch`. So `action type` is no need to be defined in Vivy. Also, redundant actions are unnecessary when
+you can dispatch reducers directly.
+
+Vivy is designed with high expansibility. You can easily route by using [vivy-router][router-plugin-url], and lazy load
+components and models by [vivy-async-component][async-component-plugin-url]. [vivy-api][api-plugin-url] can help to
+request apis. [vivy-subscription][subscription-plugin-url] can easily watch history or something else to update state by
+dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement i18n.
 
 ## Installation
 
@@ -65,13 +73,13 @@ $ npm run example:[EXAMPLE_NAME]
 
 ## Plugins
 
-| Name                                               | Description                                                                         |
-|:---------------------------------------------------|:------------------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                   | A router plugin based on `connected-react-router`.                                  |
-| [vivy-async-component][async-component-plugin-url] | A plugin which loading async component and async Vivy model to easily split chunks. |
-| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                             |
-| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.          |
-| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                     |
+| Name                                               | Description                                                                                                            |
+|:---------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------|
+| [vivy-router][router-plugin-url]                   | A router plugin based on `connected-react-router`.                                                                     |
+| [vivy-async-component][async-component-plugin-url] | A plugin which loading async component and async Vivy model to easily split chunks according to `react-router` config. |
+| [vivy-api][api-plugin-url]                         | Handle `apis` in Vivy model to make api calling easier.                                                                |
+| [vivy-subscription][subscription-plugin-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                                             |
+| [vivy-i18n][i18n-plugin-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                                                        |
 
 ## Documentation
 
