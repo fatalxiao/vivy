@@ -49,6 +49,7 @@ dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement
 * [Documentation](#documentation)
     * [Basic usage](#basic-usage)
     * [Vivy model](#vivy-model)
+    * [Use Vivy in Component](#use-vivy-in-component)
     * [Methods](#methods)
 
 ## Installation
@@ -126,10 +127,10 @@ render(
 A Vivy model is an `Object` combined `state`, `actions`, `globalReducers` and `reducers`.
 
 ```js
-const EXAMPLE_MODEL = {
+const yourVivyModel = {
 
     // An unique key registered to store.
-    nameSpace: 'MODEL_NAME_SPACE',
+    nameSpace: 'yourVivyModel',
 
     // Any type of redux state value.
     state: STATE_VALUE,
@@ -217,6 +218,48 @@ const EXAMPLE_MODEL = {
     }
 
 }
+```
+
+### Use Vivy in Component
+
+```js
+import React, {useCallback} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {bindModelActionCreators} from 'vivy';
+
+const App = ({
+    value, updateValue
+}) => {
+
+    /**
+     * Update value to state.
+     */
+    const handleChange = useCallback(e => {
+        updateValue({
+            value: e.target.value
+        })
+    }, [
+        updateValue
+    ]);
+
+    return (
+        <input value={value}
+               onChange={handleChange}/>
+    );
+
+}
+
+App.propTypes = {
+    value: PropTypes.string,
+    updateValue: PropTypes.func
+};
+
+export default connect(state => ({
+    value: state.yourVivyModel.value // Get value from state.
+}), dispatch => bindModelActionCreators({
+    updateValue: 'yourVivyModel/updateValue' // Define action or reducer.
+}, dispatch))(App);
 ```
 
 ### Methods
@@ -348,6 +391,7 @@ unregisterModels(YOUR_VIVY_STORE, [
 Example:
 
 ```js
+import React from 'react';
 import {connect} from 'react-redux';
 import {bindModelActionCreators} from 'vivy';
 
