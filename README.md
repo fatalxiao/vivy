@@ -33,9 +33,10 @@
 
 ## What is Vivy?
 
-Vivy is a state container for JavaScript apps based on [redux][redux-url].
+Vivy is a state container for JavaScript apps based on [redux][redux-url]. You can get started easily as syntax is
+designed closing to Redux.
 
-In Vivy, state, actions and reducers are combined in one file called `model`. Actions and reducers in model all can be
+In Vivy, state, actions and reducers are combined in one object called `model`. Actions and reducers in model all can be
 called by `dispatch`. So `action type` is no need to be defined in Vivy. Also, redundant actions are unnecessary when
 you can dispatch reducers directly.
 
@@ -124,13 +125,13 @@ const EXAMPLE_MODEL = {
     // An unique key registered to store.
     nameSpace: 'MODEL_NAME_SPACE',
 
-    // Any type of value.
+    // Any type of redux state value.
     state: STATE_VALUE,
 
-    // Vivy model actions just like redux actions.
+    // Vivy model action.
     actions: {
 
-        // Register a model action.
+        // Define a model action. Payload here is an object passing by dispatch
         ACTION_NAME: payload => (dispatch, getState) => {
 
             // Get state value by getState.
@@ -140,19 +141,19 @@ const EXAMPLE_MODEL = {
             // Dispatch an action
             dispatch({
                 type: 'MODEL_NAME_SPACE/OTHER_ACTION_NAME',
-                // payloads ...
+                // payload ...
             });
 
             // Dispatch a global reducer.
             dispatch({
                 type: 'GLOBAL_REDUCER_NAME',
-                // payloads ...
+                // payload ...
             });
 
             // Dispatch a reducer
             dispatch({
                 type: 'MODEL_NAME_SPACE/REDUCER_NAME',
-                // payloads ...
+                // payload ...
             });
 
         },
@@ -218,6 +219,8 @@ const EXAMPLE_MODEL = {
 
 `registerReducer(vivyStore, nameSpace, reducer)`
 
+Example:
+
 ```js
 import {registerReducer} from 'vivy';
 
@@ -228,6 +231,8 @@ registerReducer(YOUR_VIVY_STORE, YOUR_REDUCER_NAME_SAPCE, YOUR_REDUX_REDUCER);
 #### registerReducers
 
 `registerReducers(vivyStore, reducers)`
+
+Example:
 
 ```js
 import {registerReducers} from 'vivy';
@@ -244,6 +249,8 @@ registerReducers(YOUR_VIVY_STORE, {
 
 `registerModel(vivyStore, model)`
 
+Example:
+
 ```js
 import {registerModel} from 'vivy';
 
@@ -254,6 +261,8 @@ registerModel(YOUR_VIVY_STORE, YOUR_VIVY_MODEL);
 #### registerModels
 
 `registerModels(vivyStore, models)`
+
+Example:
 
 ```js
 import {registerModels} from 'vivy';
@@ -270,6 +279,8 @@ registerModels(YOUR_VIVY_STORE, [
 
 `unregisterReducer(vivyStore, nameSpace)`
 
+Example:
+
 ```js
 import {unregisterReducer} from 'vivy';
 
@@ -280,6 +291,8 @@ unregisterReducer(YOUR_VIVY_STORE, YOUR_REDUCER_NAME_SAPCE);
 #### unregisterReducers
 
 `unregisterReducers(vivyStore, nameSpaces)`
+
+Example:
 
 ```js
 import {unregisterReducers} from 'vivy';
@@ -296,6 +309,8 @@ unregisterReducers(YOUR_VIVY_STORE, [
 
 `unregisterModel(vivyStore, model)`
 
+Example:
+
 ```js
 import {unregisterModel} from 'vivy';
 
@@ -306,6 +321,8 @@ unregisterModel(YOUR_VIVY_STORE, YOUR_VIVY_MODEL);
 #### unregisterModels
 
 `unregisterModels(vivyStore, models)`
+
+Example:
 
 ```js
 import {unregisterModels} from 'vivy';
@@ -322,13 +339,17 @@ unregisterModels(YOUR_VIVY_STORE, [
 
 `bindModelActionCreators(modelActionCreators, dispatch)`
 
+Example:
+
 ```js
 import {connect} from 'react-redux';
 import {bindModelActionCreators} from 'vivy';
 
 const App = ({
     MODEL_STATE, MODEL_ACTION
-}) => <div>App</div>
+}) => (
+    <div>App</div>
+);
 
 export default connect(state => ({
     MODEL_STATE: state.MODEL_NAMESPACE,
