@@ -1,5 +1,5 @@
 import {
-    Reducer, Middleware, MiddlewareAPI, Action, Store
+    Reducer, Middleware, MiddlewareAPI, Action, Store, Dispatch
 } from 'redux';
 
 export interface VivyStore extends Store {
@@ -274,7 +274,7 @@ export function unregisterModels(store?: VivyStore, nameSpacesOrModels?: string[
  * @param modelActionCreators
  * @param dispatch
  */
-export function bindModelActionCreators(modelActionCreators?: object, dispatch?: () => {}): object
+export function bindModelActionCreators(modelActionCreators?: object, dispatch?: Dispatch): object
 
 /**
  * Create Vivy Instance
