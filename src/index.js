@@ -10,6 +10,18 @@ import createModelReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
 /**
+ * Handle Vivy hooks in options and plugins.
+ * @param options
+ * @param plugins
+ * @param hookName
+ * @param args
+ */
+function handleVivyHooks(options, plugins, hookName, ...args) {
+    options?.[hookName]?.(...args);
+    plugins?.forEach(plugin => plugin?.[hookName]?.(...args));
+}
+
+/**
  * Register reducer
  * @param store {Object}
  * @param nameSpace {string}
@@ -36,8 +48,13 @@ export function registerReducer(store, nameSpace, reducer) {
     store.replaceReducer(createRootReducer(store.asyncReducers));
 
     // Call onRegisterReducer in plugins
-    store.plugins?.forEach(plugin =>
-        plugin?.onRegisterReducer?.(reducer, nameSpace, store)
+    // store.plugins?.forEach(plugin =>
+    //     plugin?.onRegisterReducer?.(reducer, nameSpace, store)
+    // );
+    handleVivyHooks(
+        store.options, store.plugins,
+        'onRegisterReducer',
+        reducer, nameSpace, store
     );
 
 }
@@ -76,8 +93,13 @@ export function unregisterReducer(store, nameSpace) {
     store.replaceReducer(createRootReducer(nextReducers));
 
     // Call onUnregisterReducer in plugins
-    store.plugins?.forEach(plugin =>
-        plugin?.onUnregisterReducer?.(unregisteredReducer, nameSpace, store)
+    // store.plugins?.forEach(plugin =>
+    //     plugin?.onUnregisterReducer?.(unregisteredReducer, nameSpace, store)
+    // );
+    handleVivyHooks(
+        store.options, store.plugins,
+        'onUnregisterReducer',
+        unregisteredReducer, nameSpace, store
     );
 
 }
@@ -144,8 +166,13 @@ export function registerModel(store, model) {
     }
 
     // Call onRegisterModel in plugins
-    store.plugins?.forEach(plugin =>
-        plugin?.onRegisterModel?.(model, store)
+    // store.plugins?.forEach(plugin =>
+    //     plugin?.onRegisterModel?.(model, store)
+    // );
+    handleVivyHooks(
+        store.options, store.plugins,
+        'onRegisterModel',
+        model, store
     );
 
 }
@@ -192,8 +219,13 @@ export function unregisterModel(store, nameSpaceOrModel) {
     store.replaceReducer(createRootReducer(nextReducers));
 
     // Call onUnregisterModel in plugins
-    store.plugins?.forEach(plugin =>
-        plugin?.onUnregisterModel?.(unregisteredModel, store)
+    // store.plugins?.forEach(plugin =>
+    //     plugin?.onUnregisterModel?.(unregisteredModel, store)
+    // );
+    handleVivyHooks(
+        store.options, store.plugins,
+        'onUnregisterModel',
+        unregisteredModel, store
     );
 
 }
@@ -296,13 +328,15 @@ export default function Vivy(options) {
     function createStore() {
 
         // Call beforeCreateStore in plugins
-        plugins?.forEach(plugin => plugin?.beforeCreateStore?.(opts, plugins));
+        // plugins?.forEach(plugin => plugin?.beforeCreateStore?.(opts, plugins));
+        handleVivyHooks(opts, plugins, 'beforeCreateStore', opts, plugins);
 
         // Create a vivy store
         const store = createVivyStore(opts?.initialState, plugins, opts?.extraMiddlewares);
 
         // Call onCreateStore in plugins
-        plugins?.forEach(plugin => plugin?.onCreateStore?.(store, opts, plugins));
+        // plugins?.forEach(plugin => plugin?.onCreateStore?.(store, opts, plugins));
+        handleVivyHooks(opts, plugins, 'onCreateStore', store, opts, plugins);
 
         // Register extra reducers in plugins
         registerReducers(
