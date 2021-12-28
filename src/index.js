@@ -298,16 +298,16 @@ const DEFAULT_OPTIONS = {
 
 /**
  * Create Vivy instance
- * @param options
+ * @param opts
  * @returns {Object}
  * @constructor
  */
-export default function Vivy(options) {
+export default function Vivy(opts) {
 
     // Vivy options
-    const opts = {
+    const options = {
         ...DEFAULT_OPTIONS,
-        ...options
+        ...opts
     };
 
     // All Vivy plugins
@@ -328,20 +328,20 @@ export default function Vivy(options) {
     function createStore() {
 
         // Call beforeCreateStore in plugins
-        // plugins?.forEach(plugin => plugin?.beforeCreateStore?.(opts, plugins));
-        handleHooks(opts, plugins, 'beforeCreateStore', opts, plugins);
+        // plugins?.forEach(plugin => plugin?.beforeCreateStore?.(options, plugins));
+        handleHooks(options, plugins, 'beforeCreateStore', options, plugins);
 
         // Create a vivy store
-        const store = createVivyStore(opts?.initialState, plugins, opts?.extraMiddlewares);
+        const store = createVivyStore(options?.initialState, plugins, options?.extraMiddlewares);
 
         // Call onCreateStore in plugins
-        // plugins?.forEach(plugin => plugin?.onCreateStore?.(store, opts, plugins));
-        handleHooks(opts, plugins, 'onCreateStore', store, opts, plugins);
+        // plugins?.forEach(plugin => plugin?.onCreateStore?.(store, options, plugins));
+        handleHooks(options, plugins, 'onCreateStore', store, options, plugins);
 
         // Register extra reducers in options
         registerReducers(
             store,
-            opts?.extraReducers
+            options?.extraReducers
         );
 
         // Register extra reducers in plugins
@@ -356,7 +356,7 @@ export default function Vivy(options) {
         // Register extra models in options
         registerReducers(
             store,
-            opts?.extraModels
+            options?.extraModels
         );
 
         // Register extra models in plugins
@@ -369,7 +369,7 @@ export default function Vivy(options) {
         );
 
         // Add props
-        store.options = opts || {};
+        store.options = options || {};
 
         // Add methods
         store.registerReducer = registerReducer.bind(null, store);
@@ -387,7 +387,7 @@ export default function Vivy(options) {
 
     return {
 
-        options: opts,
+        options,
 
         plugins,
 
