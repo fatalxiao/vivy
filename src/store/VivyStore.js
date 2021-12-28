@@ -40,7 +40,7 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         )
     );
 
-    const store = {
+    return {
 
         // Store
         ...originStore,
@@ -58,10 +58,5 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         plugins
 
     };
-
-    // Call onCreateStore in plugins
-    plugins?.forEach(plugin => plugin?.onCreateStore?.(store));
-
-    return store;
 
 }

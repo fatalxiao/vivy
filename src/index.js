@@ -301,6 +301,9 @@ export default function Vivy(options) {
         // Create a vivy store
         const store = createVivyStore(opts?.initialState, plugins, opts?.extraMiddlewares);
 
+        // Call onCreateStore in plugins
+        plugins?.forEach(plugin => plugin?.onCreateStore?.(store, opts, plugins));
+
         // Register extra reducers in plugins
         registerReducers(
             store,
