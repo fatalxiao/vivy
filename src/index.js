@@ -16,7 +16,7 @@ import createRootReducer from './reducers/RootReducer';
  * @param hookName
  * @param args
  */
-function handleVivyHooks(options, plugins, hookName, ...args) {
+function handleHooks(options, plugins, hookName, ...args) {
     options?.[hookName]?.(...args);
     plugins?.forEach(plugin => plugin?.[hookName]?.(...args));
 }
@@ -51,7 +51,7 @@ export function registerReducer(store, nameSpace, reducer) {
     // store.plugins?.forEach(plugin =>
     //     plugin?.onRegisterReducer?.(reducer, nameSpace, store)
     // );
-    handleVivyHooks(
+    handleHooks(
         store.options, store.plugins,
         'onRegisterReducer',
         reducer, nameSpace, store
@@ -96,7 +96,7 @@ export function unregisterReducer(store, nameSpace) {
     // store.plugins?.forEach(plugin =>
     //     plugin?.onUnregisterReducer?.(unregisteredReducer, nameSpace, store)
     // );
-    handleVivyHooks(
+    handleHooks(
         store.options, store.plugins,
         'onUnregisterReducer',
         unregisteredReducer, nameSpace, store
@@ -169,7 +169,7 @@ export function registerModel(store, model) {
     // store.plugins?.forEach(plugin =>
     //     plugin?.onRegisterModel?.(model, store)
     // );
-    handleVivyHooks(
+    handleHooks(
         store.options, store.plugins,
         'onRegisterModel',
         model, store
@@ -222,7 +222,7 @@ export function unregisterModel(store, nameSpaceOrModel) {
     // store.plugins?.forEach(plugin =>
     //     plugin?.onUnregisterModel?.(unregisteredModel, store)
     // );
-    handleVivyHooks(
+    handleHooks(
         store.options, store.plugins,
         'onUnregisterModel',
         unregisteredModel, store
@@ -329,14 +329,14 @@ export default function Vivy(options) {
 
         // Call beforeCreateStore in plugins
         // plugins?.forEach(plugin => plugin?.beforeCreateStore?.(opts, plugins));
-        handleVivyHooks(opts, plugins, 'beforeCreateStore', opts, plugins);
+        handleHooks(opts, plugins, 'beforeCreateStore', opts, plugins);
 
         // Create a vivy store
         const store = createVivyStore(opts?.initialState, plugins, opts?.extraMiddlewares);
 
         // Call onCreateStore in plugins
         // plugins?.forEach(plugin => plugin?.onCreateStore?.(store, opts, plugins));
-        handleVivyHooks(opts, plugins, 'onCreateStore', store, opts, plugins);
+        handleHooks(opts, plugins, 'onCreateStore', store, opts, plugins);
 
         // Register extra reducers in options
         registerReducers(
