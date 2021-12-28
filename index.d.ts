@@ -105,41 +105,7 @@ export interface VivyModel {
 
 }
 
-export interface VivyOption {
-
-    /**
-     * Initial state of store
-     */
-    initialState?: Object,
-
-    /**
-     * Register extra middlewares to Vivy
-     */
-    extraMiddlewares?: Middleware[],
-
-    /**
-     * Whether overwrite same name space model when registering ( Default false )
-     */
-    overwriteSameNameSpaceModel?: boolean
-
-}
-
-export interface VivyPlugin {
-
-    /**
-     * Register extra reducers to Vivy
-     */
-    extraReducers: VivyModelReducers,
-
-    /**
-     * Register extra models to Vivy
-     */
-    extraModels: VivyModel[],
-
-    /**
-     * Register extra middlewares to Vivy
-     */
-    extraMiddlewares: Middleware[],
+export interface Hooks {
 
     /**
      * Callback before create Vivy store
@@ -185,6 +151,41 @@ export interface VivyPlugin {
     onUnregisterModel?: (unregisteredModel?: VivyModel, store?: VivyStore) => void
 
 }
+
+export interface ExtraInfo {
+
+    /**
+     * Register extra reducers to Vivy
+     */
+    extraReducers: VivyModelReducers,
+
+    /**
+     * Register extra models to Vivy
+     */
+    extraModels: VivyModel[],
+
+    /**
+     * Register extra middlewares to Vivy
+     */
+    extraMiddlewares?: Middleware[]
+
+}
+
+export type VivyOption = Hooks & ExtraInfo & {
+
+    /**
+     * Initial state of store
+     */
+    initialState?: Object,
+
+    /**
+     * Whether overwrite same name space model when registering ( Default false )
+     */
+    overwriteSameNameSpaceModel?: boolean
+
+}
+
+export type VivyPlugin = Hooks & ExtraInfo;
 
 export interface VivyInstance {
 

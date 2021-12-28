@@ -338,6 +338,12 @@ export default function Vivy(options) {
         // plugins?.forEach(plugin => plugin?.onCreateStore?.(store, opts, plugins));
         handleVivyHooks(opts, plugins, 'onCreateStore', store, opts, plugins);
 
+        // Register extra reducers in options
+        registerReducers(
+            store,
+            opts?.extraReducers
+        );
+
         // Register extra reducers in plugins
         registerReducers(
             store,
@@ -345,6 +351,12 @@ export default function Vivy(options) {
                 ...extraReducers,
                 ...plugin?.extraReducers
             }), {})
+        );
+
+        // Register extra models in options
+        registerReducers(
+            store,
+            opts?.extraModels
         );
 
         // Register extra models in plugins
