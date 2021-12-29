@@ -9,6 +9,9 @@ import createVivyStore from './store/VivyStore';
 import createModelReducer from './reducers/ModelReducer';
 import createRootReducer from './reducers/RootReducer';
 
+// Utils
+import {isEmptyObject} from './util/Util';
+
 /**
  * Handle Vivy hooks in options and plugins.
  * @param options
@@ -390,6 +393,83 @@ export default function Vivy(opts) {
     }
 
     /**
+     * Register extra reducers in options.
+     * @param store
+     */
+    function registerOptionsReducers(store) {
+
+        if (!store || !options.extraReducers || isEmptyObject(options.extraReducers)) {
+            return;
+        }
+
+        registerReducers(store, options.extraReducers);
+
+    }
+
+    /**
+     * Register extra models in options.
+     * @param store
+     */
+    function registerOptionsModels(store) {
+
+        if (!store || !options.extraModels || options.extraModels.length < 1) {
+            return;
+        }
+
+        registerModels(store, options.extraModels);
+
+    }
+
+    /**
+     * Register extra reducers in plugins.
+     * @param store
+     */
+    function registerPluginsReducers(store) {
+
+        if (!store || !plugins || plugins.length < 1) {
+            return;
+        }
+
+        const reducers = plugins?.reduce((extraReducers, plugin) => ({
+            ...extraReducers,
+            ...plugin?.extraReducers
+        }), {});
+
+        if (!reducers || isEmptyObject(reducers)) {
+            return;
+        }
+
+        registerReducers(store, reducers);
+
+    }
+
+    /**
+     * Register extra models in plugins.
+     * @param store
+     */
+    function registerPluginsModels(store) {
+
+        if (!store || !plugins || plugins.length < 1) {
+            return;
+        }
+
+        const models = plugins?.reduce((extraModels, plugin) => [
+            ...extraModels,
+            ...(plugin?.extraModels || [])
+        ], []);
+
+        if (!models || models.length < 1) {
+            return;
+        }
+
+        registerModels(
+            store,
+            models
+        );
+
+    }
+
+    /**
      * Create store
      * @returns {Object}
      */
@@ -407,34 +487,16 @@ export default function Vivy(opts) {
         handleHooks(options, plugins, 'onCreateStore', store, options, plugins);
 
         // Register extra reducers in options
-        registerReducers(
-            store,
-            options?.extraReducers
-        );
-
-        // Register extra reducers in plugins
-        registerReducers(
-            store,
-            plugins?.reduce((extraReducers, plugin) => ({
-                ...extraReducers,
-                ...plugin?.extraReducers
-            }), {})
-        );
+        registerOptionsReducers(store);
 
         // Register extra models in options
-        registerModels(
-            store,
-            options?.extraModels
-        );
+        registerOptionsModels(store);
+
+        // Register extra reducers in plugins
+        registerPluginsReducers(store);
 
         // Register extra models in plugins
-        registerModels(
-            store,
-            plugins?.reduce((extraModels, plugin) => [
-                ...extraModels,
-                ...(plugin?.extraModels || [])
-            ], [])
-        );
+        registerPluginsModels(store);
 
         // Add props
         store.options = options || {};
