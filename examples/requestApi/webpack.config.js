@@ -21,13 +21,14 @@ module.exports = merge(baseConfig, {
 
     devServer: {
         static: path.join(__dirname, './dist'),
+        open: true,
         hot: true,
-        port: 3002,
+        port: 3000,
         historyApiFallback: true,
-        onBeforeSetupMiddleware: server => {
+        setupMiddlewares: (middlewares, devServer) => {
 
             // Reponse user list
-            server.app.get('/getUserList', (req, res) => {
+            devServer.app.get('/getUserList', (req, res) => {
 
                 const data = [
                     'User-1',
@@ -47,6 +48,8 @@ module.exports = merge(baseConfig, {
                 ), 1000);
 
             });
+
+            return middlewares;
 
         }
     },
