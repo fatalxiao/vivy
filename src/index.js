@@ -18,7 +18,7 @@ import createRootReducer from './reducers/RootReducer';
  */
 function handleHooks(options, plugins, hookName, ...args) {
     options?.[hookName]?.(...args);
-    plugins?.forEach(plugin => plugin?.[hookName]?.(...args));
+    plugins?.forEach?.(plugin => plugin?.[hookName]?.(...args));
 }
 
 /**
@@ -65,9 +65,21 @@ export function registerReducer(store, nameSpace, reducer) {
  * @param reducers {Object}
  */
 export function registerReducers(store, reducers) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!reducers) {
+        console.error('Reducers is required.');
+        return;
+    }
+
     Object.keys(reducers).forEach(nameSpace =>
         registerReducer(store, nameSpace, reducers[nameSpace])
     );
+
 }
 
 /**
@@ -110,6 +122,17 @@ export function unregisterReducer(store, nameSpace) {
  * @param nameSpacesOrReducers {Array<string>|Object}
  */
 export function unregisterReducers(store, nameSpacesOrReducers) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!nameSpacesOrReducers) {
+        console.error('NameSpaces or reducers is required.');
+        return;
+    }
+
     if (Array.isArray(nameSpacesOrReducers)) { // nameSpaces
         nameSpacesOrReducers.forEach(nameSpace =>
             unregisterReducer(store, nameSpace)
@@ -119,6 +142,7 @@ export function unregisterReducers(store, nameSpacesOrReducers) {
             unregisterReducer(store, nameSpace)
         );
     }
+
 }
 
 /**
@@ -183,9 +207,21 @@ export function registerModel(store, model) {
  * @param models {Array<Object>}
  */
 export function registerModels(store, models) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!models) {
+        console.error('Models is required.');
+        return;
+    }
+
     models.forEach(model =>
         registerModel(store, model)
     );
+
 }
 
 /**
@@ -236,9 +272,21 @@ export function unregisterModel(store, nameSpaceOrModel) {
  * @param nameSpacesOrModels {Array<string|Object>}
  */
 export function unregisterModels(store, nameSpacesOrModels) {
+
+    if (!store) {
+        console.error('Store is required.');
+        return;
+    }
+
+    if (!nameSpacesOrModels) {
+        console.error('NameSpaces or models is required.');
+        return;
+    }
+
     nameSpacesOrModels.forEach(nameSpaceOrModel =>
         unregisterModel(store, nameSpaceOrModel)
     );
+
 }
 
 /**
@@ -248,12 +296,23 @@ export function unregisterModels(store, nameSpacesOrModels) {
  * @returns {Function}
  */
 function buildModelActionCreator(modelActionCreator, dispatch) {
+
+    if (!modelActionCreator) {
+        return;
+    }
+
+    if (!dispatch || typeof dispatch !== 'function') {
+        console.error('Dispatch is required.');
+        return;
+    }
+
     return function (args) {
         return dispatch({
             ...args,
             type: modelActionCreator
         });
     };
+
 }
 
 /**
@@ -264,6 +323,15 @@ function buildModelActionCreator(modelActionCreator, dispatch) {
  * @returns {Object}
  */
 export function bindModelActionCreators(modelActionCreators, dispatch) {
+
+    if (!modelActionCreators) {
+        return null;
+    }
+
+    if (!dispatch || typeof dispatch !== 'function') {
+        console.error('Dispatch is required.');
+        return null;
+    }
 
     if (typeof modelActionCreators === 'object') {
 
@@ -354,7 +422,7 @@ export default function Vivy(opts) {
         );
 
         // Register extra models in options
-        registerReducers(
+        registerModels(
             store,
             options?.extraModels
         );
