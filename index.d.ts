@@ -5,7 +5,7 @@ import {
 export interface VivyStore extends Store {
 
     /**
-     * Origin redux store
+     * Origin Redux store
      */
     originStore?: Store,
 
@@ -94,12 +94,17 @@ export interface VivyModel {
     state?: any,
 
     /**
-     * Vivy model actions, like action in redux
+     * Vivy model actions, like action in Redux
      */
     actions?: VivyModelActions,
 
     /**
-     * Vivy model reducers, like reducers in redux
+     * Vivy model global reducers, like reducers in Redux
+     */
+    globalReducers?: VivyModelReducers,
+
+    /**
+     * Vivy model reducers, like reducers in Redux
      */
     reducers?: VivyModelReducers
 
@@ -271,7 +276,7 @@ export function unregisterModels(store?: VivyStore, nameSpacesOrModels?: string[
 
 /**
  * Build actions or reducers methods with dispatch, and bind them into your props
- * Just like "bindActionCreator" in redux
+ * Just like "bindActionCreator" in Redux
  * @param modelActionCreators
  * @param dispatch
  */
