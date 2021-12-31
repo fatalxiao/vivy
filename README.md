@@ -107,7 +107,7 @@ $ npm run start
 ## Plugins
 
 | Plugin                                             | Version                                                                            | Description                                                                                  |
-|:---------------------------------------------------|------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
+|:---------------------------------------------------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
 | [vivy-router][router-plugin-url]                   | [![NPM Version][router-plugin-npm-image]][router-plugin-npm-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].               |
 | [vivy-async-component][async-component-plugin-url] | [![NPM Version][async-component-plugin-npm-image]][async-component-plugin-npm-url] | A plugin which loading async component and async Vivy model to easily split chunks by route. |
 | [vivy-api][api-plugin-url]                         | [![NPM Version][api-plugin-npm-image]][api-plugin-npm-url]                         | Handle `apis` in Vivy model to make api calling easier.                                      |
