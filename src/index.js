@@ -338,9 +338,7 @@ export function bindModelActionCreators(modelActionCreators, dispatch) {
 
     if (typeof modelActionCreators === 'object') {
 
-        const boundModelActionCreators = {
-            dispatch
-        };
+        const boundModelActionCreators = {};
 
         Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
             if (typeof modelActionCreator === 'function') {
