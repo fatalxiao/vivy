@@ -293,6 +293,18 @@ export function unregisterModels(store, nameSpacesOrModels) {
 }
 
 /**
+ * Same as bindActionCreator in Redux
+ * @param actionCreator
+ * @param dispatch
+ * @returns {function(): *}
+ */
+function bindActionCreator(actionCreator, dispatch) {
+    return function () {
+        return dispatch(actionCreator.apply(this, arguments));
+    };
+}
+
+/**
  * Build action or reducer methods with dispatch
  * @param modelActionCreator {string}
  * @param dispatch {Function}
@@ -320,7 +332,7 @@ function buildModelActionCreator(modelActionCreator, dispatch) {
 
 /**
  * Build actions or reducers methods with dispatch, and bind them into your props
- * Just like "bindActionCreator" in redux
+ * Just like "bindActionCreators" in redux
  * @param modelActionCreators {Object}
  * @param dispatch {Function}
  * @returns {Object}
@@ -336,23 +348,25 @@ export function bindModelActionCreators(modelActionCreators, dispatch) {
         return null;
     }
 
-    if (typeof modelActionCreators === 'object') {
-
-        const boundModelActionCreators = {};
-
-        Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
-            if (typeof modelActionCreator === 'function') {
-                boundModelActionCreators[key] = modelActionCreator;
-            } else if (typeof modelActionCreator === 'string') {
-                boundModelActionCreators[key] = buildModelActionCreator(modelActionCreator, dispatch);
-            }
-        });
-
-        return boundModelActionCreators;
-
+    if (typeof modelActionCreators === 'function') {
+        return bindActionCreator(modelActionCreators, dispatch);
     }
 
-    return null;
+    if (typeof modelActionCreators !== 'object') {
+        return null;
+    }
+
+    const boundModelActionCreators = {};
+
+    Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
+        if (typeof modelActionCreator === 'function') {
+            boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
+        } else if (typeof modelActionCreator === 'string') {
+            boundModelActionCreators[key] = buildModelActionCreator(modelActionCreator, dispatch);
+        }
+    });
+
+    return boundModelActionCreators;
 
 }
 
