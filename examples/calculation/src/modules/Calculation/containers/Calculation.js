@@ -12,7 +12,7 @@ import './Calculation.scss';
 
 const Calculation = ({
     leftValue, rightValue,
-    updateLeftValue, updateRightValue
+    dispatch, updateRightValue
 }) => {
 
     /**
@@ -20,11 +20,15 @@ const Calculation = ({
      * @type {(function(*): void)|*}
      */
     const handleLeftValueChange = useCallback(e => {
-        updateLeftValue?.({
+
+        // Use "dispatch" to dispatch an action
+        dispatch?.({
+            type: 'calculation/updateLeftValue',
             value: e?.target?.value
         });
+
     }, [
-        updateLeftValue
+        dispatch
     ]);
 
     /**
@@ -32,9 +36,12 @@ const Calculation = ({
      * @type {(function(*): void)|*}
      */
     const handleRightValueChange = useCallback(e => {
+
+        // Use "updateRightValue" to dispatch an action by using "bindModelActionCreators"
         updateRightValue?.({
             value: e?.target?.value
         });
+
     }, [
         updateRightValue
     ]);
@@ -62,7 +69,7 @@ Calculation.propTypes = {
     leftValue: PropTypes.number,
     rightValue: PropTypes.number,
 
-    updateLeftValue: PropTypes.func,
+    dispatch: PropTypes.func,
     updateRightValue: PropTypes.func
 
 };
@@ -71,6 +78,6 @@ export default connect(state => ({
     leftValue: state.calculation.leftValue,
     rightValue: state.calculation.rightValue
 }), dispatch => bindModelActionCreators({
-    updateLeftValue: 'calculation/updateLeftValue',
+    dispatch,
     updateRightValue: 'calculation/updateRightValue'
 }, dispatch))(Calculation);
