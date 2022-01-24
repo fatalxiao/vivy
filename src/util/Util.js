@@ -3,7 +3,7 @@
  */
 
 /**
- * Whether a object is empty.
+ * Whether an object is empty.
  * @param obj
  * @returns {boolean}
  */
