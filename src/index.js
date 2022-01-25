@@ -51,9 +51,6 @@ export function registerReducer(store, nameSpace, reducer) {
     store.replaceReducer(createRootReducer(store.asyncReducers));
 
     // Call onRegisterReducer in plugins
-    // store.plugins?.forEach(plugin =>
-    //     plugin?.onRegisterReducer?.(reducer, nameSpace, store)
-    // );
     handleHooks(
         store.options, store.plugins,
         'onRegisterReducer',
@@ -108,9 +105,6 @@ export function unregisterReducer(store, nameSpace) {
     store.replaceReducer(createRootReducer(nextReducers));
 
     // Call onUnregisterReducer in plugins
-    // store.plugins?.forEach(plugin =>
-    //     plugin?.onUnregisterReducer?.(unregisteredReducer, nameSpace, store)
-    // );
     handleHooks(
         store.options, store.plugins,
         'onUnregisterReducer',
@@ -193,9 +187,6 @@ export function registerModel(store, model) {
     }
 
     // Call onRegisterModel in plugins
-    // store.plugins?.forEach(plugin =>
-    //     plugin?.onRegisterModel?.(model, store)
-    // );
     handleHooks(
         store.options, store.plugins,
         'onRegisterModel',
@@ -258,9 +249,6 @@ export function unregisterModel(store, nameSpaceOrModel) {
     store.replaceReducer(createRootReducer(nextReducers));
 
     // Call onUnregisterModel in plugins
-    // store.plugins?.forEach(plugin =>
-    //     plugin?.onUnregisterModel?.(unregisteredModel, store)
-    // );
     handleHooks(
         store.options, store.plugins,
         'onUnregisterModel',
@@ -492,15 +480,10 @@ export default function Vivy(opts) {
     function createStore() {
 
         // Call beforeCreateStore in plugins
-        // plugins?.forEach(plugin => plugin?.beforeCreateStore?.(options, plugins));
         handleHooks(options, plugins, 'beforeCreateStore', options, plugins);
 
         // Create a vivy store
         const store = createVivyStore(options?.initialState, plugins, options?.extraMiddlewares);
-
-        // Call onCreateStore in plugins
-        // plugins?.forEach(plugin => plugin?.onCreateStore?.(store, options, plugins));
-        handleHooks(options, plugins, 'onCreateStore', store, options, plugins);
 
         // Register extra reducers in options
         registerOptionsReducers(store);
@@ -526,6 +509,9 @@ export default function Vivy(opts) {
         store.registerModels = registerModels.bind(null, store);
         store.unregisterModel = unregisterModel.bind(null, store);
         store.unregisterModels = unregisterModels.bind(null, store);
+
+        // Call onCreateStore in plugins
+        handleHooks(options, plugins, 'onCreateStore', store, options, plugins);
 
         return store;
 
