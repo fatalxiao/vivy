@@ -176,7 +176,16 @@ export interface ExtraInfo {
 
 }
 
-export type VivyOption = Hooks & ExtraInfo & {
+export type VivyPlugin = ExtraInfo & Hooks & {
+
+    /**
+     * Use callback
+     */
+    onUse: (options?: VivyOption, plugins?: VivyPlugin[]) => void
+
+};
+
+export type VivyOption = ExtraInfo & Hooks & {
 
     /**
      * Initial state of store
@@ -186,11 +195,14 @@ export type VivyOption = Hooks & ExtraInfo & {
     /**
      * Whether overwrite same name space model when registering ( Default false )
      */
-    overwriteSameNameSpaceModel?: boolean
+    overwriteSameNameSpaceModel?: boolean,
+
+    /**
+     * Use plugin callback
+     */
+    onUsePlugin: (plugin?: VivyPlugin, options?: VivyOption, plugins?: VivyPlugin[]) => void
 
 }
-
-export type VivyPlugin = Hooks & ExtraInfo;
 
 export interface VivyInstance {
 
