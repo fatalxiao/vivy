@@ -14,12 +14,11 @@ import VivyReducer from '../reducers/VivyReducer';
 
 /**
  * Create Vivy store
- * @param initialState {Object}
+ * @param options {Object}
  * @param plugins {Array}
- * @param extraMiddlewares {Array}
  * @returns {Object}
  */
-export default function createVivyStore(initialState, plugins, extraMiddlewares) {
+export default function createVivyStore(options, plugins) {
 
     // Handle actions in models
     const ModelActionMiddleware = createModelActionMiddleware();
@@ -29,14 +28,14 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         createRootReducer({
             '@@VIVY': VivyReducer
         }),
-        initialState,
+        (options?.initialState || null),
         applyMiddleware(
             ModelActionMiddleware,
             ...plugins?.reduce((pluginMiddlewares, plugin) => [
                 ...pluginMiddlewares,
                 ...(plugin.extraMiddlewares || [])
             ], []),
-            ...(extraMiddlewares || [])
+            ...(options?.extraMiddlewares || [])
         )
     );
 
@@ -48,6 +47,9 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         // Origin store
         originStore,
 
+        // Vivy options
+        options: options || {},
+
         // Async reducers
         asyncReducers: {},
 
@@ -55,7 +57,7 @@ export default function createVivyStore(initialState, plugins, extraMiddlewares)
         registerActions: ModelActionMiddleware.register,
 
         // All registered plugins
-        plugins
+        plugins: plugins || []
 
     };
 
