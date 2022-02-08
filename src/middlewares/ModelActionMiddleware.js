@@ -35,10 +35,20 @@ export default function createModelActionMiddleware() {
      * Register async actions
      * @param nameSpace {string}
      * @param actions {Object}
+     * @param store {Object}
      */
-    ModelActionMiddleware.register = (nameSpace, actions) => Object.keys(actions).forEach(type =>
-        asyncActions[`${nameSpace}/${type}`] = actions[type]
-    );
+    ModelActionMiddleware.register = (nameSpace, actions, store) => {
+
+        Object.keys(actions).forEach(type =>
+            asyncActions[`${nameSpace}/${type}`] = actions[type]
+        );
+
+        store.dispatch[nameSpace] = Object.entries(actions).reduce((result, [name, action]) => ({
+            ...result,
+            name: params => action(params)(store.dispatch, store.getState)
+        }), {});
+
+    };
 
     return ModelActionMiddleware;
 

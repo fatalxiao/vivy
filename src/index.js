@@ -183,7 +183,7 @@ export function registerModel(store, model) {
 
     // Register actions
     if (actions) {
-        store.registerActions(nameSpace, actions ?? {});
+        store.registerActions(nameSpace, actions ?? {}, store);
     }
 
     // Call onRegisterModel in plugins
@@ -474,10 +474,7 @@ export default function Vivy(opts) {
             return;
         }
 
-        registerModels(
-            store,
-            models
-        );
+        registerModels(store, models);
 
     }
 

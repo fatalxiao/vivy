@@ -39,6 +39,15 @@ export default function createVivyStore(options, plugins) {
         )
     );
 
+    /**
+     * Vivy store dispatch
+     * @param args
+     * @returns {*}
+     */
+    function dispatch(...args) {
+        return originStore.dispatch(...args);
+    }
+
     return {
 
         // Store
@@ -46,6 +55,8 @@ export default function createVivyStore(options, plugins) {
 
         // Origin store
         originStore,
+
+        dispatch,
 
         // Vivy options
         options: options || {},
