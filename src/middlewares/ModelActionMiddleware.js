@@ -33,11 +33,11 @@ export default function createModelActionMiddleware() {
 
     /**
      * Register async actions
+     * @param store {Object}
      * @param nameSpace {string}
      * @param actions {Object}
-     * @param store {Object}
      */
-    ModelActionMiddleware.register = (nameSpace, actions, store) => {
+    ModelActionMiddleware.register = (store, nameSpace, actions) => {
 
         Object.keys(actions).forEach(type =>
             asyncActions[`${nameSpace}/${type}`] = actions[type]
@@ -48,6 +48,36 @@ export default function createModelActionMiddleware() {
             [name]: params => action(params)(store.dispatch, store.getState)
         }), {});
 
+    };
+
+    /**
+     * Unregister Async Actions
+     * @param store {Object}
+     * @param nameSpace {string}
+     */
+    function unregisterAsyncActions(store, nameSpace) {
+
+        Object.keys(asyncActions).forEach(asyncActionsKey => {
+            if (asyncActionsKey.startsWith(`${nameSpace}/`)) {
+                delete asyncActions[asyncActionsKey];
+            }
+        });
+
+        delete store.dispatch[nameSpace];
+
+    }
+
+    /**
+     * Unregister async actions
+     * @param store {Object}
+     * @param nameSpaceOrModel {string|Object}
+     */
+    ModelActionMiddleware.unregister = (store, nameSpaceOrModel) => {
+        if (typeof nameSpaceOrModel === 'string') {
+            unregisterAsyncActions(store, nameSpaceOrModel);
+        } else {
+            unregisterAsyncActions(store, nameSpaceOrModel?.nameSpace);
+        }
     };
 
     return ModelActionMiddleware;

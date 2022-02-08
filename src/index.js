@@ -183,7 +183,7 @@ export function registerModel(store, model) {
 
     // Register actions
     if (actions) {
-        store.registerActions(nameSpace, actions ?? {}, store);
+        store.registerActions(store, nameSpace, actions ?? {});
     }
 
     // Call onRegisterModel in plugins
@@ -248,6 +248,9 @@ export function unregisterModel(store, nameSpaceOrModel) {
 
     store.replaceReducer(createRootReducer(nextReducers));
 
+    // Unregister actions
+    store.unregisterActions(store, nameSpaceOrModel);
+
     // Call onUnregisterModel in plugins
     handlePluginsHook(
         store.options, store.plugins,
@@ -309,11 +312,16 @@ function buildModelActionCreator(modelActionCreator, dispatch) {
         return;
     }
 
-    return function (args) {
-        return dispatch({
-            ...args,
-            type: modelActionCreator
-        });
+    return function () {
+
+        const [nameSpace, name] = modelActionCreator.split('/');
+
+        if (name === undefined) {
+            return dispatch[nameSpace](arguments);
+        }
+
+        return dispatch[nameSpace][name](arguments);
+
     };
 
 }

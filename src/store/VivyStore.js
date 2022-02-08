@@ -67,6 +67,9 @@ export default function createVivyStore(options, plugins) {
         // Register actions
         registerActions: ModelActionMiddleware.register,
 
+        // Unregister actions
+        unregisterActions: ModelActionMiddleware.unregister,
+
         // All registered plugins
         plugins: plugins || []
 
