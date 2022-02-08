@@ -28,7 +28,7 @@ export default function createVivyStore(options, plugins) {
         createRootReducer({
             '@@VIVY': VivyReducer
         }),
-        (options?.initialState || null),
+        (options?.initialState || {}),
         applyMiddleware(
             ModelActionMiddleware,
             ...plugins?.reduce((pluginMiddlewares, plugin) => [
