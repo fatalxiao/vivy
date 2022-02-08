@@ -45,7 +45,7 @@ export default function createModelActionMiddleware() {
 
         store.dispatch[nameSpace] = Object.entries(actions).reduce((result, [name, action]) => ({
             ...result,
-            name: params => action(params)(store.dispatch, store.getState)
+            [name]: params => action(params)(store.dispatch, store.getState)
         }), {});
 
     };
