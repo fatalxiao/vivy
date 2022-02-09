@@ -44,10 +44,12 @@ export default function createModelActionMiddleware() {
         );
 
         // Bind actions to store.dispatch to implement "dispatch.nameSpace.actionName()"
-        store.dispatch[nameSpace] = Object.entries(actions).reduce((result, [name, action]) => ({
-            ...result,
-            [name]: params => action(params)(store.dispatch, store.getState)
-        }), {});
+        if (!store.dispatch[nameSpace]) {
+            store.dispatch[nameSpace] = {};
+        }
+        Object.entries(actions).forEach(([name, action]) => {
+            store.dispatch[nameSpace][name] = params => action(params)(store.dispatch, store.getState);
+        });
 
     };
 
