@@ -46,9 +46,7 @@ export function registerReducer(store, nameSpace, reducer) {
         return;
     }
 
-    // store.asyncReducers[nameSpace] = reducer;
-    // store.replaceReducer(createRootReducer(store.asyncReducers));
-
+    // Register or overwrite Redux reducers
     store.registerReduxReducer(nameSpace, reducer);
 
     // Call onRegisterReducer in plugins
@@ -100,11 +98,7 @@ export function unregisterReducer(store, nameSpace) {
         return;
     }
 
-    // const nextReducers = {...store.asyncReducers};
-    // const unregisteredReducer = nextReducers[nameSpace];
-    // delete nextReducers[nameSpace];
-    // store.replaceReducer(createRootReducer(nextReducers));
-
+    // Unregister Redux reducer
     const unregisteredReducer = store.unregisterReduxReducer(nameSpace);
 
     // Call onUnregisterReducer in plugins
@@ -174,16 +168,7 @@ export function registerModel(store, model) {
         return;
     }
 
-    // Register or overwrite reducers
-    // store.asyncReducers[nameSpace] = createModelReducer(
-    //     store,
-    //     nameSpace,
-    //     state ?? null,
-    //     globalReducers ?? {},
-    //     reducers ?? {}
-    // );
-    // store.replaceReducer(createRootReducer(store.asyncReducers));
-
+    // Register or overwrite Redux reducers
     store.registerReduxReducer(nameSpace, createModelReducer(
         store,
         nameSpace,
@@ -192,7 +177,7 @@ export function registerModel(store, model) {
         reducers ?? {}
     ));
 
-    // Register actions
+    // Register Redux actions
     if (actions) {
         store.registerReduxActions(store, nameSpace, actions ?? {});
     }
@@ -246,25 +231,13 @@ export function unregisterModel(store, nameSpaceOrModel) {
         return;
     }
 
-    // const nextReducers = {...store.asyncReducers};
-    // let unregisteredModel;
-    //
-    // if (typeof nameSpaceOrModel === 'string') { // nameSpace
-    //     unregisteredModel = nextReducers[nameSpaceOrModel];
-    //     delete nextReducers[nameSpaceOrModel];
-    // } else { // model
-    //     unregisteredModel = nextReducers[nameSpaceOrModel.nameSpace];
-    //     delete nextReducers[nameSpaceOrModel.nameSpace];
-    // }
-    //
-    // store.replaceReducer(createRootReducer(nextReducers));
-
+    // Unregister Redux reducers
     const unregisteredModel = typeof nameSpaceOrModel === 'string' ?
         store.unregisterReduxReducer(nameSpaceOrModel)
         :
         store.unregisterReduxReducer(nameSpaceOrModel.nameSpace);
 
-    // Unregister actions
+    // Unregister Redux actions
     store.unregisterReduxActions(store, nameSpaceOrModel);
 
     // Call onUnregisterModel in plugins
