@@ -6,7 +6,7 @@ import Vivy from '../src';
 const testReducer = (state = 0, action) => {
     switch (action.type) {
 
-        case 'UPDATE': {
+        case 'UPGRADE': {
             return state + 1;
         }
 
@@ -16,62 +16,114 @@ const testReducer = (state = 0, action) => {
     }
 };
 
-describe('Vivy', () => {
+const testModel = {
+    nameSpace: 'testModel',
+    state: 0,
+    reducers: {
+        upgrade: state => {
+            return state + 1;
+        }
+    }
+};
 
-    test('Create Vivy', () => {
+test('Create Vivy', () => {
 
-        const vivy = Vivy();
+    const vivy = Vivy();
 
-        expect(
-            typeof vivy
-        ).toEqual(
-            'object'
-        );
+    expect(
+        typeof vivy
+    ).toEqual(
+        'object'
+    );
 
+});
+
+test('Create Vivy store', () => {
+
+    const vivy = Vivy();
+    const store = vivy.createStore();
+
+    expect(
+        typeof store
+    ).toEqual(
+        'object'
+    );
+
+});
+
+test('Register reducer', () => {
+
+    const vivy = Vivy();
+    const store = vivy.createStore();
+    store.registerReducer('testReducer', testReducer);
+
+    expect(
+        store.getState().testReducer
+    ).toEqual(
+        0
+    );
+
+});
+
+test('Dispatch reducer action', () => {
+
+    const vivy = Vivy();
+    const store = vivy.createStore();
+    store.registerReducer('testReducer', testReducer);
+    store.dispatch({
+        type: 'UPGRADE'
     });
 
-    test('Create Vivy store', () => {
+    expect(
+        store.getState().testReducer
+    ).toEqual(
+        1
+    );
 
-        const vivy = Vivy();
-        const store = vivy.createStore();
+});
 
-        expect(
-            typeof store
-        ).toEqual(
-            'object'
-        );
+test('Register model', () => {
 
+    const vivy = Vivy();
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
+    );
+
+});
+
+test('Dispatch model action', () => {
+
+    const vivy = Vivy();
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+    store.dispatch({
+        type: 'testModel/upgrade'
     });
 
-    test('Register reducer', () => {
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        1
+    );
 
-        const vivy = Vivy();
-        const store = vivy.createStore();
-        store.registerReducer('testReducer', testReducer);
+});
 
-        expect(
-            store.getState().testReducer
-        ).toEqual(
-            0
-        );
+test('Dispatch model action 2', () => {
 
-    });
+    const vivy = Vivy();
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+    store.dispatch.testModel.upgrade();
 
-    test('Dispatch reducer action', () => {
-
-        const vivy = Vivy();
-        const store = vivy.createStore();
-        store.registerReducer('testReducer', testReducer);
-        store.dispatch({
-            type: 'UPDATE'
-        });
-
-        expect(
-            store.getState().testReducer
-        ).toEqual(
-            1
-        );
-
-    });
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        1
+    );
 
 });
