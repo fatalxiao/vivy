@@ -317,7 +317,7 @@ function bindActionCreator(actionCreator, dispatch) {
  * @param dispatch {Function}
  * @returns {Function}
  */
-function buildModelActionCreator(modelActionCreator, dispatch) {
+function bindModelActionCreator(modelActionCreator, dispatch) {
 
     if (!modelActionCreator) {
         return;
@@ -328,15 +328,15 @@ function buildModelActionCreator(modelActionCreator, dispatch) {
         return;
     }
 
+    const [nameSpace, name] = modelActionCreator.split('/');
+
     return function () {
 
-        const [nameSpace, name] = modelActionCreator.split('/');
-
         if (name === undefined) {
-            return dispatch[nameSpace](arguments);
+            return dispatch?.[nameSpace]?.apply?.(this, arguments);
         }
 
-        return dispatch[nameSpace][name](arguments);
+        return dispatch?.[nameSpace]?.[name]?.apply?.(this, arguments);
 
     };
 
@@ -376,7 +376,7 @@ export function bindModelActionCreators(modelActionCreators, dispatch) {
         } else if (typeof modelActionCreator === 'function') {
             boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
         } else if (typeof modelActionCreator === 'string') {
-            boundModelActionCreators[key] = buildModelActionCreator(modelActionCreator, dispatch);
+            boundModelActionCreators[key] = bindModelActionCreator(modelActionCreator, dispatch);
         }
     });
 
