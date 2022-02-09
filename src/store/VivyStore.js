@@ -48,6 +48,46 @@ export default function createVivyStore(options, plugins) {
         return originStore.dispatch(...args);
     }
 
+    /**
+     * Register Reducer
+     * @param nameSpace
+     * @param reducer
+     * @returns {*}
+     */
+    function registerReduxReducer(nameSpace, reducer) {
+
+        if (!this) {
+            return;
+        }
+
+        this.asyncReducers[nameSpace] = reducer;
+        this.replaceReducer(createRootReducer(this.asyncReducers));
+
+        return reducer;
+
+    }
+
+    /**
+     * Unregister reducer
+     * @param nameSpace
+     * @returns {*}
+     */
+    function unregisterReduxReducer(nameSpace) {
+
+        if (!this) {
+            return;
+        }
+
+        const nextReducers = {...this.asyncReducers};
+        const unregisteredReducer = nextReducers[nameSpace];
+
+        delete nextReducers[nameSpace];
+        this.replaceReducer(createRootReducer(nextReducers));
+
+        return unregisteredReducer;
+
+    }
+
     return {
 
         // Store
@@ -64,11 +104,17 @@ export default function createVivyStore(options, plugins) {
         // Async reducers
         asyncReducers: {},
 
+        // Register reducers
+        registerReduxReducer,
+
+        // Unregister reducers
+        unregisterReduxReducer,
+
         // Register actions
-        registerActions: ModelActionMiddleware.register,
+        registerReduxActions: ModelActionMiddleware.register,
 
         // Unregister actions
-        unregisterActions: ModelActionMiddleware.unregister,
+        unregisterReduxActions: ModelActionMiddleware.unregister,
 
         // All registered plugins
         plugins: plugins || []

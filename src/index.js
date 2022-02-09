@@ -7,7 +7,6 @@ import createVivyStore from './store/VivyStore';
 
 // Reducers
 import createModelReducer from './reducers/ModelReducer';
-import createRootReducer from './reducers/RootReducer';
 
 // Utils
 import {isEmptyObject} from './util/Util';
@@ -47,8 +46,10 @@ export function registerReducer(store, nameSpace, reducer) {
         return;
     }
 
-    store.asyncReducers[nameSpace] = reducer;
-    store.replaceReducer(createRootReducer(store.asyncReducers));
+    // store.asyncReducers[nameSpace] = reducer;
+    // store.replaceReducer(createRootReducer(store.asyncReducers));
+
+    store.registerReduxReducer(nameSpace, reducer);
 
     // Call onRegisterReducer in plugins
     handlePluginsHook(
@@ -99,10 +100,12 @@ export function unregisterReducer(store, nameSpace) {
         return;
     }
 
-    const nextReducers = {...store.asyncReducers};
-    const unregisteredReducer = nextReducers[nameSpace];
-    delete nextReducers[nameSpace];
-    store.replaceReducer(createRootReducer(nextReducers));
+    // const nextReducers = {...store.asyncReducers};
+    // const unregisteredReducer = nextReducers[nameSpace];
+    // delete nextReducers[nameSpace];
+    // store.replaceReducer(createRootReducer(nextReducers));
+
+    const unregisteredReducer = store.unregisterReduxReducer(nameSpace);
 
     // Call onUnregisterReducer in plugins
     handlePluginsHook(
@@ -172,18 +175,26 @@ export function registerModel(store, model) {
     }
 
     // Register or overwrite reducers
-    store.asyncReducers[nameSpace] = createModelReducer(
+    // store.asyncReducers[nameSpace] = createModelReducer(
+    //     store,
+    //     nameSpace,
+    //     state ?? null,
+    //     globalReducers ?? {},
+    //     reducers ?? {}
+    // );
+    // store.replaceReducer(createRootReducer(store.asyncReducers));
+
+    store.registerReduxReducer(nameSpace, createModelReducer(
         store,
         nameSpace,
         state ?? null,
         globalReducers ?? {},
         reducers ?? {}
-    );
-    store.replaceReducer(createRootReducer(store.asyncReducers));
+    ));
 
     // Register actions
     if (actions) {
-        store.registerActions(store, nameSpace, actions ?? {});
+        store.registerReduxActions(store, nameSpace, actions ?? {});
     }
 
     // Call onRegisterModel in plugins
@@ -235,21 +246,26 @@ export function unregisterModel(store, nameSpaceOrModel) {
         return;
     }
 
-    const nextReducers = {...store.asyncReducers};
-    let unregisteredModel;
+    // const nextReducers = {...store.asyncReducers};
+    // let unregisteredModel;
+    //
+    // if (typeof nameSpaceOrModel === 'string') { // nameSpace
+    //     unregisteredModel = nextReducers[nameSpaceOrModel];
+    //     delete nextReducers[nameSpaceOrModel];
+    // } else { // model
+    //     unregisteredModel = nextReducers[nameSpaceOrModel.nameSpace];
+    //     delete nextReducers[nameSpaceOrModel.nameSpace];
+    // }
+    //
+    // store.replaceReducer(createRootReducer(nextReducers));
 
-    if (typeof nameSpaceOrModel === 'string') { // nameSpace
-        unregisteredModel = nextReducers[nameSpaceOrModel];
-        delete nextReducers[nameSpaceOrModel];
-    } else { // model
-        unregisteredModel = nextReducers[nameSpaceOrModel.nameSpace];
-        delete nextReducers[nameSpaceOrModel.nameSpace];
-    }
-
-    store.replaceReducer(createRootReducer(nextReducers));
+    const unregisteredModel = typeof nameSpaceOrModel === 'string' ?
+        store.unregisterReduxReducer(nameSpaceOrModel)
+        :
+        store.unregisterReduxReducer(nameSpaceOrModel.nameSpace);
 
     // Unregister actions
-    store.unregisterActions(store, nameSpaceOrModel);
+    store.unregisterReduxActions(store, nameSpaceOrModel);
 
     // Call onUnregisterModel in plugins
     handlePluginsHook(
