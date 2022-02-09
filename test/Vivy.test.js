@@ -3,28 +3,9 @@
 // Vendors
 import Vivy from '../src';
 
-const testReducer = (state = 0, action) => {
-    switch (action.type) {
-
-        case 'UPGRADE': {
-            return state + 1;
-        }
-
-        default:
-            return state;
-
-    }
-};
-
-const testModel = {
-    nameSpace: 'testModel',
-    state: 0,
-    reducers: {
-        upgrade: state => {
-            return state + 1;
-        }
-    }
-};
+// Statics
+import testReducer from './testReducer';
+import testModel from './testModel';
 
 test('Create Vivy', () => {
 
