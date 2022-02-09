@@ -11,7 +11,7 @@ import {bindModelActionCreators} from 'vivy';
 import './Calculation.scss';
 
 const Calculation = ({
-    leftValue, rightValue,
+    leftValue, middleValue, rightValue,
     dispatch, updateRightValue
 }) => {
 
@@ -24,6 +24,21 @@ const Calculation = ({
         // Use "dispatch" to dispatch an action
         dispatch?.({
             type: 'calculation/updateLeftValue',
+            value: e?.target?.value
+        });
+
+    }, [
+        dispatch
+    ]);
+
+    /**
+     * Update middle value to model
+     * @type {(function(*): void)|*}
+     */
+    const handleMiddleValueChange = useCallback(e => {
+
+        // Use "dispatch.nameSpace.reducerName" to dispatch an action
+        dispatch.calculation.updateMiddleValueValue({
             value: e?.target?.value
         });
 
@@ -53,12 +68,17 @@ const Calculation = ({
             &nbsp;
             +
             &nbsp;
+            <input value={middleValue}
+                   onChange={handleMiddleValueChange}/>
+            &nbsp;
+            +
+            &nbsp;
             <input value={rightValue}
                    onChange={handleRightValueChange}/>
             &nbsp;
             =
             &nbsp;
-            {leftValue + rightValue}
+            {leftValue + middleValue + rightValue}
         </div>
     );
 
@@ -67,6 +87,7 @@ const Calculation = ({
 Calculation.propTypes = {
 
     leftValue: PropTypes.number,
+    middleValue: PropTypes.number,
     rightValue: PropTypes.number,
 
     dispatch: PropTypes.func,
@@ -76,6 +97,7 @@ Calculation.propTypes = {
 
 export default connect(state => ({
     leftValue: state.calculation.leftValue,
+    middleValue: state.calculation.middleValue,
     rightValue: state.calculation.rightValue
 }), dispatch => bindModelActionCreators({
     dispatch,
