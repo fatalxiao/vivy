@@ -43,6 +43,7 @@ export default function createModelActionMiddleware() {
             asyncActions[`${nameSpace}/${type}`] = actions[type]
         );
 
+        // Bind actions to store.dispatch to implement "dispatch.nameSpace.actionName()"
         store.dispatch[nameSpace] = Object.entries(actions).reduce((result, [name, action]) => ({
             ...result,
             [name]: params => action(params)(store.dispatch, store.getState)

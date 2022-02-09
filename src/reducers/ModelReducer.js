@@ -73,6 +73,15 @@ export default function createModelReducer(
     // Reduce reducers
     const reducer = reduceReducers(...globalReducerHandlers, ...reducerHandlers);
 
+    // Bind reducers to store.dispatch to implement "dispatch.nameSpace.reducerName()"
+    store.dispatch[nameSpace] = Object.entries(reducers).reduce((result, [name, reducer]) => ({
+        ...result,
+        [name]: params => store.dispatch({
+            ...params,
+            type: `${nameSpace}/${name}`
+        })
+    }), {});
+
     // Return reducer
     return (state = initialState, action) => reducer(state, action);
 
