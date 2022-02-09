@@ -11,7 +11,8 @@ module.exports = {
     },
     'extends': [
         'plugin:react/recommended',
-        'plugin:react-hooks/recommended'
+        'plugin:react-hooks/recommended',
+        'plugin:jest/recommended'
     ],
     'globals': {
         'Atomics': 'readonly',
@@ -49,7 +50,8 @@ module.exports = {
     },
     'plugins': [
         'react',
-        'react-hooks'
+        'react-hooks',
+        'jest'
     ],
     'rules': {
 

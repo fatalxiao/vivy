@@ -60,6 +60,7 @@
         "core-js": "^3.21.0",
         "cross-env": "^7.0.3",
         "eslint": "^8.8.0",
+        "eslint-plugin-jest": "^26.1.0",
         "eslint-plugin-react": "^7.28.0",
         "eslint-plugin-react-hooks": "^4.3.0",
         "gulp": "^4.0.2",
