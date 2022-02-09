@@ -41,11 +41,10 @@ export default function createVivyStore(options, plugins) {
 
     /**
      * Vivy store dispatch
-     * @param args
      * @returns {*}
      */
-    function dispatch(...args) {
-        return originStore.dispatch(...args);
+    function dispatch() {
+        return originStore.dispatch.apply(this, arguments);
     }
 
     /**
