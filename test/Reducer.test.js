@@ -4,7 +4,7 @@
 import Vivy from '../src';
 
 // Statics
-import testReducer from './testReducer';
+import testReducer from './mocks/testReducer';
 
 test('Register reducer', () => {
 

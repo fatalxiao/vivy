@@ -4,7 +4,7 @@
 import Vivy from '../src';
 
 // Statics
-import testModel from './testModel';
+import testModel from './mocks/testModel';
 
 test('Register model', () => {
 
