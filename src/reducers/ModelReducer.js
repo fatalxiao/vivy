@@ -23,7 +23,6 @@ function handleReducer(actionType, reducer = identify) {
         const {type} = action;
 
         if (actionType === type) {
-
             return reducer(state, action);
         }
 

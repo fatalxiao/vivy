@@ -179,7 +179,7 @@ export function registerModel(store, model) {
 
     // Register Redux actions
     if (actions) {
-        store.registerReduxActions(store, nameSpace, actions ?? {});
+        store.registerReduxActions(nameSpace, actions ?? {});
     }
 
     // Call onRegisterModel in plugins
@@ -238,7 +238,7 @@ export function unregisterModel(store, nameSpaceOrModel) {
         store.unregisterReduxReducer(nameSpaceOrModel.nameSpace);
 
     // Unregister Redux actions
-    store.unregisterReduxActions(store, nameSpaceOrModel);
+    store.unregisterReduxActions(nameSpaceOrModel);
 
     // Call onUnregisterModel in plugins
     handlePluginsHook(

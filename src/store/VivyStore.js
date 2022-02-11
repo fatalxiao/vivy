@@ -2,15 +2,14 @@
  * @file VivyStore.js
  */
 
-// Vendors
-import {createStore, applyMiddleware} from 'redux';
+// ReduxStore
+import createReduxStore from './ReduxStore';
 
 // Middlewares
-import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
+// import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
-import VivyReducer from '../reducers/VivyReducer';
 
 /**
  * Create Vivy store
@@ -21,30 +20,25 @@ import VivyReducer from '../reducers/VivyReducer';
 export default function createVivyStore(options, plugins) {
 
     // Handle actions in models
-    const ModelActionMiddleware = createModelActionMiddleware();
+    // const ModelActionMiddleware = createModelActionMiddleware();
 
     // Create origin redux store
-    const originStore = createStore(
-        createRootReducer({
-            '@@VIVY': VivyReducer
-        }),
-        (options?.initialState || {}),
-        applyMiddleware(
-            ModelActionMiddleware,
-            ...plugins?.reduce((pluginMiddlewares, plugin) => [
-                ...pluginMiddlewares,
-                ...(plugin.extraMiddlewares || [])
-            ], []),
-            ...(options?.extraMiddlewares || [])
-        )
-    );
+    const reduxStore = createReduxStore(options, plugins);
 
     /**
      * Vivy store dispatch
      * @returns {*}
      */
     function dispatch() {
-        return originStore.dispatch.apply(this, arguments);
+
+        // if (this.modelActions) {
+        //
+        // }
+
+
+
+        return reduxStore.dispatch.apply(this, arguments);
+
     }
 
     /**
@@ -87,13 +81,46 @@ export default function createVivyStore(options, plugins) {
 
     }
 
+    function registerReduxActions(nameSpace, actions) {
+
+        if (!this) {
+            return;
+        }
+
+        // if (!this.modelActions[nameSpace]) {
+        //     this.modelActions[nameSpace] = {};
+        // }
+
+        Object.entries(actions).forEach(([name, action]) => {
+            // this.modelActions[nameSpace][name] = action;
+            this.dispatch[nameSpace][name] = params => action(params)(this.dispatch, this.getState);
+        });
+
+    }
+
+    function unregisterReduxActions(nameSpaceOrModel) {
+
+        if (!this) {
+            return;
+        }
+
+        if (typeof nameSpaceOrModel === 'string') {
+            // delete this.modelActions[nameSpaceOrModel];
+            delete this.dispatch[nameSpaceOrModel];
+        } else if (nameSpaceOrModel?.nameSpace) {
+            // delete this.modelActions[nameSpaceOrModel.nameSpace];
+            delete this.dispatch[nameSpaceOrModel.nameSpace];
+        }
+
+    }
+
     return {
 
         // Store
-        ...originStore,
+        ...reduxStore,
 
         // Origin store
-        originStore,
+        originStore: reduxStore,
 
         dispatch,
 
@@ -103,6 +130,9 @@ export default function createVivyStore(options, plugins) {
         // Async reducers
         asyncReducers: {},
 
+        // Model actions
+        // modelActions: {},
+
         // Register reducers
         registerReduxReducer,
 
@@ -110,10 +140,10 @@ export default function createVivyStore(options, plugins) {
         unregisterReduxReducer,
 
         // Register actions
-        registerReduxActions: ModelActionMiddleware.register,
+        registerReduxActions,
 
         // Unregister actions
-        unregisterReduxActions: ModelActionMiddleware.unregister,
+        unregisterReduxActions,
 
         // All registered plugins
         plugins: plugins || []
