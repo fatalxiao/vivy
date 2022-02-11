@@ -5,9 +5,6 @@
 // ReduxStore
 import createReduxStore from './ReduxStore';
 
-// Middlewares
-// import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
-
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
 

@@ -22,7 +22,6 @@ export default function createReduxStore(options, plugins) {
         }),
         (options?.initialState || {}),
         applyMiddleware(
-            // ModelActionMiddleware,
             ...plugins?.reduce((pluginMiddlewares, plugin) => [
                 ...pluginMiddlewares,
                 ...(plugin.extraMiddlewares || [])
