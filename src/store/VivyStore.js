@@ -19,9 +19,8 @@ import createRootReducer from '../reducers/RootReducer';
  */
 export default function createVivyStore(options, plugins) {
 
-    // Handle actions in models
-    // const ModelActionMiddleware = createModelActionMiddleware();
-
+    // All model actions
+    // [modelNameSpace][actionName]: Action
     const modelActions = {};
 
     // Create origin redux store
@@ -33,11 +32,13 @@ export default function createVivyStore(options, plugins) {
      */
     function dispatch(action) {
 
+        // Handle action dispatch
         const [nameSpace, name] = action?.type?.split?.('/');
         if (nameSpace && name && modelActions?.[nameSpace]?.[name]) {
             return modelActions?.[nameSpace]?.[name]?.(action)?.(this.dispatch, this.getState);
         }
 
+        // Handle reducer dispatch
         return reduxStore.dispatch(action || {});
 
     }
@@ -82,6 +83,11 @@ export default function createVivyStore(options, plugins) {
 
     }
 
+    /**
+     * Register Redux actions
+     * @param nameSpace
+     * @param actions
+     */
     function registerReduxActions(nameSpace, actions) {
 
         if (!this) {
@@ -99,6 +105,10 @@ export default function createVivyStore(options, plugins) {
 
     }
 
+    /**
+     * Unregister Redux actions
+     * @param nameSpaceOrModel
+     */
     function unregisterReduxActions(nameSpaceOrModel) {
 
         if (!this) {
