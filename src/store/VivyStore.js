@@ -32,7 +32,7 @@ export default function createVivyStore(options, plugins) {
         // Handle action dispatch
         const [nameSpace, name] = action?.type?.split?.('/');
         if (nameSpace && name && modelActions?.[nameSpace]?.[name]) {
-            return modelActions?.[nameSpace]?.[name]?.(action)?.(this.dispatch, this.getState);
+            return modelActions?.[nameSpace]?.[name]?.(action);
         }
 
         // Handle reducer dispatch
@@ -96,8 +96,8 @@ export default function createVivyStore(options, plugins) {
         }
 
         Object.entries(actions).forEach(([name, action]) => {
-            modelActions[nameSpace][name] = action;
-            this.dispatch[nameSpace][name] = params => action(params)(this.dispatch, this.getState);
+            modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = params =>
+                action(params)(this.dispatch, this.getState);
         });
 
     }
