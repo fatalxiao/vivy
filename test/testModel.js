@@ -20,7 +20,7 @@ export default {
     },
     globalReducers: {
         globalUpdate: (state, {value}) => {
-            return state + 1;
+            return value;
         }
     },
     reducers: {

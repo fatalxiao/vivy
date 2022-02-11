@@ -42,7 +42,7 @@ function reduceReducers(...reducers) {
 
 /**
  * Create an async reducer
- * @param store {Object}
+ * @param vivyStore {Object}
  * @param nameSpace {string}
  * @param initialState {any}
  * @param globalReducers {Object}
@@ -50,7 +50,7 @@ function reduceReducers(...reducers) {
  * @returns {function(*=, *=): *}
  */
 export default function createModelReducer(
-    store, nameSpace, initialState, globalReducers, reducers
+    vivyStore, nameSpace, initialState, globalReducers, reducers
 ) {
 
     // Handle global reducers
@@ -72,20 +72,20 @@ export default function createModelReducer(
     // Reduce reducers
     const reducer = reduceReducers(...globalReducerHandlers, ...reducerHandlers);
 
-    // Bind global reducers to store.dispatch to implement "dispatch.globalReducerName()"
+    // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
     Object.entries(globalReducers).forEach(([name, reducer]) => {
-        store.dispatch[name] = params => store.dispatch({
+        vivyStore.dispatch[name] = params => vivyStore.dispatch({
             ...params,
             type: name
         });
     });
 
-    // Bind reducers to store.dispatch to implement "dispatch.nameSpace.reducerName()"
-    if (!store.dispatch[nameSpace]) {
-        store.dispatch[nameSpace] = {};
+    // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
+    if (!vivyStore.dispatch[nameSpace]) {
+        vivyStore.dispatch[nameSpace] = {};
     }
     Object.entries(reducers).forEach(([name, reducer]) => {
-        store.dispatch[nameSpace][name] = params => store.dispatch({
+        vivyStore.dispatch[nameSpace][name] = params => vivyStore.dispatch({
             ...params,
             type: `${nameSpace}/${name}`
         });

@@ -22,6 +22,8 @@ export default function createVivyStore(options, plugins) {
     // Handle actions in models
     // const ModelActionMiddleware = createModelActionMiddleware();
 
+    const modelActions = {};
+
     // Create origin redux store
     const reduxStore = createReduxStore(options, plugins);
 
@@ -29,15 +31,14 @@ export default function createVivyStore(options, plugins) {
      * Vivy store dispatch
      * @returns {*}
      */
-    function dispatch() {
+    function dispatch(action) {
 
-        // if (this.modelActions) {
-        //
-        // }
+        const [nameSpace, name] = action?.type?.split?.('/');
+        if (nameSpace && name && modelActions?.[nameSpace]?.[name]) {
+            return modelActions?.[nameSpace]?.[name]?.(action)?.(this.dispatch, this.getState);
+        }
 
-
-
-        return reduxStore.dispatch.apply(this, arguments);
+        return reduxStore.dispatch(action || {});
 
     }
 
@@ -87,12 +88,12 @@ export default function createVivyStore(options, plugins) {
             return;
         }
 
-        // if (!this.modelActions[nameSpace]) {
-        //     this.modelActions[nameSpace] = {};
-        // }
+        if (!modelActions[nameSpace]) {
+            modelActions[nameSpace] = {};
+        }
 
         Object.entries(actions).forEach(([name, action]) => {
-            // this.modelActions[nameSpace][name] = action;
+            modelActions[nameSpace][name] = action;
             this.dispatch[nameSpace][name] = params => action(params)(this.dispatch, this.getState);
         });
 
@@ -105,10 +106,10 @@ export default function createVivyStore(options, plugins) {
         }
 
         if (typeof nameSpaceOrModel === 'string') {
-            // delete this.modelActions[nameSpaceOrModel];
+            delete modelActions[nameSpaceOrModel];
             delete this.dispatch[nameSpaceOrModel];
         } else if (nameSpaceOrModel?.nameSpace) {
-            // delete this.modelActions[nameSpaceOrModel.nameSpace];
+            delete modelActions[nameSpaceOrModel.nameSpace];
             delete this.dispatch[nameSpaceOrModel.nameSpace];
         }
 
@@ -119,8 +120,8 @@ export default function createVivyStore(options, plugins) {
         // Store
         ...reduxStore,
 
-        // Origin store
-        originStore: reduxStore,
+        // Redux store
+        reduxStore,
 
         dispatch,
 
@@ -131,7 +132,7 @@ export default function createVivyStore(options, plugins) {
         asyncReducers: {},
 
         // Model actions
-        // modelActions: {},
+        modelActions,
 
         // Register reducers
         registerReduxReducer,
