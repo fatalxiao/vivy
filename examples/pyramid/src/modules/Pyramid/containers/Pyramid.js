@@ -18,6 +18,10 @@ const Pyramid = ({
     update
 }) => {
 
+    /**
+     * Check whether input value is error
+     * @type {function(*, *): boolean}
+     */
     const isError = useCallback((rowIndex, colIndex) => {
         return errors.findIndex(item =>
             item.rowIndex === rowIndex && item.colIndex === colIndex

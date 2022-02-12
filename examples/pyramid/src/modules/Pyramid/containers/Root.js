@@ -17,6 +17,9 @@ const Root = ({
     random
 }) => {
 
+    /**
+     * Init value
+     */
     useEffect(() => {
         random?.();
     }, [
