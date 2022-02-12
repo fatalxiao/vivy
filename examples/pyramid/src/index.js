@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Component and model
-import Root from './modules/Root/containers/Root';
+import Root from './modules/Pyramid/containers/Root';
 import pyramidModel from './modules/Pyramid/models/pyramid';
 
 // Create vivy
