@@ -3,5 +3,14 @@
  */
 
 .actions {
+    position: absolute;
+    left: 40px;
+    top: 40px;
 
+    button {
+        display: block;
+        width: 80px;
+        height: 32px;
+        margin-bottom: 16px;
+    }
 }

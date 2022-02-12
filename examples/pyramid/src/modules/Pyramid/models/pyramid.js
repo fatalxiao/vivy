@@ -8,7 +8,19 @@ export default {
 
         count: 4,
 
-        data: []
+        data: [],
+
+        msg: ''
+
+    },
+    actions: {
+
+        check: () => (dispatch, getState) => {
+
+            const {data} = getState().pyramid;
+
+
+        }
 
     },
     reducers: {
