@@ -2,43 +2,41 @@
  * @file Pyramid.js
  */
 
-import React, {useCallback} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import {bindModelActionCreators} from 'vivy';
 
 // Styles
 import './Pyramid.scss';
 
 const Pyramid = ({
-    pyramidData
+    data,
+    random, update
 }) => {
 
-    /**
-     * Get pyramid row data
-     * @type {(function(*): (*))|*}
-     */
-    const getRowData = useCallback(rowIndex => {
-
-        if (rowIndex === pyramidData.length - 1) {
-            return [...pyramidData];
-        }
-
-        return new Array(rowIndex + 1).fill('');
-
+    useEffect(() => {
+        random?.();
     }, [
-        pyramidData
+        random
     ]);
 
     return (
         <div className="pyramid">
             {
-                pyramidData.map((row, rowIndex) =>
+                data.map((row, rowIndex) =>
                     <div key={rowIndex}
                          className="pyramid-row">
                         {
-                            getRowData(rowIndex).map((item, colIndex) =>
+                            row.map((value, colIndex) =>
                                 <input key={`${rowIndex}-${colIndex}`}
-                                       className="pyramid-cell"/>
+                                       className="pyramid-cell"
+                                       value={value}
+                                       onChange={e => update({
+                                           rowIndex,
+                                           colIndex,
+                                           value: e.target.value
+                                       })}/>
                             )
                         }
                     </div>
@@ -46,12 +44,21 @@ const Pyramid = ({
             }
         </div>
     );
+
 };
 
 Pyramid.propTypes = {
-    pyramidData: PropTypes.array
+
+    data: PropTypes.array,
+
+    random: PropTypes.func,
+    update: PropTypes.func
+
 };
 
 export default connect(state => ({
-    pyramidData: state.pyramid
-}))(Pyramid);
+    data: state.pyramid.data
+}), dispatch => bindModelActionCreators({
+    random: 'pyramid/random',
+    update: 'pyramid/update'
+}, dispatch))(Pyramid);
