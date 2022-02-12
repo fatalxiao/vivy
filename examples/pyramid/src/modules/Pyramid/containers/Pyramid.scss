@@ -1,0 +1,29 @@
+/**
+ * @file Pyramid.scss
+ */
+
+body {
+    margin: 0;
+}
+
+.pyramid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    .pyramid-row {
+        display: inline-flex;
+        justify-content: center;
+        align-content: center;
+
+        .pyramid-cell {
+            width: 64px;
+            height: 64px;
+            margin: 16px;
+            text-align: center;
+            line-height: 64px;
+            font-size: 24px;
+        }
+    }
+}
