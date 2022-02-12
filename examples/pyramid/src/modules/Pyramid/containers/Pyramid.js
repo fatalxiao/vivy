@@ -2,23 +2,28 @@
  * @file Pyramid.js
  */
 
-import React, {useEffect} from 'react';
+import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindModelActionCreators} from 'vivy';
+
+// Vendors
+import classNames from 'classnames';
 
 // Styles
 import './Pyramid.scss';
 
 const Pyramid = ({
-    data,
-    random, update
+    data, errors,
+    update
 }) => {
 
-    useEffect(() => {
-        random?.();
+    const isError = useCallback((rowIndex, colIndex) => {
+        return errors.findIndex(item =>
+            item.rowIndex === rowIndex && item.colIndex === colIndex
+        ) !== -1;
     }, [
-        random
+        errors
     ]);
 
     return (
@@ -30,7 +35,9 @@ const Pyramid = ({
                         {
                             row.map((value, colIndex) =>
                                 <input key={`${rowIndex}-${colIndex}`}
-                                       className="pyramid-cell"
+                                       className={classNames('pyramid-cell', {
+                                           error: isError(rowIndex, colIndex)
+                                       })}
                                        value={value}
                                        onChange={e => update({
                                            rowIndex,
@@ -50,15 +57,15 @@ const Pyramid = ({
 Pyramid.propTypes = {
 
     data: PropTypes.array,
+    errors: PropTypes.array,
 
-    random: PropTypes.func,
     update: PropTypes.func
 
 };
 
 export default connect(state => ({
-    data: state.pyramid.data
+    data: state.pyramid.data,
+    errors: state.pyramid.errors
 }), dispatch => bindModelActionCreators({
-    random: 'pyramid/random',
     update: 'pyramid/update'
 }, dispatch))(Pyramid);

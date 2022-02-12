@@ -18,10 +18,16 @@
         .pyramid-cell {
             width: 80px;
             height: 80px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             margin: 16px;
             text-align: center;
             line-height: 80px;
             font-size: 40px;
+
+            &.error {
+                border: 1px solid #f00;
+            }
         }
     }
 }

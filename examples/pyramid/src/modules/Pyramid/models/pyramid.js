@@ -10,17 +10,7 @@ export default {
 
         data: [],
 
-        msg: ''
-
-    },
-    actions: {
-
-        check: () => (dispatch, getState) => {
-
-            const {data} = getState().pyramid;
-
-
-        }
+        errors: []
 
     },
     reducers: {
@@ -42,7 +32,8 @@ export default {
 
             return {
                 ...state,
-                data
+                data,
+                errors: []
             };
 
         },
@@ -57,13 +48,52 @@ export default {
          */
         update: (state, {rowIndex, colIndex, value}) => {
 
-            const nextData = [...state.data];
+            const {data, errors} = state;
+
+            const nextData = [...data];
             nextData[rowIndex] = [...nextData[rowIndex]];
             nextData[rowIndex][colIndex] = value;
 
+            const nextErrors = [...errors];
+            const index = nextErrors.findIndex(item =>
+                item.rowIndex === rowIndex && item.colIndex === colIndex
+            );
+            if (index !== -1) {
+                nextErrors.splice(index, 1);
+            }
+
             return {
                 ...state,
-                data: nextData
+                data: nextData,
+                errors: nextErrors
+            };
+
+        },
+
+        /**
+         * Check result
+         * @param state
+         * @returns {*&{errors: *[]}}
+         */
+        check: state => {
+
+            const {count, data} = state;
+            const errors = [];
+
+            for (let i = count - 2; i >= 0; i--) {
+                for (let j = 0; j <= i; j++) {
+                    if (!data[i][j] || +data[i][j] !== +data[i + 1][j] + +data[i + 1][j + 1]) {
+                        errors.push({
+                            rowIndex: i,
+                            colIndex: j
+                        });
+                    }
+                }
+            }
+
+            return {
+                ...state,
+                errors
             };
 
         }
