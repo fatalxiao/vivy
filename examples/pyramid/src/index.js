@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Component and model
-import Pyramid from './modules/Pyramid/containers/Pyramid';
+import Root from './modules/Root/containers/Root';
 import pyramidModel from './modules/Pyramid/models/pyramid';
 
 // Create vivy
@@ -24,7 +24,7 @@ store.registerModel(pyramidModel);
 
 render(
     <Provider store={store}>
-        <Pyramid/>
+        <Root/>
     </Provider>,
     document.getElementById('app-container')
 );
