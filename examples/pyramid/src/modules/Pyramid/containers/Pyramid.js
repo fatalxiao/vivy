@@ -38,8 +38,7 @@ const Pyramid = ({
                         {
                             getRowData(rowIndex).map((item, colIndex) =>
                                 <input key={`${rowIndex}-${colIndex}`}
-                                       className="pyramid-cell"
-                                       value={item}/>
+                                       className="pyramid-cell"/>
                             )
                         }
                     </div>
