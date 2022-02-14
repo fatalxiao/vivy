@@ -77,6 +77,7 @@ dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement
 * [Documentation](#documentation)
     * [Basic usage](#basic-usage)
     * [Vivy model](#vivy-model)
+    * [Vivy store dispatcher](#vivy-store-dispatcher)
     * [Use Vivy in Component](#use-vivy-in-component)
     * [Methods](#methods)
 
@@ -250,7 +251,7 @@ const yourVivyModel = {
 }
 ```
 
-### Vivy store.dispatch
+### Vivy store dispatcher
 
 In Vivy, you can use three kind ways to dispatch an action.
 
