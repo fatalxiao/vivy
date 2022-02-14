@@ -232,7 +232,7 @@ const yourVivyModel = {
         // Register a reducer.
         //
         // Example:
-        //  dispatch({
+        //  store.dispatch({
         //      type: 'MODEL_NAME_SPACE/GLOBAL_REDUCER_NAME',
         //      // payloads ...
         //  });
@@ -248,6 +248,49 @@ const yourVivyModel = {
     }
 
 }
+```
+
+### Vivy store.dispatch
+
+In Vivy, you can use three kind ways to dispatch an action.
+
+1. Use `store.dispatch` function
+
+```js
+dispatch({
+    type: 'MODEL_NAME_SPACE/ACTION_OR_REDUCER_NAME',
+    OTHER_PROPS
+});
+```
+
+2. Use `store.dispatch` chain function
+
+```js
+dispatch.MODEL_NAME_SPACE.ACTION_OR_REDUCER_NAME({
+    OTHER_PROPS
+});
+```
+
+3. Use `bindModelActionCreators` to create an action dispatcher
+
+```js
+const App = () => {
+
+    // ...
+
+    ACTION_OR_REDUCER_NAME({
+        OTHER_PROPS
+    });
+
+    // ...
+
+}
+
+export default connect(state => ({
+    // states
+}), dispatch => bindModelActionCreators({
+    ACTION_OR_REDUCER_NAME: 'MODEL_NAME_SPACE/ACTION_OR_REDUCER_NAME'
+}, dispatch))(App);
 ```
 
 ### Use Vivy in Component
@@ -268,7 +311,7 @@ const App = ({
     const handleChange = useCallback(e => {
         updateValue({
             value: e.target.value
-        })
+        });
     }, [
         updateValue
     ]);
@@ -288,7 +331,7 @@ App.propTypes = {
 export default connect(state => ({
     value: state.yourVivyModel.value // Get value from state.
 }), dispatch => bindModelActionCreators({
-    updateValue: 'yourVivyModel/updateValue' // Define action or reducer.
+    updateValue: 'yourVivyModel/updateValue' // Create action or reducer dispatcher.
 }, dispatch))(App);
 ```
 
