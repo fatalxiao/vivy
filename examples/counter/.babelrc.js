@@ -2,7 +2,8 @@
  * @file .babelrc.js
  */
 
-const presets = [
+module.exports = {
+    presets: [
         [
             '@babel/preset-env',
             {
@@ -13,7 +14,7 @@ const presets = [
         ],
         '@babel/preset-react'
     ],
-    commonPlugins = [
+    plugins: [
         ['@babel/plugin-proposal-decorators', {legacy: true}],
         '@babel/plugin-proposal-class-properties',
         '@babel/plugin-proposal-do-expressions',
@@ -31,25 +32,5 @@ const presets = [
         '@babel/plugin-syntax-dynamic-import',
         '@babel/plugin-syntax-import-meta',
         '@babel/plugin-transform-runtime'
-    ],
-    packageConfig = {
-        presets,
-        plugins: commonPlugins
-    };
-
-module.exports = {
-    'env': {
-
-        'development': packageConfig,
-
-        'test': {
-            'presets': [
-                '@babel/preset-env',
-                '@babel/preset-react'
-            ]
-        },
-
-        'production': packageConfig
-
-    }
+    ]
 };
