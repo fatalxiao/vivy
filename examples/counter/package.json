@@ -11,7 +11,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-redux": "^7.2.6",
-        "vivy": "^2.0.0-alpha.1"
+        "vivy": "^2.0.1"
     },
     "devDependencies": {
         "@babel/core": "^7.17.2",
@@ -41,7 +41,7 @@
         "html-webpack-plugin": "^5.5.0",
         "postcss": "^8.4.6",
         "postcss-loader": "^6.2.1",
-        "postcss-preset-env": "^7.3.1",
+        "postcss-preset-env": "^7.3.3",
         "sass": "^1.49.7",
         "sass-loader": "^12.4.0",
         "style-loader": "^3.3.1",
