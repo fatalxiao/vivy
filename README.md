@@ -253,7 +253,7 @@ const yourVivyModel = {
 
 ### Vivy store dispatcher
 
-In Vivy, you can use three kind ways to dispatch an action.
+In Vivy, you can use three ways to dispatch an action.
 
 1. Use `store.dispatch` function
 
