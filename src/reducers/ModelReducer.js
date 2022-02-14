@@ -72,25 +72,6 @@ export default function createModelReducer(
     // Reduce reducers
     const reducer = reduceReducers(...globalReducerHandlers, ...reducerHandlers);
 
-    // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
-    Object.entries(globalReducers).forEach(([name, reducer]) => {
-        vivyStore.dispatch[name] = params => vivyStore.dispatch({
-            ...params,
-            type: name
-        });
-    });
-
-    // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
-    if (!vivyStore.dispatch[nameSpace]) {
-        vivyStore.dispatch[nameSpace] = {};
-    }
-    Object.entries(reducers).forEach(([name, reducer]) => {
-        vivyStore.dispatch[nameSpace][name] = params => vivyStore.dispatch({
-            ...params,
-            type: `${nameSpace}/${name}`
-        });
-    });
-
     // Return reducer
     return (state = initialState, action) => reducer(state, action);
 

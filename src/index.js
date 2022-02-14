@@ -9,7 +9,7 @@ import createVivyStore from './store/VivyStore';
 import createModelReducer from './reducers/ModelReducer';
 
 // Utils
-import {isEmptyObject} from './util/Util';
+// import {isEmptyObject} from './util/Util';
 
 /**
  * Handle Vivy hooks in options and plugins.
@@ -23,121 +23,121 @@ function handlePluginsHook(options, plugins, hookName, ...args) {
     plugins?.forEach?.(plugin => plugin?.[hookName]?.(...args));
 }
 
-/**
- * Register reducer
- * @param store {Object}
- * @param nameSpace {string}
- * @param reducer {Function}
- */
-export function registerReducer(store, nameSpace, reducer) {
+// /**
+//  * Register reducer
+//  * @param store {Object}
+//  * @param nameSpace {string}
+//  * @param reducer {Function}
+//  */
+// export function registerReducer(store, nameSpace, reducer) {
+//
+//     if (!store) {
+//         console.error('Store is required.');
+//         return;
+//     }
+//
+//     if (!nameSpace) {
+//         console.error('NameSpace of reducer is required.');
+//         return;
+//     }
+//
+//     if (!store.options?.overwriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
+//         // console.error('Same nameSpace reducer already exists.');
+//         return;
+//     }
+//
+//     // Register or overwrite Redux reducers
+//     store.registerReduxReducer(nameSpace, reducer);
+//
+//     // Call onRegisterReducer in plugins
+//     handlePluginsHook(
+//         store.options, store.plugins,
+//         'onRegisterReducer',
+//         reducer, nameSpace, store
+//     );
+//
+// }
 
-    if (!store) {
-        console.error('Store is required.');
-        return;
-    }
+// /**
+//  * Register reducers
+//  * @param store {Object}
+//  * @param reducers {Object}
+//  */
+// export function registerReducers(store, reducers) {
+//
+//     if (!store) {
+//         console.error('Store is required.');
+//         return;
+//     }
+//
+//     if (!reducers) {
+//         console.error('Reducers is required.');
+//         return;
+//     }
+//
+//     Object.keys(reducers).forEach(nameSpace =>
+//         registerReducer(store, nameSpace, reducers[nameSpace])
+//     );
+//
+// }
 
-    if (!nameSpace) {
-        console.error('NameSpace of reducer is required.');
-        return;
-    }
+// /**
+//  * Unregister reducer
+//  * @param store {Object}
+//  * @param nameSpace {string}
+//  */
+// export function unregisterReducer(store, nameSpace) {
+//
+//     if (!store) {
+//         console.error('Store is required.');
+//         return;
+//     }
+//
+//     if (!nameSpace) {
+//         console.error('NameSpace of reducer is required.');
+//         return;
+//     }
+//
+//     // Unregister Redux reducer
+//     const unregisteredReducer = store.unregisterReduxReducer(nameSpace);
+//
+//     // Call onUnregisterReducer in plugins
+//     handlePluginsHook(
+//         store.options, store.plugins,
+//         'onUnregisterReducer',
+//         unregisteredReducer, nameSpace, store
+//     );
+//
+// }
 
-    if (!store.options?.overwriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
-        // console.error('Same nameSpace reducer already exists.');
-        return;
-    }
-
-    // Register or overwrite Redux reducers
-    store.registerReduxReducer(nameSpace, reducer);
-
-    // Call onRegisterReducer in plugins
-    handlePluginsHook(
-        store.options, store.plugins,
-        'onRegisterReducer',
-        reducer, nameSpace, store
-    );
-
-}
-
-/**
- * Register reducers
- * @param store {Object}
- * @param reducers {Object}
- */
-export function registerReducers(store, reducers) {
-
-    if (!store) {
-        console.error('Store is required.');
-        return;
-    }
-
-    if (!reducers) {
-        console.error('Reducers is required.');
-        return;
-    }
-
-    Object.keys(reducers).forEach(nameSpace =>
-        registerReducer(store, nameSpace, reducers[nameSpace])
-    );
-
-}
-
-/**
- * Unregister reducer
- * @param store {Object}
- * @param nameSpace {string}
- */
-export function unregisterReducer(store, nameSpace) {
-
-    if (!store) {
-        console.error('Store is required.');
-        return;
-    }
-
-    if (!nameSpace) {
-        console.error('NameSpace of reducer is required.');
-        return;
-    }
-
-    // Unregister Redux reducer
-    const unregisteredReducer = store.unregisterReduxReducer(nameSpace);
-
-    // Call onUnregisterReducer in plugins
-    handlePluginsHook(
-        store.options, store.plugins,
-        'onUnregisterReducer',
-        unregisteredReducer, nameSpace, store
-    );
-
-}
-
-/**
- * Unregister reducers
- * @param store {Object}
- * @param nameSpacesOrReducers {Array<string>|Object}
- */
-export function unregisterReducers(store, nameSpacesOrReducers) {
-
-    if (!store) {
-        console.error('Store is required.');
-        return;
-    }
-
-    if (!nameSpacesOrReducers) {
-        console.error('NameSpaces or reducers is required.');
-        return;
-    }
-
-    if (Array.isArray(nameSpacesOrReducers)) { // nameSpaces
-        nameSpacesOrReducers.forEach(nameSpace =>
-            unregisterReducer(store, nameSpace)
-        );
-    } else { // reducers
-        Object.keys(nameSpacesOrReducers).forEach(nameSpace =>
-            unregisterReducer(store, nameSpace)
-        );
-    }
-
-}
+// /**
+//  * Unregister reducers
+//  * @param store {Object}
+//  * @param nameSpacesOrReducers {Array<string>|Object}
+//  */
+// export function unregisterReducers(store, nameSpacesOrReducers) {
+//
+//     if (!store) {
+//         console.error('Store is required.');
+//         return;
+//     }
+//
+//     if (!nameSpacesOrReducers) {
+//         console.error('NameSpaces or reducers is required.');
+//         return;
+//     }
+//
+//     if (Array.isArray(nameSpacesOrReducers)) { // nameSpaces
+//         nameSpacesOrReducers.forEach(nameSpace =>
+//             unregisterReducer(store, nameSpace)
+//         );
+//     } else { // reducers
+//         Object.keys(nameSpacesOrReducers).forEach(nameSpace =>
+//             unregisterReducer(store, nameSpace)
+//         );
+//     }
+//
+// }
 
 /**
  * Register model
@@ -176,6 +176,25 @@ export function registerModel(store, model) {
         globalReducers ?? {},
         reducers ?? {}
     ));
+
+    // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
+    Object.entries(globalReducers).forEach(([name, reducer]) => {
+        store.dispatch[name] = params => store.dispatch({
+            ...params,
+            type: name
+        });
+    });
+
+    // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
+    if (!store.dispatch[nameSpace]) {
+        store.dispatch[nameSpace] = {};
+    }
+    Object.entries(reducers).forEach(([name, reducer]) => {
+        store.dispatch[nameSpace][name] = params => store.dispatch({
+            ...params,
+            type: `${nameSpace}/${name}`
+        });
+    });
 
     // Register Redux actions
     if (actions) {
@@ -403,19 +422,19 @@ export default function Vivy(opts) {
 
     }
 
-    /**
-     * Register extra reducers in options.
-     * @param store
-     */
-    function registerOptionsReducers(store) {
-
-        if (!store || !options.extraReducers || isEmptyObject(options.extraReducers)) {
-            return;
-        }
-
-        registerReducers(store, options.extraReducers);
-
-    }
+    // /**
+    //  * Register extra reducers in options.
+    //  * @param store
+    //  */
+    // function registerOptionsReducers(store) {
+    //
+    //     if (!store || !options.extraReducers || isEmptyObject(options.extraReducers)) {
+    //         return;
+    //     }
+    //
+    //     registerReducers(store, options.extraReducers);
+    //
+    // }
 
     /**
      * Register extra models in options.
@@ -431,28 +450,28 @@ export default function Vivy(opts) {
 
     }
 
-    /**
-     * Register extra reducers in plugins.
-     * @param store
-     */
-    function registerPluginsReducers(store) {
-
-        if (!store || !plugins || plugins.length < 1) {
-            return;
-        }
-
-        const reducers = plugins?.reduce((extraReducers, plugin) => ({
-            ...extraReducers,
-            ...plugin?.extraReducers
-        }), {});
-
-        if (!reducers || isEmptyObject(reducers)) {
-            return;
-        }
-
-        registerReducers(store, reducers);
-
-    }
+    // /**
+    //  * Register extra reducers in plugins.
+    //  * @param store
+    //  */
+    // function registerPluginsReducers(store) {
+    //
+    //     if (!store || !plugins || plugins.length < 1) {
+    //         return;
+    //     }
+    //
+    //     const reducers = plugins?.reduce((extraReducers, plugin) => ({
+    //         ...extraReducers,
+    //         ...plugin?.extraReducers
+    //     }), {});
+    //
+    //     if (!reducers || isEmptyObject(reducers)) {
+    //         return;
+    //     }
+    //
+    //     registerReducers(store, reducers);
+    //
+    // }
 
     /**
      * Register extra models in plugins.
@@ -490,22 +509,22 @@ export default function Vivy(opts) {
         const store = createVivyStore(options, plugins);
 
         // Register extra reducers in options
-        registerOptionsReducers(store);
+        // registerOptionsReducers(store);
 
         // Register extra models in options
         registerOptionsModels(store);
 
         // Register extra reducers in plugins
-        registerPluginsReducers(store);
+        // registerPluginsReducers(store);
 
         // Register extra models in plugins
         registerPluginsModels(store);
 
         // Add methods
-        store.registerReducer = registerReducer.bind(null, store);
-        store.registerReducers = registerReducers.bind(null, store);
-        store.unregisterReducer = unregisterReducer.bind(null, store);
-        store.unregisterReducers = unregisterReducers.bind(null, store);
+        // store.registerReducer = registerReducer.bind(null, store);
+        // store.registerReducers = registerReducers.bind(null, store);
+        // store.unregisterReducer = unregisterReducer.bind(null, store);
+        // store.unregisterReducers = unregisterReducers.bind(null, store);
         store.registerModel = registerModel.bind(null, store);
         store.registerModels = registerModels.bind(null, store);
         store.unregisterModel = unregisterModel.bind(null, store);
