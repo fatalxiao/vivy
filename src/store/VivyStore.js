@@ -30,9 +30,11 @@ export default function createVivyStore(options, plugins) {
     function dispatch(action) {
 
         // Handle action dispatch
-        const [nameSpace, name] = action?.type?.split?.('/');
-        if (nameSpace && name && modelActions?.[nameSpace]?.[name]) {
-            return modelActions?.[nameSpace]?.[name]?.(action);
+        if (action?.type) {
+            const [nameSpace, name] = action.type.split?.('/');
+            if (nameSpace && name && modelActions?.[nameSpace]?.[name]) {
+                return modelActions?.[nameSpace]?.[name]?.(action);
+            }
         }
 
         // Handle reducer dispatch
