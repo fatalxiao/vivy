@@ -14,6 +14,8 @@
 
 [request-api-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/requestApi
 
+[pyramid-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/pyramid
+
 [pieb-with-dpe-frontend-url]: https://github.com/fatalxiao/pieb-with-dpe-frontend
 
 [connected-react-router-url]: https://github.com/supasate/connected-react-router
@@ -101,6 +103,7 @@ $ npm run start
 * [calculation][calculation-example-url]
 * [globalReducers][global-reducers-example-url]
 * [requestApi][request-api-example-url]
+* [pyramid][pyramid-example-url]
 
 ### Complete and real project example
 
