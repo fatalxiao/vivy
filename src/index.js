@@ -9,7 +9,7 @@ import createVivyStore from './store/VivyStore';
 import createModelReducer from './reducers/ModelReducer';
 
 // Utils
-// import {isEmptyObject} from './util/Util';
+import {isEmptyObject} from './util/Util';
 
 /**
  * Handle Vivy hooks in options and plugins.
@@ -178,23 +178,27 @@ export function registerModel(store, model) {
     ));
 
     // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
-    Object.entries(globalReducers).forEach(([name, reducer]) => {
-        store.dispatch[name] = params => store.dispatch({
-            ...params,
-            type: name
+    if (globalReducers && !isEmptyObject(globalReducers)) {
+        Object.entries(globalReducers).forEach(([name, reducer]) => {
+            store.dispatch[name] = params => store.dispatch({
+                ...params,
+                type: name
+            });
         });
-    });
+    }
 
     // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
-    if (!store.dispatch[nameSpace]) {
-        store.dispatch[nameSpace] = {};
-    }
-    Object.entries(reducers).forEach(([name, reducer]) => {
-        store.dispatch[nameSpace][name] = params => store.dispatch({
-            ...params,
-            type: `${nameSpace}/${name}`
+    if (reducers && !isEmptyObject(reducers)) {
+        if (!store.dispatch[nameSpace]) {
+            store.dispatch[nameSpace] = {};
+        }
+        Object.entries(reducers).forEach(([name, reducer]) => {
+            store.dispatch[nameSpace][name] = params => store.dispatch({
+                ...params,
+                type: `${nameSpace}/${name}`
+            });
         });
-    });
+    }
 
     // Register Redux actions
     if (actions) {
