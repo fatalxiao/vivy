@@ -275,6 +275,8 @@ dispatch.MODEL_NAME_SPACE.ACTION_OR_REDUCER_NAME({
 3. Use `bindModelActionCreators` to create an action dispatcher
 
 ```js
+import {bindModelActionCreators} from 'vivy';
+
 const App = () => {
 
     // ...
