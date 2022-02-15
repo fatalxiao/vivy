@@ -97,6 +97,10 @@ export default function createVivyStore(options, plugins) {
             modelActions[nameSpace] = {};
         }
 
+        if (!this.dispatch[nameSpace]) {
+            this.dispatch[nameSpace] = {};
+        }
+
         Object.entries(actions).forEach(([name, action]) => {
             modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = params =>
                 action(params)(this.dispatch, this.getState);
