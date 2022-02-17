@@ -7,6 +7,7 @@ import createReduxStore from './ReduxStore';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
+import {isEmptyObject} from '../util/Util';
 
 /**
  * Create Vivy store
@@ -50,7 +51,7 @@ export default function createVivyStore(options, plugins) {
      */
     function registerReduxReducer(nameSpace, reducer) {
 
-        if (!this) {
+        if (!this || !nameSpace || !reducer) {
             return;
         }
 
@@ -68,7 +69,7 @@ export default function createVivyStore(options, plugins) {
      */
     function unregisterReduxReducer(nameSpace) {
 
-        if (!this) {
+        if (!this || !nameSpace) {
             return;
         }
 
@@ -83,13 +84,57 @@ export default function createVivyStore(options, plugins) {
     }
 
     /**
+     * Register model global reducer dispatcher
+     * @param nameSpace
+     * @param globalReducers
+     */
+    function registerModelGlobalReducersDispatcher(nameSpace, globalReducers) {
+
+        if (!this || !nameSpace || !globalReducers || isEmptyObject(globalReducers)) {
+            return;
+        }
+
+        Object.entries(globalReducers).forEach(([name, reducer]) => {
+            this.dispatch[name] = (params = {}) => this.dispatch({
+                ...params,
+                type: name
+            });
+        });
+
+    }
+
+    /**
+     * Register model reducer dispatcher
+     * @param nameSpace
+     * @param reducers
+     */
+    function registerModelReducerDispatcher(nameSpace, reducers) {
+
+        if (!this || !nameSpace || !reducers || isEmptyObject(reducers)) {
+            return;
+        }
+
+        if (!this.dispatch[nameSpace]) {
+            this.dispatch[nameSpace] = {};
+        }
+
+        Object.entries(reducers).forEach(([name, reducer]) => {
+            this.dispatch[nameSpace][name] = (params = {}) => this.dispatch({
+                ...params,
+                type: `${nameSpace}/${name}`
+            });
+        });
+
+    }
+
+    /**
      * Register Redux actions
      * @param nameSpace
      * @param actions
      */
     function registerReduxActions(nameSpace, actions) {
 
-        if (!this) {
+        if (!this || !nameSpace || !actions || isEmptyObject(actions)) {
             return;
         }
 
@@ -102,7 +147,7 @@ export default function createVivyStore(options, plugins) {
         }
 
         Object.entries(actions).forEach(([name, action]) => {
-            modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = params =>
+            modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = (params = {}) =>
                 action(params)(this.dispatch, this.getState);
         });
 
@@ -114,7 +159,7 @@ export default function createVivyStore(options, plugins) {
      */
     function unregisterReduxActions(nameSpaceOrModel) {
 
-        if (!this) {
+        if (!this || !nameSpaceOrModel) {
             return;
         }
 
@@ -152,6 +197,12 @@ export default function createVivyStore(options, plugins) {
 
         // Unregister reducers
         unregisterReduxReducer,
+
+        // Register model global reducers dispatcher
+        registerModelGlobalReducersDispatcher,
+
+        // Register model reducers dispatcher
+        registerModelReducerDispatcher,
 
         // Register actions
         registerReduxActions,
