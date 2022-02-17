@@ -27,7 +27,7 @@ export default {
                 data[i] = new Array(i + 1).fill('');
             }
             for (let i = 0; i < state.count; i++) {
-                data[state.count - 1][i] = Math.floor(Math.random() * 9 + 1);
+                data[state.count - 1][i] = (Math.random() < 0.5 ? -1 : 1) * Math.floor(Math.random() * 9 + 1);
             }
 
             return {
