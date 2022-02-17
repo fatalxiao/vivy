@@ -178,27 +178,11 @@ export function registerModel(store, model) {
     ));
 
     // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
-    if (globalReducers && !isEmptyObject(globalReducers)) {
-        Object.entries(globalReducers).forEach(([name, reducer]) => {
-            store.dispatch[name] = params => store.dispatch({
-                ...params,
-                type: name
-            });
-        });
-    }
+    store.registerModelGlobalReducersDispatcher(nameSpace, globalReducers);
 
     // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
-    if (reducers && !isEmptyObject(reducers)) {
-        if (!store.dispatch[nameSpace]) {
-            store.dispatch[nameSpace] = {};
-        }
-        Object.entries(reducers).forEach(([name, reducer]) => {
-            store.dispatch[nameSpace][name] = params => store.dispatch({
-                ...params,
-                type: `${nameSpace}/${name}`
-            });
-        });
-    }
+    store.registerModelReducerDispatcher(nameSpace, reducers);
+
 
     // Register Redux actions
     if (actions) {
