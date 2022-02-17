@@ -59,6 +59,7 @@ const UserList = ({
             <div className="search">
                 Search:
                 <input value={searchText}
+                       disabled={getUserListActionType === 'userList/getUserListRequest'}
                        onChange={handleChange}/>
             </div>
 
