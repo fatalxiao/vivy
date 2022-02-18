@@ -4,12 +4,10 @@
 
 /**
  * ModelActionMiddleware creater
- * @returns {function({dispatch?: *, getState?: *}): function(*): function(*=): *}
+ * @param modelActions
+ * @returns {function({dispatch: Function, getState: Function}): function(*): function(*): (*)}
  */
-export default function createModelActionMiddleware() {
-
-    // Async actions
-    const asyncActions = {};
+export default function createModelActionMiddleware(modelActions = {}) {
 
     /**
      * ModelActionMiddleware
@@ -21,69 +19,20 @@ export default function createModelActionMiddleware() {
     function ModelActionMiddleware({dispatch, getState}) {
         return next => action => {
 
-            // match type in asyncActions
-            if (asyncActions?.hasOwnProperty(action?.type)) {
-                asyncActions[action.type]?.(action)?.(dispatch, getState);
+            if (!action?.type) {
+                return next(action);
+            }
+
+            // Match action type in modelActions
+            const [nameSpace, name] = action.type.split('/');
+            if (modelActions[nameSpace]?.[name]) {
+                modelActions[nameSpace]?.[name]?.(action);
             }
 
             return next(action);
 
         };
     }
-
-    ModelActionMiddleware.asyncActions = asyncActions;
-
-    /**
-     * Register async actions
-     * @param store {Object}
-     * @param nameSpace {string}
-     * @param actions {Object}
-     */
-    ModelActionMiddleware.register = (store, nameSpace, actions) => {
-
-        Object.keys(actions).forEach(type =>
-            asyncActions[`${nameSpace}/${type}`] = actions[type]
-        );
-
-        // Bind actions to store.dispatch to implement "dispatch.nameSpace.actionName()"
-        if (!store.dispatch[nameSpace]) {
-            store.dispatch[nameSpace] = {};
-        }
-        Object.entries(actions).forEach(([name, action]) => {
-            store.dispatch[nameSpace][name] = params => action(params)(store.dispatch, store.getState);
-        });
-
-    };
-
-    /**
-     * Unregister Async Actions
-     * @param store {Object}
-     * @param nameSpace {string}
-     */
-    function unregisterAsyncActions(store, nameSpace) {
-
-        Object.keys(asyncActions).forEach(asyncActionsKey => {
-            if (asyncActionsKey.startsWith(`${nameSpace}/`)) {
-                delete asyncActions[asyncActionsKey];
-            }
-        });
-
-        delete store.dispatch[nameSpace];
-
-    }
-
-    /**
-     * Unregister async actions
-     * @param store {Object}
-     * @param nameSpaceOrModel {string|Object}
-     */
-    ModelActionMiddleware.unregister = (store, nameSpaceOrModel) => {
-        if (typeof nameSpaceOrModel === 'string') {
-            unregisterAsyncActions(store, nameSpaceOrModel);
-        } else {
-            unregisterAsyncActions(store, nameSpaceOrModel?.nameSpace);
-        }
-    };
 
     return ModelActionMiddleware;
 
