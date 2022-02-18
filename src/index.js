@@ -184,9 +184,9 @@ export function registerModel(store, model) {
     store.registerModelReducerDispatcher(nameSpace, reducers);
 
 
-    // Register Redux actions
+    // Register model actions
     if (actions) {
-        store.registerReduxActions(nameSpace, actions ?? {});
+        store.registerModelActions(nameSpace, actions ?? {});
     }
 
     // Call onRegisterModel in plugins
@@ -244,8 +244,8 @@ export function unregisterModel(store, nameSpaceOrModel) {
         :
         store.unregisterReduxReducer(nameSpaceOrModel.nameSpace);
 
-    // Unregister Redux actions
-    store.unregisterReduxActions(nameSpaceOrModel);
+    // Unregister model actions
+    store.unregisterModelActions(nameSpaceOrModel);
 
     // Call onUnregisterModel in plugins
     handlePluginsHook(
@@ -369,6 +369,11 @@ export function bindModelActionCreators(modelActionCreators, dispatch) {
  * @type {{overwriteSameNameSpaceModel: boolean}}
  */
 const DEFAULT_OPTIONS = {
+
+    /**
+     * Redux initial state
+     */
+    initialState: {},
 
     /**
      * Whether overwrite same name space model when registering ( Default false )
