@@ -1,6 +1,5 @@
 'use strict';
 
-// Vendors
 import Vivy from '../src';
 
 test('Create Vivy', () => {
