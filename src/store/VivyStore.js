@@ -10,6 +10,8 @@ import createReduxStore from './ReduxStore';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
+
+// Vendors
 import {isEmptyObject} from '../util/Util';
 
 /**
@@ -21,11 +23,11 @@ import {isEmptyObject} from '../util/Util';
 export default function createVivyStore(options, plugins) {
 
     // All model actions
-    // [modelNameSpace][actionName]: Action
+    // modelActions[modelNameSpace][actionName]: Action
     const modelActions = {};
 
     // Handle actions in models
-    const ModelActionMiddleware = createModelActionMiddleware();
+    const ModelActionMiddleware = createModelActionMiddleware(modelActions);
 
     // Create origin redux store
     const reduxStore = createReduxStore(options, [ModelActionMiddleware], plugins);
@@ -157,8 +159,6 @@ export default function createVivyStore(options, plugins) {
                 action(params)(this.dispatch, this.getState);
         });
 
-        ModelActionMiddleware.register(this, nameSpace, actions);
-
     }
 
     /**
@@ -178,8 +178,6 @@ export default function createVivyStore(options, plugins) {
             delete modelActions[nameSpaceOrModel.nameSpace];
             delete this.dispatch[nameSpaceOrModel.nameSpace];
         }
-
-        ModelActionMiddleware.unregister(this, nameSpaceOrModel);
 
     }
 
