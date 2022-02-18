@@ -175,3 +175,76 @@ test('Dispatch model chain dispatch action by chain dispatch', () => {
     );
 
 });
+
+test('Dispatch no value by functional dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch({
+        type: 'testModel/update'
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
+    );
+
+});
+
+test('Dispatch no value by chain dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch.testModel.update();
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
+    );
+
+});
+
+test('Dispatch error value by functional dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch({
+        type: 'testModel/update',
+        value: null
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
+    );
+
+});
+
+test('Dispatch error value by chain dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch.testModel.update(null);
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
+    );
+
+});
