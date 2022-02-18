@@ -33,8 +33,10 @@ test('Dispatch action to middleware', () => {
             testMiddleware
         ]
     });
+
     const store = vivy.createStore();
     store.registerModel(testModel);
+
     store.dispatch({
         type: 'updateTestModelValue',
         value: 1
@@ -44,6 +46,30 @@ test('Dispatch action to middleware', () => {
         store.getState().testModel
     ).toEqual(
         1
+    );
+
+});
+
+test('Dispatch no matched action to middleware', () => {
+
+    const vivy = Vivy({
+        extraMiddlewares: [
+            testMiddleware
+        ]
+    });
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch({
+        type: 'xxxxx',
+        value: 1
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
     );
 
 });
