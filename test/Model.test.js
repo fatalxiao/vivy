@@ -1,9 +1,8 @@
 'use strict';
 
-// Vendors
 import Vivy from '../src';
 
-// Statics
+// Models
 import testModel from './mocks/testModel';
 
 test('Register model', () => {

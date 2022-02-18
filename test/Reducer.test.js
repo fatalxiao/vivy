@@ -1,9 +1,8 @@
 'use strict';
 
-// Vendors
 import Vivy from '../src';
 
-// Statics
+// Reducers
 import testReducer from './mocks/testReducer';
 
 test('Register reducer', () => {
