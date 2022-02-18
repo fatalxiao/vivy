@@ -27,7 +27,7 @@ test('Register middleware', () => {
 
 });
 
-test('Dispatch action to middleware', () => {
+test('Dispatch action through middleware', () => {
 
     const vivy = Vivy({
         extraMiddlewares: [
@@ -51,7 +51,7 @@ test('Dispatch action to middleware', () => {
 
 });
 
-test('Dispatch no matched action to middleware', () => {
+test('Dispatch no matched action through middleware', () => {
 
     const vivy = Vivy({
         extraMiddlewares: [
