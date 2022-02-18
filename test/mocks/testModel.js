@@ -25,7 +25,10 @@ export default {
     },
     reducers: {
         update: (state, {value}) => {
-            return value;
+            return !isNaN(value) && value != null ?
+                value
+                :
+                state;
         }
     }
 };
