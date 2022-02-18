@@ -2,6 +2,9 @@
  * @file VivyStore.js
  */
 
+// Middlewares
+import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
+
 // ReduxStore
 import createReduxStore from './ReduxStore';
 
@@ -21,8 +24,11 @@ export default function createVivyStore(options, plugins) {
     // [modelNameSpace][actionName]: Action
     const modelActions = {};
 
+    // Handle actions in models
+    const ModelActionMiddleware = createModelActionMiddleware();
+
     // Create origin redux store
-    const reduxStore = createReduxStore(options, plugins);
+    const reduxStore = createReduxStore(options, [ModelActionMiddleware], plugins);
 
     /**
      * Vivy store dispatch
@@ -128,11 +134,11 @@ export default function createVivyStore(options, plugins) {
     }
 
     /**
-     * Register Redux actions
+     * Register model actions
      * @param nameSpace
      * @param actions
      */
-    function registerReduxActions(nameSpace, actions) {
+    function registerModelActions(nameSpace, actions) {
 
         if (!this || !nameSpace || !actions || isEmptyObject(actions)) {
             return;
@@ -151,13 +157,15 @@ export default function createVivyStore(options, plugins) {
                 action(params)(this.dispatch, this.getState);
         });
 
+        ModelActionMiddleware.register(this, nameSpace, actions);
+
     }
 
     /**
-     * Unregister Redux actions
+     * Unregister model actions
      * @param nameSpaceOrModel
      */
-    function unregisterReduxActions(nameSpaceOrModel) {
+    function unregisterModelActions(nameSpaceOrModel) {
 
         if (!this || !nameSpaceOrModel) {
             return;
@@ -170,6 +178,8 @@ export default function createVivyStore(options, plugins) {
             delete modelActions[nameSpaceOrModel.nameSpace];
             delete this.dispatch[nameSpaceOrModel.nameSpace];
         }
+
+        ModelActionMiddleware.unregister(this, nameSpaceOrModel);
 
     }
 
@@ -204,11 +214,11 @@ export default function createVivyStore(options, plugins) {
         // Register model reducers dispatcher
         registerModelReducerDispatcher,
 
-        // Register actions
-        registerReduxActions,
+        // Register model actions
+        registerModelActions,
 
-        // Unregister actions
-        unregisterReduxActions,
+        // Unregister model actions
+        unregisterModelActions,
 
         // All registered plugins
         plugins: plugins || []
