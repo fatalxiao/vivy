@@ -8,7 +8,25 @@ import testMiddleware from './mocks/testMiddleware';
 // Models
 import testModel from './mocks/testModel';
 
-test('Register model', () => {
+test('Register middleware', () => {
+
+    const vivy = Vivy({
+        extraMiddlewares: [
+            testMiddleware
+        ]
+    });
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        0
+    );
+
+});
+
+test('Dispatch action to middleware', () => {
 
     const vivy = Vivy({
         extraMiddlewares: [
