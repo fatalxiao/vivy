@@ -16,7 +16,7 @@ export default function createModelActionMiddleware(modelActions = {}) {
      * @returns {function(*): function(*=): *}
      * @constructor
      */
-    function ModelActionMiddleware({dispatch, getState}) {
+    return function ModelActionMiddleware({dispatch, getState}) {
         return next => action => {
 
             if (!action?.type) {
@@ -32,8 +32,6 @@ export default function createModelActionMiddleware(modelActions = {}) {
             return next(action);
 
         };
-    }
-
-    return ModelActionMiddleware;
+    };
 
 }
