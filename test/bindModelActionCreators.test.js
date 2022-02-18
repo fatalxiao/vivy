@@ -8,6 +8,7 @@ import testModel from './mocks/testModel';
 test('bindModelActionCreators', () => {
 
     const vivy = Vivy();
+
     const store = vivy.createStore();
     store.registerModel(testModel);
 

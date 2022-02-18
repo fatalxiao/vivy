@@ -8,6 +8,7 @@ import testReducer from './mocks/testReducer';
 test('Register reducer', () => {
 
     const vivy = Vivy();
+
     const store = vivy.createStore();
     store.registerReducer('testReducer', testReducer);
 
@@ -22,8 +23,10 @@ test('Register reducer', () => {
 test('Dispatch reducer action', () => {
 
     const vivy = Vivy();
+
     const store = vivy.createStore();
     store.registerReducer('testReducer', testReducer);
+
     store.dispatch({
         type: 'UPGRADE'
     });

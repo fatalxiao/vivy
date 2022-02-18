@@ -15,6 +15,7 @@ test('Register middleware', () => {
             testMiddleware
         ]
     });
+
     const store = vivy.createStore();
     store.registerModel(testModel);
 
