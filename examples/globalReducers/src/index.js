@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import {render} from 'react-dom';
+import {createRoot} from 'react-dom/client';
 import {Provider} from 'react-redux';
 
 // Import Vivy
@@ -30,9 +30,8 @@ store.registerModels([
     cModel
 ]);
 
-render(
+createRoot(document.getElementById('app-container')).render(
     <Provider store={store}>
         <Root/>
-    </Provider>,
-    document.getElementById('app-container')
+    </Provider>
 );
