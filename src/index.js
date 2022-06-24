@@ -6,6 +6,7 @@
 import createVivyStore from './store/VivyStore';
 
 // Reducers
+import BuildInModelReducers from './reducers/BuildInModelReducers';
 import createModelReducer from './reducers/ModelReducer';
 
 // Utils
@@ -168,21 +169,26 @@ export function registerModel(store, model) {
         return;
     }
 
+    // Add build-in model reducers
+    const allReducers = {
+        ...BuildInModelReducers,
+        ...reducers
+    };
+
     // Register or overwrite Redux reducers
     store.registerReduxReducer(nameSpace, createModelReducer(
         store,
         nameSpace,
         state ?? null,
         globalReducers ?? {},
-        reducers ?? {}
+        allReducers ?? {}
     ));
 
     // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
     store.registerModelGlobalReducersDispatcher(nameSpace, globalReducers);
 
     // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
-    store.registerModelReducerDispatcher(nameSpace, reducers);
-
+    store.registerModelReducerDispatcher(nameSpace, allReducers);
 
     // Register model actions
     if (actions) {
