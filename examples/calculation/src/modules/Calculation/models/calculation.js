@@ -5,48 +5,49 @@
 export default {
     nameSpace: 'calculation',
     state: {
-        leftValue: 1,
-        middleValue: 1,
-        rightValue: 1
+        value1: 1,
+        value2: 1,
+        value3: 1,
+        value4: 1
     },
     reducers: {
 
         /**
-         * Update left value
+         * Update value1
          * @param state
          * @param value
-         * @returns {*&{leftValue}}
+         * @returns {*&{value1}}
          */
-        updateLeftValue: (state, {value}) => {
+        updateValue1: (state, {value}) => {
             return {
                 ...state,
-                leftValue: +value || 1
+                value1: value
             };
         },
 
         /**
-         * Update middle value
+         * Update value2
          * @param state
          * @param value
-         * @returns {*&{middleValue}}
+         * @returns {*&{value2}}
          */
-        updateMiddleValueValue: (state, {value}) => {
+        updateValue2: (state, {value}) => {
             return {
                 ...state,
-                middleValue: +value || 1
+                value2: value
             };
         },
 
         /**
-         * Update right value
+         * Update value3
          * @param state
          * @param value
-         * @returns {*&{rightValue}}
+         * @returns {*&{value3}}
          */
-        updateRightValue: (state, {value}) => {
+        updateValue3: (state, {value}) => {
             return {
                 ...state,
-                rightValue: +value || 1
+                value3: value
             };
         }
 

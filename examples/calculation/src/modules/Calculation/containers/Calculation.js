@@ -11,20 +11,35 @@ import {bindModelActionCreators} from 'vivy';
 import './Calculation.scss';
 
 const Calculation = ({
-    leftValue, middleValue, rightValue,
-    dispatch, updateRightValue
+    value1, value2, value3, value4,
+    dispatch, updateValue1
 }) => {
 
     /**
-     * Update left value to model
+     * Update value1 to model
      * @type {(function(*): void)|*}
      */
-    const handleLeftValueChange = useCallback(e => {
+    const handleValue1Change = useCallback(e => {
+
+        // Use "updateValue1" to dispatch an action by using "bindModelActionCreators"
+        updateValue1?.({
+            value: +e?.target?.value
+        });
+
+    }, [
+        updateValue1
+    ]);
+
+    /**
+     * Update value2 to model
+     * @type {(function(*): void)|*}
+     */
+    const handleValue2Change = useCallback(e => {
 
         // Use "dispatch" to dispatch an action
         dispatch?.({
-            type: 'calculation/updateLeftValue',
-            value: e?.target?.value
+            type: 'calculation/updateValue2',
+            value: +e?.target?.value
         });
 
     }, [
@@ -32,14 +47,14 @@ const Calculation = ({
     ]);
 
     /**
-     * Update middle value to model
+     * Update value3 to model
      * @type {(function(*): void)|*}
      */
-    const handleMiddleValueChange = useCallback(e => {
+    const handleValue3Change = useCallback(e => {
 
         // Use "dispatch.nameSpace.reducerName" to dispatch an action
-        dispatch.calculation.updateMiddleValueValue({
-            value: e?.target?.value
+        dispatch.calculation.updateValue3({
+            value: +e?.target?.value
         });
 
     }, [
@@ -47,38 +62,47 @@ const Calculation = ({
     ]);
 
     /**
-     * Update right value to model
+     * Update value4 to model
      * @type {(function(*): void)|*}
      */
-    const handleRightValueChange = useCallback(e => {
+    const handleValue4Change = useCallback(e => {
 
-        // Use "updateRightValue" to dispatch an action by using "bindModelActionCreators"
-        updateRightValue?.({
-            value: e?.target?.value
+        // Use build-in "setState reducer" update model state
+        dispatch?.({
+            type: 'calculation/setState',
+            nextState: state => ({
+                ...state,
+                value4: +e?.target?.value
+            })
         });
 
     }, [
-        updateRightValue
+        dispatch
     ]);
 
     return (
         <div className="calculation">
-            <input value={leftValue}
-                   onChange={handleLeftValueChange}/>
+            <input value={value1}
+                   onChange={handleValue1Change}/>
             &nbsp;
             +
             &nbsp;
-            <input value={middleValue}
-                   onChange={handleMiddleValueChange}/>
+            <input value={value2}
+                   onChange={handleValue2Change}/>
             &nbsp;
             +
             &nbsp;
-            <input value={rightValue}
-                   onChange={handleRightValueChange}/>
+            <input value={value3}
+                   onChange={handleValue3Change}/>
+            &nbsp;
+            +
+            &nbsp;
+            <input value={value4}
+                   onChange={handleValue4Change}/>
             &nbsp;
             =
             &nbsp;
-            {leftValue + middleValue + rightValue}
+            {value1 + value2 + value3 + value4}
         </div>
     );
 
@@ -86,20 +110,22 @@ const Calculation = ({
 
 Calculation.propTypes = {
 
-    leftValue: PropTypes.number,
-    middleValue: PropTypes.number,
-    rightValue: PropTypes.number,
+    value1: PropTypes.number,
+    value2: PropTypes.number,
+    value3: PropTypes.number,
+    value4: PropTypes.number,
 
     dispatch: PropTypes.func,
-    updateRightValue: PropTypes.func
+    updateValue1: PropTypes.func
 
 };
 
 export default connect(state => ({
-    leftValue: state.calculation.leftValue,
-    middleValue: state.calculation.middleValue,
-    rightValue: state.calculation.rightValue
+    value1: state.calculation.value1,
+    value2: state.calculation.value2,
+    value3: state.calculation.value3,
+    value4: state.calculation.value4
 }), dispatch => bindModelActionCreators({
     dispatch,
-    updateRightValue: 'calculation/updateRightValue'
+    updateValue1: 'calculation/updateValue1'
 }, dispatch))(Calculation);
