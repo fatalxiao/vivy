@@ -59,6 +59,45 @@ test('Dispatch model setState action by chain dispatch', () => {
 
 });
 
+test('Dispatch functional model setState action by functional dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch({
+        type: 'testModel/setState',
+        nextState: state => state + 2
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        2
+    );
+
+});
+
+test('Dispatch functional model setState action by chain dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch.testModel.setState({
+        nextState: state => state + 2
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        2
+    );
+
+});
+
 test('Dispatch model reducer by functional dispatch', () => {
 
     const vivy = Vivy();
@@ -68,13 +107,13 @@ test('Dispatch model reducer by functional dispatch', () => {
 
     store.dispatch({
         type: 'testModel/update',
-        value: 1
+        value: 3
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        3
     );
 
 });
@@ -87,13 +126,13 @@ test('Dispatch model reducer by chain dispatch', () => {
     store.registerModel(testModel);
 
     store.dispatch.testModel.update({
-        value: 1
+        value: 3
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        3
     );
 
 });
@@ -107,13 +146,13 @@ test('Dispatch model global reducer by functional dispatch', () => {
 
     store.dispatch({
         type: 'globalUpdate',
-        value: 1
+        value: 4
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        4
     );
 
 });
@@ -126,13 +165,13 @@ test('Dispatch model global reducer by chain dispatch', () => {
     store.registerModel(testModel);
 
     store.dispatch.globalUpdate({
-        value: 1
+        value: 4
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        4
     );
 
 });
@@ -146,13 +185,13 @@ test('Dispatch model functional dispatch action by functional dispatch', () => {
 
     store.dispatch({
         type: 'testModel/actionUpdateByFunctionalDispatch',
-        value: 1
+        value: 5
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        5
     );
 
 });
@@ -165,13 +204,13 @@ test('Dispatch model functional dispatch action by chain dispatch', () => {
     store.registerModel(testModel);
 
     store.dispatch.testModel.actionUpdateByFunctionalDispatch({
-        value: 1
+        value: 5
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        5
     );
 
 });
@@ -185,13 +224,13 @@ test('Dispatch model chain dispatch action by functional dispatch', () => {
 
     store.dispatch({
         type: 'testModel/actionUpdateByChainDispatch',
-        value: 1
+        value: 6
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        6
     );
 
 });
@@ -204,13 +243,13 @@ test('Dispatch model chain dispatch action by chain dispatch', () => {
     store.registerModel(testModel);
 
     store.dispatch.testModel.actionUpdateByChainDispatch({
-        value: 1
+        value: 6
     });
 
     expect(
         store.getState().testModel
     ).toEqual(
-        1
+        6
     );
 
 });
