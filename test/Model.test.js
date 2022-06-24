@@ -20,6 +20,45 @@ test('Register model', () => {
 
 });
 
+test('Dispatch model setState action by functional dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch({
+        type: 'testModel/setState',
+        nextState: 1
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        1
+    );
+
+});
+
+test('Dispatch model setState action by chain dispatch', () => {
+
+    const vivy = Vivy();
+
+    const store = vivy.createStore();
+    store.registerModel(testModel);
+
+    store.dispatch.testModel.setState({
+        nextState: 1
+    });
+
+    expect(
+        store.getState().testModel
+    ).toEqual(
+        1
+    );
+
+});
+
 test('Dispatch model reducer by functional dispatch', () => {
 
     const vivy = Vivy();
