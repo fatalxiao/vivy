@@ -2,9 +2,6 @@
  * @file ModelReducer.js
  */
 
-// Statics
-import BuildInModelReducers from './BuildInModelReducers';
-
 // Vendors
 import {isEmptyObject} from '../util/Util';
 
@@ -67,14 +64,6 @@ export default function createModelReducer(
         :
         [];
 
-    // Handle build-in model reducers
-    const buildInReducerHandlers = !isEmptyObject(BuildInModelReducers) ?
-        Object.entries(BuildInModelReducers).map(([type, bildInModelReducer]) =>
-            handleReducer(`${nameSpace}/${type}`, bildInModelReducer)
-        )
-        :
-        [];
-
     // Handle reducers
     const reducerHandlers = !isEmptyObject(reducers) ?
         Object.entries(reducers).map(([type, reducer]) =>
@@ -86,7 +75,6 @@ export default function createModelReducer(
     // Reduce reducers
     const reducer = reduceReducers(
         ...globalReducerHandlers,
-        ...buildInReducerHandlers,
         ...reducerHandlers
     );
 
