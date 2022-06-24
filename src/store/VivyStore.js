@@ -41,8 +41,11 @@ export default function createVivyStore(options, plugins) {
         // Handle action dispatch
         if (action?.type) {
             const [nameSpace, name] = action.type.split?.('/');
-            if (nameSpace && name && modelActions?.[nameSpace]?.[name]) {
-                return modelActions?.[nameSpace]?.[name]?.(action);
+            if (
+                nameSpace && name && modelActions?.[nameSpace]?.[name]
+                && typeof modelActions[nameSpace][name] === 'function'
+            ) {
+                return modelActions[nameSpace][name](action);
             }
         }
 
