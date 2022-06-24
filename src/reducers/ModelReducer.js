@@ -2,6 +2,12 @@
  * @file ModelReducer.js
  */
 
+// Statics
+import BuildInModelReducers from './BuildInModelReducers';
+
+// Vendors
+import {isEmptyObject} from '../util/Util';
+
 /**
  * Default reducer
  * @param value {any}
@@ -54,23 +60,35 @@ export default function createModelReducer(
 ) {
 
     // Handle global reducers
-    const globalReducerHandlers = globalReducers ?
-        Object.keys(globalReducers).map(type =>
-            handleReducer(type, globalReducers[type])
+    const globalReducerHandlers = !isEmptyObject(globalReducers) ?
+        Object.entries(globalReducers).map(([type, globalReducer]) =>
+            handleReducer(type, globalReducer)
+        )
+        :
+        [];
+
+    // Handle build-in model reducers
+    const buildInReducerHandlers = !isEmptyObject(BuildInModelReducers) ?
+        Object.entries(BuildInModelReducers).map(([type, bildInModelReducer]) =>
+            handleReducer(`${nameSpace}/${type}`, bildInModelReducer)
         )
         :
         [];
 
     // Handle reducers
-    const reducerHandlers = reducers ?
-        Object.keys(reducers).map(type =>
-            handleReducer(`${nameSpace}/${type}`, reducers[type])
+    const reducerHandlers = !isEmptyObject(reducers) ?
+        Object.entries(reducers).map(([type, reducer]) =>
+            handleReducer(`${nameSpace}/${type}`, reducer)
         )
         :
         [];
 
     // Reduce reducers
-    const reducer = reduceReducers(...globalReducerHandlers, ...reducerHandlers);
+    const reducer = reduceReducers(
+        ...globalReducerHandlers,
+        ...buildInReducerHandlers,
+        ...reducerHandlers
+    );
 
     // Return reducer
     return (state = initialState, action) => reducer(state, action);
