@@ -82,27 +82,29 @@ const Calculation = ({
 
     return (
         <div className="calculation">
-            <input value={value1}
-                   onChange={handleValue1Change}/>
-            &nbsp;
-            +
-            &nbsp;
-            <input value={value2}
-                   onChange={handleValue2Change}/>
-            &nbsp;
-            +
-            &nbsp;
-            <input value={value3}
-                   onChange={handleValue3Change}/>
-            &nbsp;
-            +
-            &nbsp;
-            <input value={value4}
-                   onChange={handleValue4Change}/>
-            &nbsp;
-            =
-            &nbsp;
-            {value1 + value2 + value3 + value4}
+            <div className="row">
+                <input value={value1}
+                       onChange={handleValue1Change}/>
+            </div>
+            <div className="row">
+                +
+                <input value={value2}
+                       onChange={handleValue2Change}/>
+            </div>
+            <div className="row">
+                +
+                <input value={value3}
+                       onChange={handleValue3Change}/>
+            </div>
+            <div className="row">
+                +
+                <input value={value4}
+                       onChange={handleValue4Change}/>
+            </div>
+            <hr/>
+            <div className="row">
+                {value1 + value2 + value3 + value4}
+            </div>
         </div>
     );
 
