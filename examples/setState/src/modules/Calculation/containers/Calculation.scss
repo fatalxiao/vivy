@@ -1,0 +1,29 @@
+/**
+ * @file Calculation.scss
+ */
+
+body {
+    margin: 0;
+}
+
+.calculation {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-items: center;
+    font-size: 24px;
+    line-height: 64px;
+
+    input {
+        box-sizing: border-box;
+        width: 160px;
+        height: 64px;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        text-align: right;
+        font-size: 24px;
+    }
+}
