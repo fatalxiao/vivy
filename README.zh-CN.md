@@ -55,12 +55,11 @@
 [![NPM Version][npm-image]][npm-url]
 [![License][license-image]][npm-url]
 
-Vivy is a state container for JavaScript apps based on [redux][redux-url]. You can get started easily as syntax is
-designed closing to Redux.
+Vivy 是一个基于 [redux][redux-url] 开发的 Javascript 状态管理器。为了更便于上手，使用了尽可能贴近 `Redux` 的语法和传参。
 
-In Vivy, `state`, `actions` and `reducers` are combined in one `Object` called `model`. Actions and reducers in model
-all can be called by `dispatch`. So `action type` is no need to be defined in Vivy. Also, redundant actions are
-unnecessary as you can dispatch reducers directly.
+在 Vivy 中，`state`、`actions` 和 `reducers` 被组合在一个 `Object` 中，我们称它为 `model`。在 `model` 中的 `actions` 和
+`reducers` 都可以使用 `dispatch` 来调用，所以在 Vivy 中无需再定义原生 `Redux` 中的 `action type`。同时由于可以直接使用 
+`dispatch` 调用到 `reducer`，因此可以免去不必要的 `action`。
 
 Vivy is designed with high expansibility. You can easily route by using [vivy-router][router-plugin-url], and lazy load
 components and models by [vivy-async-component][async-component-plugin-url]. [vivy-api][api-plugin-url] can help to
