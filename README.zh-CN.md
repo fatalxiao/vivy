@@ -58,46 +58,44 @@
 Vivy 是一个基于 [redux][redux-url] 开发的 Javascript 状态管理器。为了更便于上手，使用了尽可能贴近 `Redux` 的语法和传参。
 
 在 Vivy 中，`state`、`actions` 和 `reducers` 被组合在一个 `Object` 中，我们称它为 `model`。在 `model` 中的 `actions` 和
-`reducers` 都可以使用 `dispatch` 来调用，所以在 Vivy 中无需再定义原生 `Redux` 中的 `action type`。同时由于可以直接使用 
+`reducers` 都可以使用 `dispatch` 来调用，所以在 Vivy 中无需再定义原生 `Redux` 中的 `action type`。同时由于可以直接使用
 `dispatch` 调用到 `reducer`，因此可以免去不必要的 `action`。
 
-Vivy is designed with high expansibility. You can easily route by using [vivy-router][router-plugin-url], and lazy load
-components and models by [vivy-async-component][async-component-plugin-url]. [vivy-api][api-plugin-url] can help to
-request apis. [vivy-subscription][subscription-plugin-url] can easily watch history or something else to update state by
-dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement i18n.
+Vivy 的设计具有很好的扩展性，可以使用插件来扩展功能。可以使用 [vivy-router][router-plugin-url] 配置路由，使用
+[vivy-async-component][async-component-plugin-url] 可以在路由级别懒加载 `component` 和 `model`，
+[vivy-api][api-plugin-url] 可以很方便的调用 api，[vivy-subscription][subscription-plugin-url] 可以很方便的检测 `history`
+或其他变量，[vivy-i18n][i18n-plugin-url] 可以实现多语言。
 
-## Docs
-
-* [Installation](#installation)
-* [Examples](#examples)
-    * [Examples in repository](#examples-in-repository)
-    * [Complete and real project example](#complete-and-real-project-example)
-* [Plugins](#plugins)
-* [Documentation](#documentation)
-    * [Basic usage](#basic-usage)
+* [安装](#安装)
+* [例子](#例子)
+    * [项目中的例子](#项目中的例子)
+    * [一个真实项目的例子](#一个真实项目的例子)
+* [插件](#插件)
+* [文档](#文档)
+    * [基础](#基础)
     * [Vivy model](#vivy-model)
     * [Vivy store dispatcher](#vivy-store-dispatcher)
-    * [Use Vivy in Component](#use-vivy-in-component)
-    * [Methods](#methods)
+    * [在 Component 中使用 Vivy](#在-Component-中使用-Vivy)
+    * [方法](#方法)
 
-## Installation
+## 安装
 
-Using npm:
+使用 `NPM`:
 
 ```shell
 $ npm install vivy
 ```
 
-## Examples
+## 例子
 
-### Examples in repository
+### 项目中的例子
 
 ```shell
 $ cd ./examples/[EXAMPLE_NAME]
 $ npm run start
 ```
 
-**Example names**:
+**例子的名称**:
 
 * [counter][counter-example-url]
 * [calculation][calculation-example-url]
@@ -105,23 +103,23 @@ $ npm run start
 * [requestApi][request-api-example-url]
 * [pyramid][pyramid-example-url]
 
-### Complete and real project example
+### 一个真实项目的例子
 
 * [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
 
-## Plugins
+## 插件
 
-| Plugin                                             | Version                                                                            | Description                                                                                  |
-|:---------------------------------------------------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                   | [![NPM Version][router-plugin-npm-image]][router-plugin-npm-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].               |
-| [vivy-async-component][async-component-plugin-url] | [![NPM Version][async-component-plugin-npm-image]][async-component-plugin-npm-url] | A plugin which loading async component and async Vivy model to easily split chunks by route. |
-| [vivy-api][api-plugin-url]                         | [![NPM Version][api-plugin-npm-image]][api-plugin-npm-url]                         | Handle `apis` in Vivy model to make api calling easier.                                      |
-| [vivy-subscription][subscription-plugin-url]       | [![NPM Version][subscription-plugin-npm-image]][subscription-plugin-npm-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                   |
-| [vivy-i18n][i18n-plugin-url]                       | [![NPM Version][i18n-plugin-npm-image]][i18n-plugin-npm-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                              |
+| 插件名称                                               | 版本                                                                                 | 说明                                                                         |
+|:---------------------------------------------------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------|
+| [vivy-router][router-plugin-url]                   | [![NPM Version][router-plugin-npm-image]][router-plugin-npm-url]                   | 基于 [connected-react-router][connected-react-router-url] 的路由插件.             |
+| [vivy-async-component][async-component-plugin-url] | [![NPM Version][async-component-plugin-npm-image]][async-component-plugin-npm-url] | 基于路由级别的 `component` / `model` / `reducer` 懒加载                              |
+| [vivy-api][api-plugin-url]                         | [![NPM Version][api-plugin-npm-image]][api-plugin-npm-url]                         | Handle `apis` in Vivy model to make api calling easier.                    |
+| [vivy-subscription][subscription-plugin-url]       | [![NPM Version][subscription-plugin-npm-image]][subscription-plugin-npm-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else. |
+| [vivy-i18n][i18n-plugin-url]                       | [![NPM Version][i18n-plugin-npm-image]][i18n-plugin-npm-url]                       | Handle `i18ns` in Vivy model to implement i18n.                            |
 
-## Documentation
+## 文档
 
-### Basic usage
+### 基础
 
 ```js
 import React from 'react';
@@ -295,7 +293,7 @@ export default connect(state => ({
 }, dispatch))(App);
 ```
 
-### Use Vivy in Component
+### 在 Component 中使用 Vivy
 
 ```js
 import React, {useCallback} from 'react';
@@ -337,7 +335,7 @@ export default connect(state => ({
 }, dispatch))(App);
 ```
 
-### Methods
+### 方法
 
 #### registerReducer
 

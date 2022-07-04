@@ -67,8 +67,6 @@ components and models by [vivy-async-component][async-component-plugin-url]. [vi
 request apis. [vivy-subscription][subscription-plugin-url] can easily watch history or something else to update state by
 dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement i18n.
 
-## Docs
-
 * [Installation](#installation)
 * [Examples](#examples)
     * [Examples in repository](#examples-in-repository)
@@ -83,7 +81,7 @@ dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement
 
 ## Installation
 
-Using npm:
+Using `NPM`:
 
 ```shell
 $ npm install vivy
