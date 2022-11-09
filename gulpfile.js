@@ -5,7 +5,7 @@
 'use strict';
 
 const gulp = require('gulp');
-const del = require('del');
+const del = require('delete');
 const babel = require('gulp-babel');
 
 gulp.task('clean', () =>

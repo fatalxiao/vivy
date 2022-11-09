@@ -59,7 +59,7 @@
         "babel-jest": "^29.3.1",
         "core-js": "^3.26.0",
         "cross-env": "^7.0.3",
-        "del": "^7.0.0",
+        "delete": "^1.1.0",
         "eslint": "^8.27.0",
         "eslint-plugin-jest": "^27.1.4",
         "eslint-plugin-react": "^7.31.10",
