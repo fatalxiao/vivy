@@ -12,6 +12,9 @@ import createModelReducer from './reducers/ModelReducer';
 // Utils
 import {isEmptyObject} from './util/Util';
 
+// ActionTypes
+export VivyActionType from './actionTypes/VivyActionType';
+
 /**
  * Handle Vivy hooks in options and plugins.
  * @param options

@@ -3,11 +3,12 @@
  */
 
 // Redux
-import {createStore, applyMiddleware} from 'redux';
+import {legacy_createStore as createStore, applyMiddleware} from 'redux';
 
 // Reducers
 import createRootReducer from '../reducers/RootReducer';
 import VivyReducer from '../reducers/VivyReducer';
+import createVivyOptionReducer from '../reducers/VivyOptionReducer';
 
 /**
  * Create Redux store
@@ -19,7 +20,8 @@ import VivyReducer from '../reducers/VivyReducer';
 export default function createReduxStore(options, middlewares, plugins) {
     return createStore(
         createRootReducer({
-            '@@VIVY': VivyReducer
+            '@@VIVY': VivyReducer,
+            '@@VIVY_OPTION': createVivyOptionReducer(options)
         }),
         (options?.initialState || {}),
         applyMiddleware(
