@@ -105,7 +105,7 @@ export default function createVivyStore(options, plugins) {
             return;
         }
 
-        Object.entries(globalReducers).forEach(([name, reducer]) => {
+        Object.keys(globalReducers).forEach(name => {
             this.dispatch[name] = (params = {}) => this.dispatch({
                 ...params,
                 type: name
@@ -129,7 +129,7 @@ export default function createVivyStore(options, plugins) {
             this.dispatch[nameSpace] = {};
         }
 
-        Object.entries(reducers).forEach(([name, reducer]) => {
+        Object.keys(reducers).forEach(name => {
             this.dispatch[nameSpace][name] = (params = {}) => this.dispatch({
                 ...params,
                 type: `${nameSpace}/${name}`
