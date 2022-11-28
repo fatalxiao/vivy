@@ -1,6 +1,12 @@
 import {
     Reducer, Middleware, MiddlewareAPI, Action, Store, Dispatch
 } from 'redux';
+import VivyActionType from './dist/actionTypes/VivyActionType';
+
+/**
+ * VivyActionType
+ */
+export {VivyActionType};
 
 export interface VivyStore extends Store {
 
