@@ -9,7 +9,7 @@ import createModelActionMiddleware from '../middlewares/ModelActionMiddleware';
 import createReduxStore from './ReduxStore';
 
 // Reducers
-import createRootReducer from '../reducers/RootReducer';
+import createCreateRootReducer from '../reducers/RootReducer';
 
 // Vendors
 import {isEmptyObject} from '../util/Util';
@@ -29,8 +29,11 @@ export default function createVivyStore(options, plugins) {
     // Handle actions in models
     const ModelActionMiddleware = createModelActionMiddleware(modelActions);
 
+    // Get create reducer method
+    const createRootReducer = createCreateRootReducer(options);
+
     // Create origin redux store
-    const reduxStore = createReduxStore(options, [ModelActionMiddleware], plugins);
+    const reduxStore = createReduxStore(createRootReducer(), options, [ModelActionMiddleware], plugins);
 
     /**
      * Vivy store dispatch
@@ -202,6 +205,9 @@ export default function createVivyStore(options, plugins) {
 
         // Model actions
         modelActions,
+
+        // Create reducer
+        createRootReducer,
 
         // Register reducers
         registerReduxReducer,

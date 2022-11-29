@@ -14,10 +14,10 @@ import {combineReducers} from 'redux';
 
 /**
  * Create root reducer
- * @param reducers {Object}
- * @returns {Reducer}
+ * @param options
+ * @returns {function(*): (state: (Object | undefined), action: Object) => Object}
  */
-export default reducers => combineReducers({
+export default options => reducers => combineReducers({
     [VIVY_REDUCER_NAME_SPACE]: VivyReducer,
     [VIVY_OPTION_REDUCER_NAME_SPACE]: createVivyOptionReducer(options),
     ...reducers
