@@ -13,7 +13,11 @@ import createModelReducer from './reducers/ModelReducer';
 import {isEmptyObject} from './util/Util';
 
 // ActionTypes
-export VivyActionType from './actionTypes/VivyActionType';
+export * from './actionTypes/VivyActionType';
+export * from './actionTypes/VivyOptionActionType';
+
+// ReducerNameSpaces
+export * from './reducers/ReducerNameSpace';
 
 /**
  * Handle Vivy hooks in options and plugins.

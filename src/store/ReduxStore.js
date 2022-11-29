@@ -10,6 +10,9 @@ import createRootReducer from '../reducers/RootReducer';
 import VivyReducer from '../reducers/VivyReducer';
 import createVivyOptionReducer from '../reducers/VivyOptionReducer';
 
+// ReducerNameSpaces
+import {VIVY_REDUCER_NAME_SPACE, VIVY_OPTION_REDUCER_NAME_SPACE} from '../reducers/ReducerNameSpace';
+
 /**
  * Create Redux store
  * @param options {Object}
@@ -20,8 +23,8 @@ import createVivyOptionReducer from '../reducers/VivyOptionReducer';
 export default function createReduxStore(options, middlewares, plugins) {
     return createStore(
         createRootReducer({
-            '@@VIVY': VivyReducer,
-            '@@VIVY_OPTION': createVivyOptionReducer(options)
+            [VIVY_REDUCER_NAME_SPACE]: VivyReducer,
+            [VIVY_OPTION_REDUCER_NAME_SPACE]: createVivyOptionReducer(options)
         }),
         (options?.initialState || {}),
         applyMiddleware(
