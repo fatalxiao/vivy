@@ -1,6 +1,6 @@
 'use strict';
 
-import Vivy from '../src';
+import Vivy, {VIVY_OPTION_REDUCER_NAME_SPACE} from '../src';
 
 test('Vivy option', () => {
 
@@ -31,7 +31,7 @@ test('Vivy option', () => {
     const store = vivy.createStore();
 
     expect(
-        store.getState()['@@VIVY_OPTION']
+        store.getState()[VIVY_OPTION_REDUCER_NAME_SPACE]
     ).toEqual(
         option
     );
