@@ -3,7 +3,7 @@
  */
 
 // Action Types
-import {VIVY_OPTION_UPDATE} from '../actionTypes/VivyActionType';
+import {VIVY_OPTION_UPDATE} from '../actionTypes/VivyOptionActionType';
 
 /**
  * Vivy Option Reducer
