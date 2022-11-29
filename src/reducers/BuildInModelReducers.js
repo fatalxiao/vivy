@@ -2,6 +2,9 @@
  * @file BuildInModelReducers.js
  */
 
+/**
+ * These reducers will be injected into each model
+ */
 export default {
 
     /**

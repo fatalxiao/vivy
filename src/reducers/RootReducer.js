@@ -2,6 +2,13 @@
  * @file RootReducer.js
  */
 
+// Reducers
+import VivyReducer from './VivyReducer';
+import createVivyOptionReducer from './VivyOptionReducer';
+
+// ReducerNameSpaces
+import {VIVY_OPTION_REDUCER_NAME_SPACE, VIVY_REDUCER_NAME_SPACE} from './ReducerNameSpace';
+
 // Vendors
 import {combineReducers} from 'redux';
 
@@ -11,5 +18,7 @@ import {combineReducers} from 'redux';
  * @returns {Reducer}
  */
 export default reducers => combineReducers({
+    [VIVY_REDUCER_NAME_SPACE]: VivyReducer,
+    [VIVY_OPTION_REDUCER_NAME_SPACE]: createVivyOptionReducer(options),
     ...reducers
 });

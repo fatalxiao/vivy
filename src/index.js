@@ -544,15 +544,10 @@ export default function Vivy(opts) {
     }
 
     return {
-
         options,
-
         plugins,
-
         use,
-
         createStore
-
     };
 
 }
