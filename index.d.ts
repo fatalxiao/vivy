@@ -5,13 +5,13 @@ import {
 /**
  * VivyActionTypes
  */
-export * from './dist/actionTypes/VivyActionType';
-export * from './dist/actionTypes/VivyOptionActionType';
+export {VIVY_UPDATE} from './dist/actionTypes/VivyActionType';
+export {VIVY_OPTION_UPDATE} from './dist/actionTypes/VivyOptionActionType';
 
 /**
  * VivyReducerNameSpace
  */
-export * from './dist/reducers/ReducerNameSpace';
+export {VIVY_REDUCER_NAME_SPACE, VIVY_OPTION_REDUCER_NAME_SPACE} from './dist/reducers/ReducerNameSpace';
 
 export interface VivyStore extends Store {
 
