@@ -17,8 +17,7 @@ gulp.task('clean', () =>
 gulp.task('build', () =>
     gulp.src('./src/**/*.js')
         .pipe(babel({
-            presets: [['@babel/env', {modules: 'commonjs'}]],
-            plugins: ['@babel/plugin-transform-runtime']
+            presets: [['@babel/env', {modules: 'commonjs'}]]
         }))
         .pipe(gulp.dest('./dist'))
 );

@@ -2,10 +2,6 @@
  * @file .babelrc.js
  */
 
-const plugins = [
-    '@babel/plugin-proposal-export-default-from'
-];
-
 module.exports = {
     'env': {
 
@@ -19,15 +15,13 @@ module.exports = {
                         corejs: 3
                     }
                 ]
-            ],
-            plugins
+            ]
         },
 
         'test': {
             'presets': [
                 '@babel/preset-env'
-            ],
-            plugins
+            ]
         }
 
     }
