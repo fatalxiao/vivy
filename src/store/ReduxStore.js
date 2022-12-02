@@ -3,11 +3,11 @@
  */
 
 // Redux
-import {legacy_createStore as createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 
 /**
  * Create Redux store
- * @param rootReducer {Object}
+ * @param rootReducer {Reducer}
  * @param options {Object}
  * @param middlewares {Array}
  * @param plugins {Array}
