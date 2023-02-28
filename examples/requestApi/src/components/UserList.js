@@ -4,7 +4,7 @@
 
 import React, {useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {connect} from 'react-vivy';
 
 // Styles
 import './UserList.scss';

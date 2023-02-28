@@ -125,7 +125,7 @@ $ npm run start
 ```js
 import React from 'react';
 import {render} from 'react-dom';
-import {Provider} from 'react-redux';
+import {Provider} from 'react-vivy';
 
 // Import Vivy
 import Vivy from 'vivy';
@@ -299,7 +299,7 @@ export default connect(state => ({
 ```js
 import React, {useCallback} from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
+import {connect} from 'react-vivy';
 import {bindModelActionCreators} from 'vivy';
 
 const App = ({
@@ -466,7 +466,7 @@ Example:
 
 ```js
 import React from 'react';
-import {connect} from 'react-redux';
+import {connect} from 'react-vivy';
 import {bindModelActionCreators} from 'vivy';
 
 const App = ({
