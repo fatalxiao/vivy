@@ -6,6 +6,8 @@
 
 [redux-url]: https://github.com/reduxjs/redux
 
+[vivy-url]: https://github.com/fatalxiao/vivy
+
 [counter-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/counter
 
 [calculation-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/calculation
@@ -19,6 +21,14 @@
 [pieb-with-dpe-frontend-url]: https://github.com/fatalxiao/pieb-with-dpe-frontend
 
 [connected-react-router-url]: https://github.com/supasate/connected-react-router
+
+[react-redux-url]: https://github.com/reduxjs/react-redux
+
+[react-vivy-url]: https://github.com/fatalxiao/react-vivy
+
+[react-vivy-npm-image]: https://img.shields.io/npm/v/react-vivy.svg?style=flat-square
+
+[react-vivy-npm-url]: https://npmjs.org/package/react-vivy
 
 [router-plugin-url]: https://github.com/fatalxiao/vivy-router
 
@@ -71,6 +81,7 @@ dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement
 * [Examples](#examples)
     * [Examples in repository](#examples-in-repository)
     * [Complete and real project example](#complete-and-real-project-example)
+* [React bindings](#react-bindings)
 * [Plugins](#plugins)
 * [Documentation](#documentation)
     * [Basic usage](#basic-usage)
@@ -107,6 +118,12 @@ $ npm run start
 ### Complete and real project example
 
 * [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
+
+## React bindings
+
+| Plugin                       | Version                                                    | Description                                                                  |
+|:-----------------------------|:-----------------------------------------------------------|:-----------------------------------------------------------------------------|
+| [react-vivy][react-vivy-url] | [![NPM Version][react-vivy-npm-image]][react-vivy-npm-url] | React bindings for [Vivy][vivy-url] based on [react-redux][react-redux-url]. |
 
 ## Plugins
 
