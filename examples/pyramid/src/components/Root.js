@@ -3,6 +3,7 @@
  */
 
 import React, {useEffect} from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {bindModelActionCreators} from 'vivy';
 
@@ -33,6 +34,10 @@ const Root = ({
         </div>
     );
 
+};
+
+Root.propTypes = {
+    random: PropTypes.func
 };
 
 export default connect(null, dispatch => bindModelActionCreators({

@@ -1,5 +1,5 @@
 /**
- * @file calculation.js
+ * @file calculationModel.js
  */
 
 export default {

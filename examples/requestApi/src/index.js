@@ -10,8 +10,8 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Sync component and model
-import UserList from './modules/UserList/containers/UserList';
-import userListModel from './modules/UserList/models/userList';
+import UserList from './components/UserList';
+import userListModel from './models/userListModel';
 
 // Create vivy
 const vivy = Vivy();

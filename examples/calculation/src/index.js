@@ -10,8 +10,8 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Component and model
-import Calculation from './modules/Calculation/containers/Calculation';
-import calculationModel from './modules/Calculation/models/calculation';
+import Calculation from './Calculation';
+import calculationModel from './calculationModel';
 
 // Create vivy
 const vivy = Vivy();

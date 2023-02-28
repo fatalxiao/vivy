@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 // Components
-import A from '../../A/containers/A';
-import B from '../../B/containers/B';
-import C from '../../C/containers/C';
+import A from './A';
+import B from './B';
+import C from './C';
 
 // Styles
 import './Root.scss';

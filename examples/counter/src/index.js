@@ -10,8 +10,8 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Component and model
-import Counter from './modules/Counter/containers/Counter';
-import counterModel from './modules/Counter/models/counter';
+import Counter from './Counter';
+import counterModel from './counterModel';
 
 // Create vivy
 const vivy = Vivy();

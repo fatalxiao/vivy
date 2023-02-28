@@ -10,11 +10,11 @@ import {Provider} from 'react-redux';
 import Vivy from 'vivy';
 
 // Sync component and model
-import Root from './modules/Root/containers/Root';
-import rootModel from './modules/Root/models/root';
-import aModel from './modules/A/models/a';
-import bModel from './modules/B/models/b';
-import cModel from './modules/C/models/c';
+import Root from './components/Root';
+import rootModel from './models/rootModel';
+import aModel from './models/aModel';
+import bModel from './models/bModel';
+import cModel from './models/cModel';
 
 // Create vivy
 const vivy = Vivy();
