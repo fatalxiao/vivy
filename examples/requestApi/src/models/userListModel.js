@@ -1,5 +1,5 @@
 /**
- * @file userList.js
+ * @file userListModel.js
  */
 
 // Apis

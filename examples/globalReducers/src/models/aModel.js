@@ -1,5 +1,5 @@
 /**
- * @file a.js
+ * @file aModel.js
  */
 
 export default {

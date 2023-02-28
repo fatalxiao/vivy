@@ -1,5 +1,5 @@
 /**
- * @file counter.js
+ * @file counterModel.js
  */
 
 export default {

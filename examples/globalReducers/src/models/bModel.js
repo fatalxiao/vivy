@@ -1,5 +1,5 @@
 /**
- * @file b.js
+ * @file bModel.js
  */
 
 export default {

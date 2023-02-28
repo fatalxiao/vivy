@@ -1,5 +1,5 @@
 /**
- * @file pyramid.js
+ * @file pyramidModel.js
  */
 
 export default {

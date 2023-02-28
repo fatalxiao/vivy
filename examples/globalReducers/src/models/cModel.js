@@ -1,5 +1,5 @@
 /**
- * @file c.js
+ * @file cModel.js
  */
 
 export default {
