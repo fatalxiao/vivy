@@ -362,6 +362,8 @@ const App = () => {
 export default App;
 ```
 
+For more hooks usage documents, please check [react-vivy][react-vivy-url].
+
 ### Methods
 
 #### registerReducer
