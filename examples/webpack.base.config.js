@@ -2,26 +2,6 @@
  * @file webpack.base.config.js
  */
 
-/**
- * css loader config
- * @type {[]}
- */
-const cssLoaderConfig = ['style-loader', {
-    loader: 'css-loader',
-    options: {
-        importLoaders: 1
-    }
-}, {
-    loader: 'postcss-loader',
-    options: {
-        postcssOptions: {
-            plugins: [
-                'postcss-preset-env'
-            ]
-        }
-    }
-}];
-
 module.exports = {
 
     mode: 'development',
@@ -29,7 +9,7 @@ module.exports = {
     devtool: 'inline-source-map',
 
     resolve: {
-        extensions: ['.js', '.scss']
+        extensions: ['.js']
     },
 
     module: {
@@ -40,14 +20,6 @@ module.exports = {
             options: {
                 cacheDirectory: true
             }
-        }, {
-            test: /\.scss$/,
-            use: [...cssLoaderConfig, {
-                loader: 'sass-loader'
-            }]
-        }, {
-            test: /\.css$/,
-            use: cssLoaderConfig
         }]
     }
 
