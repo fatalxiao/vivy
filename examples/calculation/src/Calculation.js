@@ -7,8 +7,22 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-vivy';
 import {bindModelActionCreators} from 'vivy';
 
-// Styles
-import './Calculation.scss';
+const wrapperStyle = {
+    display: 'flex',
+    width: 200,
+    flexDirection: 'column',
+    alignItems: 'flex-end'
+};
+
+const inputStyle = {
+    padding: 8,
+    margin: 8,
+    textAlign: 'right'
+};
+
+const hrStyle = {
+    width: '100%'
+};
 
 const Calculation = ({
     value1, value2, value3, value4,
@@ -81,30 +95,32 @@ const Calculation = ({
     ]);
 
     return (
-        <div className="calculation">
-            <div className="row">
-                <input value={value1}
+        <div style={wrapperStyle}>
+            <div>
+                <input style={inputStyle}
+                       value={value1}
                        onChange={handleValue1Change}/>
             </div>
-            <div className="row">
+            <div>
                 +
-                <input value={value2}
+                <input style={inputStyle}
+                       value={value2}
                        onChange={handleValue2Change}/>
             </div>
-            <div className="row">
+            <div>
                 +
-                <input value={value3}
+                <input style={inputStyle}
+                       value={value3}
                        onChange={handleValue3Change}/>
             </div>
-            <div className="row">
+            <div>
                 +
-                <input value={value4}
+                <input style={inputStyle}
+                       value={value4}
                        onChange={handleValue4Change}/>
             </div>
-            <hr/>
-            <div className="row">
-                {value1 + value2 + value3 + value4}
-            </div>
+            <hr style={hrStyle}/>
+            {value1 + value2 + value3 + value4}
         </div>
     );
 
