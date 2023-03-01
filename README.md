@@ -270,7 +270,33 @@ const yourVivyModel = {
 
 In Vivy, you can use three ways to dispatch an action.
 
-1. Use `store.dispatch` function
+1. Use hook "useModel" from [react-vivy][react-vivy-url].
+
+```js
+import {useModel} from 'react-vivy';
+
+const App = () => {
+
+    // ...
+
+    /**
+     * Get state, actions and reducers from model using hook "useModel".
+     */
+    const [modelState, modelActions] = useModel('MODEL_OR_NAME_SPACE');
+
+    /**
+     * Call the action or reducer.
+     */
+    modelActions();
+
+    // ...
+
+};
+
+export default App;
+```
+
+2. Use `store.dispatch` function.
 
 ```js
 dispatch({
@@ -279,7 +305,7 @@ dispatch({
 });
 ```
 
-2. Use `store.dispatch` chain function
+3. Use `store.dispatch` chain function.
 
 ```js
 dispatch.MODEL_NAME_SPACE.ACTION_OR_REDUCER_NAME({
@@ -287,7 +313,7 @@ dispatch.MODEL_NAME_SPACE.ACTION_OR_REDUCER_NAME({
 });
 ```
 
-3. Use `bindModelActionCreators` to create an action dispatcher
+4. Use `bindModelActionCreators` to create an action dispatcher.
 
 ```js
 import {bindModelActionCreators} from 'vivy';
