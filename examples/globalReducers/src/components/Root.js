@@ -2,72 +2,44 @@
  * @file Root.js
  */
 
-import React, {useCallback} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
+import React from 'react';
+import {useModel, useGlobalReducers} from 'react-vivy';
 
 // Components
 import A from './A';
 import B from './B';
 import C from './C';
 
-const Root = ({
-    value,
-    dispatch
-}) => {
+const Root = () => {
 
     /**
-     * Update input value to root model
-     * @type {(function(*): void)|*}
+     * Get state and reducer from model "root" using hook "useModel".
      */
-    const handleChange = useCallback(e => {
-        dispatch?.({
-            type: 'root/update',
-            value: e.target.value
-        });
-    }, [
-        dispatch
-    ]);
+    const [value, {update}] = useModel('root');
 
     /**
-     * Sync value to all "sync" global reducers
-     * @type {(function(): void)|*}
+     * Get global reducer using hook "useGlobalReducers".
      */
-    const handleSync = useCallback(() => {
-        dispatch?.({
-            type: 'sync',
-            value
-        });
-    }, [
-        value,
-        dispatch
-    ]);
+    const {sync} = useGlobalReducers();
 
     return (
         <>
 
             <input value={value}
-                   onChange={handleChange}/>
-            <button onClick={handleSync}>
+                   onChange={e => update?.({
+                       value: e.target.value
+                   })}/>
+            <button onClick={() => sync({value})}>
                 Sync value
             </button>
 
-            <div>
-                <A/>
-                <B/>
-                <C/>
-            </div>
+            <A/>
+            <B/>
+            <C/>
 
         </>
     );
 
 };
 
-Root.propTypes = {
-    value: PropTypes.string,
-    dispatch: PropTypes.func
-};
-
-export default connect(state => ({
-    value: state.root
-}))(Root);
+export default Root;

@@ -3,26 +3,26 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
+import {useModelState} from 'react-vivy';
 
-const A = ({
-    value
-}) => (
-    <div>
-        <h1>
-            Module A
-        </h1>
-        <div>
-            {value}
-        </div>
-    </div>
-);
+const A = () => {
 
-A.propTypes = {
-    value: PropTypes.string
+    /**
+     * Get state from model using hook "useModelState".
+     */
+    const value = useModelState('a');
+
+    return (
+        <>
+            <h1>
+                Module A
+            </h1>
+            <div>
+                {value}
+            </div>
+        </>
+    );
+
 };
 
-export default connect(state => ({
-    value: state.a
-}))(A);
+export default A;
