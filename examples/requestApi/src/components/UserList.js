@@ -6,9 +6,6 @@ import React, {useState, useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-vivy';
 
-// Styles
-import './UserList.scss';
-
 const UserList = ({
     data, getUserListActionType,
     dispatch
@@ -57,7 +54,7 @@ const UserList = ({
         <div className="user-list">
 
             <div className="search">
-                Search:
+                Search:&nbsp;
                 <input value={searchText}
                        disabled={getUserListActionType === 'userList/getUserListRequest'}
                        onChange={handleChange}/>
