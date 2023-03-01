@@ -11,7 +11,7 @@ import Vivy from 'vivy';
 
 // Sync component and model
 import UserList from './components/UserList';
-import userListModel from './models/userListModel';
+import userListModel from './models/userList';
 
 // Create vivy
 const vivy = Vivy();

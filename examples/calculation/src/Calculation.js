@@ -30,7 +30,7 @@ const Calculation = ({
 }) => {
 
     /**
-     * Get state and reducer from model "calculation" using hook "useModel".
+     * Get state and reducer from model using hook "useModel".
      */
     const [{value0}, {updateValue0}] = useModel('calculation');
 

@@ -23,7 +23,7 @@ const buttonStyle = {
 const Counter = () => {
 
     /**
-     * Get state and reducer from model "counter" using hook "useModel".
+     * Get state and reducer from model using hook "useModel".
      */
     const [value, {plus, minus, update}] = useModel('counter');
 

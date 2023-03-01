@@ -13,7 +13,7 @@ import C from './C';
 const Root = () => {
 
     /**
-     * Get state and reducer from model "root" using hook "useModel".
+     * Get state and reducer from model using hook "useModel".
      */
     const [value, {update}] = useModel('root');
 

@@ -3,13 +3,14 @@
  */
 
 import React, {useState, useCallback, useEffect} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
+import {useModel} from 'react-vivy';
 
-const UserList = ({
-    data, getUserListActionType,
-    dispatch
-}) => {
+const UserList = () => {
+
+    /**
+     * Get state and reducer from model using hook "useModel".
+     */
+    const [{data, getUserListActionType}, {getUserList}] = useModel('userList');
 
     /**
      * Search text state
@@ -20,14 +21,13 @@ const UserList = ({
      * Query user list by search text
      * @type {(function(): void)|*}
      */
-    const getUserList = useCallback(() => {
-        dispatch?.({
-            type: 'userList/getUserList',
+    const handleGetUserList = useCallback(() => {
+        getUserList?.({
             searchText
         });
     }, [
         searchText,
-        dispatch
+        getUserList
     ]);
 
     /**
@@ -36,18 +36,18 @@ const UserList = ({
      */
     const handleChange = useCallback(e => {
         setSearchText(e.target.value);
-        getUserList();
+        handleGetUserList();
     }, [
-        getUserList
+        handleGetUserList
     ]);
 
     /**
      * Query user list when init
      */
     useEffect(() => {
-        getUserList();
+        handleGetUserList();
     }, [
-        getUserList
+        handleGetUserList
     ]);
 
     return (
@@ -85,16 +85,4 @@ const UserList = ({
 
 };
 
-UserList.propTypes = {
-
-    data: PropTypes.array,
-    getUserListActionType: PropTypes.string,
-
-    dispatch: PropTypes.func
-
-};
-
-export default connect(state => ({
-    data: state.userList.data,
-    getUserListActionType: state.userList.getUserListActionType
-}))(UserList);
+export default UserList;
