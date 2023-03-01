@@ -6,8 +6,20 @@ import React, {useState, useCallback} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-vivy';
 
-// Styles
-import './Counter.scss';
+const wrapperStyle = {
+    margin: 8
+};
+
+const inputStyle = {
+    width: 207,
+    padding: 8
+};
+
+const buttonStyle = {
+    width: 100,
+    height: 32,
+    marginLeft: 8
+};
 
 const Counter = ({
     value,
@@ -66,30 +78,37 @@ const Counter = ({
     ]);
 
     return (
-        <div>
+        <>
 
-            <div className="counter">
+            <div style={wrapperStyle}>
 
                 Current value: {value}
 
-                <button onClick={handlePlus}>+1</button>
-                <button onClick={handleMinus}>-1</button>
+                <button style={buttonStyle}
+                        onClick={handlePlus}>
+                    +1
+                </button>
+                <button style={buttonStyle}
+                        onClick={handleMinus}>
+                    -1
+                </button>
 
             </div>
 
-            <div className="counter-updater">
+            <div style={wrapperStyle}>
 
-                <input value={inputValue}
+                <input style={inputStyle}
+                       value={inputValue}
                        onChange={handleChange}/>
 
-                <button className="update-button"
+                <button style={buttonStyle}
                         onClick={handleUpdate}>
                     Update value
                 </button>
 
             </div>
 
-        </div>
+        </>
     );
 
 };
