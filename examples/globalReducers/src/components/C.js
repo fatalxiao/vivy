@@ -10,12 +10,12 @@ const C = ({
     value
 }) => (
     <div>
-        <h2>
+        <h1>
             Module C
-        </h2>
-        <h3>
+        </h1>
+        <div>
             {value}
-        </h3>
+        </div>
     </div>
 );
 

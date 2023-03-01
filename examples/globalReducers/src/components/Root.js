@@ -11,9 +11,6 @@ import A from './A';
 import B from './B';
 import C from './C';
 
-// Styles
-import './Root.scss';
-
 const Root = ({
     value,
     dispatch
@@ -47,26 +44,21 @@ const Root = ({
     ]);
 
     return (
-        <div className="root">
+        <>
+
+            <input value={value}
+                   onChange={handleChange}/>
+            <button onClick={handleSync}>
+                Sync value
+            </button>
 
             <div>
-
-                <input value={value}
-                       onChange={handleChange}/>
-
-                <button onClick={handleSync}>
-                    Sync value
-                </button>
-
-            </div>
-
-            <div className="modules">
                 <A/>
                 <B/>
                 <C/>
             </div>
 
-        </div>
+        </>
     );
 
 };
