@@ -5,12 +5,26 @@
 export default {
     nameSpace: 'calculation',
     state: {
+        value0: 1,
         value1: 1,
         value2: 1,
         value3: 1,
         value4: 1
     },
     reducers: {
+
+        /**
+         * Update value0
+         * @param state
+         * @param value
+         * @returns {*&{value0}}
+         */
+        updateValue0: (state, {value}) => {
+            return {
+                ...state,
+                value0: value
+            };
+        },
 
         /**
          * Update value1

@@ -2,9 +2,9 @@
  * @file Calculation.js
  */
 
-import React, {useCallback} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
+import {connect, useModel} from 'react-vivy';
 import {bindModelActionCreators} from 'vivy';
 
 const wrapperStyle = {
@@ -29,98 +29,57 @@ const Calculation = ({
     dispatch, updateValue1
 }) => {
 
-    /**
-     * Update value1 to model
-     * @type {(function(*): void)|*}
-     */
-    const handleValue1Change = useCallback(e => {
-
-        // Use "updateValue1" to dispatch an action by using "bindModelActionCreators"
-        updateValue1?.({
-            value: +e?.target?.value
-        });
-
-    }, [
-        updateValue1
-    ]);
-
-    /**
-     * Update value2 to model
-     * @type {(function(*): void)|*}
-     */
-    const handleValue2Change = useCallback(e => {
-
-        // Use "dispatch" to dispatch an action
-        dispatch?.({
-            type: 'calculation/updateValue2',
-            value: +e?.target?.value
-        });
-
-    }, [
-        dispatch
-    ]);
-
-    /**
-     * Update value3 to model
-     * @type {(function(*): void)|*}
-     */
-    const handleValue3Change = useCallback(e => {
-
-        // Use "dispatch.nameSpace.reducerName" to dispatch an action
-        dispatch.calculation.updateValue3({
-            value: +e?.target?.value
-        });
-
-    }, [
-        dispatch
-    ]);
-
-    /**
-     * Update value4 to model
-     * @type {(function(*): void)|*}
-     */
-    const handleValue4Change = useCallback(e => {
-
-        // Use build-in "setState reducer" update model state
-        dispatch?.({
-            type: 'calculation/setState',
-            nextState: state => ({
-                ...state,
-                value4: +e?.target?.value
-            })
-        });
-
-    }, [
-        dispatch
-    ]);
+    // Get state and reducer from model "calculation" using hook "useModel".
+    const [{value0}, {updateValue0}] = useModel('calculation');
 
     return (
         <div style={wrapperStyle}>
             <div>
+                +
+                <input style={inputStyle}
+                       value={value0}
+                       onChange={e => updateValue0?.({
+                           value: +e?.target?.value
+                       })}/>
+            </div>
+            <div>
                 <input style={inputStyle}
                        value={value1}
-                       onChange={handleValue1Change}/>
+                       onChange={e => updateValue1?.({
+                           value: +e?.target?.value
+                       })}/>
             </div>
             <div>
                 +
                 <input style={inputStyle}
                        value={value2}
-                       onChange={handleValue2Change}/>
+                       onChange={e => dispatch?.({
+                           type: 'calculation/updateValue2',
+                           value: +e?.target?.value
+                       })}/>
             </div>
             <div>
                 +
                 <input style={inputStyle}
                        value={value3}
-                       onChange={handleValue3Change}/>
+                       onChange={e => dispatch.calculation.updateValue3({
+                           value: +e?.target?.value
+                       })}/>
             </div>
             <div>
                 +
                 <input style={inputStyle}
                        value={value4}
-                       onChange={handleValue4Change}/>
+                       onChange={e => dispatch?.({
+                           type: 'calculation/setState',
+                           nextState: state => ({
+                               ...state,
+                               value4: +e?.target?.value
+                           })
+                       })}/>
             </div>
             <hr style={hrStyle}/>
-            {value1 + value2 + value3 + value4}
+            {value0 + value1 + value2 + value3 + value4}
         </div>
     );
 
