@@ -3,32 +3,31 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
-import {bindModelActionCreators} from 'vivy';
+import {useModelActions} from 'react-vivy';
 
-const Actions = ({
-    random, check
-}) => (
-    <>
-        <button style={{
-            marginRight: 16
-        }}
-                onClick={random}>
-            Reset
-        </button>
-        <button onClick={check}>
-            Check
-        </button>
-    </>
-);
+const Actions = () => {
 
-Actions.propTypes = {
-    random: PropTypes.func,
-    check: PropTypes.func
+    /**
+     * Get actions and reducers from model using hook "useModelActions".
+     */
+    const {random, check} = useModelActions('pyramid');
+
+    return (
+        <div style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: 184,
+            paddingLeft: 8
+        }}>
+            <button onClick={random}>
+                Reset
+            </button>
+            <button onClick={check}>
+                Check
+            </button>
+        </div>
+    );
+
 };
 
-export default connect(null, dispatch => bindModelActionCreators({
-    random: 'pyramid/random',
-    check: 'pyramid/check'
-}, dispatch))(Actions);
+export default Actions;

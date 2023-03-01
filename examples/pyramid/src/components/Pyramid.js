@@ -2,30 +2,15 @@
  * @file Pyramid.js
  */
 
-import React, {useCallback} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
-import {bindModelActionCreators} from 'vivy';
+import React from 'react';
+import {useModel} from 'react-vivy';
 
-// Vendors
-import classNames from 'classnames';
-
-const Pyramid = ({
-    data, errors,
-    update
-}) => {
+const Pyramid = () => {
 
     /**
-     * Check whether input value is error
-     * @type {function(*, *): boolean}
+     * Get state, actions and reducers from model using hook "useModel".
      */
-    const isError = useCallback((rowIndex, colIndex) => {
-        return errors.findIndex(item =>
-            item.rowIndex === rowIndex && item.colIndex === colIndex
-        ) !== -1;
-    }, [
-        errors
-    ]);
+    const [{data, errors}, {update}] = useModel('pyramid');
 
     return (
         <div style={{
@@ -45,14 +30,14 @@ const Pyramid = ({
                         {
                             row.map((value, colIndex) =>
                                 <input key={`${rowIndex}-${colIndex}`}
-                                       className={classNames('pyramid-cell', {
-                                           error: isError(rowIndex, colIndex)
-                                       })}
                                        style={{
                                            width: 32,
                                            height: 32,
                                            marginLeft: 8,
-                                           textAlign: 'center'
+                                           textAlign: 'center',
+                                           borderColor: errors.find(item =>
+                                               item.rowIndex === rowIndex && item.colIndex === colIndex
+                                           ) ? '#f00' : undefined
                                        }}
                                        value={value}
                                        onChange={e => update({
@@ -70,18 +55,4 @@ const Pyramid = ({
 
 };
 
-Pyramid.propTypes = {
-
-    data: PropTypes.array,
-    errors: PropTypes.array,
-
-    update: PropTypes.func
-
-};
-
-export default connect(state => ({
-    data: state.pyramid.data,
-    errors: state.pyramid.errors
-}), dispatch => bindModelActionCreators({
-    update: 'pyramid/update'
-}, dispatch))(Pyramid);
+export default Pyramid;

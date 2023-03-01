@@ -11,7 +11,7 @@ import Vivy from 'vivy';
 
 // Component and model
 import Root from './components/Root';
-import pyramidModel from './models/pyramidModel';
+import pyramidModel from './models/pyramid';
 
 // Create vivy
 const vivy = Vivy();
