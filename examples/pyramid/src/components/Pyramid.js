@@ -10,9 +10,6 @@ import {bindModelActionCreators} from 'vivy';
 // Vendors
 import classNames from 'classnames';
 
-// Styles
-import './Pyramid.scss';
-
 const Pyramid = ({
     data, errors,
     update
@@ -31,17 +28,32 @@ const Pyramid = ({
     ]);
 
     return (
-        <div className="pyramid">
+        <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: 192
+        }}>
             {
                 data.map((row, rowIndex) =>
                     <div key={rowIndex}
-                         className="pyramid-row">
+                         style={{
+                             display: 'flex',
+                             justifyContent: 'center',
+                             alignContent: 'center',
+                             marginTop: 8
+                         }}>
                         {
                             row.map((value, colIndex) =>
                                 <input key={`${rowIndex}-${colIndex}`}
                                        className={classNames('pyramid-cell', {
                                            error: isError(rowIndex, colIndex)
                                        })}
+                                       style={{
+                                           width: 32,
+                                           height: 32,
+                                           marginLeft: 8,
+                                           textAlign: 'center'
+                                       }}
                                        value={value}
                                        onChange={e => update({
                                            rowIndex,

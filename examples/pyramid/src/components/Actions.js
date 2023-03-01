@@ -7,20 +7,20 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-vivy';
 import {bindModelActionCreators} from 'vivy';
 
-// Styles
-import './Actions.scss';
-
 const Actions = ({
     random, check
 }) => (
-    <div className="actions">
-        <button onClick={random}>
+    <>
+        <button style={{
+            marginRight: 16
+        }}
+                onClick={random}>
             Reset
         </button>
         <button onClick={check}>
             Check
         </button>
-    </div>
+    </>
 );
 
 Actions.propTypes = {

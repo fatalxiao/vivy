@@ -11,9 +11,6 @@ import {bindModelActionCreators} from 'vivy';
 import Pyramid from './Pyramid';
 import Actions from './Actions';
 
-// Styles
-import './Root.scss';
-
 const Root = ({
     random
 }) => {
@@ -29,8 +26,8 @@ const Root = ({
 
     return (
         <div className="root">
-            <Pyramid/>
             <Actions/>
+            <Pyramid/>
         </div>
     );
 
