@@ -3,8 +3,7 @@
  */
 
 import React, {useState, useCallback} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
+import {useModel} from 'react-vivy';
 
 const wrapperStyle = {
     margin: 8
@@ -21,34 +20,12 @@ const buttonStyle = {
     marginLeft: 8
 };
 
-const Counter = ({
-    value,
-    dispatch
-}) => {
+const Counter = () => {
 
     /**
-     * Plus 1
-     * @type {(function(): void)|*}
+     * Get state and reducer from model "counter" using hook "useModel".
      */
-    const handlePlus = useCallback(() => {
-        dispatch?.({
-            type: 'counter/plus'
-        });
-    }, [
-        dispatch
-    ]);
-
-    /**
-     * Minus 1
-     * @type {(function(): void)|*}
-     */
-    const handleMinus = useCallback(() => {
-        dispatch?.({
-            type: 'counter/minus'
-        });
-    }, [
-        dispatch
-    ]);
+    const [{value}, {plus, minus, update}] = useModel('counter');
 
     /**
      * Input value state
@@ -63,20 +40,6 @@ const Counter = ({
         setInputValue(+e.target.value);
     }, []);
 
-    /**
-     * Update input value to model
-     * @type {(function(): void)|*}
-     */
-    const handleUpdate = useCallback(() => {
-        dispatch?.({
-            type: 'counter/update',
-            nextValue: inputValue
-        });
-    }, [
-        inputValue,
-        dispatch
-    ]);
-
     return (
         <>
 
@@ -85,11 +48,11 @@ const Counter = ({
                 Current value: {value}
 
                 <button style={buttonStyle}
-                        onClick={handlePlus}>
+                        onClick={plus}>
                     +1
                 </button>
                 <button style={buttonStyle}
-                        onClick={handleMinus}>
+                        onClick={minus}>
                     -1
                 </button>
 
@@ -102,7 +65,7 @@ const Counter = ({
                        onChange={handleChange}/>
 
                 <button style={buttonStyle}
-                        onClick={handleUpdate}>
+                        onClick={() => update({nextValue: inputValue})}>
                     Update value
                 </button>
 
@@ -113,11 +76,4 @@ const Counter = ({
 
 };
 
-Counter.propTypes = {
-    value: PropTypes.number,
-    dispatch: PropTypes.func
-};
-
-export default connect(state => ({
-    value: state.counter
-}))(Counter);
+export default Counter;

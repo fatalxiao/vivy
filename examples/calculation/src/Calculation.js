@@ -29,7 +29,9 @@ const Calculation = ({
     dispatch, updateValue1
 }) => {
 
-    // Get state and reducer from model "calculation" using hook "useModel".
+    /**
+     * Get state and reducer from model "calculation" using hook "useModel".
+     */
     const [{value0}, {updateValue0}] = useModel('calculation');
 
     return (
