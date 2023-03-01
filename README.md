@@ -268,7 +268,7 @@ const yourVivyModel = {
 
 ### Vivy store dispatcher
 
-In Vivy, you can use three ways to dispatch an action.
+In Vivy, you can use 4 ways to dispatch an action.
 
 1. Use hook "useModel" from [react-vivy][react-vivy-url].
 
@@ -340,43 +340,26 @@ export default connect(state => ({
 ### Use Vivy in Component
 
 ```js
-import React, {useCallback} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
-import {bindModelActionCreators} from 'vivy';
+import React from 'react';
+import {useModel} from 'react-vivy';
 
-const App = ({
-    value, updateValue
-}) => {
+const App = () => {
 
     /**
-     * Update value to state.
+     * Get state, actions and reducers from model using hook "useModel".
      */
-    const handleChange = useCallback(e => {
-        updateValue({
-            value: e.target.value
-        });
-    }, [
-        updateValue
-    ]);
+    const [{value}, {updateValue}] = useModel('MODEL_OR_NAME_SPACE');
 
     return (
         <input value={value}
-               onChange={handleChange}/>
+               onChange={e => updateValue({
+                   value: e.target.value
+               })}/>
     );
 
-}
-
-App.propTypes = {
-    value: PropTypes.string,
-    updateValue: PropTypes.func
 };
 
-export default connect(state => ({
-    value: state.yourVivyModel.value // Get value from state.
-}), dispatch => bindModelActionCreators({
-    updateValue: 'yourVivyModel/updateValue' // Create action or reducer dispatcher.
-}, dispatch))(App);
+export default App;
 ```
 
 ### Methods
