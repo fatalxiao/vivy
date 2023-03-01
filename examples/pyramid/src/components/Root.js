@@ -3,17 +3,18 @@
  */
 
 import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-vivy';
-import {bindModelActionCreators} from 'vivy';
+import {useModelActions} from 'react-vivy';
 
 // Components
 import Pyramid from './Pyramid';
 import Actions from './Actions';
 
-const Root = ({
-    random
-}) => {
+const Root = () => {
+
+    /**
+     * Get actions and reducers from model using hook "useModelActions".
+     */
+    const {random} = useModelActions('pyramid');
 
     /**
      * Init value
@@ -25,18 +26,12 @@ const Root = ({
     ]);
 
     return (
-        <div className="root">
+        <>
             <Actions/>
             <Pyramid/>
-        </div>
+        </>
     );
 
 };
 
-Root.propTypes = {
-    random: PropTypes.func
-};
-
-export default connect(null, dispatch => bindModelActionCreators({
-    random: 'pyramid/random'
-}, dispatch))(Root);
+export default Root;
