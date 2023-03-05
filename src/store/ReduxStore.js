@@ -3,7 +3,7 @@
  */
 
 // Redux
-import {legacy_createStore as createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 
 /**
  * Create Redux store
