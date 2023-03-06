@@ -18,7 +18,7 @@
 
 [pyramid-example-url]: https://github.com/fatalxiao/vivy/tree/main/examples/pyramid
 
-[pieb-with-dpe-frontend-url]: https://github.com/fatalxiao/pieb-with-dpe-frontend
+[labor-analgesia-frontend-url]: https://github.com/fatalxiao/labor-analgesia-frontend
 
 [connected-react-router-url]: https://github.com/supasate/connected-react-router
 
@@ -117,7 +117,7 @@ $ npm run start
 
 ### Complete and real project example
 
-* [pieb-with-dpe-frontend][pieb-with-dpe-frontend-url]
+* [labor-analgesia-frontend][labor-analgesia-frontend-url]
 
 ## React bindings
 
