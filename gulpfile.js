@@ -6,7 +6,8 @@
 
 const gulp = require('gulp');
 const del = require('delete');
-const babel = require('gulp-babel');
+const ts = require('gulp-typescript');
+const tsProject = ts.createProject('./tsconfig.json');
 
 gulp.task('clean', () =>
     del([
@@ -16,9 +17,7 @@ gulp.task('clean', () =>
 
 gulp.task('build', () =>
     gulp.src('./src/**/*.js')
-        .pipe(babel({
-            presets: [['@babel/env', {modules: 'commonjs'}]]
-        }))
+        .pipe(tsProject())
         .pipe(gulp.dest('./dist'))
 );
 
