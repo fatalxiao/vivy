@@ -123,8 +123,8 @@ export function unregisterReducer(store: VivyStore, nameSpace: string) {
 
 /**
  * Unregister reducers
- * @param store {Object}
- * @param nameSpacesOrReducers {Array<string>|Object}
+ * @param store
+ * @param nameSpacesOrReducers
  */
 export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | VivyModelReducers) {
 
@@ -152,8 +152,8 @@ export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: strin
 
 /**
  * Register model
- * @param store {Object}
- * @param model {Object}
+ * @param store
+ * @param model
  */
 export function registerModel(store: VivyStore, model: VivyModel) {
 
@@ -215,10 +215,10 @@ export function registerModel(store: VivyStore, model: VivyModel) {
 
 /**
  * Register models
- * @param store {Object}
- * @param models {Array<Object>}
+ * @param store
+ * @param models
  */
-export function registerModels(store, models) {
+export function registerModels(store: VivyStore, models: VivyModel[]) {
 
     if (!store) {
         console.error('Store is required.');
