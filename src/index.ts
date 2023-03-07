@@ -12,6 +12,10 @@ import createModelReducer from './reducers/ModelReducer';
 // Utils
 import {isEmptyObject} from './util/Util';
 
+// Types
+import {Reducer} from 'redux';
+import {VivyOption, VivyPlugin, HookName, VivyStore, VivyModelReducers, VivyModel} from './types'
+
 // ActionTypes
 export * from './actionTypes/VivyActionType';
 export * from './actionTypes/VivyOptionActionType';
@@ -26,18 +30,18 @@ export * from './reducers/ReducerNameSpace';
  * @param hookName
  * @param args
  */
-function handlePluginsHook(options, plugins, hookName, ...args) {
+function handlePluginsHook(options: VivyOption, plugins: VivyPlugin[], hookName: HookName, ...args: any[]) {
     options?.[hookName]?.(...args);
     plugins?.forEach?.(plugin => plugin?.[hookName]?.(...args));
 }
 
 /**
  * Register reducer
- * @param store {Object}
- * @param nameSpace {string}
- * @param reducer {Function}
+ * @param store
+ * @param nameSpace
+ * @param reducer
  */
-export function registerReducer(store, nameSpace, reducer) {
+export function registerReducer(store: VivyStore, nameSpace: string, reducer: Reducer) {
 
     if (!store) {
         console.error('Store is required.');
@@ -49,6 +53,7 @@ export function registerReducer(store, nameSpace, reducer) {
         return;
     }
 
+    // eslint-disable-next-line no-prototype-builtins
     if (!store.options?.overwriteSameNameSpaceModel && store.asyncReducers.hasOwnProperty(nameSpace)) {
         // console.error('Same nameSpace reducer already exists.');
         return;
@@ -59,8 +64,7 @@ export function registerReducer(store, nameSpace, reducer) {
 
     // Call onRegisterReducer in plugins
     handlePluginsHook(
-        store.options, store.plugins,
-        'onRegisterReducer',
+        store.options, store.plugins, HookName.onRegisterReducer,
         reducer, nameSpace, store
     );
 
@@ -68,10 +72,10 @@ export function registerReducer(store, nameSpace, reducer) {
 
 /**
  * Register reducers
- * @param store {Object}
- * @param reducers {Object}
+ * @param store
+ * @param reducers
  */
-export function registerReducers(store, reducers) {
+export function registerReducers(store: VivyStore, reducers: VivyModelReducers) {
 
     if (!store) {
         console.error('Store is required.');
@@ -83,18 +87,18 @@ export function registerReducers(store, reducers) {
         return;
     }
 
-    Object.keys(reducers).forEach(nameSpace =>
-        registerReducer(store, nameSpace, reducers[nameSpace])
+    Object.entries(reducers).forEach(([nameSpace, reducer]) =>
+        registerReducer(store, nameSpace, reducer)
     );
 
 }
 
 /**
  * Unregister reducer
- * @param store {Object}
- * @param nameSpace {string}
+ * @param store
+ * @param nameSpace
  */
-export function unregisterReducer(store, nameSpace) {
+export function unregisterReducer(store: VivyStore, nameSpace: string) {
 
     if (!store) {
         console.error('Store is required.');
@@ -107,12 +111,11 @@ export function unregisterReducer(store, nameSpace) {
     }
 
     // Unregister Redux reducer
-    const unregisteredReducer = store.unregisterReduxReducer(nameSpace);
+    const unregisteredReducer = store?.unregisterReduxReducer?.(nameSpace);
 
     // Call onUnregisterReducer in plugins
     handlePluginsHook(
-        store.options, store.plugins,
-        'onUnregisterReducer',
+        store.options, store.plugins, HookName.onUnregisterReducer,
         unregisteredReducer, nameSpace, store
     );
 
@@ -123,7 +126,7 @@ export function unregisterReducer(store, nameSpace) {
  * @param store {Object}
  * @param nameSpacesOrReducers {Array<string>|Object}
  */
-export function unregisterReducers(store, nameSpacesOrReducers) {
+export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | VivyModelReducers) {
 
     if (!store) {
         console.error('Store is required.');
@@ -152,7 +155,7 @@ export function unregisterReducers(store, nameSpacesOrReducers) {
  * @param store {Object}
  * @param model {Object}
  */
-export function registerModel(store, model) {
+export function registerModel(store: VivyStore, model: VivyModel) {
 
     if (!store) {
         console.error('Store is required.');
@@ -204,8 +207,7 @@ export function registerModel(store, model) {
 
     // Call onRegisterModel in plugins
     handlePluginsHook(
-        store.options, store.plugins,
-        'onRegisterModel',
+        store.options, store.plugins, HookName.onRegisterModel,
         model, store
     );
 
