@@ -30,49 +30,49 @@ export interface VivyStore extends Store {
      * @param nameSpace
      * @param reducer
      */
-    registerReducer: (nameSpace?: string, reducer?: Reducer) => void,
+    registerReducer?: (nameSpace?: string, reducer?: Reducer) => void,
 
     /**
      * Register reducers to Vivy
      * @param reducer
      */
-    registerReducers: (reducer?: Reducer) => void,
+    registerReducers?: (reducer?: Reducer) => void,
 
     /**
      * Unregister reducer
      * @param nameSpace
      */
-    unregisterReducer: (nameSpace?: string) => void,
+    unregisterReducer?: (nameSpace?: string) => void,
 
     /**
      * Unregister reducers
      * @param nameSpacesOrReducers
      */
-    unregisterReducers: (nameSpacesOrReducers?: string[] | Reducer[]) => void,
+    unregisterReducers?: (nameSpacesOrReducers?: string[] | Reducer[]) => void,
 
     /**
      * Register model to Vivy
      * @param model
      */
-    registerModel: (model?: VivyModel) => void,
+    registerModel?: (model?: VivyModel) => void,
 
     /**
      * Register models to Vivy
      * @param models
      */
-    registerModels: (models?: VivyModel[]) => void,
+    registerModels?: (models?: VivyModel[]) => void,
 
     /**
      * Unregister model
      * @param nameSpaceOrModel
      */
-    unregisterModel: (nameSpaceOrModel?: string | VivyModel) => void,
+    unregisterModel?: (nameSpaceOrModel?: string | VivyModel) => void,
 
     /**
      * Unregister models
      * @param nameSpacesOrModels
      */
-    unregisterModels: (nameSpacesOrModels?: string[] | VivyModel[]) => void
+    unregisterModels?: (nameSpacesOrModels?: string[] | VivyModel[]) => void
 
 }
 
@@ -173,12 +173,12 @@ export interface ExtraInfo {
     /**
      * Register extra reducers to Vivy
      */
-    extraReducers: VivyModelReducers,
+    extraReducers?: VivyModelReducers,
 
     /**
      * Register extra models to Vivy
      */
-    extraModels: VivyModel[],
+    extraModels?: VivyModel[],
 
     /**
      * Register extra middlewares to Vivy
@@ -192,7 +192,7 @@ export type VivyPlugin = ExtraInfo & Hooks & {
     /**
      * Use callback
      */
-    onUse: (options?: VivyOption, plugins?: VivyPlugin[]) => void
+    onUse?: (options?: VivyOption, plugins?: VivyPlugin[]) => void
 
 };
 
@@ -211,7 +211,7 @@ export type VivyOption = ExtraInfo & Hooks & {
     /**
      * Use plugin callback
      */
-    onUsePlugin: (plugin?: VivyPlugin, options?: VivyOption, plugins?: VivyPlugin[]) => void
+    onUsePlugin?: (plugin?: VivyPlugin, options?: VivyOption, plugins?: VivyPlugin[]) => void
 
 }
 
@@ -231,12 +231,12 @@ export interface VivyInstance {
      * Register Vivy plugin to Vivy
      * @param plugin
      */
-    use: (plugin: VivyPlugin) => void,
+    use?: (plugin?: VivyPlugin) => void,
 
     /**
      * Generate Vivy store
      */
-    createStore: () => VivyStore
+    createStore?: () => VivyStore
 
 }
 
