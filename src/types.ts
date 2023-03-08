@@ -206,6 +206,8 @@ export interface VivyStore extends Store {
      */
     unregisterModels: (nameSpacesOrModels: string[] | VivyModel[]) => void,
 
+    [key: string]: any
+
 }
 
 export interface Hooks {
