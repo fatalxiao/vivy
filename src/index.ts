@@ -26,13 +26,10 @@ import {
     VivyStoreDispatch
 } from './types';
 
+export * from 'redux';
 export * from './types';
-
-// ActionTypes
 export * from './actionTypes/VivyActionType';
 export * from './actionTypes/VivyOptionActionType';
-
-// ReducerNameSpaces
 export * from './reducers/ReducerNameSpace';
 
 /**
