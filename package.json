@@ -1,11 +1,10 @@
 {
     "name": "vivy",
     "author": "liangxiaojun",
-    "version": "3.0.0-alpha.2",
+    "version": "3.0.0-alpha.3",
     "description": "A state container for JavaScript apps based on Redux",
     "main": "./esm/index.js",
     "files": [
-        "src",
         "esm",
         "LICENSE",
         "README.md"
