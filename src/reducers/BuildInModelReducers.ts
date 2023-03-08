@@ -1,5 +1,5 @@
 /**
- * @file BuildInModelReducers.js
+ * @file BuildInModelReducers.ts
  */
 
 // Types

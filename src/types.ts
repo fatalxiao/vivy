@@ -1,3 +1,8 @@
+/**
+ * @file types.ts
+ */
+
+// Types
 import {
     Reducer, Middleware, Action, Store, Dispatch, ReducersMapObject, AnyAction
 } from 'redux';

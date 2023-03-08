@@ -1,5 +1,5 @@
 /**
- * @file RootReducer.js
+ * @file RootReducer.ts
  */
 
 // Reducers
@@ -10,7 +10,10 @@ import createVivyOptionReducer from './VivyOptionReducer';
 import {VIVY_OPTION_REDUCER_NAME_SPACE, VIVY_REDUCER_NAME_SPACE} from './ReducerNameSpace';
 
 // Vendors
-import {combineReducers, ReducersMapObject} from 'redux';
+import {combineReducers} from 'redux';
+
+// Types
+import {ReducersMapObject} from 'redux';
 import {VivyOption} from "src/types";
 
 /**

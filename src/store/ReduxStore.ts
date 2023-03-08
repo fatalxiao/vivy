@@ -1,9 +1,12 @@
 /**
- * @file ReduxStore.js
+ * @file ReduxStore.ts
  */
 
 // Redux
-import {createStore, applyMiddleware, Reducer, Middleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+
+// Types
+import {Reducer, Middleware} from 'redux';
 import {VivyOption, VivyPlugin} from "src/types";
 
 /**

@@ -1,5 +1,5 @@
 /**
- * @file VivyStore.js
+ * @file VivyStore.ts
  */
 
 // Middlewares
@@ -234,6 +234,6 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         // All registered plugins
         plugins: plugins || []
 
-    };
+    } as VivyStore;
 
 }

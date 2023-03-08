@@ -1,27 +1,27 @@
 /**
- * @file ModelReducer.js
+ * @file ModelReducer.ts
  */
 
 // Vendors
 import {isEmptyObject} from '../util/Util';
+import {AnyAction, Reducer, ReducersMapObject} from "redux";
+import {VivyStore} from "src/types";
 
 /**
  * Default reducer
- * @param value {any}
- * @returns {*}
+ * @param value
  */
-function identify(value) {
+function identify(value: any): any {
     return value;
 }
 
 /**
  * Generate reducer
- * @param actionType {string}
- * @param reducer {Function}
- * @returns {(function(*=, *=): (*))|*}
+ * @param actionType
+ * @param reducer
  */
-function handleReducer(actionType, reducer = identify) {
-    return (state, action) => {
+function handleReducer(actionType: string, reducer: Reducer = identify) {
+    return (state: any, action: AnyAction): any => {
 
         const {type} = action;
 
@@ -36,25 +36,25 @@ function handleReducer(actionType, reducer = identify) {
 
 /**
  * Reduce reducers
- * @param reducers {Array}
- * @returns {function(*=, *=): *}
+ * @param reducers
  */
-function reduceReducers(...reducers) {
-    return (previous, current) => reducers.reduce((p, r) => r(p, current), previous);
+function reduceReducers(...reducers: Reducer[]): Reducer {
+    return (state: any, action: AnyAction) =>
+        reducers.reduce((p, r) => r(p, action), state);
 }
 
 /**
  * Create an async reducer
- * @param vivyStore {Object}
- * @param nameSpace {string}
- * @param initialState {any}
- * @param globalReducers {Object}
- * @param reducers {Object}
- * @returns {function(*=, *=): *}
+ * @param vivyStore
+ * @param nameSpace
+ * @param initialState
+ * @param globalReducers
+ * @param reducers
  */
 export default function createModelReducer(
-    vivyStore, nameSpace, initialState, globalReducers, reducers
-) {
+    vivyStore: VivyStore, nameSpace: string, initialState: any,
+    globalReducers: ReducersMapObject, reducers: ReducersMapObject
+): Reducer {
 
     // Handle global reducers
     const globalReducerHandlers = !isEmptyObject(globalReducers) ?
@@ -79,6 +79,6 @@ export default function createModelReducer(
     );
 
     // Return reducer
-    return (state = initialState, action) => reducer(state, action);
+    return (state = initialState, action: AnyAction) => reducer(state, action);
 
 }

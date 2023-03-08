@@ -1,13 +1,12 @@
 /**
- * @file Util.js
+ * @file Util.ts
  */
 
 /**
  * Whether an object is empty.
  * @param obj
- * @returns {boolean}
  */
-export function isEmptyObject(obj) {
+export function isEmptyObject(obj: object): boolean {
     return Object.keys(obj)?.length < 1;
 }
 

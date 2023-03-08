@@ -1,22 +1,16 @@
 /**
- * @file ModelActionMiddleware.js
+ * @file ModelActionMiddleware.ts
  */
+
+// Types
+import {Middleware} from "redux";
 
 /**
  * ModelActionMiddleware creater
  * @param modelActions
- * @returns {function({dispatch: Function, getState: Function}): function(*): function(*): (*)}
  */
-export default function createModelActionMiddleware(modelActions = {}) {
-
-    /**
-     * ModelActionMiddleware
-     * @param dispatch {Function}
-     * @param getState {Function}
-     * @returns {function(*): function(*=): *}
-     * @constructor
-     */
-    return function ModelActionMiddleware({dispatch, getState}) {
+export default function createModelActionMiddleware(modelActions = {}): Middleware {
+    return function ModelActionMiddleware() {
         return next => action => {
 
             if (!action?.type) {
@@ -33,5 +27,4 @@ export default function createModelActionMiddleware(modelActions = {}) {
 
         };
     };
-
 }

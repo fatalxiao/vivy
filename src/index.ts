@@ -1,5 +1,5 @@
 /**
- * @file index.js
+ * @file index.ts
  */
 
 // Vivy Store
@@ -14,7 +14,7 @@ import {isEmptyObject} from './util/Util';
 
 // Types
 import {Reducer, ReducersMapObject} from 'redux';
-import {HookName, VivyModel, VivyOption, VivyPlugin, VivyStore} from './types'
+import {HookName, VivyInstance, VivyModel, VivyOption, VivyPlugin, VivyStore} from './types'
 
 // ActionTypes
 export * from './actionTypes/VivyActionType';
@@ -400,7 +400,7 @@ const DEFAULT_OPTIONS = {
  * @param opts
  * @constructor
  */
-export default function Vivy(opts: VivyOption) {
+export default function Vivy(opts: VivyOption): VivyInstance {
 
     // Vivy options
     const options = {
@@ -553,6 +553,6 @@ export default function Vivy(opts: VivyOption) {
         plugins,
         use,
         createStore
-    };
+    } as VivyInstance;
 
 }
