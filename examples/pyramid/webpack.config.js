@@ -11,14 +11,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('../webpack.base.config.js');
 
 module.exports = merge(baseConfig, {
-
     entry: path.join(__dirname, './src/index.js'),
-
     output: {
         filename: 'index.[hash].js',
         path: path.join(__dirname, './dist')
     },
-
     devServer: {
         static: path.join(__dirname, './dist'),
         open: true,
@@ -26,11 +23,9 @@ module.exports = merge(baseConfig, {
         port: 3000,
         historyApiFallback: true
     },
-
     plugins: [
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/index.html')
         })
     ]
-
 });
