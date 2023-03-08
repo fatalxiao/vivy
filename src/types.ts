@@ -60,7 +60,9 @@ export interface VivyModel {
     /**
      * Vivy model reducers, like reducers in Redux
      */
-    reducers: VivyModelReducerMapObject
+    reducers: VivyModelReducerMapObject,
+
+    [key: string]: any
 
 }
 
