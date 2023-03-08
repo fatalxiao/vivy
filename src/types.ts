@@ -147,7 +147,58 @@ export interface VivyStore extends Store {
      * Unregister model actions
      * @param nameSpacesOrModel
      */
-    unregisterModelActions: (nameSpacesOrModel: string | VivyModel) => void
+    unregisterModelActions: (nameSpacesOrModel: string | VivyModel) => void,
+
+    /**
+     * Register reducer
+     * @param store
+     * @param nameSpace
+     * @param reducer
+     */
+    registerReducer: (nameSpace: string, reducer: Reducer) => void,
+
+    /**
+     * Register reducers
+     * @param store
+     * @param reducers
+     */
+    registerReducers: (reducers: ReducersMapObject) => void,
+
+    /**
+     * Unregister reducer
+     * @param nameSpace
+     */
+    unregisterReducer: (nameSpace: string) => void,
+
+    /**
+     * Unregister reducers
+     * @param nameSpacesOrReducers
+     */
+    unregisterReducers: (nameSpacesOrReducers: string[] | ReducersMapObject) => void,
+
+    /**
+     * Register model
+     * @param model
+     */
+    registerModel: (model: VivyModel) => void,
+
+    /**
+     * Register models
+     * @param models
+     */
+    registerModels: (models: VivyModel[]) => void,
+
+    /**
+     * Unregister model
+     * @param nameSpaceOrModel
+     */
+    unregisterModel: (nameSpaceOrModel: string | VivyModel) => void,
+
+    /**
+     * Unregister models
+     * @param nameSpacesOrModels
+     */
+    unregisterModels: (nameSpacesOrModels: string[] | VivyModel[]) => void,
 
 }
 
@@ -273,70 +324,13 @@ export interface VivyInstance {
 }
 
 // /**
-//  * Register reducer to Vivy
-//  * @param store
-//  * @param nameSpace
-//  * @param reducer
-//  */
-// export function registerReducer(store: VivyStore, nameSpace: string, reducer: Reducer): void
-//
-// /**
-//  * Register reducers to Vivy
-//  * @param store
-//  * @param reducers
-//  */
-// export function registerReducers(store: VivyStore, reducers: ReducersMapObject): void
-//
-// /**
-//  * Unregister reducer
-//  * @param store
-//  * @param nameSpace
-//  */
-// export function unregisterReducer(store: VivyStore, nameSpace: string): void
-//
-// /**
-//  * Unregister reducers
-//  * @param store
-//  * @param nameSpacesOrReducers
-//  */
-// export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | ReducersMapObject): void
-//
-// /**
-//  * Register model to Vivy
-//  * @param store
-//  * @param model
-//  */
-// export function registerModel(store: VivyStore, model: VivyModel): void
-//
-// /**
-//  * Register models to Vivy
-//  * @param store
-//  * @param models
-//  */
-// export function registerModels(store: VivyStore, models: VivyModel[]): void
-//
-// /**
-//  * Unregister model
-//  * @param store
-//  * @param nameSpaceOrModel
-//  */
-// export function unregisterModel(store: VivyStore, nameSpaceOrModel: string | VivyModel): void
-//
-// /**
-//  * Unregister models
-//  * @param store
-//  * @param nameSpacesOrModels
-//  */
-// export function unregisterModels(store: VivyStore, nameSpacesOrModels: string[] | VivyModel[]): void
-//
-// /**
 //  * Build actions or reducers methods with dispatch, and bind them into your props
 //  * Just like "bindActionCreator" in Redux
 //  * @param modelActionCreators
 //  * @param dispatch
 //  */
 // export function bindModelActionCreators(modelActionCreators: object, dispatch: Dispatch): object
-//
+
 // /**
 //  * Create Vivy Instance
 //  * @param options
