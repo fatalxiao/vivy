@@ -16,8 +16,11 @@ import createCreateRootReducer from '../reducers/RootReducer';
 import {isEmptyObject} from '../util/Util';
 
 // Types
-import {VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin, VivyStore} from '../types';
-import {AnyAction, Reducer, ReducersMapObject} from 'redux';
+import {
+    VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin,
+    VivyStore, VivyModelReducerMapObject, VivyModelReducer
+} from '../types';
+import {AnyAction, Reducer} from 'redux';
 
 /**
  * Create Vivy store
@@ -85,13 +88,13 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * Unregister reducer
      * @param nameSpace
      */
-    function unregisterReduxReducer(this: VivyStore, nameSpace: string): Reducer | void {
+    function unregisterReduxReducer(this: VivyStore, nameSpace: string): VivyModelReducer | void {
 
         if (!this || !nameSpace) {
             return;
         }
 
-        const nextReducers = {...this.asyncReducers} as ReducersMapObject;
+        const nextReducers = {...this.asyncReducers} as VivyModelReducerMapObject;
         const unregisteredReducer = nextReducers[nameSpace];
 
         delete nextReducers[nameSpace];
@@ -106,7 +109,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param globalReducers
      */
-    function registerModelGlobalReducersDispatcher(this: VivyStore, nameSpace: string, globalReducers: ReducersMapObject): void {
+    function registerModelGlobalReducersDispatcher(this: VivyStore, nameSpace: string, globalReducers: VivyModelReducerMapObject): void {
 
         if (!this || !nameSpace || !globalReducers || isEmptyObject(globalReducers)) {
             return;
@@ -126,7 +129,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param reducers
      */
-    function registerModelReducerDispatcher(this: VivyStore, nameSpace: string, reducers: ReducersMapObject): void {
+    function registerModelReducerDispatcher(this: VivyStore, nameSpace: string, reducers: VivyModelReducerMapObject): void {
 
         if (!this || !nameSpace || !reducers || isEmptyObject(reducers)) {
             return;

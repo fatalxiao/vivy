@@ -7,8 +7,8 @@
 import {isEmptyObject} from '../util/Util';
 
 // Types
-import {AnyAction, Reducer, ReducersMapObject} from 'redux';
-import {VivyStore} from '../types';
+import {AnyAction, Reducer} from 'redux';
+import {VivyStore, VivyModelReducerMapObject} from '../types';
 
 /**
  * Default reducer
@@ -56,7 +56,7 @@ function reduceReducers(...reducers: Reducer[]): Reducer {
  */
 export default function createModelReducer(
     vivyStore: VivyStore, nameSpace: string, initialState: any,
-    globalReducers: ReducersMapObject, reducers: ReducersMapObject
+    globalReducers: VivyModelReducerMapObject, reducers: VivyModelReducerMapObject
 ): Reducer {
 
     // Handle global reducers
