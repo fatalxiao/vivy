@@ -41,7 +41,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
     /**
      * Vivy store dispatch
      */
-    function dispatch(action: AnyAction): Dispatch | object {
+    function dispatch(action: AnyAction): AnyAction {
 
         // Handle action dispatch
         if (action?.type) {
@@ -58,7 +58,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         }
 
         // Handle reducer dispatch
-        return reduxStore.dispatch(action || {});
+        return reduxStore.dispatch(action);
 
     }
 
@@ -67,7 +67,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param reducer
      */
-    function registerReduxReducer(nameSpace: string, reducer: Reducer): Reducer | void {
+    function registerReduxReducer(this: VivyStore, nameSpace: string, reducer: Reducer): Reducer | void {
 
         if (!this || !nameSpace || !reducer) {
             return;
@@ -84,7 +84,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * Unregister reducer
      * @param nameSpace
      */
-    function unregisterReduxReducer(nameSpace: string): Reducer | void {
+    function unregisterReduxReducer(this: VivyStore, nameSpace: string): Reducer | void {
 
         if (!this || !nameSpace) {
             return;
@@ -105,7 +105,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param globalReducers
      */
-    function registerModelGlobalReducersDispatcher(nameSpace: string, globalReducers: ReducersMapObject): void {
+    function registerModelGlobalReducersDispatcher(this: VivyStore, nameSpace: string, globalReducers: ReducersMapObject): void {
 
         if (!this || !nameSpace || !globalReducers || isEmptyObject(globalReducers)) {
             return;
@@ -125,7 +125,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param reducers
      */
-    function registerModelReducerDispatcher(nameSpace: string, reducers: ReducersMapObject): void {
+    function registerModelReducerDispatcher(this: VivyStore, nameSpace: string, reducers: ReducersMapObject): void {
 
         if (!this || !nameSpace || !reducers || isEmptyObject(reducers)) {
             return;
@@ -149,7 +149,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param actions
      */
-    function registerModelActions(nameSpace: string, actions: VivyModelActionMapObject): void {
+    function registerModelActions(this: VivyStore, nameSpace: string, actions: VivyModelActionMapObject): void {
 
         if (!this || !nameSpace || !actions || isEmptyObject(actions)) {
             return;
@@ -164,7 +164,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         }
 
         Object.entries(actions).forEach(([name, action]) => {
-            modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = (params = {}) =>
+            modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = (params: AnyAction) =>
                 action(params)(this.dispatch, this.getState);
         });
 
@@ -174,7 +174,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * Unregister model actions
      * @param nameSpaceOrModel
      */
-    function unregisterModelActions(nameSpaceOrModel: string | VivyModel): void {
+    function unregisterModelActions(this: VivyStore, nameSpaceOrModel: string | VivyModel): void {
 
         if (!this || !nameSpaceOrModel) {
             return;

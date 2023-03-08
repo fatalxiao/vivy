@@ -21,8 +21,7 @@ export default function createReduxStore(
         options?.initialState || {},
         applyMiddleware(
             ...middlewares,
-            // @ts-ignore
-            ...(plugins?.reduce?.((pluginMiddlewares, plugin) => [
+            ...(plugins?.reduce?.((pluginMiddlewares: Middleware[], plugin) => [
                 ...pluginMiddlewares,
                 ...(plugin.extraMiddlewares || [])
             ], []) || []),

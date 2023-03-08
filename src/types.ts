@@ -86,7 +86,7 @@ export interface VivyStore extends Store {
     /**
      * Vivy store dispatch
      */
-    dispatch: Dispatch | object,
+    dispatch: Dispatch,
 
     /**
      * Register reducer to Vivy
@@ -200,7 +200,9 @@ export type VivyPlugin = ExtraInfo & Hooks & {
     /**
      * Use callback
      */
-    [HookName.onUse]: (options: VivyOption, plugins: VivyPlugin[]) => void
+    [HookName.onUse]: (options: VivyOption, plugins: VivyPlugin[]) => void,
+
+    [Symbol.iterator](): Iterator<any>
 
 };
 
