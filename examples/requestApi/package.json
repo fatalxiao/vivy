@@ -12,7 +12,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-vivy": "^2.0.0-alpha.1",
-        "vivy": "^3.0.0-alpha.5"
+        "vivy": "^3.0.0-alpha.6"
     },
     "devDependencies": {
         "@babel/core": "^7.21.0",
