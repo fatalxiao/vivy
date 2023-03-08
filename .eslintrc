@@ -8,16 +8,13 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended",
-        "plugin:react-hooks/recommended",
         "plugin:jest/recommended"
     ],
     "plugins": [
         "@typescript-eslint/eslint-plugin",
-        "react",
-        "react-hooks",
         "jest"
     ],
+    "root": true,
     "overrides": [
         {
             "files": [
@@ -41,7 +38,6 @@
             }
         }
     ],
-    "root": true,
     "rules": {
         "no-prototype-builtins": 0
     }

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./dist",
+        "outDir": "esm",
         "allowJs": true,
         "module": "esnext",
         "target": "es5",
@@ -10,6 +10,7 @@
             "dom"
         ],
         "sourceMap": true,
+        "declaration": true,
         "baseUrl": ".",
         "jsx": "react-jsx",
         "strictNullChecks": true,
@@ -34,6 +35,6 @@
     ],
     "exclude": [
         "node_modules",
-        "dist"
+        "esm"
     ]
 }
