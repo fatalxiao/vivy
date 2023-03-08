@@ -16,7 +16,7 @@ import {isEmptyObject} from '../util/Util';
 
 // Types
 import {VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin, VivyStore} from "src/types";
-import {AnyAction, Dispatch, Reducer, ReducersMapObject} from "redux";
+import {AnyAction, Reducer, ReducersMapObject} from "redux";
 
 /**
  * Create Vivy store
@@ -41,7 +41,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
     /**
      * Vivy store dispatch
      */
-    function dispatch(action: AnyAction): AnyAction {
+    function dispatch(action: AnyAction): any {
 
         // Handle action dispatch
         if (action?.type) {
@@ -198,6 +198,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         // Redux store
         reduxStore,
 
+        // Vivy store overload dispatch
         dispatch,
 
         // Vivy options

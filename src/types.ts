@@ -1,5 +1,5 @@
 import {
-    Reducer, Middleware, MiddlewareAPI, Action, Store, Dispatch, ReducersMapObject
+    Reducer, Middleware, Action, Store, Dispatch, ReducersMapObject, AnyAction
 } from 'redux';
 
 export enum HookName {
@@ -14,7 +14,7 @@ export enum HookName {
 }
 
 export interface VivyModelAction {
-    (action: Action): (api: MiddlewareAPI<any>) => any
+    (action: Action): (dispatch: VivyStoreDispatch, getState: () => any) => any
 }
 
 export interface VivyModelActionMapObject {
@@ -50,6 +50,23 @@ export interface VivyModel {
 
 }
 
+/**
+ * Vivy store dispatch
+ */
+export interface VivyStoreDispatch {
+    (action: AnyAction): any
+}
+
+/**
+ * Vivy store dispatch
+ */
+export interface VivyStoreDispatch {
+    (nameSpace: string): (name: string) => (action: AnyAction) => any
+}
+
+/**
+ * Vivy store
+ */
 export interface VivyStore extends Store {
 
     /**
@@ -86,7 +103,12 @@ export interface VivyStore extends Store {
     /**
      * Vivy store dispatch
      */
-    dispatch: Dispatch,
+    dispatch: Dispatch | VivyStoreDispatch,
+
+    /**
+     * Vivy store getState
+     */
+    getState: () => any,
 
     /**
      * Register reducer to Vivy
