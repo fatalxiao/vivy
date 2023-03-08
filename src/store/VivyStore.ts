@@ -1,5 +1,6 @@
 /**
  * @file VivyStore.ts
+ * @author Liangxiaojun
  */
 
 // Middlewares

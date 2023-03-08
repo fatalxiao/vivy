@@ -1,5 +1,6 @@
 /**
  * @file BuildInModelReducers.ts
+ * @author Liangxiaojun
  */
 
 // Types

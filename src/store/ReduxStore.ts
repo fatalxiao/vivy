@@ -1,5 +1,6 @@
 /**
  * @file ReduxStore.ts
+ * @author Liangxiaojun
  */
 
 // Redux

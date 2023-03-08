@@ -1,5 +1,6 @@
 /**
  * @file VivyOptionReducer.ts
+ * @author Liangxiaojun
  */
 
 // Action Types

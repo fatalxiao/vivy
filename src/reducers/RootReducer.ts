@@ -1,5 +1,6 @@
 /**
  * @file RootReducer.ts
+ * @author Liangxiaojun
  */
 
 // Reducers

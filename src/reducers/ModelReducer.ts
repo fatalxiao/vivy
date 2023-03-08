@@ -1,5 +1,6 @@
 /**
  * @file ModelReducer.ts
+ * @author Liangxiaojun
  */
 
 // Vendors

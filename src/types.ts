@@ -1,5 +1,6 @@
 /**
  * @file types.ts
+ * @author Liangxiaojun
  */
 
 // Types
