@@ -2,10 +2,11 @@
     "compilerOptions": {
         "outDir": "./dist",
         "allowJs": true,
-        "module": "es5",
+        "module": "esnext",
         "target": "es5",
         "lib": [
             "es5",
+            "esnext",
             "dom"
         ],
         "sourceMap": true,
