@@ -24,7 +24,9 @@ import {
     VivyPlugin,
     VivyStore,
     VivyStoreDispatch
-} from './types'
+} from './types';
+
+export * from './types';
 
 // ActionTypes
 export * from './actionTypes/VivyActionType';
