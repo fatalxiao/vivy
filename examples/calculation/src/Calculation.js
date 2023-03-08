@@ -45,6 +45,7 @@ const Calculation = ({
                        })}/>
             </div>
             <div>
+                +
                 <input style={inputStyle}
                        value={value1}
                        onChange={e => updateValue1?.({
