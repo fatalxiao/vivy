@@ -4,7 +4,7 @@
  */
 
 // Types
-import {AnyAction} from "redux";
+import {AnyAction} from 'redux';
 
 /**
  * These reducers will be injected into each model

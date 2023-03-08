@@ -8,7 +8,7 @@ import {createStore, applyMiddleware} from 'redux';
 
 // Types
 import {Reducer, Middleware} from 'redux';
-import {VivyOption, VivyPlugin} from "src/types";
+import {VivyOption, VivyPlugin} from '../types';
 
 /**
  * Create Redux store

@@ -5,8 +5,10 @@
 
 // Vendors
 import {isEmptyObject} from '../util/Util';
-import {AnyAction, Reducer, ReducersMapObject} from "redux";
-import {VivyStore} from "src/types";
+
+// Types
+import {AnyAction, Reducer, ReducersMapObject} from 'redux';
+import {VivyStore} from '../types';
 
 /**
  * Default reducer

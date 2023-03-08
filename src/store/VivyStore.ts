@@ -16,8 +16,8 @@ import createCreateRootReducer from '../reducers/RootReducer';
 import {isEmptyObject} from '../util/Util';
 
 // Types
-import {VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin, VivyStore} from "src/types";
-import {AnyAction, Reducer, ReducersMapObject} from "redux";
+import {VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin, VivyStore} from '../types';
+import {AnyAction, Reducer, ReducersMapObject} from 'redux';
 
 /**
  * Create Vivy store

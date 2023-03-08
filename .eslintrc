@@ -40,6 +40,11 @@
         }
     ],
     "rules": {
-        "no-prototype-builtins": 0
+        "no-prototype-builtins": 0,
+        "quotes": [
+            2,
+            "single",
+            "avoid-escape"
+        ]
     }
 }

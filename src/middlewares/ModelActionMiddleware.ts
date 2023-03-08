@@ -4,7 +4,7 @@
  */
 
 // Types
-import {Middleware} from "redux";
+import {Middleware} from 'redux';
 
 /**
  * ModelActionMiddleware creater

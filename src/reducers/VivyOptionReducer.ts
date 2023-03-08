@@ -7,8 +7,8 @@
 import {VIVY_OPTION_UPDATE} from '../actionTypes/VivyOptionActionType';
 
 // Types
-import {VivyOption} from "src/types";
-import {AnyAction} from "redux";
+import {VivyOption} from '../types';
+import {AnyAction} from 'redux';
 
 /**
  * Vivy Option Reducer

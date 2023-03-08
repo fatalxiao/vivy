@@ -7,7 +7,7 @@
 import {VIVY_UPDATE} from '../actionTypes/VivyActionType';
 
 // Types
-import {AnyAction} from "redux";
+import {AnyAction} from 'redux';
 
 /**
  * Vivy Reducer

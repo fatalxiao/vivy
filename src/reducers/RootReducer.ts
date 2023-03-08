@@ -15,7 +15,7 @@ import {combineReducers} from 'redux';
 
 // Types
 import {ReducersMapObject} from 'redux';
-import {VivyOption} from "src/types";
+import {VivyOption} from '../types';
 
 /**
  * Create root reducer
