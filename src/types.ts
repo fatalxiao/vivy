@@ -329,17 +329,16 @@ export interface VivyInstance {
 
 }
 
-// /**
-//  * Build actions or reducers methods with dispatch, and bind them into your props
-//  * Just like "bindActionCreator" in Redux
-//  * @param modelActionCreators
-//  * @param dispatch
-//  */
-// export function bindModelActionCreators(modelActionCreators: object, dispatch: Dispatch): object
+/**
+ * Function type model action creator
+ */
+export type ModelActionCreatorFunction = () => any
 
-// /**
-//  * Create Vivy Instance
-//  * @param options
-//  * @constructor
-//  */
-// export default function Vivy(options: VivyOption): VivyInstance;
+/**
+ * All kind of model action creators
+ */
+export type ModelActionCreators = VivyStoreDispatch | ModelActionCreatorFunction | {
+    [key: string]: string
+} | {
+    [key: string]: ModelActionCreatorFunction
+}

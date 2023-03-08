@@ -15,7 +15,16 @@ import {isEmptyObject} from './util/Util';
 
 // Types
 import {Reducer, ReducersMapObject} from 'redux';
-import {HookName, VivyInstance, VivyModel, VivyOption, VivyPlugin, VivyStore} from './types'
+import {
+    HookName, ModelActionCreatorFunction,
+    ModelActionCreators,
+    VivyInstance,
+    VivyModel,
+    VivyOption,
+    VivyPlugin,
+    VivyStore,
+    VivyStoreDispatch
+} from './types'
 
 // ActionTypes
 export * from './actionTypes/VivyActionType';
@@ -299,84 +308,84 @@ export function unregisterModels(store: VivyStore, nameSpacesOrModels: string[] 
  * @param actionCreator
  * @param dispatch
  */
-// function bindActionCreator(actionCreator, dispatch: Dispatch) {
-//     return function () {
-//         return dispatch(actionCreator.apply(this, arguments));
-//     };
-// }
+function bindActionCreator(actionCreator: ModelActionCreatorFunction, dispatch: VivyStoreDispatch) {
+    return function (...args: any[]) {
+        return dispatch(actionCreator(...(args as [])));
+    };
+}
 
 /**
  * Build action or reducer methods with dispatch
- * @param modelActionCreator {string}
- * @param dispatch {Function}
- * @returns {Function}
+ * @param modelActionCreator
+ * @param dispatch
  */
-// function bindModelActionCreator(modelActionCreator, dispatch) {
-//
-//     if (!modelActionCreator) {
-//         return;
-//     }
-//
-//     if (!dispatch || typeof dispatch !== 'function') {
-//         console.error('Dispatch is required.');
-//         return;
-//     }
-//
-//     const [nameSpace, name] = modelActionCreator.split('/');
-//
-//     return function () {
-//
-//         if (name === undefined) {
-//             return dispatch?.[nameSpace]?.apply?.(this, arguments);
-//         }
-//
-//         return dispatch?.[nameSpace]?.[name]?.apply?.(this, arguments);
-//
-//     };
-//
-// }
+function bindModelActionCreator(modelActionCreator: string, dispatch: VivyStoreDispatch) {
+
+    if (!modelActionCreator) {
+        return;
+    }
+
+    if (!dispatch || typeof dispatch !== 'function') {
+        console.error('Dispatch is required.');
+        return;
+    }
+
+    const [nameSpace, name] = modelActionCreator.split('/');
+
+    return function (...args: any[]) {
+
+        if (name === undefined) {
+            return dispatch?.[nameSpace]?.(...args);
+        }
+
+        return dispatch?.[nameSpace]?.[name]?.(...args);
+
+    };
+
+}
 
 /**
  * Build actions or reducers methods with dispatch, and bind them into your props
  * Just like "bindActionCreators" in redux
- * @param modelActionCreators {Object}
- * @param dispatch {Function}
- * @returns {Object}
+ * @param modelActionCreators
+ * @param dispatch
  */
-// export function bindModelActionCreators(modelActionCreators, dispatch) {
-//
-//     if (!modelActionCreators) {
-//         return null;
-//     }
-//
-//     if (!dispatch || typeof dispatch !== 'function') {
-//         console.error('Dispatch is required.');
-//         return null;
-//     }
-//
-//     if (typeof modelActionCreators === 'function') {
-//         return bindActionCreator(modelActionCreators, dispatch);
-//     }
-//
-//     if (typeof modelActionCreators !== 'object') {
-//         return null;
-//     }
-//
-//     const boundModelActionCreators = {};
-//
-//     Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
-//         if (modelActionCreator === dispatch) {
-//             boundModelActionCreators[key] = dispatch;
-//         } else if (typeof modelActionCreator === 'function') {
-//             boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
-//         } else if (typeof modelActionCreator === 'string') {
-//             boundModelActionCreators[key] = bindModelActionCreator(modelActionCreator, dispatch);
-//         }
-//     });
-//
-//     return boundModelActionCreators;
-//
-// }
+export function bindModelActionCreators(
+    modelActionCreators: ModelActionCreators, dispatch: VivyStoreDispatch
+): object | null {
+
+    if (!modelActionCreators) {
+        return null;
+    }
+
+    if (!dispatch || typeof dispatch !== 'function') {
+        console.error('Dispatch is required.');
+        return null;
+    }
+
+    if (typeof modelActionCreators === 'function') {
+        return bindActionCreator(modelActionCreators as ModelActionCreatorFunction, dispatch);
+    }
+
+    if (typeof modelActionCreators !== 'object') {
+        return null;
+    }
+
+    const boundModelActionCreators = {};
+
+    Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
+        if (modelActionCreator === dispatch) {
+            boundModelActionCreators[key] = dispatch;
+        } else if (typeof modelActionCreator === 'function') {
+            boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
+        } else if (typeof modelActionCreator === 'string') {
+            boundModelActionCreators[key] = bindModelActionCreator(modelActionCreator, dispatch);
+        }
+    });
+
+    return boundModelActionCreators;
+
+}
 
 /**
  * Default Vivy options
