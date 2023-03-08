@@ -5,7 +5,7 @@
 
 // Types
 import {
-    Reducer, Middleware, Action, Store, Dispatch, ReducersMapObject, AnyAction
+    Reducer, Middleware, Store, Dispatch, ReducersMapObject, AnyAction
 } from 'redux';
 
 export enum HookName {
@@ -20,7 +20,7 @@ export enum HookName {
 }
 
 export interface VivyModelAction {
-    (action: Action): (dispatch: VivyStoreDispatch, getState: () => any) => any
+    (action: AnyAction): (dispatch: VivyStoreDispatch, getState: () => any) => any
 }
 
 export interface VivyModelActionMapObject {
