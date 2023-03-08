@@ -8,8 +8,7 @@
         "src",
         "esm",
         "LICENSE",
-        "README.md",
-        "index.d.ts"
+        "README.md"
     ],
     "scripts": {
         "clean": "rimraf esm",
