@@ -14,13 +14,16 @@ import createCreateRootReducer from '../reducers/RootReducer';
 // Vendors
 import {isEmptyObject} from '../util/Util';
 
+// Types
+import {VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin, VivyStore} from "src/types";
+import {AnyAction, Dispatch, Reducer, ReducersMapObject} from "redux";
+
 /**
  * Create Vivy store
- * @param options {Object}
- * @param plugins {Array}
- * @returns {Object}
+ * @param options
+ * @param plugins
  */
-export default function createVivyStore(options, plugins) {
+export default function createVivyStore(options: VivyOption, plugins: VivyPlugin[]): VivyStore {
 
     // All model actions
     // modelActions[modelNameSpace][actionName]: Action
@@ -37,18 +40,20 @@ export default function createVivyStore(options, plugins) {
 
     /**
      * Vivy store dispatch
-     * @returns {*}
      */
-    function dispatch(action) {
+    function dispatch(action: AnyAction): Dispatch | object {
 
         // Handle action dispatch
         if (action?.type) {
-            const [nameSpace, name] = action.type.split?.('/');
-            if (
-                nameSpace && name && modelActions?.[nameSpace]?.[name]
-                && typeof modelActions[nameSpace][name] === 'function'
-            ) {
-                return modelActions[nameSpace][name](action);
+            const result = action.type.split?.('/');
+            if (result) {
+                const [nameSpace, name] = result;
+                if (
+                    nameSpace && name && modelActions?.[nameSpace]?.[name]
+                    && typeof modelActions[nameSpace][name] === 'function'
+                ) {
+                    return modelActions[nameSpace][name](action);
+                }
             }
         }
 
@@ -61,9 +66,8 @@ export default function createVivyStore(options, plugins) {
      * Register Reducer
      * @param nameSpace
      * @param reducer
-     * @returns {*}
      */
-    function registerReduxReducer(nameSpace, reducer) {
+    function registerReduxReducer(nameSpace: string, reducer: Reducer): Reducer | void {
 
         if (!this || !nameSpace || !reducer) {
             return;
@@ -79,15 +83,14 @@ export default function createVivyStore(options, plugins) {
     /**
      * Unregister reducer
      * @param nameSpace
-     * @returns {*}
      */
-    function unregisterReduxReducer(nameSpace) {
+    function unregisterReduxReducer(nameSpace: string): Reducer | void {
 
         if (!this || !nameSpace) {
             return;
         }
 
-        const nextReducers = {...this.asyncReducers};
+        const nextReducers = {...this.asyncReducers} as ReducersMapObject;
         const unregisteredReducer = nextReducers[nameSpace];
 
         delete nextReducers[nameSpace];
@@ -102,7 +105,7 @@ export default function createVivyStore(options, plugins) {
      * @param nameSpace
      * @param globalReducers
      */
-    function registerModelGlobalReducersDispatcher(nameSpace, globalReducers) {
+    function registerModelGlobalReducersDispatcher(nameSpace: string, globalReducers: ReducersMapObject): void {
 
         if (!this || !nameSpace || !globalReducers || isEmptyObject(globalReducers)) {
             return;
@@ -122,7 +125,7 @@ export default function createVivyStore(options, plugins) {
      * @param nameSpace
      * @param reducers
      */
-    function registerModelReducerDispatcher(nameSpace, reducers) {
+    function registerModelReducerDispatcher(nameSpace: string, reducers: ReducersMapObject): void {
 
         if (!this || !nameSpace || !reducers || isEmptyObject(reducers)) {
             return;
@@ -146,7 +149,7 @@ export default function createVivyStore(options, plugins) {
      * @param nameSpace
      * @param actions
      */
-    function registerModelActions(nameSpace, actions) {
+    function registerModelActions(nameSpace: string, actions: VivyModelActionMapObject): void {
 
         if (!this || !nameSpace || !actions || isEmptyObject(actions)) {
             return;
@@ -171,7 +174,7 @@ export default function createVivyStore(options, plugins) {
      * Unregister model actions
      * @param nameSpaceOrModel
      */
-    function unregisterModelActions(nameSpaceOrModel) {
+    function unregisterModelActions(nameSpaceOrModel: string | VivyModel): void {
 
         if (!this || !nameSpaceOrModel) {
             return;

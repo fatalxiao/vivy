@@ -13,8 +13,8 @@ import createModelReducer from './reducers/ModelReducer';
 import {isEmptyObject} from './util/Util';
 
 // Types
-import {Reducer} from 'redux';
-import {VivyOption, VivyPlugin, HookName, VivyStore, VivyModelReducers, VivyModel} from './types'
+import {Reducer, ReducersMapObject} from 'redux';
+import {HookName, VivyModel, VivyOption, VivyPlugin, VivyStore} from './types'
 
 // ActionTypes
 export * from './actionTypes/VivyActionType';
@@ -75,7 +75,7 @@ export function registerReducer(store: VivyStore, nameSpace: string, reducer: Re
  * @param store
  * @param reducers
  */
-export function registerReducers(store: VivyStore, reducers: VivyModelReducers) {
+export function registerReducers(store: VivyStore, reducers: ReducersMapObject) {
 
     if (!store) {
         console.error('Store is required.');
@@ -126,7 +126,7 @@ export function unregisterReducer(store: VivyStore, nameSpace: string) {
  * @param store
  * @param nameSpacesOrReducers
  */
-export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | VivyModelReducers) {
+export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | ReducersMapObject) {
 
     if (!store) {
         console.error('Store is required.');
@@ -238,10 +238,10 @@ export function registerModels(store: VivyStore, models: VivyModel[]) {
 
 /**
  * Unregister model
- * @param store {Object}
- * @param nameSpaceOrModel {string|Object}
+ * @param store
+ * @param nameSpaceOrModel
  */
-export function unregisterModel(store, nameSpaceOrModel) {
+export function unregisterModel(store: VivyStore, nameSpaceOrModel: string | VivyModel) {
 
     if (!store) {
         console.error('Store is required.');
@@ -264,8 +264,7 @@ export function unregisterModel(store, nameSpaceOrModel) {
 
     // Call onUnregisterModel in plugins
     handlePluginsHook(
-        store.options, store.plugins,
-        'onUnregisterModel',
+        store.options, store.plugins, HookName.onUnregisterModel,
         unregisteredModel, store
     );
 
@@ -273,10 +272,10 @@ export function unregisterModel(store, nameSpaceOrModel) {
 
 /**
  * Unregister models
- * @param store {Object}
- * @param nameSpacesOrModels {Array<string|Object>}
+ * @param store
+ * @param nameSpacesOrModels
  */
-export function unregisterModels(store, nameSpacesOrModels) {
+export function unregisterModels(store: VivyStore, nameSpacesOrModels: string[] | VivyModel[]) {
 
     if (!store) {
         console.error('Store is required.');
@@ -298,13 +297,12 @@ export function unregisterModels(store, nameSpacesOrModels) {
  * Same as bindActionCreator in Redux
  * @param actionCreator
  * @param dispatch
- * @returns {function(): *}
  */
-function bindActionCreator(actionCreator, dispatch) {
-    return function () {
-        return dispatch(actionCreator.apply(this, arguments));
-    };
-}
+// function bindActionCreator(actionCreator, dispatch: Dispatch) {
+//     return function () {
+//         return dispatch(actionCreator.apply(this, arguments));
+//     };
+// }
 
 /**
  * Build action or reducer methods with dispatch
@@ -312,30 +310,30 @@ function bindActionCreator(actionCreator, dispatch) {
  * @param dispatch {Function}
  * @returns {Function}
  */
-function bindModelActionCreator(modelActionCreator, dispatch) {
-
-    if (!modelActionCreator) {
-        return;
-    }
-
-    if (!dispatch || typeof dispatch !== 'function') {
-        console.error('Dispatch is required.');
-        return;
-    }
-
-    const [nameSpace, name] = modelActionCreator.split('/');
-
-    return function () {
-
-        if (name === undefined) {
-            return dispatch?.[nameSpace]?.apply?.(this, arguments);
-        }
-
-        return dispatch?.[nameSpace]?.[name]?.apply?.(this, arguments);
-
-    };
-
-}
+// function bindModelActionCreator(modelActionCreator, dispatch) {
+//
+//     if (!modelActionCreator) {
+//         return;
+//     }
+//
+//     if (!dispatch || typeof dispatch !== 'function') {
+//         console.error('Dispatch is required.');
+//         return;
+//     }
+//
+//     const [nameSpace, name] = modelActionCreator.split('/');
+//
+//     return function () {
+//
+//         if (name === undefined) {
+//             return dispatch?.[nameSpace]?.apply?.(this, arguments);
+//         }
+//
+//         return dispatch?.[nameSpace]?.[name]?.apply?.(this, arguments);
+//
+//     };
+//
+// }
 
 /**
  * Build actions or reducers methods with dispatch, and bind them into your props
@@ -344,40 +342,40 @@ function bindModelActionCreator(modelActionCreator, dispatch) {
  * @param dispatch {Function}
  * @returns {Object}
  */
-export function bindModelActionCreators(modelActionCreators, dispatch) {
-
-    if (!modelActionCreators) {
-        return null;
-    }
-
-    if (!dispatch || typeof dispatch !== 'function') {
-        console.error('Dispatch is required.');
-        return null;
-    }
-
-    if (typeof modelActionCreators === 'function') {
-        return bindActionCreator(modelActionCreators, dispatch);
-    }
-
-    if (typeof modelActionCreators !== 'object') {
-        return null;
-    }
-
-    const boundModelActionCreators = {};
-
-    Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
-        if (modelActionCreator === dispatch) {
-            boundModelActionCreators[key] = dispatch;
-        } else if (typeof modelActionCreator === 'function') {
-            boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
-        } else if (typeof modelActionCreator === 'string') {
-            boundModelActionCreators[key] = bindModelActionCreator(modelActionCreator, dispatch);
-        }
-    });
-
-    return boundModelActionCreators;
-
-}
+// export function bindModelActionCreators(modelActionCreators, dispatch) {
+//
+//     if (!modelActionCreators) {
+//         return null;
+//     }
+//
+//     if (!dispatch || typeof dispatch !== 'function') {
+//         console.error('Dispatch is required.');
+//         return null;
+//     }
+//
+//     if (typeof modelActionCreators === 'function') {
+//         return bindActionCreator(modelActionCreators, dispatch);
+//     }
+//
+//     if (typeof modelActionCreators !== 'object') {
+//         return null;
+//     }
+//
+//     const boundModelActionCreators = {};
+//
+//     Object.entries(modelActionCreators).forEach(([key, modelActionCreator]) => {
+//         if (modelActionCreator === dispatch) {
+//             boundModelActionCreators[key] = dispatch;
+//         } else if (typeof modelActionCreator === 'function') {
+//             boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
+//         } else if (typeof modelActionCreator === 'string') {
+//             boundModelActionCreators[key] = bindModelActionCreator(modelActionCreator, dispatch);
+//         }
+//     });
+//
+//     return boundModelActionCreators;
+//
+// }
 
 /**
  * Default Vivy options
@@ -400,10 +398,9 @@ const DEFAULT_OPTIONS = {
 /**
  * Create Vivy instance
  * @param opts
- * @returns {Object}
  * @constructor
  */
-export default function Vivy(opts) {
+export default function Vivy(opts: VivyOption) {
 
     // Vivy options
     const options = {
@@ -412,13 +409,13 @@ export default function Vivy(opts) {
     };
 
     // All Vivy plugins
-    const plugins = [];
+    const plugins: VivyPlugin[] = [];
 
     /**
      * Use vivy plugin
-     * @param plugin {Object}
+     * @param plugin
      */
-    function use(plugin) {
+    function use(plugin: VivyPlugin) {
 
         plugins.push(plugin);
 
@@ -434,7 +431,7 @@ export default function Vivy(opts) {
      * Register extra reducers in options.
      * @param store
      */
-    function registerOptionsReducers(store) {
+    function registerOptionsReducers(store: VivyStore) {
 
         if (!store || !options.extraReducers || isEmptyObject(options.extraReducers)) {
             return;
@@ -448,7 +445,7 @@ export default function Vivy(opts) {
      * Register extra models in options.
      * @param store
      */
-    function registerOptionsModels(store) {
+    function registerOptionsModels(store: VivyStore) {
 
         if (!store || !options.extraModels || options.extraModels.length < 1) {
             return;
@@ -462,7 +459,7 @@ export default function Vivy(opts) {
      * Register extra reducers in plugins.
      * @param store
      */
-    function registerPluginsReducers(store) {
+    function registerPluginsReducers(store: VivyStore) {
 
         if (!store || !plugins || plugins.length < 1) {
             return;
@@ -485,7 +482,7 @@ export default function Vivy(opts) {
      * Register extra models in plugins.
      * @param store
      */
-    function registerPluginsModels(store) {
+    function registerPluginsModels(store: VivyStore) {
 
         if (!store || !plugins || plugins.length < 1) {
             return;
@@ -511,7 +508,10 @@ export default function Vivy(opts) {
     function createStore() {
 
         // Call beforeCreateStore in plugins
-        handlePluginsHook(options, plugins, 'beforeCreateStore', options, plugins);
+        handlePluginsHook(
+            options, plugins, HookName.beforeCreateStore,
+            options, plugins
+        );
 
         // Create a vivy store
         const store = createVivyStore(options, plugins);

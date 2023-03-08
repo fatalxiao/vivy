@@ -14,9 +14,8 @@ export default {
      * Update model state
      * @param state
      * @param nextState
-     * @returns {*}
      */
-    setState: (state: never, {nextState}: AnyAction) => {
+    setState: (state: any, {nextState}: AnyAction) => {
 
         if (typeof nextState === 'function') {
             return nextState(state);

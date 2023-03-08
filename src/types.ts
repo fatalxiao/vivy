@@ -1,5 +1,5 @@
 import {
-    Reducer, Middleware, MiddlewareAPI, Action, Store
+    Reducer, Middleware, MiddlewareAPI, Action, Store, Dispatch, ReducersMapObject
 } from 'redux';
 
 export enum HookName {
@@ -14,15 +14,11 @@ export enum HookName {
 }
 
 export interface VivyModelAction {
-    (action: Action): (api: MiddlewareAPI<never>) => never
+    (action: Action): (api: MiddlewareAPI<any>) => any
 }
 
-export interface VivyModelActions {
+export interface VivyModelActionMapObject {
     [key: string]: VivyModelAction
-}
-
-export interface VivyModelReducers {
-    [nameSpace: string]: Reducer
 }
 
 export interface VivyModel {
@@ -35,22 +31,22 @@ export interface VivyModel {
     /**
      * Vivy model state
      */
-    state: never,
+    state: any,
 
     /**
      * Vivy model actions, like action in Redux
      */
-    actions: VivyModelActions,
+    actions: VivyModelActionMapObject,
 
     /**
      * Vivy model global reducers, like reducers in Redux
      */
-    globalReducers: VivyModelReducers,
+    globalReducers: ReducersMapObject,
 
     /**
      * Vivy model reducers, like reducers in Redux
      */
-    reducers: VivyModelReducers
+    reducers: ReducersMapObject
 
 }
 
@@ -69,7 +65,7 @@ export interface VivyStore extends Store {
     /**
      * All async reducers
      */
-    asyncReducers: VivyModelReducers,
+    asyncReducers: ReducersMapObject,
 
     /**
      * All models actions
@@ -80,12 +76,17 @@ export interface VivyStore extends Store {
      * A callback to create root reducer using "combineReducers"
      * @param reducers
      */
-    createRootReducer: (reducers: VivyModelReducers) => Reducer
+    createRootReducer: (reducers: ReducersMapObject) => Reducer
 
     /**
      * All Vivy plugins
      */
     plugins: VivyPlugin[],
+
+    /**
+     * Vivy store dispatch
+     */
+    dispatch: Dispatch | object,
 
     /**
      * Register reducer to Vivy
@@ -105,20 +106,20 @@ export interface VivyStore extends Store {
      * @param nameSpace
      * @param globalReducers
      */
-    registerModelGlobalReducersDispatcher: (nameSpace: string, globalReducers: VivyModelReducers) => void,
+    registerModelGlobalReducersDispatcher: (nameSpace: string, globalReducers: ReducersMapObject) => void,
 
     /**
      * Register model reducer dispatcher
      * @param nameSpace
      * @param reducers
      */
-    registerModelReducerDispatcher: (nameSpace: string, reducers: VivyModelReducers) => void,
+    registerModelReducerDispatcher: (nameSpace: string, reducers: ReducersMapObject) => void,
 
     /**
      * Register model actions
      * @param models
      */
-    registerModelActions: (nameSpace: string, actions: VivyModelActions) => void,
+    registerModelActions: (nameSpace: string, actions: VivyModelActionMapObject) => void,
 
     /**
      * Unregister model actions
@@ -180,7 +181,7 @@ export interface ExtraInfo {
     /**
      * Register extra reducers to Vivy
      */
-    extraReducers: VivyModelReducers,
+    extraReducers: ReducersMapObject,
 
     /**
      * Register extra models to Vivy
@@ -260,7 +261,7 @@ export interface VivyInstance {
 //  * @param store
 //  * @param reducers
 //  */
-// export function registerReducers(store: VivyStore, reducers: VivyModelReducers): void
+// export function registerReducers(store: VivyStore, reducers: ReducersMapObject): void
 //
 // /**
 //  * Unregister reducer
@@ -274,7 +275,7 @@ export interface VivyInstance {
 //  * @param store
 //  * @param nameSpacesOrReducers
 //  */
-// export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | VivyModelReducers): void
+// export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: string[] | ReducersMapObject): void
 //
 // /**
 //  * Register model to Vivy
