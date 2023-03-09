@@ -20,7 +20,7 @@ export enum HookName {
 }
 
 export interface VivyModelAction {
-    (action: object): (dispatch: VivyStoreDispatch, getState: () => any) => any
+    (action: object | AnyAction): (dispatch: VivyStoreDispatch, getState: () => any) => any
 }
 
 export interface VivyModelActionMapObject {
@@ -28,7 +28,7 @@ export interface VivyModelActionMapObject {
 }
 
 export interface VivyModelReducer {
-    (state: any, action: object): any
+    (state: any, action: object | AnyAction): any
 }
 
 export interface VivyModelReducerMapObject {
@@ -96,7 +96,7 @@ export interface VivyStore extends Store {
     /**
      * All async reducers
      */
-    asyncReducers: VivyModelReducerMapObject,
+    asyncReducers: ReducersMapObject,
 
     /**
      * All models actions

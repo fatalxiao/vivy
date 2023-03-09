@@ -3,9 +3,6 @@
  * @author Liangxiaojun
  */
 
-// Types
-import {AnyAction} from 'redux';
-
 /**
  * These reducers will be injected into each model
  */
@@ -16,7 +13,7 @@ export default {
      * @param state
      * @param nextState
      */
-    setState: (state: any, {nextState}: AnyAction) => {
+    setState: (state: any, {nextState}: any) => {
 
         if (typeof nextState === 'function') {
             return nextState(state);
