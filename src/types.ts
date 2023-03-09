@@ -340,7 +340,7 @@ export interface VivyInstance {
 /**
  * Function type model action creator
  */
-export type ModelActionCreatorFunction = () => any
+export type ModelActionCreatorFunction = (...args: any[]) => any
 
 export interface ModelActionCreatorFunctionMapObject {
     [key: string]: ModelActionCreatorFunction
