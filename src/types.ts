@@ -19,17 +19,13 @@ export enum HookName {
     onUsePlugin = 'onUsePlugin'
 }
 
-export interface VivyModelAction {
-    (action: object | AnyAction): (dispatch: VivyStoreDispatch, getState: () => any) => any
-}
+export type VivyModelAction = (action: object | AnyAction) => (dispatch: VivyStoreDispatch, getState: () => any) => any
 
 export interface VivyModelActionMapObject {
     [actionName: string]: VivyModelAction
 }
 
-export interface VivyModelReducer {
-    (state: any, action: object | AnyAction): any
-}
+export type VivyModelReducer = (state: any, action: object | AnyAction) => any
 
 export interface VivyModelReducerMapObject {
     [reducerName: string]: VivyModelReducer
@@ -346,11 +342,13 @@ export interface VivyInstance {
  */
 export type ModelActionCreatorFunction = () => any
 
+export interface ModelActionCreatorFunctionMapObject {
+    [key: string]: ModelActionCreatorFunction
+}
+
 /**
  * All kind of model action creators
  */
 export type ModelActionCreators = VivyStoreDispatch | ModelActionCreatorFunction | {
     [key: string]: string
-} | {
-    [key: string]: ModelActionCreatorFunction
-}
+} | ModelActionCreatorFunctionMapObject
