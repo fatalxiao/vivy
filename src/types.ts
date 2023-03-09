@@ -22,13 +22,13 @@ export enum HookName {
 export type VivyModelAction = (action: object | AnyAction) => (dispatch: VivyStoreDispatch, getState: () => any) => any
 
 export interface VivyModelActionMapObject {
-    [actionName: string]: VivyModelAction
+    [actionName: string]: VivyModelAction;
 }
 
 export type VivyModelReducer = (state: any, action: object | AnyAction) => any
 
 export interface VivyModelReducerMapObject {
-    [reducerName: string]: VivyModelReducer
+    [reducerName: string]: VivyModelReducer;
 }
 
 export interface VivyModel {
@@ -66,14 +66,14 @@ export interface VivyModel {
  * Vivy store dispatch
  */
 export interface VivyStoreDispatch {
-    (action: AnyAction): any
+    (action: AnyAction): any;
 }
 
 /**
  * Vivy store dispatch
  */
 export interface VivyStoreDispatch {
-    (nameSpace: string): (name: string) => (action: object) => any
+    (nameSpace: string): (name: string) => (action: object) => any;
 }
 
 /**
@@ -343,7 +343,7 @@ export interface VivyInstance {
 export type ModelActionCreatorFunction = (...args: any[]) => any
 
 export interface ModelActionCreatorFunctionMapObject {
-    [key: string]: ModelActionCreatorFunction
+    [key: string]: ModelActionCreatorFunction;
 }
 
 /**
