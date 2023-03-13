@@ -324,13 +324,13 @@ function bindModelActionCreator(modelActionCreator: string, dispatch: VivyStoreD
 
     const [nameSpace, name] = modelActionCreator.split('/');
 
-    return function (...args: any[]) {
+    return function (params: any, ...args: any[]) {
 
         if (name === undefined) {
-            return dispatch?.[nameSpace]?.(...args);
+            return dispatch?.[nameSpace]?.(params, ...args);
         }
 
-        return dispatch?.[nameSpace]?.[name]?.(...args);
+        return dispatch?.[nameSpace]?.[name]?.(params, ...args);
 
     };
 
