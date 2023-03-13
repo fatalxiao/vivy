@@ -235,21 +235,21 @@ export interface Hooks {
      * @param options
      * @param plugins
      */
-    [HookName.beforeCreateStore]: (options: VivyOption, plugins: VivyPlugin[]) => void,
+    [HookName.beforeCreateStore]?: (options: VivyOption, plugins: VivyPlugin[]) => void,
 
     /**
      * Callback when create Vivy store
      * @param options
      * @param plugins
      */
-    [HookName.onCreateStore]: (store: VivyStore) => void,
+    [HookName.onCreateStore]?: (store: VivyStore) => void,
 
     /**
      * Callback when register reducer
      * @param options
      * @param plugins
      */
-    [HookName.onRegisterReducer]: (reducer: VivyModelReducer, nameSpace: string, store: VivyStore) => void,
+    [HookName.onRegisterReducer]?: (reducer: VivyModelReducer, nameSpace: string, store: VivyStore) => void,
 
     /**
      * Callback when unregister reducer
@@ -257,21 +257,21 @@ export interface Hooks {
      * @param nameSpace
      * @param store
      */
-    [HookName.onUnregisterReducer]: (unregisteredReducer: VivyModelReducer, nameSpace: string, store: VivyStore) => void,
+    [HookName.onUnregisterReducer]?: (unregisteredReducer: VivyModelReducer, nameSpace: string, store: VivyStore) => void,
 
     /**
      * Callback when register model
      * @param model
      * @param store
      */
-    [HookName.onRegisterModel]: (model: VivyModel, store: VivyStore) => void,
+    [HookName.onRegisterModel]?: (model: VivyModel, store: VivyStore) => void,
 
     /**
      * Callback when unregister model
      * @param unregisteredModel
      * @param store
      */
-    [HookName.onUnregisterModel]: (unregisteredModel: VivyModel, store: VivyStore) => void
+    [HookName.onUnregisterModel]?: (unregisteredModel: VivyModel, store: VivyStore) => void
 
 }
 
@@ -280,17 +280,17 @@ export interface ExtraInfo {
     /**
      * Register extra reducers to Vivy
      */
-    extraReducers: VivyModelReducerMapObject,
+    extraReducers?: VivyModelReducerMapObject,
 
     /**
      * Register extra models to Vivy
      */
-    extraModels: VivyModel[],
+    extraModels?: VivyModel[],
 
     /**
      * Register extra middlewares to Vivy
      */
-    extraMiddlewares: Middleware[]
+    extraMiddlewares?: Middleware[]
 
 }
 
@@ -299,7 +299,7 @@ export type VivyPlugin = ExtraInfo & Hooks & {
     /**
      * Use callback
      */
-    [HookName.onUse]: (options: VivyOption, plugins: VivyPlugin[]) => void,
+    [HookName.onUse]?: (options: VivyOption, plugins: VivyPlugin[]) => void,
 
     [Symbol.iterator](): Iterator<any>
 
