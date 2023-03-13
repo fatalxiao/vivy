@@ -301,7 +301,7 @@ export type VivyPlugin = ExtraInfo & Hooks & {
      */
     [HookName.onUse]?: (options: VivyOption, plugins: VivyPlugin[]) => void,
 
-    [Symbol.iterator](): Iterator<any>
+    // [Symbol.iterator](): Iterator<any>
 
 };
 

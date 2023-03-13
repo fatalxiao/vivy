@@ -477,7 +477,7 @@ export default function Vivy(opts: VivyOption): VivyInstance {
             return;
         }
 
-        registerReducers(store, reducers);
+        registerReducers(store, reducers as ReducersMapObject);
 
     }
 
