@@ -23,7 +23,7 @@ export type VivyModelActionParams = {
     [ParamName: string]: any;
 }
 
-export type VivyModelAction = (params: VivyModelActionParams) => (dispatch: VivyStoreDispatch, getState: () => any) => any
+export type VivyModelAction = (params: VivyModelActionParams, ...extraParams: []) => (dispatch: VivyStoreDispatch, getState: () => any) => any
 
 export interface VivyModelActionMapObject {
     [actionName: string]: VivyModelAction;
@@ -77,7 +77,11 @@ export interface VivyStoreDispatch extends Dispatch {
  * Vivy store dispatch action
  */
 export interface VivyStoreDispatchAction {
-    [name: string]: (params: any) => any;
+
+    (params: any, ...extraParams: any[]): any;
+
+    [name: string]: (params: any, ...extraParams: any[]) => any;
+
 }
 
 /**
