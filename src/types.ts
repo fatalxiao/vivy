@@ -75,9 +75,9 @@ export interface VivyStoreDispatch extends Dispatch {
 
 export type VivyStoreDispatchAction = {
 
-    (params: any, ...extraParams: any[]): any;
+    (params?: any, ...extraParams: any[]): any;
 
-    [name: string]: (params: any, ...extraParams: any[]) => any;
+    [name: string]: (params?: any, ...extraParams: any[]) => any;
 
 };
 
