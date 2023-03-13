@@ -370,7 +370,7 @@ export function bindModelActionCreators(
             boundModelActionCreators[key] = dispatch;
         } else if (typeof modelActionCreator === 'function') {
             boundModelActionCreators[key] = bindActionCreator(modelActionCreator, dispatch);
-        } else if (typeof modelActionCreator === 'string') {
+        } else {
             boundModelActionCreators[key] = bindModelActionCreator(modelActionCreator, dispatch);
         }
     });
