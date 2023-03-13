@@ -17,7 +17,6 @@ export default {
          * Update value0
          * @param state
          * @param value
-         * @returns {*&{value0}}
          */
         updateValue0: (state, {value}) => {
             return {
@@ -30,7 +29,6 @@ export default {
          * Update value1
          * @param state
          * @param value
-         * @returns {*&{value1}}
          */
         updateValue1: (state, {value}) => {
             return {
@@ -43,7 +41,6 @@ export default {
          * Update value2
          * @param state
          * @param value
-         * @returns {*&{value2}}
          */
         updateValue2: (state, {value}) => {
             return {
@@ -56,7 +53,6 @@ export default {
          * Update value3
          * @param state
          * @param value
-         * @returns {*&{value3}}
          */
         updateValue3: (state, {value}) => {
             return {
