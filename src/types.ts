@@ -20,7 +20,7 @@ export enum HookName {
 }
 
 export type VivyModelActionParams = {
-    [ParamName: string]: any;
+    [paramName: string]: any;
 }
 
 export type VivyModelAction = (params: VivyModelActionParams, ...extraParams: []) => (dispatch: VivyStoreDispatch, getState: () => any) => any
@@ -73,22 +73,19 @@ export interface VivyStoreDispatch extends Dispatch {
     (action: AnyAction): any;
 }
 
-/**
- * Vivy store dispatch action
- */
-export interface VivyStoreDispatchAction {
+export type VivyStoreDispatchAction = {
 
     (params: any, ...extraParams: any[]): any;
 
     [name: string]: (params: any, ...extraParams: any[]) => any;
 
-}
+};
 
 /**
  * Vivy store dispatch
  */
 export interface VivyStoreDispatch {
-    [nameSpace: string]: VivyStoreDispatchAction;
+    [name: string]: VivyStoreDispatchAction;
 }
 
 /**
@@ -130,7 +127,7 @@ export interface VivyStore extends Store {
     /**
      * Vivy store dispatch
      */
-    dispatch: Dispatch | VivyStoreDispatch,
+    dispatch: VivyStoreDispatch,
 
     /**
      * Vivy store getState

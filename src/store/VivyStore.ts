@@ -18,7 +18,7 @@ import {isEmptyObject} from '../util/Util';
 // Types
 import {
     VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin,
-    VivyStore, VivyModelReducerMapObject, VivyModelReducer
+    VivyStore, VivyModelReducerMapObject, VivyModelReducer, VivyStoreDispatchAction
 } from '../types';
 import {AnyAction, Reducer} from 'redux';
 
@@ -116,6 +116,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         }
 
         Object.keys(globalReducers).forEach(name => {
+            // @ts-ignore
             this.dispatch[name] = (params = {}) => this.dispatch({
                 ...params,
                 type: name
@@ -136,7 +137,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         }
 
         if (!this.dispatch[nameSpace]) {
-            this.dispatch[nameSpace] = {};
+            this.dispatch[nameSpace] = <VivyStoreDispatchAction>{};
         }
 
         Object.keys(reducers).forEach(name => {
@@ -164,7 +165,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         }
 
         if (!this.dispatch[nameSpace]) {
-            this.dispatch[nameSpace] = {};
+            this.dispatch[nameSpace] = <VivyStoreDispatchAction>{};
         }
 
         Object.entries(actions).forEach(([name, action]) => {
