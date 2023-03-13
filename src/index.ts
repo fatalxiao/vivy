@@ -14,9 +14,10 @@ import createModelReducer from './reducers/ModelReducer';
 import {isEmptyObject} from './util/Util';
 
 // Types
+import {Reducer, ReducersMapObject} from 'redux';
 import {
     HookName, ModelActionCreatorFunction, ModelActionCreators, VivyInstance, VivyModel,
-    VivyOption, VivyPlugin, VivyStore, VivyStoreDispatch, VivyModelReducerMapObject, VivyModelReducer
+    VivyOption, VivyPlugin, VivyStore, VivyStoreDispatch, VivyModelReducerMapObject
 } from './types';
 
 export * from 'redux';
@@ -43,7 +44,7 @@ function handlePluginsHook(options: VivyOption, plugins: VivyPlugin[], hookName:
  * @param nameSpace
  * @param reducer
  */
-export function registerReducer(store: VivyStore, nameSpace: string, reducer: VivyModelReducer): void {
+export function registerReducer(store: VivyStore, nameSpace: string, reducer: Reducer): void {
 
     if (!store) {
         console.error('Store is required.');
@@ -77,7 +78,7 @@ export function registerReducer(store: VivyStore, nameSpace: string, reducer: Vi
  * @param store
  * @param reducers
  */
-export function registerReducers(store: VivyStore, reducers: VivyModelReducerMapObject): void {
+export function registerReducers(store: VivyStore, reducers: ReducersMapObject): void {
 
     if (!store) {
         console.error('Store is required.');
