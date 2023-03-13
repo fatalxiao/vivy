@@ -310,17 +310,17 @@ export type VivyOption = ExtraInfo & Hooks & {
     /**
      * Initial state of store
      */
-    initialState: object,
+    initialState?: object,
 
     /**
      * Whether overwrite same name space model when registering ( Default false )
      */
-    overwriteSameNameSpaceModel: boolean,
+    overwriteSameNameSpaceModel?: boolean,
 
     /**
      * Use plugin callback
      */
-    [HookName.onUsePlugin]: (plugin: VivyPlugin, options: VivyOption, plugins: VivyPlugin[]) => void
+    [HookName.onUsePlugin]?: (plugin: VivyPlugin, options: VivyOption, plugins: VivyPlugin[]) => void
 
 }
 
