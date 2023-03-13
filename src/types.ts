@@ -31,7 +31,7 @@ export interface VivyModelActionMapObject {
 
 export type VivyModelReducer = (state: any, params: VivyModelActionParams) => any
 
-export interface VivyModelReducerMapObject extends ReducersMapObject {
+export interface VivyModelReducerMapObject {
     [reducerName: string]: VivyModelReducer;
 }
 
@@ -280,7 +280,7 @@ export interface ExtraInfo {
     /**
      * Register extra reducers to Vivy
      */
-    extraReducers?: VivyModelReducerMapObject,
+    extraReducers?: ReducersMapObject,
 
     /**
      * Register extra models to Vivy
