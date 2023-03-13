@@ -74,10 +74,17 @@ export interface VivyStoreDispatch extends Dispatch {
 }
 
 /**
+ * Vivy store dispatch action
+ */
+export interface VivyStoreDispatchAction {
+    [name: string]: (params: any) => any;
+}
+
+/**
  * Vivy store dispatch
  */
-export interface VivyStoreDispatch extends Dispatch {
-    (nameSpace: string): (name: string) => (action: object) => any;
+export interface VivyStoreDispatch {
+    [nameSpace: string]: VivyStoreDispatchAction;
 }
 
 /**
