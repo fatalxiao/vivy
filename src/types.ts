@@ -45,22 +45,22 @@ export interface VivyModel {
     /**
      * Vivy model state
      */
-    state: any,
+    state?: any,
 
     /**
      * Vivy model actions, like action in Redux
      */
-    actions: VivyModelActionMapObject,
+    actions?: VivyModelActionMapObject,
 
     /**
      * Vivy model global reducers, like reducers in Redux
      */
-    globalReducers: VivyModelReducerMapObject,
+    globalReducers?: VivyModelReducerMapObject,
 
     /**
      * Vivy model reducers, like reducers in Redux
      */
-    reducers: VivyModelReducerMapObject,
+    reducers?: VivyModelReducerMapObject,
 
     [key: string]: any
 
