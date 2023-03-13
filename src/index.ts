@@ -197,10 +197,10 @@ export function registerModel(store: VivyStore, model: VivyModel): void {
     ));
 
     // Bind global reducers to vivyStore.dispatch to implement "dispatch.globalReducerName()"
-    store.registerModelGlobalReducersDispatcher(nameSpace, globalReducers);
+    store.registerModelGlobalReducersDispatcher(nameSpace, globalReducers ?? {});
 
     // Bind reducers to vivyStore.dispatch to implement "dispatch.nameSpace.reducerName()"
-    store.registerModelReducerDispatcher(nameSpace, allReducers);
+    store.registerModelReducerDispatcher(nameSpace, allReducers ?? {});
 
     // Register model actions
     if (actions) {
