@@ -6,6 +6,7 @@
     "main": "./esm/index.js",
     "files": [
         "esm",
+        "src",
         "LICENSE",
         "README.md"
     ],
