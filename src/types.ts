@@ -280,7 +280,7 @@ export interface ExtraInfo {
     /**
      * Register extra reducers to Vivy
      */
-    extraReducers?: VivyModelReducerMapObject,
+    extraReducers?: VivyModelReducerMapObject | ReducersMapObject,
 
     /**
      * Register extra models to Vivy
