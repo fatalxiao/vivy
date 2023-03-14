@@ -158,7 +158,7 @@ export function unregisterReducers(store: VivyStore, nameSpacesOrReducers: strin
  * @param store
  * @param model
  */
-export function registerModel(store: VivyStore, model: VivyModel): void {
+export function registerModel(store: VivyStore, model: VivyModel<any>): void {
 
     if (!store) {
         console.error('Store is required.');
@@ -221,7 +221,7 @@ export function registerModel(store: VivyStore, model: VivyModel): void {
  * @param store
  * @param models
  */
-export function registerModels(store: VivyStore, models: VivyModel[]): void {
+export function registerModels(store: VivyStore, models: VivyModel<any>[]): void {
 
     if (!store) {
         console.error('Store is required.');
@@ -244,7 +244,7 @@ export function registerModels(store: VivyStore, models: VivyModel[]): void {
  * @param store
  * @param nameSpaceOrModel
  */
-export function unregisterModel(store: VivyStore, nameSpaceOrModel: string | VivyModel): void {
+export function unregisterModel(store: VivyStore, nameSpaceOrModel: string | VivyModel<any>): void {
 
     if (!store) {
         console.error('Store is required.');
@@ -278,7 +278,7 @@ export function unregisterModel(store: VivyStore, nameSpaceOrModel: string | Viv
  * @param store
  * @param nameSpacesOrModels
  */
-export function unregisterModels(store: VivyStore, nameSpacesOrModels: string[] | VivyModel[]): void {
+export function unregisterModels(store: VivyStore, nameSpacesOrModels: string[] | VivyModel<any>[]): void {
 
     if (!store) {
         console.error('Store is required.');
@@ -491,7 +491,7 @@ export default function Vivy(opts: VivyOption): VivyInstance {
             return;
         }
 
-        const models = plugins?.reduce((extraModels: VivyModel[], plugin) => [
+        const models = plugins?.reduce((extraModels: VivyModel<any>[], plugin) => [
             ...extraModels,
             ...(plugin?.extraModels || [])
         ], []);

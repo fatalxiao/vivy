@@ -179,7 +179,7 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * Unregister model actions
      * @param nameSpaceOrModel
      */
-    function unregisterModelActions(this: VivyStore, nameSpaceOrModel: string | VivyModel): void {
+    function unregisterModelActions(this: VivyStore, nameSpaceOrModel: string | VivyModel<any>): void {
 
         if (!this || !nameSpaceOrModel) {
             return;

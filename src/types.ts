@@ -23,7 +23,8 @@ export type VivyModelActionParams = {
     [paramName: string]: any;
 }
 
-export type VivyModelAction = (params: VivyModelActionParams, ...extraParams: []) => (dispatch: VivyStoreDispatch, getState: () => any) => any
+export type VivyModelAction = (params: VivyModelActionParams, ...extraParams: []) => (dispatch: VivyStoreDispatch,
+    getState: () => any) => any
 
 export interface VivyModelActionMapObject {
     [actionName: string]: VivyModelAction;
@@ -35,34 +36,34 @@ export interface VivyModelReducerMapObject {
     [reducerName: string]: VivyModelReducer;
 }
 
-export interface VivyModel {
+export interface VivyModel<S> {
 
     /**
      * Vivy model nameSpace
      */
-    nameSpace: string,
+    nameSpace: string;
 
     /**
      * Vivy model state
      */
-    state?: any,
+    state?: S;
 
     /**
      * Vivy model actions, like action in Redux
      */
-    actions?: VivyModelActionMapObject,
+    actions?: VivyModelActionMapObject;
 
     /**
      * Vivy model global reducers, like reducers in Redux
      */
-    globalReducers?: VivyModelReducerMapObject,
+    globalReducers?: VivyModelReducerMapObject;
 
     /**
      * Vivy model reducers, like reducers in Redux
      */
-    reducers?: VivyModelReducerMapObject,
+    reducers?: VivyModelReducerMapObject;
 
-    [key: string]: any
+    [key: string]: any;
 
 }
 
@@ -171,7 +172,7 @@ export interface VivyStore extends Store {
      * Unregister model actions
      * @param nameSpacesOrModel
      */
-    unregisterModelActions: (nameSpacesOrModel: string | VivyModel) => void,
+    unregisterModelActions: (nameSpacesOrModel: string | VivyModel<any>) => void,
 
     /**
      * Register reducer
@@ -204,25 +205,25 @@ export interface VivyStore extends Store {
      * Register model
      * @param model
      */
-    registerModel: (model: VivyModel) => void,
+    registerModel: (model: VivyModel<any>) => void,
 
     /**
      * Register models
      * @param models
      */
-    registerModels: (models: VivyModel[]) => void,
+    registerModels: (models: VivyModel<any>[]) => void,
 
     /**
      * Unregister model
      * @param nameSpaceOrModel
      */
-    unregisterModel: (nameSpaceOrModel: string | VivyModel) => void,
+    unregisterModel: (nameSpaceOrModel: string | VivyModel<any>) => void,
 
     /**
      * Unregister models
      * @param nameSpacesOrModels
      */
-    unregisterModels: (nameSpacesOrModels: string[] | VivyModel[]) => void,
+    unregisterModels: (nameSpacesOrModels: string[] | VivyModel<any>[]) => void,
 
     [key: string]: any
 
@@ -257,21 +258,22 @@ export interface Hooks {
      * @param nameSpace
      * @param store
      */
-    [HookName.onUnregisterReducer]?: (unregisteredReducer: VivyModelReducer, nameSpace: string, store: VivyStore) => void,
+    [HookName.onUnregisterReducer]?: (unregisteredReducer: VivyModelReducer, nameSpace: string,
+        store: VivyStore) => void,
 
     /**
      * Callback when register model
      * @param model
      * @param store
      */
-    [HookName.onRegisterModel]?: (model: VivyModel, store: VivyStore) => void,
+    [HookName.onRegisterModel]?: (model: VivyModel<any>, store: VivyStore) => void,
 
     /**
      * Callback when unregister model
      * @param unregisteredModel
      * @param store
      */
-    [HookName.onUnregisterModel]?: (unregisteredModel: VivyModel, store: VivyStore) => void
+    [HookName.onUnregisterModel]?: (unregisteredModel: VivyModel<any>, store: VivyStore) => void
 
 }
 
@@ -285,7 +287,7 @@ export interface ExtraInfo {
     /**
      * Register extra models to Vivy
      */
-    extraModels?: VivyModel[],
+    extraModels?: VivyModel<any>[],
 
     /**
      * Register extra middlewares to Vivy
