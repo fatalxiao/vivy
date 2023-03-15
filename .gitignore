@@ -15,4 +15,5 @@ node_modules
 package-lock.json
 
 # Dist directories
-/esm
+/es
+/lib

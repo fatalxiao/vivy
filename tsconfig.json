@@ -1,7 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "esm",
-        "allowJs": true,
+        "outDir": "es",
         "module": "esnext",
         "target": "es5",
         "lib": [
@@ -9,21 +8,15 @@
             "esnext",
             "dom"
         ],
+        "jsx": "react-jsx",
+        "moduleResolution": "node",
+        "strict": true,
+        "allowJs": true,
         "sourceMap": false,
+        "noImplicitAny": false,
+        "allowSyntheticDefaultImports": true,
         "declaration": true,
         "baseUrl": ".",
-        "jsx": "react-jsx",
-        "strictNullChecks": true,
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true,
-        "moduleResolution": "node",
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitReturns": true,
-        "suppressImplicitAnyIndexErrors": true,
-        "noUnusedLocals": true,
-        "skipLibCheck": true,
-        "experimentalDecorators": true,
-        "strict": true,
         "paths": {
             "src/*": [
                 "./src/*"
@@ -34,7 +27,6 @@
         "src/**/*"
     ],
     "exclude": [
-        "node_modules",
-        "esm"
+        "node_modules"
     ]
 }
