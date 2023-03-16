@@ -18,7 +18,7 @@ import {isEmptyObject} from '../util/Util';
 // Types
 import {
     VivyModel, VivyModelActionMapObject, VivyOption, VivyPlugin,
-    VivyStore, VivyModelReducerMapObject, VivyModelReducer, VivyStoreDispatchAction
+    VivyStore, VivyModelReducerMapObject, VivyModelReducer, VivyStoreDispatchAction, VivyModelActionParams
 } from '../types';
 import {AnyAction, Reducer} from 'redux';
 
@@ -71,7 +71,9 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param reducer
      */
-    function registerReduxReducer(this: VivyStore, nameSpace: string, reducer: Reducer): Reducer | void {
+    function registerReduxReducer(
+        this: VivyStore, nameSpace: string, reducer: Reducer
+    ): Reducer | void {
 
         if (!this || !nameSpace || !reducer) {
             return;
@@ -88,13 +90,15 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * Unregister reducer
      * @param nameSpace
      */
-    function unregisterReduxReducer(this: VivyStore, nameSpace: string): VivyModelReducer | void {
+    function unregisterReduxReducer(
+        this: VivyStore, nameSpace: string
+    ): VivyModelReducer | void {
 
         if (!this || !nameSpace) {
             return;
         }
 
-        const nextReducers = {...this.asyncReducers} as VivyModelReducerMapObject;
+        const nextReducers = <VivyModelReducerMapObject>{...this.asyncReducers};
         const unregisteredReducer = nextReducers[nameSpace];
 
         delete nextReducers[nameSpace];
@@ -109,7 +113,9 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param globalReducers
      */
-    function registerModelGlobalReducersDispatcher(this: VivyStore, nameSpace: string, globalReducers: VivyModelReducerMapObject): void {
+    function registerModelGlobalReducersDispatcher(
+        this: VivyStore, nameSpace: string, globalReducers: VivyModelReducerMapObject
+    ): void {
 
         if (!this || !nameSpace || !globalReducers || isEmptyObject(globalReducers)) {
             return;
@@ -130,7 +136,9 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param reducers
      */
-    function registerModelReducerDispatcher(this: VivyStore, nameSpace: string, reducers: VivyModelReducerMapObject): void {
+    function registerModelReducerDispatcher(
+        this: VivyStore, nameSpace: string, reducers: VivyModelReducerMapObject
+    ): void {
 
         if (!this || !nameSpace || !reducers || isEmptyObject(reducers)) {
             return;
@@ -154,7 +162,9 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * @param nameSpace
      * @param actions
      */
-    function registerModelActions(this: VivyStore, nameSpace: string, actions: VivyModelActionMapObject): void {
+    function registerModelActions(
+        this: VivyStore, nameSpace: string, actions: VivyModelActionMapObject
+    ): void {
 
         if (!this || !nameSpace || !actions || isEmptyObject(actions)) {
             return;
@@ -169,8 +179,9 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
         }
 
         Object.entries(actions).forEach(([name, action]) => {
-            modelActions[nameSpace][name] = this.dispatch[nameSpace][name] = (params: AnyAction) =>
-                action(params)(this.dispatch, this.getState);
+            modelActions[nameSpace][name]
+                = this.dispatch[nameSpace][name]
+                = (params: VivyModelActionParams = {}) => action(params)(this.dispatch, this.getState);
         });
 
     }
@@ -179,7 +190,9 @@ export default function createVivyStore(options: VivyOption, plugins: VivyPlugin
      * Unregister model actions
      * @param nameSpaceOrModel
      */
-    function unregisterModelActions(this: VivyStore, nameSpaceOrModel: string | VivyModel<any>): void {
+    function unregisterModelActions(
+        this: VivyStore, nameSpaceOrModel: string | VivyModel<any>
+    ): void {
 
         if (!this || !nameSpaceOrModel) {
             return;
