@@ -16,8 +16,8 @@
     "scripts": {
         "clean": "rimraf lib es",
         "test": "cross-env NODE_ENV=test ts-jest test/**.test.js",
-        "build:commonjs": "tsc --module commonjs --declaration false --outDir lib",
-        "build:es": "tsc --module esnext --declaration true --outDir es",
+        "build:commonjs": "tsc --project tsconfig.build.json --module commonjs --declaration false --outDir lib",
+        "build:es": "tsc --project tsconfig.build.json --module esnext --declaration true --outDir es",
         "build": "npm run clean && npm run build:commonjs && npm run build:es",
         "do-publish": "npm run build && npm publish"
     },
