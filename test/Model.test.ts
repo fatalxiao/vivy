@@ -1,6 +1,6 @@
 'use strict';
 
-import Vivy from '../src';
+import Vivy from 'src';
 
 // Models
 import testModel from './mocks/testModel';
@@ -68,7 +68,7 @@ test('Dispatch functional model setState action by functional dispatch', () => {
 
     store.dispatch({
         type: 'testModel/setState',
-        nextState: state => state + 2
+        nextState: (state: number) => state + 2
     });
 
     expect(
@@ -87,7 +87,7 @@ test('Dispatch functional model setState action by chain dispatch', () => {
     store.registerModel(testModel);
 
     store.dispatch.testModel.setState({
-        nextState: state => state + 2
+        nextState: (state: number) => state + 2
     });
 
     expect(

@@ -3,19 +3,19 @@
 import Vivy, {
     VIVY_UPDATE, VIVY_OPTION_UPDATE,
     VIVY_REDUCER_NAME_SPACE, VIVY_OPTION_REDUCER_NAME_SPACE
-} from '../src';
+} from 'src';
 
 import {
     VIVY_REDUCER_NAME_SPACE as VivyReducerNameSpace,
     VIVY_OPTION_REDUCER_NAME_SPACE as VivyOptionReducerNameSpace
-} from '../src/reducers/ReducerNameSpace';
+} from 'src/reducers/ReducerNameSpace';
 
 import {
     VIVY_UPDATE as VivyUpdateActionType
-} from '../src/actionTypes/VivyActionType';
+} from 'src/actionTypes/VivyActionType';
 import {
     VIVY_OPTION_UPDATE as VivyOptionUpdateActionType
-} from '../src/actionTypes/VivyOptionActionType';
+} from 'src/actionTypes/VivyOptionActionType';
 
 test('Vivy VIVY_REDUCER_NAME_SPACE', () => {
     expect(

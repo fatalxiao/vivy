@@ -1,5 +1,5 @@
 /**
- * @file testReducer.js
+ * @file testReducer.ts
  */
 
 export default (state = 0, action) => {

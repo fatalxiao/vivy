@@ -1,6 +1,6 @@
 'use strict';
 
-import Vivy, {bindModelActionCreators} from '../src';
+import Vivy, {bindModelActionCreators, ModelActionCreatorFunctionMapObject} from 'src';
 
 // Models
 import testModel from './mocks/testModel';
@@ -12,11 +12,11 @@ test('bindModelActionCreators', () => {
     const store = vivy.createStore();
     store.registerModel(testModel);
 
-    const {update} = bindModelActionCreators({
+    const actions = bindModelActionCreators({
         update: 'testModel/update'
     }, store.dispatch);
 
-    update({
+    (actions as ModelActionCreatorFunctionMapObject)?.update?.({
         value: 1
     });
 

@@ -1,8 +1,8 @@
 /**
- * @file testMiddleware.js
+ * @file testMiddleware.ts
  */
 
-export default ({dispatch, getState}) => next => action => {
+export default ({dispatch}) => next => action => {
 
     const {type, value} = action;
 

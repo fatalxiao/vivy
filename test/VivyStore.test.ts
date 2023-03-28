@@ -1,6 +1,6 @@
 'use strict';
 
-import Vivy from '../src';
+import Vivy from 'src';
 
 test('Create Vivy store', () => {
 
