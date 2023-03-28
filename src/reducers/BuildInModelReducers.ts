@@ -11,23 +11,15 @@ export default {
     /**
      * Update model state
      * @param state
-     * @param params
+     * @param nextState
      */
-    setState: (state: any, params: any) => {
+    setState: (state: any, {nextState}: any) => {
 
-        if (typeof params === 'function') {
-            return params(state);
+        if (typeof nextState === 'function') {
+            return nextState(state);
         }
 
-        if (typeof params?.nextState === 'function') {
-            return params.nextState(state);
-        }
-
-        if (params) {
-            return params;
-        }
-
-        return state;
+        return nextState;
 
     }
 
