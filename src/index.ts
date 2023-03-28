@@ -16,8 +16,8 @@ import {isEmptyObject} from './util/Util';
 // Types
 import {Reducer, ReducersMapObject} from 'redux';
 import {
-    HookName, ModelActionCreatorFunction, ModelActionCreators, VivyInstance, VivyModel,
-    VivyOption, VivyPlugin, VivyStore, VivyStoreDispatch, VivyModelReducerMapObject
+    HookName, ModelActionCreatorFunction, ModelActionCreators, VivyInstance, VivyModel, VivyOption,
+    VivyPlugin, VivyStore, VivyStoreDispatch, VivyModelReducerMapObject, ModelActionCreatorFunctionMapObject
 } from './types';
 
 export * from 'redux';
@@ -345,15 +345,15 @@ function bindModelActionCreator(modelActionCreator: string, dispatch: VivyStoreD
  */
 export function bindModelActionCreators(
     modelActionCreators: ModelActionCreators, dispatch: VivyStoreDispatch
-): object | null {
+): ModelActionCreatorFunction | ModelActionCreatorFunctionMapObject | undefined {
 
     if (!modelActionCreators) {
-        return null;
+        return;
     }
 
     if (!dispatch || typeof dispatch !== 'function') {
         console.error('Dispatch is required.');
-        return null;
+        return;
     }
 
     if (typeof modelActionCreators === 'function') {
@@ -361,7 +361,7 @@ export function bindModelActionCreators(
     }
 
     if (typeof modelActionCreators !== 'object') {
-        return null;
+        return;
     }
 
     const boundModelActionCreators = {};
@@ -403,7 +403,7 @@ const DEFAULT_OPTIONS = {
  * @param opts
  * @constructor
  */
-export default function Vivy(opts: VivyOption): VivyInstance {
+export default function Vivy(opts?: VivyOption): VivyInstance {
 
     // Vivy options
     const options = {
