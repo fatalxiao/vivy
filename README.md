@@ -287,7 +287,7 @@ const App = () => {
     /**
      * Call the action or reducer.
      */
-    modelActions();
+    modelActions.someAction();
 
     // ...
 
@@ -346,7 +346,7 @@ import {useModel} from 'react-vivy';
 const App = () => {
 
     /**
-     * Get state, actions and reducers from model using hook "useModel".
+     * Get state and actions/reducers from model using hook "useModel".
      */
     const [{value}, {updateValue}] = useModel('MODEL_OR_NAME_SPACE');
 
