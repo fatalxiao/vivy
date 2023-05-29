@@ -280,7 +280,7 @@ const App = () => {
     // ...
 
     /**
-     * Get state, actions and reducers from model using hook "useModel".
+     * Get state and actions/reducers from model using hook "useModel".
      */
     const [modelState, modelActions] = useModel('MODEL_OR_NAME_SPACE');
 
