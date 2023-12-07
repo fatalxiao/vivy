@@ -65,17 +65,19 @@
 [![NPM Version][npm-image]][npm-url]
 [![License][license-image]][npm-url]
 
-Vivy is a state container for JavaScript apps based on [redux][redux-url]. You can get started easily as syntax is
-designed closing to Redux.
+Vivy is a JavaScript state container built on [redux][redux-url] that simplifies development by adopting a syntax
+similar to Redux.
 
-In Vivy, `state`, `actions` and `reducers` are combined in one `Object` called `model`. Actions and reducers in model
-all can be called by `dispatch`. So `action type` is no need to be defined in Vivy. Also, redundant actions are
-unnecessary as you can dispatch reducers directly.
+In Vivy, the `state`, `actions`, and `reducers` are combined into a single `Object` called the `model`. Both `actions`
+and `reducers` within the `model` can be invoked using the `dispatch` function. Consequently, there's no need to define
+specific `action types` in Vivy. Additionally, redundant `actions` become unnecessary as you can directly dispatch
+`reducers`.
 
-Vivy is designed with high expansibility. You can easily route by using [vivy-router][router-plugin-url], and lazy load
-components and models by [vivy-async-component][async-component-plugin-url]. [vivy-api][api-plugin-url] can help to
-request apis. [vivy-subscription][subscription-plugin-url] can easily watch history or something else to update state by
-dispatching a reducer or action. [vivy-i18n][i18n-plugin-url] help you implement i18n.
+Vivy is designed with expandability in mind. You can easily handle routing using [vivy-router][router-plugin-url], and
+effortlessly load components and models on-demand with [vivy-async-component][async-component-plugin-url].
+The [vivy-api][api-plugin-url] facilitates API requests, while [vivy-subscription][subscription-plugin-url] allows you
+to observe changes in history or other events and update the state by dispatching a reducer or action.
+Furthermore, [vivy-i18n][i18n-plugin-url] assists you in implementing internationalization (i18n) functionality.
 
 * [Installation](#installation)
 * [Examples](#examples)
@@ -121,19 +123,19 @@ $ npm run start
 
 ## React bindings
 
-| Plugin                       | Version                                                    | Description                                                                  |
-|:-----------------------------|:-----------------------------------------------------------|:-----------------------------------------------------------------------------|
-| [react-vivy][react-vivy-url] | [![NPM Version][react-vivy-npm-image]][react-vivy-npm-url] | React bindings for [Vivy][vivy-url] based on [react-redux][react-redux-url]. |
+| Plugin                              | Version                                                    | Description                                                                  |
+|:------------------------------------|:-----------------------------------------------------------|:-----------------------------------------------------------------------------|
+| [react&#x2011;vivy][react-vivy-url] | [![NPM Version][react-vivy-npm-image]][react-vivy-npm-url] | React bindings for [Vivy][vivy-url] based on [react-redux][react-redux-url]. |
 
 ## Plugins
 
-| Plugin                                             | Version                                                                            | Description                                                                                  |
-|:---------------------------------------------------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
-| [vivy-router][router-plugin-url]                   | [![NPM Version][router-plugin-npm-image]][router-plugin-npm-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].               |
-| [vivy-async-component][async-component-plugin-url] | [![NPM Version][async-component-plugin-npm-image]][async-component-plugin-npm-url] | A plugin which loading async component and async Vivy model to easily split chunks by route. |
-| [vivy-api][api-plugin-url]                         | [![NPM Version][api-plugin-npm-image]][api-plugin-npm-url]                         | Handle `apis` in Vivy model to make api calling easier.                                      |
-| [vivy-subscription][subscription-plugin-url]       | [![NPM Version][subscription-plugin-npm-image]][subscription-plugin-npm-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                   |
-| [vivy-i18n][i18n-plugin-url]                       | [![NPM Version][i18n-plugin-npm-image]][i18n-plugin-npm-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                              |
+| Plugin                                                           | Version                                                                            | Description                                                                                  |
+|:-----------------------------------------------------------------|:-----------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------|
+| [vivy&#x2011;router][router-plugin-url]                          | [![NPM Version][router-plugin-npm-image]][router-plugin-npm-url]                   | A router plugin based on [connected-react-router][connected-react-router-url].               |
+| [vivy&#x2011;async&#x2011;component][async-component-plugin-url] | [![NPM Version][async-component-plugin-npm-image]][async-component-plugin-npm-url] | A plugin which loading async component and async Vivy model to easily split chunks by route. |
+| [vivy&#x2011;api][api-plugin-url]                                | [![NPM Version][api-plugin-npm-image]][api-plugin-npm-url]                         | Handle `apis` in Vivy model to make api calling easier.                                      |
+| [vivy&#x2011;subscription][subscription-plugin-url]              | [![NPM Version][subscription-plugin-npm-image]][subscription-plugin-npm-url]       | Handle `subscriptions` in Vivy model to watch `history` or something else.                   |
+| [vivy&#x2011;i18n][i18n-plugin-url]                              | [![NPM Version][i18n-plugin-npm-image]][i18n-plugin-npm-url]                       | Handle `i18ns` in Vivy model to implement i18n.                                              |
 
 ## Documentation
 
